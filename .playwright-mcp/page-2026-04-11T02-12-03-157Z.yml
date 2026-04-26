@@ -1,0 +1,85 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Efeméride" [ref=e3] [cursor=pointer]:
+      - /url: /
+    - generic [ref=e4]:
+      - link "Ensaios" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - link "Sobre" [ref=e6] [cursor=pointer]:
+        - /url: "#sobre"
+  - main [ref=e7]:
+    - article [ref=e8]:
+      - generic [ref=e9]:
+        - generic [ref=e10]: Ensaio · Mecânica Celeste
+        - heading "A Geometria Oculta das Órbitas" [level=1] [ref=e11]
+        - paragraph [ref=e12]: Por que os planetas traçam elipses, e não círculos — e o que um monge alemão descobriu ao olhar para Marte por vinte anos.
+        - generic [ref=e13]: Efeméride · 10 de abril de 2026
+      - paragraph [ref=e14]:
+        - text: "Imagine que você nunca ouviu falar de gravidade. Tudo o que lhe é dado são os céus: pontinhos luminosos se arrastando contra o pano de fundo das estrelas, noite após noite, com uma regularidade que chega a ser provocadora. Nada explica por que eles se movem assim. Nada explica por que alguns, de vez em quando, parecem andar"
+        - emphasis [ref=e15]: para trás
+        - text: .
+      - paragraph [ref=e16]: "Foi desse tipo de paciência obstinada que nasceu a astronomia moderna. Antes de Newton, antes das equações diferenciais, antes mesmo do telescópio virar um instrumento de precisão, um homem chamado Johannes Kepler gastou duas décadas brigando com os dados de Marte até que a geometria se rendesse. E quando se rendeu, rendeu-se de forma elegante: os planetas não traçam círculos. Traçam elipses. E a estrela não fica no centro dessa elipse — fica num dos focos."
+      - heading "Um planeta, uma estrela, uma teia invisível" [level=2] [ref=e17]
+      - paragraph [ref=e18]: "Arraste o ponto preto abaixo para qualquer lugar e solte. Ele vai começar a órbita com a velocidade tangencial certa para uma trajetória circular. Mexa a massa da estrela e observe como o equilíbrio muda: uma estrela mais pesada puxa com mais força, o planeta precisa ir mais rápido para não cair. Uma estrela mais leve — e o planeta escapa, voando para longe."
+      - figure "Figura 1 Órbita de dois corpos sob gravitação newtoniana. A trajetória é integrada em tempo real; arrastar o planeta reinicia a órbita com velocidade circular ideal para a nova posição." [ref=e19]:
+        - generic [ref=e23]:
+          - generic [ref=e24]:
+            - generic [ref=e25]: Massa da estrela — 1.00 M☉
+            - slider "Massa da estrela — 1.00 M☉" [ref=e26] [cursor=pointer]: "1"
+          - button "Pausar" [ref=e27] [cursor=pointer]
+          - button "Reiniciar" [ref=e28] [cursor=pointer]
+        - generic [ref=e29]: Figura 1 Órbita de dois corpos sob gravitação newtoniana. A trajetória é integrada em tempo real; arrastar o planeta reinicia a órbita com velocidade circular ideal para a nova posição.
+      - paragraph [ref=e30]:
+        - text: O que você acabou de ver é, em essência, toda a física que Kepler não tinha. Ele não sabia que a força caía com o quadrado da distância. Não sabia que a velocidade do planeta estava amarrada à sua distância da estrela por um pacto invariante de energia e momento angular. Tudo o que ele tinha eram as
+        - emphasis [ref=e31]: posições
+        - text: — tabela após tabela, mês após mês.
+      - heading "A lei das áreas iguais" [level=2] [ref=e32]
+      - paragraph [ref=e33]:
+        - text: "A segunda lei de Kepler é, no fundo, uma declaração de contabilidade. Se você desenhar uma linha imaginária da estrela até o planeta e observar essa linha varrer uma área à medida que o planeta avança, descobrirá algo curioso: o planeta varre áreas"
+        - emphasis [ref=e34]: iguais
+        - text: em tempos iguais, não importa onde esteja na órbita.
+      - paragraph [ref=e35]:
+        - text: Perto da estrela, ele precisa correr. Longe, ele pode demorar. A natureza compensa distância com velocidade da forma exata para que o balanço feche. Hoje nós chamamos isso de
+        - emphasis [ref=e36]: conservação do momento angular
+        - text: ", mas Kepler chegou à conclusão sem nenhuma dessas palavras — pela paciência geométrica."
+      - figure "Figura 2 Cada cor marca uma área varrida em intervalos de tempo iguais. Aumente a excentricidade e veja como o planeta acelera no periélio e desacelera no afélio — mas as áreas continuam iguais." [ref=e37]:
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43]: Excentricidade — 0.55
+            - slider "Excentricidade — 0.55" [ref=e44] [cursor=pointer]: "0.55"
+          - button "Pausar" [ref=e45] [cursor=pointer]
+        - generic [ref=e46]: Figura 2 Cada cor marca uma área varrida em intervalos de tempo iguais. Aumente a excentricidade e veja como o planeta acelera no periélio e desacelera no afélio — mas as áreas continuam iguais.
+      - 'heading "A terceira lei: um ritmo cósmico" [level=2] [ref=e47]'
+      - paragraph [ref=e48]:
+        - text: A primeira e a segunda leis descrevem
+        - emphasis [ref=e49]: uma
+        - text: "órbita. A terceira é mais ambiciosa: ela conecta todas as órbitas de um mesmo sistema com uma única frase. O quadrado do período é proporcional ao cubo do semieixo maior. Um planeta duas vezes mais distante demora não o dobro, mas"
+        - emphasis [ref=e50]: 2,83 vezes mais
+        - text: — a raiz quadrada de oito.
+      - paragraph [ref=e51]: Plotado em escala logarítmica, esse enunciado vira uma única linha reta com inclinação 3/2. E é dessa linha que nasce a capacidade de pesar estrelas. Observando a dança dos satélites, Kepler nos deu, sem saber, uma balança para o universo.
+      - 'figure "Figura 3 Quatro planetas em órbitas circulares de raios diferentes. Note como os mais distantes parecem lentos: não é ilusão — é a lei cúbica em ação. À direita, os quatro pontos caem exatamente sobre a reta T² ∝ a³." [ref=e52]':
+        - generic [ref=e57]:
+          - generic [ref=e58]: Velocidade do tempo — 1.0×
+          - slider "Velocidade do tempo — 1.0×" [ref=e59] [cursor=pointer]: "1"
+        - generic [ref=e60]: "Figura 3 Quatro planetas em órbitas circulares de raios diferentes. Note como os mais distantes parecem lentos: não é ilusão — é a lei cúbica em ação. À direita, os quatro pontos caem exatamente sobre a reta T² ∝ a³."
+      - heading "O que Kepler realmente fez" [level=2] [ref=e61]
+      - paragraph [ref=e62]:
+        - text: É fácil olhar para essas três leis e achar que são óbvias. Elas não são. Kepler chegou a elas num mundo onde a ideia dominante ainda era a de Ptolomeu — de círculos perfeitos empilhados em círculos perfeitos, um relógio de engrenagens celestes. Ele próprio acreditou durante anos em sólidos platônicos encaixados entre as órbitas dos planetas. A elipse não era uma hipótese que ele
+        - emphasis [ref=e63]: queria
+        - text: que fosse verdade. Ela era a única coisa que sobrava depois que todas as outras tinham falhado.
+      - paragraph [ref=e64]: "A lição, se há uma, é esta: a geometria da natureza nem sempre é a que esperávamos. Às vezes ela é mais bonita do que sabíamos. Às vezes só conseguimos vê-la depois de vinte anos teimando com uma tabela de números."
+  - contentinfo [ref=e65]:
+    - paragraph [ref=e66]: Efeméride · Ensaios interativos · 2026
+  - generic [ref=e69]:
+    - button "Menu" [ref=e70]:
+      - img [ref=e72]
+      - generic: Menu
+    - button "Inspect" [ref=e76]:
+      - img [ref=e78]
+      - generic: Inspect
+    - button "Audit" [ref=e80]:
+      - img [ref=e82]
+      - generic: Audit
+    - button "Settings" [ref=e85]:
+      - img [ref=e87]
+      - generic: Settings

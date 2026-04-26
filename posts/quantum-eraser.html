@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The experiment that doesn't need you to look — Rodrigo Nader</title>
+<meta name="description" content="The delayed-choice quantum eraser is about information, not consciousness — and the difference matters more than the popular telling lets on.">
+<link rel="stylesheet" href="../style.css?v=4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <a href="../" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>The experiment that doesn't need you to look</h1>
+    <p class="post-meta">
+      <time datetime="2026-04-15">2026 · Apr 15</time>
+      <span class="sep">·</span>
+      <span>8 min read</span>
+      <span class="sep">·</span>
+      <span>Physics</span>
+    </p>
+  </header>
+
+  <p>The double slit experiment goes like this: shoot photons one at a time at a barrier with two slits. Without a detector, they build up an interference pattern on the screen — bands of light and dark, as if each photon went through both slits at once. Add a detector that records which slit each photon went through, and the bands vanish. You get two smudges, one per slit, as if they were marbles.</p>
+
+  <figure class="viz">
+    <canvas id="v1-slit" style="height: 440px;"></canvas>
+    <div class="viz-controls">
+      <label class="check-label">
+        <input type="checkbox" id="v1-detect"> <span>path detector on</span>
+      </label>
+      <button id="v1-reset">Reset pattern</button>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 1</span>A double slit experiment. Each dot is a particle that landed on the screen. With no path detector, the pattern on the right builds into interference bands. Flip the detector on and the pattern gradually dissolves into two smudges — one per slit — exactly as if each particle had gone through one or the other like a marble. Nothing conscious is watching either way.</div>
+  </figure>
+
+  <p>The usual way of telling this story is that the act of "measurement" collapses the wavefunction — as if the universe were waiting on someone to look before it made up its mind. I think that reading is wrong, and the rest of this post is about what I think the experiment is actually saying.</p>
+
+  <p>The first crack in the usual reading is that the detector doesn't have to be a person. Plug in a blind piece of equipment that logs which slit each particle went through, and the bands die. Take the person out of the room entirely with the detector still plugged in, and they stay dead. What matters isn't the person. It's whether the <em>record</em> exists.</p>
+
+  <h2>It's the information, not the observer</h2>
+
+  <p>Here's the thought experiment that pushed it home for me. Set up the double slit. Put a detector that records which slit the particle went through — but have it record into a system you <em>never</em> look at. A hard drive you plan to destroy. A piece of paper you plan to burn. It doesn't matter. As long as the record exists as a physical correlation in the environment, the interference is gone. The experiment doesn't care that you never intend to read the record.</p>
+
+  <p>Now imagine a slightly more devious version. Instead of a detector with a dedicated hard drive, let the particle brush against a single stray atom on its way through one of the slits. That atom now "knows" something about which path was taken — the knowledge is encoded in its slightly different state. You haven't built a detector. You've let the particle leak path-information into the environment. The interference vanishes anyway. The stray atom is, for the purposes of the physics, a detector — and the universe's bookkeeping doesn't care whether a human installed it on purpose.</p>
+
+  <h2>Wheeler's trick</h2>
+
+  <p>In 1978, John Wheeler noticed that this framing leads to an even weirder version of the experiment. What if you let the particle pass through the slits, and <em>then</em> — after it's already on its way to the screen, after the "decision" about which path to take would have to have been made — you decide whether or not to turn on a detector that records the path?</p>
+
+  <p>Wheeler's claim was: if you switch the detector on <em>after the fact</em>, the particle will have behaved like it went through one slit. Leave the detector off, and it will have behaved like it went through both. The present decision somehow reaches back and determines the past.</p>
+
+  <p>Except — I don't think that's what's happening. The reading that's held up — and the way experimentalists have understood it since Jacques et al. ran the delayed-choice version in 2007 — is that the particle never had a definite path in the first place.</p>
+
+  <p>Treat the wave — the thing that spreads out and interferes with itself — as the real object. The "particle" is just where it lands when we ask. The wave evolves, and the only question is whether the experimental setup allows or prevents a recoverable path-record at any point in the process. Recover it (even late) and the interference gets wiped. Don't, and it doesn't.</p>
+
+  <p>Nothing traveled back in time. We were asking a question — "which slit did it go through?" — that the universe was under no obligation to answer until our equipment forced it to.</p>
+
+  <h2>The eraser, and the thing that undid me</h2>
+
+  <p>This is where the delayed-choice <em>eraser</em> comes in, and where I finally got what the experiment was saying.</p>
+
+  <p>Real eraser experiments use <em>entangled photon pairs</em>. One photon of the pair — call it the signal — goes to the screen and makes a dot. Its partner — call it the idler — gets sent to a separate detector. The setup is rigged so that the idler carries a record of which slit the signal went through. That record lives on the idler, not on the signal.</p>
+
+  <p>With the idler's record intact, you get two smudges — the interference is gone, as before. Now erase that record: mix the which-path information back out of the idler before it solidifies into a permanent trace.</p>
+
+  <p>The interference comes back. Sort of.</p>
+
+  <p>The first time I read this I thought it was a trick. How can the pattern come back? The particle has already landed. The dots are already on the screen. You can't reach back in time and rearrange them.</p>
+
+  <p>Here's the resolution. The dots on the screen <em>as a whole</em> still look like a featureless smudge. But sort the signal dots by which detector their idler partner ended up at. Each subset forms an interference pattern. The two subsets are mirror images. Added together, they still sum to the smudge. You never lost the interference — you lost the ability to see it, and the sorting gives it back.</p>
+
+  <figure class="viz">
+    <canvas id="v2-eraser" style="height: 420px;"></canvas>
+    <div class="viz-controls">
+      <label class="check-label">
+        <input type="checkbox" id="v2-erase-on" checked> <span>idler record erased (eraser on)</span>
+      </label>
+      <button id="v2-mode-all">all dots</button>
+      <button id="v2-mode-A">subset A only</button>
+      <button id="v2-mode-B">subset B only</button>
+      <button class="ghost" id="v2-ereset">Reset pattern</button>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 2</span>Every dot on the screen has a hidden partner that went to one of two idler detectors (A or B). With the eraser on, "all dots" looks like a featureless smudge. Click "subset A only" — an interference pattern emerges from the exact same dots. Click "subset B only" — the mirror image. Uncheck the eraser (classical record exists, no sorting rescues anything) and both subsets collapse into two Gaussians at the slit positions. The interference wasn't lost; it was sorted.</div>
+  </figure>
+
+  <p>Nothing changes retroactively. The same dots sit on the screen either way. Erasing the idler's record is what makes the sorting possible.</p>
+
+  <h2>The black hole test</h2>
+
+  <p>Here's a corollary I love, because it tightens the story.</p>
+
+  <p>Imagine the detector records the path information, and you later throw the detector into a black hole. Does the interference pattern come back?</p>
+
+  <p>No. This is the tightening the earlier rule needs: it isn't quite "nowhere recoverable in the universe," it's "no macroscopic record anywhere in the environment." The moment the detector has correlated a macroscopic number of its particles with the path, the record is classical for all practical purposes, and the interference is gone. Throwing the detector into a black hole makes the record physically inaccessible, but it doesn't un-entangle it. Once a macroscopic record forms, for every practical purpose the collapse is done.</p>
+
+  <p>The eraser works <em>because</em> it catches the record while it's still quantum — a correlation that hasn't solidified into a macroscopic trace.</p>
+
+  <div class="callout">
+    <span class="label">Honest tension</span>
+    <p>I'm using "collapse" and "records" loosely here. For readers with the vocabulary: in many-worlds, decoherence theory, consistent histories, there is no collapse at all — there's only the entangled state of the particle, the detector, and the environment, and what I called the "pattern" is what falls out when you trace the detector away. The pragmatic version I'm telling gets you to the same predictions every time. Smarter versions drop the word "collapse" entirely and talk about the information-theoretic properties of the joint state. Both end at the same place: the observer isn't the relevant variable. If that means nothing to you, skim it — the argument I'm making above doesn't depend on any of it.</p>
+  </div>
+
+  <h2>What this actually means</h2>
+
+  <div class="callout">
+    <span class="label">The whole claim</span>
+    <p>It seems like what the experiment is saying is: interference shows up when no macroscopic record of which slit the particle went through has formed anywhere in the environment. If such a record exists, the pattern is gone. If the record is still quantum — still erasable — the pattern is recoverable by sorting.</p>
+  </div>
+
+  <p>No observer required. Not even a proper detector — a stray atom will do. What's required is a <em>record</em>, the kind that has correlated itself with enough of the environment to count as classical. The universe keeps books, and the books decide what the particles are allowed to have been doing.</p>
+
+  <p>The thing that unsettles me isn't the "observation" part. It's the "recoverable" part. It's hard not to say the universe <em>cares</em> about the difference between quantum and classical information, and that the rules we use are an accounting system for tracking that care. Something about reality, at the level the experiment is pointing at, is ledger-shaped. I don't know what to do with that. What I keep coming back to is that it's not about whether anyone was looking.</p>
+
+  <hr>
+
+  <p>If this connected for you, or if I'm using "information" in a way that makes a physicist friend of yours wince, tell me — <a href="mailto:hi@rnader.com">hi@rnader.com</a>. For the flip side of this coin — what "measurement" actually does in a quantum circuit — <a href="/posts/quantum-gates.html">the quantum gates post</a> is where to go.</p>
+</article>
+
+<script src="/script.js?v=3"></script>
+<script src="./viz-common.js?v=1"></script>
+<script>
+/* ---------- Fig 1: double slit with detector toggle ---------- */
+(function(){
+  const canvas = document.getElementById('v1-slit');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const detectInput = document.getElementById('v1-detect');
+  const resetBtn = document.getElementById('v1-reset');
+
+  let detectorOn = false;
+  const hits = [];
+  const MAX_HITS = 1400;
+
+  detectInput.addEventListener('change', () => {
+    detectorOn = detectInput.checked;
+  });
+  resetBtn.addEventListener('click', () => {
+    hits.length = 0;
+  });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function sampleInterference(center, amp, k, range) {
+    for (let tries = 0; tries < 40; tries++) {
+      const y = (Math.random() - 0.5) * 2 * range;
+      const env = Math.cos(k * y) * Math.cos(k * y) * Math.exp(-(y * y) / (2 * range * range * 0.25));
+      if (Math.random() < env) return center + y;
+    }
+    return center;
+  }
+  function sampleGaussianMix(center, spread, sep) {
+    const g = () => {
+      const u1 = Math.random() || 1e-9;
+      const u2 = Math.random();
+      return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+    };
+    const offset = Math.random() < 0.5 ? -sep : sep;
+    return center + offset + g() * spread;
+  }
+
+  let last = performance.now();
+  function loop(t) {
+    const now = t;
+    if (now - last > 16) {
+      last = now;
+      const rect = canvas.getBoundingClientRect();
+      const screenX = rect.width - 80;
+      const screenY = rect.height / 2;
+      const range = rect.height * 0.32;
+      const n = 3;
+      for (let i = 0; i < n; i++) {
+        let y;
+        if (detectorOn) {
+          y = sampleGaussianMix(screenY, 12, 45);
+        } else {
+          y = sampleInterference(screenY, 1, 0.07, range);
+        }
+        hits.push({ x: screenX, y });
+      }
+      if (hits.length > MAX_HITS) hits.splice(0, hits.length - MAX_HITS);
+    }
+
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const srcX = 50;
+    const srcY = rect.height / 2;
+    ctx.fillStyle = c.accent;
+    ctx.beginPath(); ctx.arc(srcX, srcY, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('source', srcX, srcY + 24);
+
+    const barrierX = rect.width * 0.42;
+    const slit1Y = rect.height / 2 - 40;
+    const slit2Y = rect.height / 2 + 40;
+    const slitW = 6;
+    ctx.strokeStyle = c.fgDim;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(barrierX, 30);
+    ctx.lineTo(barrierX, slit1Y - slitW);
+    ctx.moveTo(barrierX, slit1Y + slitW);
+    ctx.lineTo(barrierX, slit2Y - slitW);
+    ctx.moveTo(barrierX, slit2Y + slitW);
+    ctx.lineTo(barrierX, rect.height - 30);
+    ctx.stroke();
+    ctx.fillStyle = c.fgDim;
+    ctx.textAlign = 'left';
+    ctx.fillText('slits', barrierX + 8, 24);
+
+    const screenX = rect.width - 80;
+    ctx.strokeStyle = c.fgDim;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(screenX, 30); ctx.lineTo(screenX, rect.height - 30);
+    ctx.stroke();
+    ctx.textAlign = 'right';
+    ctx.fillText('screen', screenX - 6, 24);
+
+    ctx.strokeStyle = c.gridFaint;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(srcX, srcY); ctx.lineTo(barrierX, slit1Y);
+    ctx.lineTo(screenX, slit1Y - 80);
+    ctx.moveTo(srcX, srcY); ctx.lineTo(barrierX, slit2Y);
+    ctx.lineTo(screenX, slit2Y + 80);
+    ctx.stroke();
+
+    if (detectorOn) {
+      ctx.fillStyle = c.accentWarm;
+      ctx.fillRect(barrierX + 12, slit1Y - 6, 10, 10);
+      ctx.fillRect(barrierX + 12, slit2Y - 6, 10, 10);
+      ctx.fillStyle = c.accentWarm;
+      ctx.font = 'italic 10px Charter, Georgia, serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('recording', barrierX + 26, slit1Y);
+      ctx.fillText('recording', barrierX + 26, slit2Y + 4);
+    } else {
+      ctx.strokeStyle = c.gridFaint;
+      ctx.strokeRect(barrierX + 12, slit1Y - 6, 10, 10);
+      ctx.strokeRect(barrierX + 12, slit2Y - 6, 10, 10);
+    }
+
+    ctx.fillStyle = c.accent;
+    hits.forEach((h) => {
+      ctx.beginPath();
+      ctx.arc(h.x, h.y, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px ui-monospace, JetBrains Mono, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('particles: ' + hits.length, rect.width - 20, rect.height - 14);
+  }
+  vizCommon.animate(canvas, loop);
+})();
+
+/* ---------- Fig 2: eraser sort — hidden interference revealed ---------- */
+(function(){
+  const canvas = document.getElementById('v2-eraser');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const eraseOnInput = document.getElementById('v2-erase-on');
+  const modeAllBtn = document.getElementById('v2-mode-all');
+  const modeABtn = document.getElementById('v2-mode-A');
+  const modeBBtn = document.getElementById('v2-mode-B');
+  const resetBtn = document.getElementById('v2-ereset');
+
+  let eraserOn = true;
+  let mode = 'all';
+  const hits = [];
+  const MAX_HITS = 2000;
+
+  eraseOnInput.addEventListener('change', () => {
+    eraserOn = eraseOnInput.checked;
+    hits.length = 0;
+  });
+  modeAllBtn.addEventListener('click', () => { mode = 'all'; });
+  modeABtn.addEventListener('click', () => { mode = 'A'; });
+  modeBBtn.addEventListener('click', () => { mode = 'B'; });
+  resetBtn.addEventListener('click', () => { hits.length = 0; });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function gauss() {
+    const u1 = Math.random() || 1e-9;
+    const u2 = Math.random();
+    return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+  }
+
+  function sampleY(group, center, range) {
+    if (eraserOn) {
+      const k = 0.055;
+      const shift = group === 'A' ? 0 : Math.PI / 2;
+      for (let tries = 0; tries < 60; tries++) {
+        const y = (Math.random() - 0.5) * 2 * range;
+        const env = Math.exp(-(y * y) / (2 * range * range * 0.3));
+        const fringe = Math.cos(k * y + shift);
+        const density = fringe * fringe * env;
+        if (Math.random() < density) return center + y;
+      }
+      return center;
+    } else {
+      const sep = range * 0.35;
+      const spread = 14;
+      const offset = group === 'A' ? -sep : sep;
+      return center + offset + gauss() * spread;
+    }
+  }
+
+  let last = performance.now();
+  function loop(t) {
+    if (t - last > 16) {
+      last = t;
+      const rect = canvas.getBoundingClientRect();
+      const screenY = rect.height / 2;
+      const range = rect.height * 0.36;
+      const n = 4;
+      for (let i = 0; i < n; i++) {
+        const group = Math.random() < 0.5 ? 'A' : 'B';
+        const y = sampleY(group, screenY, range);
+        hits.push({ y, group });
+      }
+      if (hits.length > MAX_HITS) hits.splice(0, hits.length - MAX_HITS);
+    }
+
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const sourceX = 50;
+    const srcY = rect.height / 2;
+    const barrierX = rect.width * 0.28;
+    const slit1Y = rect.height / 2 - 40;
+    const slit2Y = rect.height / 2 + 40;
+    const detAX = barrierX + 60;
+    const detBX = barrierX + 60;
+    const screenX = rect.width - 100;
+
+    ctx.fillStyle = c.accent;
+    ctx.beginPath(); ctx.arc(sourceX, srcY, 5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '10px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('entangled source', sourceX, srcY + 22);
+
+    ctx.strokeStyle = c.fgDim;
+    ctx.lineWidth = 2;
+    const slitW = 6;
+    ctx.beginPath();
+    ctx.moveTo(barrierX, 30);
+    ctx.lineTo(barrierX, slit1Y - slitW);
+    ctx.moveTo(barrierX, slit1Y + slitW);
+    ctx.lineTo(barrierX, slit2Y - slitW);
+    ctx.moveTo(barrierX, slit2Y + slitW);
+    ctx.lineTo(barrierX, rect.height - 30);
+    ctx.stroke();
+    ctx.fillStyle = c.fgDim;
+    ctx.textAlign = 'center';
+    ctx.fillText('slits', barrierX, 22);
+
+    const idlerY1 = 80;
+    const idlerY2 = rect.height - 80;
+    const idlerX = rect.width * 0.5;
+    ctx.strokeStyle = c.gridFaint;
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 4]);
+    ctx.beginPath();
+    ctx.moveTo(sourceX + 5, srcY);
+    ctx.bezierCurveTo(sourceX + 60, srcY - 40, idlerX - 40, idlerY1 + 20, idlerX, idlerY1);
+    ctx.moveTo(sourceX + 5, srcY);
+    ctx.bezierCurveTo(sourceX + 60, srcY + 40, idlerX - 40, idlerY2 - 20, idlerX, idlerY2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = c.accent;
+    ctx.beginPath(); ctx.arc(idlerX, idlerY1, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = c.blue;
+    ctx.beginPath(); ctx.arc(idlerX, idlerY2, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = c.fgDim;
+    ctx.textAlign = 'left';
+    ctx.font = '10px -apple-system, Inter, sans-serif';
+    ctx.fillText('idler A', idlerX + 12, idlerY1 + 3);
+    ctx.fillText('idler B', idlerX + 12, idlerY2 + 3);
+
+    ctx.strokeStyle = c.fgDim;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(screenX, 30); ctx.lineTo(screenX, rect.height - 30);
+    ctx.stroke();
+    ctx.textAlign = 'right';
+    ctx.fillStyle = c.fgDim;
+    ctx.fillText('signal screen', screenX - 6, 22);
+
+    let visibleCount = 0;
+    hits.forEach((h) => {
+      let visible = true;
+      let color = c.fgDim;
+      if (mode === 'all') {
+        color = c.fgDim;
+      } else if (mode === 'A') {
+        if (h.group !== 'A') visible = false;
+        color = c.accent;
+      } else if (mode === 'B') {
+        if (h.group !== 'B') visible = false;
+        color = c.blue;
+      }
+      if (!visible) return;
+      visibleCount++;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(screenX, h.y, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px ui-monospace, JetBrains Mono, monospace';
+    ctx.textAlign = 'left';
+    const modeLabel = mode === 'all' ? 'showing all' : (mode === 'A' ? 'showing only idler A' : 'showing only idler B');
+    ctx.fillText(modeLabel + ' · ' + visibleCount + ' dots', 14, rect.height - 14);
+    ctx.textAlign = 'right';
+    ctx.fillText(eraserOn ? 'eraser on' : 'eraser off', rect.width - 14, rect.height - 14);
+  }
+  vizCommon.animate(canvas, loop);
+})();
+</script>
+</body>
+</html>

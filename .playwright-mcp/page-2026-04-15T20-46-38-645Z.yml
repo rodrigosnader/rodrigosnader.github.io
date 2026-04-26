@@ -1,0 +1,119 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "Gamifying cooperation" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 15
+        - text: · 7 min read · Essay
+    - paragraph [ref=e20]: Imagine a senator who's spent six years building a reputation as a workhorse. She votes for a bipartisan infrastructure bill. It's a good bill — both sides got real concessions, it passes, things get built. A few months later she's primaried by someone whose entire campaign is a clip of her shaking hands with a senator from the other party. She loses. The seat flips to a harder version of her own side.
+    - paragraph [ref=e21]: Multiply that scene by a decade of election cycles and you end up with the legislators we actually have. The system didn't get unlucky. It selected for this. Anyone who voted for compromise lost to someone who didn't, and the ones still standing are the ones who learned the lesson. Extremism is a rational response to the incentive structure — the incentive structure rewards it — so a durable fix has to change the incentives, not the players.
+    - paragraph [ref=e22]: "The good news is that incentive structures are things you can actually design — sketch out the payoffs, compute the equilibrium, tweak the numbers. This post is about one such tweak. The smallest I can think of. Here it is: tie campaign funding to cross-party cooperation."
+    - paragraph [ref=e23]:
+      - text: Some version of this gets floated every few years, and I'm going to end up fairly skeptical of it by the end. But thinking through
+      - emphasis [ref=e24]: why
+      - text: it might work and
+      - emphasis [ref=e25]: how
+      - text: it could fail is more useful than another round of moral hectoring about the state of political discourse.
+    - heading "The game as it is" [level=2] [ref=e26]
+    - paragraph [ref=e27]:
+      - text: Picture two parties. Each has a choice, in any given legislative fight, between
+      - emphasis [ref=e28]: cooperate
+      - text: (vote for a compromise that includes pieces of the other party's priorities) and
+      - emphasis [ref=e29]: defect
+      - text: (block the bill, blame the other side, rally the base).
+    - paragraph [ref=e30]: "Under the rules that currently apply, the payoff structure looks something like this: if both cooperate, a moderate bill passes, both parties get a little credit, the coverage is boring (\"they worked together\" doesn't make the evening news), and both bases grumble. If one defects and the other cooperates, the defector gets to look tough and fundraise off the outrage; the cooperator looks weak. If both defect, nothing passes, each side blames the other, and each fundraises off the story that \"the other side is destroying America.\""
+    - paragraph [ref=e31]:
+      - text: Pick numbers where defection dominates cooperation — which is the normal case in this setup — and you get a classic
+      - emphasis [ref=e32]: prisoner's dilemma
+      - text: ": a game where each player does better by betraying, even though both would be better off if neither did. The only stable outcome is mutual defection, and that's what we see."
+    - paragraph [ref=e33]: "This is why moral appeals don't work. A moral appeal says: \"please accept the lower payoff in exchange for being a good citizen.\" Maybe the first cohort does that. The system punishes them for it. They get primaried. They lose their seats. The ones who didn't accept the worse outcome end up running the show. One big reason the \"why can't they get along\" commentary keeps missing is selection, not character."
+    - heading "The fix, in one sentence" [level=2] [ref=e34]
+    - paragraph [ref=e35]:
+      - emphasis [ref=e36]: Tie campaign funding — or any resource that actually matters to running for office — to a measurable record of cross-party bill support.
+    - paragraph [ref=e37]: The mechanism could look like many things. A public campaign finance pool that scales with the fraction of your votes cast for bipartisan legislation. A formula where bills passed with cross-aisle support generate more "campaign credit" for both parties than bills passed along party lines. A penalty for pure obstruction — blocking a bill without proposing an alternative reduces your next round's resource allocation. The specific design is a separate question; let me handle that below. What matters for the argument is that cooperating now has a direct, material payoff that defection doesn't.
+    - paragraph [ref=e38]: If the bonus is big enough, the matrix flips. Cooperate-cooperate becomes the best outcome for both sides, because the added funding outweighs the benefit of making the other side look bad. Neither party wants to unilaterally defect, because defection costs you the bonus you'd have gotten from cooperating.
+    - paragraph [ref=e39]: Below a certain threshold, the bonus isn't big enough to overcome the reasons to defect, and nothing changes. Above it, the equilibrium flips. You can watch it happen in the figure below. Notice how sharp the threshold is — it's not a slow dissolve, it's a switch.
+    - figure [ref=e40]:
+      - generic [ref=e43]:
+        - generic [ref=e44]: cooperation bonus — 0
+        - slider "cooperation bonus — 0" [ref=e45] [cursor=pointer]: "0"
+      - generic [ref=e46]:
+        - generic [ref=e47]: Fig 1
+        - text: A prisoner's-dilemma-style payoff matrix between two parties. The left number in each cell is A's payoff, the right is B's. The "cooperation bonus" slider adds a constant to any cell where a party cooperated. At bonus 0 the Nash equilibrium (the cell where neither side can improve by unilaterally switching) is defect-defect. As the bonus grows, there's a threshold where cooperate-cooperate becomes stable instead.
+    - heading "How you count \"cooperation\"" [level=2] [ref=e48]
+    - paragraph [ref=e49]: This is where the plan gets hard, and I don't want to pretend it doesn't. Measuring cooperation in a way that can't be gamed is a genuine design problem. Here are the traps I can think of, in roughly the order they'd hit.
+    - paragraph [ref=e50]:
+      - strong [ref=e51]: Symbolic votes.
+      - text: Parties could game the system by cooperating on low-stakes procedural votes — naming post offices, renewing holiday resolutions — while defecting on anything that mattered. The fix is to weight votes by substance. This is hard to automate and politically sensitive, because any weighting scheme is itself a political choice, but some version of it (bills flagged by nonpartisan staff as "significant") is probably necessary.
+    - paragraph [ref=e52]:
+      - strong [ref=e53]: Fake bills.
+      - text: The more devious failure mode is that the majority party introduces deliberately weak bills, gets a few members of the minority to vote for them, claims the cooperation bonus, and counts it as bipartisan. The fix is to also measure the
+      - emphasis [ref=e54]: amount
+      - text: of cross-party support — not just "at least one person from the other party voted yes" but a real fraction. Maybe 30% or more of the minority party has to vote yes for a bill to count. Pick a number and defend it.
+    - paragraph [ref=e55]:
+      - strong [ref=e56]: Obstruction without alternatives.
+      - text: A party can refuse to cooperate without proposing anything, and currently pay no cost. Any serious version of this mechanism would penalize that — if you block a bill, you have to offer a counter-proposal you'd be willing to pass. This is hard to formalize, but some version of "you can vote no on the other side's bill, but you can't vote no without
+      - emphasis [ref=e57]: also
+      - text: putting forward your own version for a vote" is tractable.
+    - paragraph [ref=e58]:
+      - strong [ref=e59]: Gaming the measurement itself.
+      - text: Any numeric measurement will be reverse-engineered by parties whose campaigns depend on it — when a measure becomes a target, it stops measuring what you wanted (Goodhart's Law). The mitigation isn't to make the measurement perfect — there's no such thing — it's to have it overseen by a body insulated from the parties it measures, and to update the rules when gaming becomes visible. Hard, but tractable.
+    - generic [ref=e60]:
+      - generic [ref=e61]: Honest tension
+      - paragraph [ref=e62]: The honest version of this proposal is that it requires the people who benefit from the current system to vote for a change to the current system. The same people whose power depends on defection would have to pass a law that rewards cooperation. Economists call this a second-order collective action problem — cooperation itself has to be cooperated-on to exist — and it's genuinely hard. I don't have a clever answer. The best I can offer is that the mechanism could start small, as a pilot at the state level, and scale up if it works.
+    - heading "Why this might still fail" [level=2] [ref=e63]
+    - paragraph [ref=e64]: The hardest objection to this plan isn't about design. It's about the voters.
+    - paragraph [ref=e65]:
+      - strong [ref=e66]: The base problem.
+      - text: Even if the funding incentive flips the equilibrium among
+      - emphasis [ref=e67]: politicians
+      - text: ", the primary voter base might still punish cooperation. A representative who votes yes on a compromise bill might get extra campaign money"
+      - emphasis [ref=e68]: and
+      - text: face a primary challenge from someone promising purity. In that case, the cooperation bonus has to be large enough to outweigh the primary risk, and I don't know what that number looks like. It might be bigger than any feasible public finance scheme could deliver. This is the objection that worries me most; the others are engineering problems and this one isn't.
+    - figure [ref=e69]:
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - generic [ref=e73]: primary-voter purity pressure — 3
+          - slider "primary-voter purity pressure — 3" [ref=e74] [cursor=pointer]: "3"
+        - generic [ref=e75]:
+          - generic [ref=e76]: funding bonus — 3
+          - slider "funding bonus — 3" [ref=e77] [cursor=pointer]: "3"
+      - generic [ref=e78]:
+        - generic [ref=e79]: Fig 2
+        - text: "A 2D view of a politician's survival. X-axis: funding bonus from cooperating. Y-axis: primary-voter pressure punishing cooperation. Green region: the politician survives the next election. Orange: primaried. The dot is the current politician. Drag the purity pressure up and watch the survival region shrink. Try to rescue them by cranking the bonus. At pressure 7, you need a bonus of 10+ just to break even — the \"any feasible public finance scheme\" edge of the chart. That's the number the post worries about."
+    - paragraph [ref=e80]:
+      - strong [ref=e81]: The shadow of the future.
+      - text: Game-theoretic results about cooperation usually assume the same players will interact repeatedly and care about future payoffs nearly as much as present ones. In electoral politics, the "future" is two years, and politicians discount outcomes beyond their next election pretty steeply. A cooperation bonus that pays out over ten years might not influence someone whose horizon is two.
+    - paragraph [ref=e82]:
+      - strong [ref=e83]: The coordination failure.
+      - text: The whole premise assumes both parties can be affected by the mechanism. If one party captures the measurement body and uses it selectively against the other, you've introduced a new weapon instead of a new equilibrium. The risk scales with how much discretion the measuring body has.
+    - heading "Why I still think it's worth trying" [level=2] [ref=e84]
+    - paragraph [ref=e85]: The thing we actually need to change — the incentive structure — is the thing most "fix democracy" proposals refuse to touch. Everyone wants to change the media environment, the candidates, the rules of redistricting, the voter demographics. These are all reasonable, and most of them are entangled with the payoff matrix rather than downstream of it — redistricting especially, because safe seats directly produce the primary pressure that makes defection profitable. Entangled is different from downstream. Upstream moves are rare.
+    - paragraph [ref=e86]: A cooperation bonus is a candidate for one. It touches the payoff matrix directly. Tweak the matrix and at least some of the rest of the system shifts around it — the voters are the piece that won't, which is the base-problem objection above. If it works, the effect is disproportionate to the policy's size. If it fails in a pilot, it fails for reasons we can learn from. The cost of trying a small version is cheap compared to another decade of moral appeals.
+    - paragraph [ref=e87]: I'm not confident enough to say "we should do this." I am confident that the conversation about political dysfunction should move from "these people are awful" to "this matrix is awful," and that most of the energy currently spent on the first question would be better spent on the second.
+    - separator [ref=e88]
+    - paragraph [ref=e89]:
+      - text: If you have a more robust version of this mechanism, or if you think I'm wrong about the upstream-ness of the payoff matrix, tell me —
+      - link "hi@rnader.com" [ref=e90] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: . The
+      - link "free-will post" [ref=e91] [cursor=pointer]:
+        - /url: /posts/free-will.html
+      - text: is the philosophical sibling of this one — same habit of blaming the structure rather than the agent.

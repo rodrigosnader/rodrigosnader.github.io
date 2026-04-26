@@ -1,0 +1,131 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e16]:
+    - generic [ref=e17]:
+      - heading "The one thing Bayes actually says" [level=1] [ref=e18]
+      - paragraph [ref=e19]:
+        - time [ref=e20]: 2026 · Apr 12
+        - text: · 8 min read · Essay
+    - paragraph [ref=e21]: Everybody has heard the same pitch about Bayes' rule. It's about updating your beliefs. You have a prior, a likelihood, and an evidence term. You multiply, you divide, you normalize, you get a posterior. The pitch is technically correct and almost entirely unhelpful, and it's the reason most people who nod along end up fifteen minutes later trying to remember which number was the prior and which was the likelihood and whether the base rate was supposed to be in there twice or once.
+    - paragraph [ref=e22]:
+      - text: "I spent an afternoon arguing with a language model about this until I finally got an explanation that didn't fall apart the moment I pressed on it. Here's the short version of where it landed:"
+      - emphasis [ref=e23]: Bayes' rule is one question, not three ingredients
+      - text: . And the question is this.
+    - generic [ref=e24]:
+      - generic [ref=e25]: The whole rule
+      - paragraph [ref=e26]:
+        - text: Is this evidence happening
+        - emphasis [ref=e27]: because
+        - text: my belief is true, or is it happening
+        - emphasis [ref=e28]: anyway
+        - text: "?"
+    - paragraph [ref=e29]: That's it. Everything else — the priors, the likelihoods, the divisions, the COVID examples — is decoration on that one comparison. Once you see it, the rest is bookkeeping.
+    - heading "Why the textbook version feels like a mess" [level=2] [ref=e30]
+    - paragraph [ref=e31]:
+      - text: "The standard setup goes like this. Imagine a COVID test. You want to know whether a positive result means you're actually sick. There are, we're told, three things to keep in mind: how likely you were to have it"
+      - emphasis [ref=e32]: before
+      - text: the test (the prior), how reliably the test detects the disease (the likelihood), and how often the test shows a positive result in general (the evidence).
+    - paragraph [ref=e33]: The problem isn't that this is wrong. It's that the third thing sounds suspiciously like the first. If I already considered how common the disease is when I formed my prior, why does it show up again in the denominator? And if I didn't consider it when I formed my prior, wasn't I forming the prior wrong?
+    - paragraph [ref=e34]: Every explanation I've read skates past this. The model I was talking to did the same thing, at first. "Well, you use it at different stages." "Well, one is an inherent property of the test and the other is about the population." "Well, it's about signal frequency in the wild." Each answer was true. None of them was the explanation.
+    - paragraph [ref=e35]: Here's what I think the textbook is doing wrong. It decomposes the rule into three parts because the algebra has three parts. Then it tries to give each part a name and a home, and the names and homes bleed into each other, and the student ends up with an equation that feels like three different ingredients being whisked around for no clear reason.
+    - paragraph [ref=e36]: The fix is to stop decomposing. Bayes' rule isn't three things. It's one comparison, and you should teach the comparison first.
+    - heading "The comparison" [level=2] [ref=e37]
+    - paragraph [ref=e38]:
+      - text: Pick any signal — a positive test, a suspicious email, a scream in the night. Call it
+      - emphasis [ref=e39]: the evidence
+      - text: . Now ask two honest questions about it.
+    - list [ref=e40]:
+      - listitem [ref=e41]: When my belief is true, how often does this signal show up?
+      - listitem [ref=e42]:
+        - text: How often does this signal show up
+        - emphasis [ref=e43]: in general
+        - text: ", regardless of whether my belief is true?"
+    - paragraph [ref=e44]:
+      - text: If the first is much larger than the second, the signal is a strong piece of evidence for your belief, because the signal is happening
+      - emphasis [ref=e45]: mostly
+      - text: when your belief is true. If the two numbers are close, the signal is a weak piece of evidence, because it's happening about as often anyway. If the first is smaller than the second, the signal is actually evidence
+      - emphasis [ref=e46]: against
+      - text: your belief.
+    - paragraph [ref=e47]: The ratio between these two frequencies is the update factor. That's the part that tells you how much to move. Your starting belief — your prior — is just the number you start from before applying the update factor. Multiply, renormalize, done.
+    - paragraph [ref=e48]: All the business about "prior versus likelihood versus evidence" is really just an accounting trick for computing that one ratio. Textbooks present the accounting first and the insight never. It's like being handed the bookkeeping for a restaurant and being told that running a restaurant is about ledger entries. No. It's about food. The ledger is how you track whether the food is paying for itself.
+    - heading "The COVID example, told properly" [level=2] [ref=e49]
+    - paragraph [ref=e50]:
+      - text: Let's run the example, but this time we're going to ask
+      - emphasis [ref=e51]: the
+      - text: question, not three ingredient questions.
+    - paragraph [ref=e52]: You're in a population where 1% of people have the disease. You take a test that correctly flags sick people 95% of the time, and falsely flags healthy people 5% of the time. You get a positive result. How worried should you be?
+    - paragraph [ref=e53]: Here's the comparison. Among sick people, positive tests show up 95% of the time. Among everybody — sick and healthy together — positive tests show up with frequency (1% × 95%) + (99% × 5%), which is 0.95% + 4.95% = 5.9%. So the signal (a positive test) happens about 95% of the time when the belief is true, but about 5.9% of the time in general. The ratio is 95 / 5.9, roughly 16.
+    - paragraph [ref=e54]: You started with a 1% prior. You multiply by the update factor. The prior nudges up. After the arithmetic — which is just normalization, not a new idea — you end at around 16% chance of actually being sick. Not 95%. Sixteen. Because the signal happens a lot anyway, most of what you're seeing is the happens-anyway part.
+    - paragraph [ref=e55]:
+      - text: This is the moment everybody finds unintuitive, and it's the moment the comparison makes obvious. A "95% accurate" test applied to a disease that's in 1% of the population produces mostly false positives, because there are
+      - emphasis [ref=e56]: so many more
+      - text: healthy people to be wrong about than sick people to be right about. The happens-anyway rate dominates.
+    - figure [ref=e57]:
+      - generic [ref=e59]:
+        - generic [ref=e60]:
+          - generic [ref=e61]: disease prevalence — 1.0%
+          - slider "disease prevalence — 1.0%" [ref=e62] [cursor=pointer]: "1"
+        - generic [ref=e63]:
+          - generic [ref=e64]: test sensitivity — 95%
+          - slider "test sensitivity — 95%" [ref=e65] [cursor=pointer]: "95"
+        - generic [ref=e66]:
+          - generic [ref=e67]: false positive rate — 5%
+          - slider "false positive rate — 5%" [ref=e68] [cursor=pointer]: "5"
+      - generic [ref=e69]:
+        - generic [ref=e70]: Fig 1
+        - text: The unit square is the whole population. It splits horizontally into sick (accent) and healthy (neutral). Within each slice, the test carves out true positives (solid) and false positives (striped). The rightmost number is the posterior — your real chance of being sick given a positive test — and it's mostly made of whichever positive region is bigger.
+    - paragraph [ref=e71]: Move the prevalence slider below 1% and watch what happens. The entire solid region — the true positives — shrinks into invisibility, while the striped region (false positives) barely changes. The positive-test box is almost entirely false alarms. Your posterior drops toward zero.
+    - paragraph [ref=e72]: Move prevalence past 10% and the opposite happens. Suddenly the true positives dominate the positive-test box. Your posterior climbs. Nothing about the test has changed. What changed is the happens-anyway rate, and the test is being interpreted against a different background.
+    - heading "What \"prior\" really means" [level=2] [ref=e73]
+    - paragraph [ref=e74]: "Here's the framing that unstuck me, after an embarrassing number of attempts to have it explained: the prior is not a separate ingredient. The prior is just the number you start with. You can form it from whatever you already know — base rates, symptoms, gut feeling, your aunt's opinion, all of it. What matters is that it's the belief you walk in with, before this particular piece of evidence."
+    - paragraph [ref=e75]:
+      - text: And the so-called evidence term — the "happens-anyway" rate — is also not magic. It's just the denominator that makes the update factor come out right, because you can only weight the evidence correctly if you know how often the evidence happens no matter what. If you skip it, you're implicitly assuming the evidence
+      - emphasis [ref=e76]: only
+      - text: happens when your belief is true, which is almost never the case.
+    - paragraph [ref=e77]: That's why the happens-anyway rate feels like it's being counted twice. It isn't. It's doing two different jobs. In the prior, it's part of your starting point — you walked in thinking the disease was rare because you know it's rare. In the update factor, it's calibrating how seriously to take a signal that also happens to rare-disease-free people. These are two different questions with the same numerical input. Both need it. Neither is redundant.
+    - generic [ref=e78]:
+      - generic [ref=e79]: Honest tension
+      - paragraph [ref=e80]: The "one comparison" framing makes the rule feel intuitive, but it hides that for non-trivial problems you still have to compute the two frequencies correctly — which often means understanding conditional probability well enough to avoid double-counting the evidence. I don't think the algebra is avoidable; I think it should just not be the first thing you see.
+    - heading "Why this matters outside of tests" [level=2] [ref=e81]
+    - paragraph [ref=e82]: "This framing generalizes the moment you stop caring about COVID. A suspicious email in your inbox: how often do real phishing attempts look like this, versus how often do legitimate messages happen to sound like this? A candidate with an impressive résumé: how often do great engineers have résumés like that, versus how often do bad engineers also polish theirs to look the same? A scientific result with a low p-value: how often does the true effect produce this signal, versus how often does chance alone?"
+    - paragraph [ref=e83]:
+      - text: The questions rhyme because it's the same question. Bayes is just the habit of always asking both halves instead of just the first. Most of the bad inference in the world — hiring mistakes, medical panic, conspiracy theories that "explain everything" — comes from forgetting to ask the second half. The signal looks strong, and you don't check how strong the signal is
+      - emphasis [ref=e84]: anyway
+      - text: .
+    - paragraph [ref=e85]:
+      - text: This is the same cognitive blind spot I poked at in the
+      - link "skepticism post" [ref=e86] [cursor=pointer]:
+        - /url: /posts/skepticism.html
+      - text: ", from a different angle. False statements vastly outnumber true ones; weak evidence for something is still mostly evidence for nothing, because \"nothing\" is so much larger."
+    - heading "The whole rule, one more time" [level=2] [ref=e87]
+    - paragraph [ref=e88]: "Bayes' rule is the habit of asking, for any piece of evidence:"
+    - paragraph [ref=e89]:
+      - emphasis [ref=e90]: how much more often does this happen when my belief is true, compared to how often it happens anyway?
+    - paragraph [ref=e91]: That's the entire machine. Every equation, every diagram, every example is a way of computing that ratio and multiplying it by the number you walked in with. If a textbook gives you three ingredients and an equation without the comparison, it's giving you the ledger without the restaurant. You can memorize the ledger, but you won't know when to use it until someone tells you what it's for.
+    - separator [ref=e92]
+    - paragraph [ref=e93]:
+      - text: If this clicked, or if I'm still missing something that would make it click better, I genuinely want to know —
+      - link "hi@rnader.com" [ref=e94] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .
+  - contentinfo [ref=e95]:
+    - paragraph [ref=e97]:
+      - link "← back to home" [ref=e98] [cursor=pointer]:
+        - /url: ../
+      - text: 0 frameworks. Plain HTML, CSS and vanilla JS.

@@ -1,0 +1,92 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e16]:
+    - generic [ref=e17]:
+      - heading "Explanations that don't eat their tail" [level=1] [ref=e18]
+      - paragraph [ref=e19]:
+        - time [ref=e20]: 2026 · Apr 16
+        - text: · 6 min read · Essay
+    - blockquote [ref=e21]:
+      - paragraph [ref=e22]: "\"What's a radius?\" \"Half the diameter.\" \"And a diameter?\" \"Twice the radius.\""
+    - paragraph [ref=e23]: Both sentences are true. Together they explain nothing. If you didn't know what a radius was before reading them, you still don't. Each definition props up the other; neither one touches the ground.
+    - paragraph [ref=e24]: "I keep coming back to this pattern. Something that sounds like an explanation, passes a casual reading, and collapses under one round of \"but why?\" The shape of the failure is always the same: a loop, disguised as a chain."
+    - heading "Levels mean dependency" [level=2] [ref=e25]
+    - paragraph [ref=e26]: "When we say a concept is \"lower-level\" than another, we mean one thing: you need it to make sense of the other. If you need B to understand A, then B is lower than A. That's all."
+    - paragraph [ref=e27]: So what sits one level below radius and diameter? The center of the circle. A circle is all the points equidistant from a center. The radius is the distance from center to edge. The diameter is the distance straight across, through the center. Neither word needs the other; both need the center. And "center," "distance," "edge" — those are words you already have. You don't need them explained. That's the floor.
+    - paragraph [ref=e28]: "Each layer rests on concepts that require less from you — concepts closer to things you'd just nod at. That's what \"lower\" means here: not simpler, not smaller, just closer to a foundation you're already standing on."
+    - paragraph [ref=e29]: Ask why a program crashed and "because there was a bug" gives you nothing — it's the crash restated with a different word. "The function received null because the API returned an empty response and nothing checked for that" has steps, each one sitting on the previous. The first is a loop. The second is a chain.
+    - paragraph [ref=e30]: This is easier to see in code than in prose. A function that calls itself without a base case blows the stack — the "compiler" refuses. Natural language has no such enforcement. Circular explanations compile just fine in English, which is why careful writers do the check by hand.
+    - heading "The dormitive virtue" [level=2] [ref=e31]
+    - paragraph [ref=e32]:
+      - link "Molière" [ref=e33] [cursor=pointer]:
+        - /url: https://en.wikipedia.org/wiki/Le_Malade_imaginaire
+      - text: staged the canonical version of this trap in 1673. In
+      - emphasis [ref=e34]: Le Malade imaginaire
+      - text: ", a medical candidate is asked why opium makes people sleep. He answers, in impressive Latin, that opium possesses a"
+      - emphasis [ref=e35]: virtus dormitiva
+      - text: — a "dormitive virtue" — whose nature is to cause the senses to slumber.
+    - blockquote [ref=e36]:
+      - paragraph [ref=e37]: "Translated: opium makes you sleepy because it has a sleepiness-making quality. The Latin dresses up the phenomenon as a cause."
+    - paragraph [ref=e38]: This matters because the trick scales. Replace "dormitive virtue" with any sufficiently technical-sounding mechanism, and the same empty move passes inspection. "Opium triggers the opioid receptors, which induce sleep." Is that an explanation? It depends on whether "opioid receptors" unpacks into something lower — ion channels, membrane potentials, signaling cascades. If it does, you've added a real step to the chain. If it's just a fancier label for "the thing that causes sleepiness," the circle got wider but didn't break.
+    - figure [ref=e39]:
+      - generic [ref=e41]:
+        - button "radius & diameter" [ref=e42] [cursor=pointer]
+        - button "dormitive virtue" [ref=e43] [cursor=pointer]
+        - button "temperature (good)" [ref=e44] [cursor=pointer]
+        - button "molecule (good)" [ref=e45] [cursor=pointer]
+      - generic [ref=e46]:
+        - generic [ref=e47]: Fig 1
+        - text: Switch between four dependency graphs. If the arrows form a loop, the explanation is circular — it never grounds out. If they reach primitive nodes (things you'd accept without further explanation), the explanation is rigorous. The first two are broken. The last two actually bottom out.
+    - heading "The why-test" [level=2] [ref=e48]
+    - paragraph [ref=e49]:
+      - text: There's a way to catch this. Take any explanation and keep asking
+      - emphasis [ref=e50]: why
+      - text: ", the way a child does before learning when to stop. Each answer is a new claim; ask why again. One of three things happens."
+    - paragraph [ref=e51]:
+      - text: "You ground out. You reach something that doesn't need further definition — a concept close enough to bedrock that you stop naturally. There's a beautiful demonstration of this on Wikipedia: pick any article, click the first link in the body text, and keep going. About 97% of articles eventually land on"
+      - emphasis [ref=e52]: Philosophy
+      - text: . The definitions keep chaining into lower-level concepts until there's nowhere left to go but the study of thought itself.
+    - figure [ref=e53]:
+      - generic [ref=e55]:
+        - button "Cat" [ref=e56] [cursor=pointer]
+        - button "Guitar" [ref=e57] [cursor=pointer]
+        - button "Love" [ref=e58] [cursor=pointer]
+        - button "Chocolate" [ref=e59] [cursor=pointer]
+        - button "Football" [ref=e60] [cursor=pointer]
+      - generic [ref=e61]:
+        - generic [ref=e62]: Fig 2
+        - text: Pick a starting word and follow Wikipedia's first-link chain to Philosophy. About 97% of all articles get there. Paths traced in April 2026 — they shift as Wikipedia is edited. Try your own at
+        - link "pathtophilosophy.com" [ref=e63] [cursor=pointer]:
+          - /url: https://pathtophilosophy.com
+        - text: .
+    - paragraph [ref=e64]: You run out of budget. The chain is solid so far, but the next step would take you into a different field entirely. That's fine — rigor isn't about reaching the bottom of all knowledge. It's about knowing where your chain stops and that the link you stopped at holds weight.
+    - paragraph [ref=e65]: Say you loop. You reach a claim you already passed through, and the explanation is broken. This is the hardest case to catch — the circle fits comfortably in your head, and the return to the starting point feels like arriving at an answer. Writing the chain down is what makes it visible. Linear text is harder to fool than a train of thought.
+    - heading "The illusion of explanatory depth" [level=2] [ref=e66]
+    - paragraph [ref=e67]: "There's a reason circular explanations feel fine in your head. Psychologists call it the illusion of explanatory depth: you think you understand something until you're asked to actually explain it. Try defining what a toy is without mentioning play. An object that... children interact with? A thing designed to... entertain? Each attempt either smuggles in \"play\" under a different word or says nothing at all. The concept felt solid until the constraint revealed it was resting on a single dependency you hadn't noticed."
+    - paragraph [ref=e68]: I think this applies to more than anyone is comfortable admitting. You "know" what a neural network does until someone asks what one neuron does and why the multiplication is there. The first layer of understanding is a label, and the label rests on familiarity, not on mechanism.
+    - paragraph [ref=e69]: You can't ground everything. At some point you take a concept as primitive and stop pushing. A physicist grounds in fields. A chemist stops at the atom. A cook stops at "salt." None of this is wrong. The discipline isn't "always go deeper" — it's knowing where you stopped, and being honest that you stopped there.
+    - heading "One check" [level=2] [ref=e70]
+    - paragraph [ref=e71]: "I've mostly been talking about other people's explanations, but the most useful version of this is turned inward. Next time you're writing or teaching or trying to argue for something, pause and trace: where does this bottom out?"
+    - paragraph [ref=e72]: Every argument has a floor. A good one knows where its floor is.
+    - separator [ref=e73]
+    - paragraph [ref=e74]:
+      - text: If you've got a favorite dormitive virtue hiding in plain sight, I want to hear about it —
+      - link "hi@rnader.com" [ref=e75] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .

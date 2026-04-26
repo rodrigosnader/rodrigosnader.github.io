@@ -1,0 +1,147 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "The inside of a glass" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 14
+        - text: · 9 min read · Physics
+    - paragraph [ref=e20]: "There's a glass on the table. You know how much water fits inside it: the volume. Pour more and it spills. That has always been the answer."
+    - paragraph [ref=e21]:
+      - text: Now change the fluid. Instead of water, fill the glass with
+      - emphasis [ref=e22]: information
+      - text: — bits, the kind that live on a hard drive. How many bits fit?
+    - paragraph [ref=e23]:
+      - text: Your first guess will be volume. Volume is the answer that has always worked, and it doesn't feel like the kind of question where there could be a different answer. It turns out there is. The limit on how much information you can stuff into any region of space is not the volume. It's the
+      - emphasis [ref=e24]: surface area
+      - text: of whatever is holding it. The skin of the container, not the inside.
+    - paragraph [ref=e25]:
+      - text: This claim took me most of a night to accept. If it sounds like a trick, I thought the same thing — that area and volume were secretly the same size and I was being fooled by a rearrangement. They aren't. Area grows with the radius squared; volume grows with the radius cubed. Make the glass bigger and the volume pulls ahead of the area — the two are not proportional, and the gap between them widens as the glass grows. The claim is that the informational limit tracks the
+      - emphasis [ref=e26]: shorter
+      - text: of the two.
+    - heading "Why area, not volume" [level=2] [ref=e27]
+    - paragraph [ref=e28]: Why would the limit track area at all? The answer is a thought experiment from the 1970s. Start with an empty region of space and begin adding information. Every bit costs a little energy; every bit of energy has weight; every weight bends space a little. At some point — and this is the part that does not feel obvious the first time you hear it — the cumulative weight of the information is enough to collapse the region into a black hole. Your glass becomes a black hole before you finish filling it.
+    - paragraph [ref=e29]:
+      - text: "Jacob Bekenstein worked out a ceiling on information in any region of space using the second law of thermodynamics. The argument: if a region could hold more information than a black hole of the same size, dropping things into the region — and watching them eventually form a black hole — would make entropy"
+      - emphasis [ref=e30]: decrease
+      - text: ", which is not allowed. So the ceiling has to match the black hole at the same size. A year later Stephen Hawking confirmed the same number from a completely different direction, working from the radiation black holes emit. And the number turned out to depend on the"
+      - emphasis [ref=e31]: area
+      - text: of the horizon, not the interior it encloses.
+    - paragraph [ref=e32]: Between those two results, the trap is closed. You cannot pack information past the area limit, because trying to do so collapses the region into a black hole, and the black hole saturates exactly that limit. There is no Plan B. The interior is a wall you cannot use.
+    - figure [ref=e33]:
+      - generic [ref=e36]:
+        - generic [ref=e37]: radius of the region — 1.0
+        - slider "radius of the region — 1.0" [ref=e38] [cursor=pointer]: "1"
+      - generic [ref=e39]:
+        - generic [ref=e40]: Fig 1
+        - text: Two ways of counting the information that could fit inside a region. On the left, the volume you'd expect to use (grows as the radius cubed). On the right, the area that actually caps it (grows as the radius squared). Drag the slider. As the region gets bigger, the tall bar pulls away from the short one. The gap is interior your gut thought was usable that physics never lets you touch.
+    - generic [ref=e41]:
+      - generic [ref=e42]: The bound
+      - paragraph [ref=e43]: The most information any region of space can hold is set by the area of its boundary, not by its volume. The interior adds nothing. You cannot use it even when you try.
+    - heading "What is the interior, then?" [level=2] [ref=e44]
+    - paragraph [ref=e45]:
+      - text: "The question that kept tripping me up: if the interior doesn't add anything, what is it"
+      - emphasis [ref=e46]: for
+      - text: "?"
+    - paragraph [ref=e47]:
+      - text: "The cheap answer is that the interior holds things that have volume — water, chairs, people. Information is a different kind of stuff with a different ceiling, and you shouldn't mix them up. That answer is fine for a while. But it doesn't survive the sharper question:"
+      - emphasis [ref=e48]: what is the volume actually made of?
+      - text: You want to say "space", and when someone asks what space is, the answer is usually another way of saying "nothing". Not an explanation.
+    - paragraph [ref=e49]:
+      - text: Here is the move that reframed everything for me. What if the interior of the glass is not a container at all, but a
+      - emphasis [ref=e50]: picture
+      - text: that something else is drawing? What if the reason its informational capacity tracks area is that the real work is happening on the surface, and the inside is a summary of that work — a picture we're reading as three-dimensional, but not primary?
+    - heading "A company, turned into a resume" [level=2] [ref=e51]
+    - paragraph [ref=e52]: Imagine a company. Not the building — the people and the way they depend on each other. A hundred and fifty of them, each with work that depends on someone else's work, each with a standing habit of checking in with so-and-so before shipping anything.
+    - paragraph [ref=e53]: From outside, the company looks spatial. Any floor plan will tell you that finance is in one corner and engineering is in another, that the VP's office is at the end of the hallway, that the meeting rooms cluster near the entrance. The layout is real in the sense that anyone can draw it.
+    - paragraph [ref=e54]:
+      - text: But the layout isn't primary. It's the thing you read off the
+      - emphasis [ref=e55]: relationships
+      - text: between the people. Change who reports to whom and the layout shifts. Move one team and the "corner" it used to define gets renamed. The relationships are the thing; the layout is the picture they happen to draw when you look at them on a map.
+    - paragraph [ref=e56]: "Now the company is acquired. The buyer wants a single page: headcount, revenue, sector. The corridors are gone. The seating chart is gone. Everything interior has been compressed to that single page — a resume, after the layout has been dissolved away. Nothing essential was lost. The buyer is still getting a company. But the spatial arrangement has evaporated."
+    - paragraph [ref=e57]: A black hole is that resume.
+    - paragraph [ref=e58]:
+      - text: "When matter falls into a black hole, the matter does not go \"inside\" in any sense you can later verify. What you get is a bigger horizon, with exactly three numbers describing everything the horizon now contains: mass, charge, and angular momentum. A cat and a library, dropped in with the same mass, charge, and spin, are indistinguishable from the outside. The cat's whiskers, the library's catalog, all of it has been dissolved into three numbers on the skin. Physicists call this the"
+      - emphasis [ref=e59]: no-hair theorem
+      - text: — a stationary black hole cannot be described with anything fancier than those three numbers.
+    - paragraph [ref=e60]: The layout the things used to have — the delicate web of who was next to what, who was carrying what — is gone. Compressed. The volume that used to separate the cat from the library isn't there to point at, because it was never a container. It was a picture, and what's left of the picture is the outer edge.
+    - heading "Space is what relationships draw" [level=2] [ref=e61]
+    - paragraph [ref=e62]:
+      - text: The physics word for "relationship between quantum things" is
+      - emphasis [ref=e63]: entanglement
+      - text: . Two particles are entangled when knowing something about one tells you something about the other — a statistical glue between them. Entanglement is not new; it's been part of quantum mechanics for a century. What's new is the suggestion that entanglement might be
+      - emphasis [ref=e64]: what space is built out of
+      - text: .
+    - paragraph [ref=e65]:
+      - text: Mark Van Raamsdonk put this sharply in a 2010 paper. In a toy universe that is simpler than ours but otherwise well-defined, you can take two halves of a quantum system, dial the entanglement between them down toward zero, and
+      - emphasis [ref=e66]: watch the space between them come apart
+      - text: . Not gradually. The geometry goes through a phase transition and the two halves become disconnected regions with no spatial bridge between them. No entanglement, no space between. Juan Maldacena and Leonard Susskind pushed this further with a line —
+      - emphasis [ref=e67]: ER = EPR
+      - text: "— which compresses to: an entangled pair of particles is secretly connected by a thread of geometry, a small wormhole. The thread"
+      - emphasis [ref=e68]: is
+      - text: the relationship. Distance is what it looks like on a map.
+    - figure [ref=e69]:
+      - generic [ref=e72]:
+        - generic [ref=e73]: compression — 0%
+        - slider "compression — 0%" [ref=e74] [cursor=pointer]: "0"
+      - generic [ref=e75]:
+        - generic [ref=e76]: Fig 2
+        - text: "Inside the region: dots are particles, lines are relationships between them. Drag the slider to compress the region the way gravity would. The interior tangle pulls toward the boundary and the relationships dissolve. At maximum compression, only the outside is left — with three numbers describing everything that was ever in there."
+    - generic [ref=e77]:
+      - generic [ref=e78]: The picture
+      - paragraph [ref=e79]: Space is what relationships look like when you draw them on a map. A black hole is what the map looks like when the relationships have been compressed as hard as physics allows — the interior gone, a handful of numbers on the outside preserved.
+    - heading "The part Einstein got wrong" [level=2] [ref=e80]
+    - paragraph [ref=e81]:
+      - text: "The thing that keeps me coming back to this idea is what it says about entanglement we already know how to do. Lab physicists entangle pairs of photons all the time, then send them to opposite sides of a building, a city, a continent. The pair continues to behave as though it's one object: measuring one constrains the other instantly. Einstein called this"
+      - emphasis [ref=e82]: spooky action at a distance
+      - text: and thought it was grounds to reject quantum mechanics, or at least to demand a fix.
+    - paragraph [ref=e83]:
+      - text: He was objecting to the "distance" part. He had it the wrong way around. Distance isn't a
+      - emphasis [ref=e84]: thing being crossed too quickly
+      - text: . Distance is what the map draws when the relationships are weak. The two photons are strongly related — maximally related, in fact — and on the underlying map that cares about relationships, they are right next to each other. The fact that we read them as far apart is an artifact of our map, which is a coarser view than the one where the story lives.
+    - paragraph [ref=e85]: The reason this is hard to hold in your head is that your head uses space to do the holding. You're using space to think about what space is. The tool is the thing you're trying to explain, and every explanation ends up a little circular.
+    - heading "Proven, and not proven" [level=2] [ref=e86]
+    - paragraph [ref=e87]: Let me be careful with what I've been claiming, because holography is a seductive story and it's easy to oversell.
+    - paragraph [ref=e88]:
+      - emphasis [ref=e89]: "Proven:"
+      - text: Information in a region of space is capped by the area of its boundary. This is the Bekenstein bound, derived from thermodynamics, confirmed from a different direction by Hawking's black-hole radiation calculation, and not controversial among physicists who work on gravity. It is as solid as physics gets.
+    - paragraph [ref=e90]:
+      - emphasis [ref=e91]: "Conjecture:"
+      - text: That the bound exists
+      - emphasis [ref=e92]: because
+      - text: space itself is emergent from entanglement, and volume is the picture that entanglement draws. This has worked out rigorously in one place — a toy universe with a clean boundary to talk about. Our actual universe does not have that boundary; it is expanding rather than contracting, which changes the shape of the problem in ways that have not been resolved.
+    - paragraph [ref=e93]: "So the correct way to hold all of this in mind is: the bound is real, the shape of the explanation is probably \"space is a picture of relationships\", and whether our universe is literally that is an open problem. The strongest version I would defend is that there is a mathematically well-defined universe in which the story is completely correct. That is stronger than it sounds, and weaker than the popular version that says the universe is a hologram."
+    - heading "The glass, once more" [level=2] [ref=e94]
+    - paragraph [ref=e95]: There's a glass on the table. Before this week I would have told you, with complete confidence, that it has an inside, and the inside can hold things, and the size of the inside is the volume. The glass looks different to me now. I see a surface. Inferred from the surface, a set of relationships between whatever the universe's actual pieces are. And drawn as a picture of those relationships, the thing I used to call an inside.
+    - paragraph [ref=e96]: The glass still holds water. I'm not revising that. But the holding is the kind a map does for a territory, not the kind a bucket does for a liquid. The map looks three-dimensional because the relationships it draws are dense and continuous. Compress the relationships hard enough — more than anything I'll ever see in this kitchen — and the three-dimensionality goes with them.
+    - paragraph [ref=e97]:
+      - text: I don't know if this is right. The people whose job it is to know don't fully know either. What I do know is that I can't unsee it. When I set the glass back down, my first thought is no longer
+      - emphasis [ref=e98]: how much fits
+      - text: . It is
+      - emphasis [ref=e99]: what is this really a picture of
+      - text: .
+    - separator [ref=e100]
+    - paragraph [ref=e101]:
+      - text: If this lands for you differently than it did for me, or if I got a piece of it wrong, I genuinely want to know —
+      - link "hi@rnader.com" [ref=e102] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: . The sister piece is
+      - link "the boy and the infinite universe" [ref=e103] [cursor=pointer]:
+        - /url: /posts/infinite-universe.html
+      - text: ", which plays a similar trick with the word \"size\"."

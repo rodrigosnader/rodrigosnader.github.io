@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explanations that don't eat their tail — Rodrigo Nader</title>
+<meta name="description" content="A short tour of what makes an explanation rigorous: dependency, not fanciness, and why the why-test catches broken ones.">
+<link rel="stylesheet" href="../style.css?v=4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <a href="../" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>Explanations that don't eat their tail</h1>
+    <p class="post-meta">
+      <time datetime="2026-04-12">2026 · Apr 12</time>
+      <span class="sep">·</span>
+      <span>7 min read</span>
+      <span class="sep">·</span>
+      <span>Essay</span>
+    </p>
+  </header>
+
+  <p>Let me try to explain something.</p>
+
+  <p>A radius is half the length of a diameter.</p>
+
+  <p>And a diameter? A diameter is twice the length of a radius.</p>
+
+  <p>Done. You should now know what a radius is.</p>
+
+  <p>Except you don't, and the reason is worth half an hour. The two sentences above form what I'd like to call a perfect explanation in the Escher sense: they are mutually consistent, each one is individually true, and together they explain nothing. If you didn't know what a radius was before reading them, you still don't. I can keep talking — I can tell you that circumference equals π times diameter, and that π is the ratio of circumference to diameter — but every sentence I add is going to rely on a word that only makes sense in terms of another word I'm also defining. The whole structure floats, held up by its own hair.</p>
+
+  <p>This is the kind of thing that happens when an explanation eats its own tail. It's one of the most common failures in writing, teaching, thinking, and debugging, and once you learn to spot it you start to notice how much of the world's "explaining" is actually just this. So let's pull it apart.</p>
+
+  <h2>Concepts are dependencies, not sizes</h2>
+
+  <p>The first thing worth saying is that "higher-level" and "lower-level" concepts are not about grandeur. They're about dependency. A concept B is <em>lower</em> than concept A if you need B to make sense of A. If I want to explain what a molecule is, I'd better have "atom" already available, because a molecule is something atoms do. If I want to explain what an atom is, I'd better have "electron" and "nucleus" available, because that's what an atom is made of. The dependency goes one way. You ground up, not sideways.</p>
+
+  <p>The radius and diameter sit at the same level. Neither depends on the other. You can define both in terms of a simpler idea — "a circle is the set of all points equidistant from a center; the radius is that distance, the diameter is twice that distance" — and now the dependency graph goes down one step to "distance" and "point" and "center", which are simpler concepts that most readers will accept without further definition. That is how explanations are supposed to work. Each layer earns its keep by sitting on something cheaper underneath.</p>
+
+  <p>If your explanation can't do this — if it's a graph of concepts that all depend on each other and never reach anything primitive — it's broken. Not wrong, exactly. Broken.</p>
+
+  <h2>The dormitive virtue</h2>
+
+  <p>Molière had a line about this in the seventeenth century. A would-be doctor is being examined on what makes opium put people to sleep. He answers, in impressive Latin: <em>because it possesses a dormitive virtue, whose nature is to cause the senses to slumber</em>. Which, translated, is "opium makes you sleepy because it has a sleepiness-making quality." He passes the exam. He should not have.</p>
+
+  <p>"Dormitive virtue" is a label stuck on the phenomenon it was supposed to explain. The phenomenon is "opium makes you sleepy." The explanation is "opium has a sleepiness-making thing in it." If you ask what the sleepiness-making thing is, the only answer the explanation can give is "it's the thing that makes opium make you sleepy," which sends you back to where you started. The explanation is a loop, and the loop has one step.</p>
+
+  <p>The reason this matters is that the dormitive-virtue trick is almost undetectable when you do it with modern vocabulary. Replace "dormitive virtue" with any sufficiently impressive-sounding neurotransmitter, mechanism, or brand of theory, and the same empty move slides past most readers. "Opium triggers the opioid receptors, which induce sleep." Is that an explanation? Sort of. It pushes the question down one level — now we have to ask what the opioid receptors are and why they induce sleep — but unless those pushes ground out in something actually mechanistic (ion channels, membrane potentials, downstream signaling cascades), we're still going in circles, just with bigger vocabulary.</p>
+
+  <figure class="viz">
+    <canvas id="v1-cycle" style="height: 400px;"></canvas>
+    <div class="viz-controls">
+      <button id="v1-case-a">radius &amp; diameter</button>
+      <button id="v1-case-b">dormitive virtue</button>
+      <button id="v1-case-c">temperature (good)</button>
+      <button id="v1-case-d">molecule (good)</button>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 1</span>Click a concept and watch its dependency graph light up. If the graph grounds out in primitive nodes — things you'd accept without further explanation — the explanation is <em>rigorous</em>. If it loops back on itself, the cycle lights up in red, and the explanation is <em>circular</em>. The two bad examples really are broken. The two good ones really do bottom out.</div>
+  </figure>
+
+  <h2>The why-test</h2>
+
+  <p>Here's a practical move. Take any explanation you're unsure about, and start asking <em>why</em> like an irritating child. Each answer is a new claim; ask why of that one. Keep going. Eventually, one of three things happens.</p>
+
+  <p>You ground out. You reach a claim that feels primitive — a physical mechanism, a mathematical definition, a sense observation, something you don't feel the need to push further. The explanation is rigorous, at least from here down.</p>
+
+  <p>You run out of budget. You reach a place where further questioning would require a different field of expertise, but the chain you traced so far is sound. That's fine. Rigor doesn't require you to ground in the Standard Model; it requires you to ground <em>somewhere solid</em>, and acknowledge where you stopped.</p>
+
+  <p>You loop. You reach a claim you already passed through. At that point the explanation is broken, and you should know it's broken before you continue building on it.</p>
+
+  <p>The loop case is the interesting one, because the loop is usually invisible in the moment. You don't notice you're back where you started until someone else is patient enough to trace the chain. This is why writing things down helps: linear prose forces the loop to become visible. Your head can hold a circular explanation and feel productive about it, because the circle fits inside working memory and the return-to-start feels like "arriving at the answer."</p>
+
+  <h2>The illusion of explanatory depth</h2>
+
+  <p>There's a name for what's happening in your head when you fall for a circular explanation you shouldn't have. Psychologists call it the <em>illusion of explanatory depth</em>, and it's a robust finding. If you ask someone how confident they are that they understand how a zipper works, they'll rate themselves pretty high. Then ask them to actually explain how a zipper works, step by step, mechanism included. Their confidence plummets within about three sentences. The reason is that the self-assessment was based on a <em>label</em> — "I know how zippers work" — and the label was indexed to a vague mental image, not to a working model.</p>
+
+  <p>This applies to everything. You "know" how an internal combustion engine works, until you have to actually explain what happens in the cylinder. You "know" what inflation is, until someone asks what's happening at the level of individual price-setting decisions. You "know" what a neural network does, until someone asks what one neuron does and why the multiplication is there. In every case, the first layer of understanding is held up by the label, and the label is held up by nothing. The why-test drops the label and asks for the mechanism, and the mechanism is where the honest work starts.</p>
+
+  <div class="callout">
+    <span class="label">Honest tension</span>
+    <p>You can't ground everything. At some point you have to take a concept as primitive, and different communities accept different primitives. A physicist grounds at "field" and keeps going. A chemist grounds at "atom" and stops. A cook grounds at "salt" and doesn't pretend otherwise. None of this is wrong. Rigor isn't "keep going forever" — it's "know where you stopped, and why it was reasonable to stop there."</p>
+  </div>
+
+  <h2>Top-down isn't a sin</h2>
+
+  <p>Before I wrap up, a defense of top-down explanations, because I don't want to leave the impression that they're always bad. They aren't. Top-down is great as <em>scaffolding</em>. "A neural network is a function that maps inputs to outputs by stacking layers of weighted sums and nonlinearities" is a top-down sentence and it's useful — it tells you the shape of the thing before you dive into the pieces.</p>
+
+  <p>The sin isn't top-down. The sin is top-down that <em>never</em> grounds out. A scaffold that stays in the air forever isn't a scaffold; it's a free-floating cathedral. Good writing uses top-down to orient the reader and then grinds through the bottom-up to actually deliver the payoff. Most textbooks do some of this. The ones that don't are the ones you still feel confused by after finishing.</p>
+
+  <p>Programming is where this discipline is easiest to see, incidentally. You can't write a function that depends on itself without eventually causing the stack to blow up. The compiler refuses. Prose has no such enforcement — circular explanations compile just fine in natural language — which is why careful writers keep doing the why-test by hand.</p>
+
+  <h2>One takeaway</h2>
+
+  <p>I've mostly been talking about reading other people's explanations, but the most useful application of this is to your own. The next time you catch yourself writing or teaching or trying to convince someone of something, pause and ask: <em>where does this bottom out?</em> Every argument has a floor, and a good one knows what its floor is. A bad one has either no floor or a secret trap door in the middle that cycles back to the top.</p>
+
+  <p>You can make a lot of your thinking sharper by just doing this one check. Not on every sentence — that would be exhausting — but on any claim that seems to be doing heavy lifting. Trace it down. See if it grounds. If it does, you've got something you can actually build on. If it doesn't, you've been holding the air and calling it a building.</p>
+
+  <hr>
+
+  <p>If you've got a favorite example of a dormitive virtue in the wild, or a discipline that's especially bad at grounding its own explanations, send it my way — <a href="mailto:hi@rnader.com">hi@rnader.com</a>.</p>
+</article>
+
+<script src="/script.js?v=3"></script>
+<script src="../viz-common.js?v=1"></script>
+<script>
+/* ---------- Fig 1: dependency graph with cycle detection ---------- */
+(function(){
+  const canvas = document.getElementById('v1-cycle');
+  const ctx = canvas.getContext('2d');
+
+  const cases = {
+    a: {
+      label: 'radius & diameter',
+      nodes: [
+        { id: 'radius', label: 'radius', x: 0.3, y: 0.45, primitive: false },
+        { id: 'diameter', label: 'diameter', x: 0.7, y: 0.45, primitive: false },
+      ],
+      edges: [
+        { from: 'radius', to: 'diameter', text: 'half of' },
+        { from: 'diameter', to: 'radius', text: 'twice' },
+      ],
+      circular: true,
+      msg: 'circular: neither concept grounds out',
+    },
+    b: {
+      label: 'dormitive virtue',
+      nodes: [
+        { id: 'sleepiness', label: 'opium makes sleepy', x: 0.3, y: 0.4, primitive: false },
+        { id: 'virtue', label: 'dormitive virtue', x: 0.7, y: 0.4, primitive: false },
+      ],
+      edges: [
+        { from: 'sleepiness', to: 'virtue', text: 'explained by' },
+        { from: 'virtue', to: 'sleepiness', text: '= the thing that does' },
+      ],
+      circular: true,
+      msg: 'circular: the label is the phenomenon',
+    },
+    c: {
+      label: 'temperature (good)',
+      nodes: [
+        { id: 'temp', label: 'temperature', x: 0.5, y: 0.22, primitive: false },
+        { id: 'ke', label: 'kinetic energy', x: 0.5, y: 0.48, primitive: false },
+        { id: 'mv', label: 'mass × velocity²', x: 0.5, y: 0.74, primitive: true },
+      ],
+      edges: [
+        { from: 'temp', to: 'ke', text: 'avg of' },
+        { from: 'ke', to: 'mv', text: 'computed from' },
+      ],
+      circular: false,
+      msg: 'grounds in measurable quantities',
+    },
+    d: {
+      label: 'molecule (good)',
+      nodes: [
+        { id: 'mol', label: 'molecule', x: 0.5, y: 0.2, primitive: false },
+        { id: 'atoms', label: 'atoms bonded', x: 0.5, y: 0.45, primitive: false },
+        { id: 'parts', label: 'nucleus + electrons', x: 0.5, y: 0.72, primitive: true },
+      ],
+      edges: [
+        { from: 'mol', to: 'atoms', text: '= bonded' },
+        { from: 'atoms', to: 'parts', text: 'made of' },
+      ],
+      circular: false,
+      msg: 'grounds in physical primitives',
+    },
+  };
+  let activeKey = 'a';
+
+  document.getElementById('v1-case-a').addEventListener('click', () => activeKey = 'a');
+  document.getElementById('v1-case-b').addEventListener('click', () => activeKey = 'b');
+  document.getElementById('v1-case-c').addEventListener('click', () => activeKey = 'c');
+  document.getElementById('v1-case-d').addEventListener('click', () => activeKey = 'd');
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const data = cases[activeKey];
+    const pad = 40;
+    const w = rect.width - pad * 2;
+    const h = rect.height - pad * 2;
+
+    // Find node positions in canvas coords
+    const positions = {};
+    data.nodes.forEach((n) => {
+      positions[n.id] = { x: pad + n.x * w, y: pad + n.y * h };
+    });
+
+    // Edges
+    data.edges.forEach((e) => {
+      const p1 = positions[e.from];
+      const p2 = positions[e.to];
+      const color = data.circular ? c.accent : c.green;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      // For a circular pair we draw each direction as a curve bulging away
+      // from the straight line, so both arrows are visible. We also label
+      // each edge at the apex of its own curve so the two labels don't
+      // stack on top of each other.
+      let labelX, labelY;
+      ctx.beginPath();
+      if (data.circular) {
+        const mx = (p1.x + p2.x) / 2;
+        const my = (p1.y + p2.y) / 2;
+        const dx = p2.x - p1.x, dy = p2.y - p1.y;
+        // Rotate the forward vector 90° CCW to get the normal. Reversing
+        // p1/p2 reverses the normal too, so the two edges in a 2-cycle
+        // naturally bulge on opposite sides.
+        const nx = -dy, ny = dx;
+        const len = Math.hypot(nx, ny) || 1;
+        const offset = 36;
+        const cx = mx + (nx / len) * offset;
+        const cy = my + (ny / len) * offset;
+        ctx.moveTo(p1.x, p1.y);
+        ctx.quadraticCurveTo(cx, cy, p2.x, p2.y);
+        // Apex of the quadratic Bézier at t=0.5 is (p1 + 2c + p2) / 4.
+        // We want the label slightly further out than the apex (toward the
+        // control point) so it sits above/below the curve rather than on it.
+        const apexX = (p1.x + 2 * cx + p2.x) / 4;
+        const apexY = (p1.y + 2 * cy + p2.y) / 4;
+        labelX = apexX + (nx / len) * 6;
+        labelY = apexY + (ny / len) * 6;
+      } else {
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        labelX = (p1.x + p2.x) / 2;
+        labelY = (p1.y + p2.y) / 2 - 6;
+      }
+      ctx.stroke();
+
+      // Arrowhead at p2
+      const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+      const ah = 8;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.moveTo(p2.x, p2.y);
+      ctx.lineTo(p2.x - ah * Math.cos(angle - 0.4), p2.y - ah * Math.sin(angle - 0.4));
+      ctx.lineTo(p2.x - ah * Math.cos(angle + 0.4), p2.y - ah * Math.sin(angle + 0.4));
+      ctx.closePath();
+      ctx.fill();
+
+      // Edge label
+      ctx.fillStyle = c.fgDim;
+      ctx.font = 'italic 10px Charter, Georgia, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(e.text, labelX, labelY);
+    });
+
+    // Nodes
+    data.nodes.forEach((n) => {
+      const p = positions[n.id];
+      const labelW = ctx.measureText(n.label).width;
+      const nodeW = Math.max(labelW + 28, 110);
+      const nodeH = 38;
+      ctx.fillStyle = n.primitive ? c.accentSoft : (data.circular ? c.gridFaint : c.gridFaint);
+      ctx.strokeStyle = n.primitive ? c.green : (data.circular ? c.accent : c.fg);
+      ctx.lineWidth = 2;
+      const r = 8;
+      const x = p.x - nodeW / 2;
+      const y = p.y - nodeH / 2;
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + nodeW - r, y);
+      ctx.arc(x + nodeW - r, y + r, r, -Math.PI / 2, 0);
+      ctx.lineTo(x + nodeW, y + nodeH - r);
+      ctx.arc(x + nodeW - r, y + nodeH - r, r, 0, Math.PI / 2);
+      ctx.lineTo(x + r, y + nodeH);
+      ctx.arc(x + r, y + nodeH - r, r, Math.PI / 2, Math.PI);
+      ctx.lineTo(x, y + r);
+      ctx.arc(x + r, y + r, r, Math.PI, -Math.PI / 2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = c.fg;
+      ctx.font = '13px -apple-system, Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, p.x, p.y + 4);
+
+      if (n.primitive) {
+        ctx.fillStyle = c.green;
+        ctx.font = '9px ui-monospace, monospace';
+        ctx.fillText('primitive', p.x, y - 6);
+      }
+    });
+
+    // Header
+    ctx.fillStyle = c.fgDim;
+    ctx.font = 'italic 12px Charter, Georgia, serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(data.label, 18, 22);
+
+    // Verdict
+    ctx.fillStyle = data.circular ? c.accent : c.green;
+    ctx.font = 'bold 13px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(data.circular ? '✗ circular' : '✓ grounded', rect.width - 18, 22);
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.fillText(data.msg, rect.width - 18, 38);
+  }
+  vizCommon.animate(canvas, draw);
+})();
+</script>
+</body>
+</html>

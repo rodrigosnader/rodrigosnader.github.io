@@ -1,0 +1,104 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation "Sections" [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - paragraph [ref=e16]: I build things with AI and product. I write here about what I learn while doing it — what works, what doesn't, and what I'd do differently if I were starting today.
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - heading "Highlights" [level=2] [ref=e19]
+      - list [ref=e20]:
+        - listitem [ref=e21]:
+          - 'link "Beyond Transformers: architectural ideas toward more efficient AI" [ref=e22] [cursor=pointer]':
+            - /url: /posts/beyond-transformers.html
+          - generic: Fourteen research bets on what could come after the Transformer — across input, compute, memory, plasticity, learning, and system design.
+        - listitem [ref=e23]:
+          - link "Quantum gates without the hype" [ref=e24] [cursor=pointer]:
+            - /url: /posts/quantum-gates.html
+          - generic: Interactive. What flipping a qubit actually means — and why it has almost nothing to do with flipping a bit.
+        - listitem [ref=e25]:
+          - link "The one thing Bayes actually says" [ref=e26] [cursor=pointer]:
+            - /url: /posts/bayes.html
+          - generic: Interactive. Stop decomposing the rule into three ingredients and see the single comparison underneath.
+        - listitem [ref=e27]:
+          - link "You, included in the universe" [ref=e28] [cursor=pointer]:
+            - /url: /posts/free-will.html
+          - generic: Free will in a deterministic universe, once "you" stop getting subtracted from the causal chain.
+    - generic [ref=e29]:
+      - heading "Recent writing" [level=2] [ref=e30]
+      - list [ref=e31]:
+        - listitem [ref=e32]:
+          - time: 2026 · Apr 12
+          - link "Quantum gates without the hype" [ref=e33] [cursor=pointer]:
+            - /url: /posts/quantum-gates.html
+          - generic: 9 min
+        - listitem [ref=e34]:
+          - time: 2026 · Apr 12
+          - link "The one thing Bayes actually says" [ref=e35] [cursor=pointer]:
+            - /url: /posts/bayes.html
+          - generic: 8 min
+        - listitem [ref=e36]:
+          - time: 2026 · Apr 12
+          - link "Neurons that keep living between words" [ref=e37] [cursor=pointer]:
+            - /url: /posts/spiking-nets.html
+          - generic: 11 min
+        - listitem [ref=e38]:
+          - time: 2026 · Apr 12
+          - link "The boy and the infinite universe" [ref=e39] [cursor=pointer]:
+            - /url: /posts/infinite-universe.html
+          - generic: 7 min
+        - listitem [ref=e40]:
+          - time: 2026 · Apr 12
+          - link "What if time is just a direction?" [ref=e41] [cursor=pointer]:
+            - /url: /posts/time-dimension.html
+          - generic: 10 min
+        - listitem [ref=e42]:
+          - time: 2026 · Apr 12
+          - link "The experiment that doesn't need you to look" [ref=e43] [cursor=pointer]:
+            - /url: /posts/quantum-eraser.html
+          - generic: 9 min
+        - listitem [ref=e44]:
+          - time: 2026 · Apr 12
+          - link "You, included in the universe" [ref=e45] [cursor=pointer]:
+            - /url: /posts/free-will.html
+          - generic: 11 min
+        - listitem [ref=e46]:
+          - time: 2026 · Apr 12
+          - link "Explanations that don't eat their tail" [ref=e47] [cursor=pointer]:
+            - /url: /posts/rigor.html
+          - generic: 7 min
+        - listitem [ref=e48]:
+          - time: 2026 · Apr 12
+          - link "Why truth is narrow" [ref=e49] [cursor=pointer]:
+            - /url: /posts/skepticism.html
+          - generic: 7 min
+        - listitem [ref=e50]:
+          - time: 2026 · Apr 12
+          - link "Gamifying cooperation" [ref=e51] [cursor=pointer]:
+            - /url: /posts/bipartisanship.html
+          - generic: 7 min
+        - listitem [ref=e52]:
+          - time: 2026 · Mar 15
+          - 'link "Beyond Transformers: architectural ideas toward more efficient AI" [ref=e53] [cursor=pointer]':
+            - /url: /posts/beyond-transformers.html
+          - generic: 22 min
+      - paragraph [ref=e54]:
+        - link "See full archive →" [ref=e55] [cursor=pointer]:
+          - /url: /writing.html
+  - contentinfo [ref=e56]:
+    - paragraph [ref=e58]:
+      - text: 0 frameworks. Plain HTML, CSS, a sprinkle of vanilla JS.
+      - text: g h home · g w writing · ? help

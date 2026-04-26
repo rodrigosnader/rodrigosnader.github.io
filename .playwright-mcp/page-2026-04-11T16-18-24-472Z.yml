@@ -1,0 +1,81 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation "Sections" [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+        - link "rss" [ref=e12] [cursor=pointer]:
+          - /url: /feed.xml
+      - button "Toggle theme" [ref=e13] [cursor=pointer]:
+        - img [ref=e14]
+  - paragraph [ref=e18]: I build things with AI and product. I write here about what I learn while doing it — what works, what doesn't, and what I'd do differently if I were starting today.
+  - main [ref=e19]:
+    - generic [ref=e20]:
+      - heading "Highlights" [level=2] [ref=e21]
+      - list [ref=e22]:
+        - listitem [ref=e23]:
+          - 'link "Beyond Transformers: architectural ideas toward more efficient AI" [ref=e24] [cursor=pointer]':
+            - /url: /posts/beyond-transformers.html
+          - generic [ref=e25]: Fourteen research bets on what could come after the Transformer — across input, compute, memory, plasticity, learning, and system design.
+        - listitem [ref=e26]:
+          - link "The hidden geometry of orbits" [ref=e27] [cursor=pointer]:
+            - /url: /posts/orbits.html
+          - generic [ref=e28]: Interactive. Why planets trace ellipses, not circles.
+        - listitem [ref=e29]:
+          - link "How a neural network actually thinks" [ref=e30] [cursor=pointer]:
+            - /url: /posts/neural-nets.html
+          - generic [ref=e31]: Interactive. A line, and then several lines, folded over each other.
+        - listitem [ref=e32]:
+          - link "Why I stopped believing in roadmaps" [ref=e33] [cursor=pointer]:
+            - /url: /posts/roadmaps.html
+          - generic [ref=e34]: How to organize work when the terrain shifts every week.
+    - generic [ref=e35]:
+      - heading "Recent writing" [level=2] [ref=e36]
+      - list [ref=e37]:
+        - listitem [ref=e38]:
+          - time [ref=e39]: 2026 · Mar 15
+          - 'link "Beyond Transformers: architectural ideas toward more efficient AI" [ref=e40] [cursor=pointer]':
+            - /url: /posts/beyond-transformers.html
+          - generic [ref=e41]: 22 min
+        - listitem [ref=e42]:
+          - time [ref=e43]: 2026 · Apr 10
+          - link "The hidden geometry of orbits" [ref=e44] [cursor=pointer]:
+            - /url: /posts/orbits.html
+          - generic [ref=e45]: 12 min
+        - listitem [ref=e46]:
+          - time [ref=e47]: 2026 · Apr 10
+          - link "How a neural network actually thinks" [ref=e48] [cursor=pointer]:
+            - /url: /posts/neural-nets.html
+          - generic [ref=e49]: 10 min
+        - listitem [ref=e50]:
+          - time [ref=e51]: 2026 · Apr 10
+          - link "Fourier without math" [ref=e52] [cursor=pointer]:
+            - /url: /posts/fourier.html
+          - generic [ref=e53]: 11 min
+        - listitem [ref=e54]:
+          - time [ref=e55]: 2026 · Apr 08
+          - link "Why I stopped believing in roadmaps" [ref=e56] [cursor=pointer]:
+            - /url: /posts/roadmaps.html
+          - generic [ref=e57]: 12 min
+        - listitem [ref=e58]:
+          - time [ref=e59]: 2026 · Mar 22
+          - link "Agents are just loops with memory" [ref=e60] [cursor=pointer]:
+            - /url: /posts/agents-loops.html
+          - generic [ref=e61]: 18 min
+      - paragraph [ref=e62]:
+        - link "See full archive →" [ref=e63] [cursor=pointer]:
+          - /url: /writing.html
+  - contentinfo [ref=e64]:
+    - paragraph [ref=e66]:
+      - text: 0 frameworks. Plain HTML, CSS, a sprinkle of vanilla JS.
+      - text: g h home · g w writing · ? help

@@ -1,0 +1,4 @@
+[      27ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8765/viz-common.js?v=1:0
+[      36ms] ReferenceError: vizCommon is not defined
+    at http://localhost:8765/posts/inside-glass.html:173:3
+    at http://localhost:8765/posts/inside-glass.html:254:3

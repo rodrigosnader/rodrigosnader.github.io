@@ -1,0 +1,142 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e16]:
+    - generic [ref=e17]:
+      - heading "What if time is just a direction?" [level=1] [ref=e18]
+      - paragraph [ref=e19]:
+        - time [ref=e20]: 2026 · Apr 12
+        - text: · 10 min read · Physics
+    - paragraph [ref=e21]:
+      - text: In 1814, Pierre-Simon Laplace made one of the most unsettling claims in the history of science, and almost nobody at the time realized
+      - emphasis [ref=e22]: why
+      - text: it was unsettling. Give me, he said, the exact position and velocity of every particle in the universe, and I will hand you back the future. The whole of it. Not an approximation. Not a simulation. Everything that will ever happen.
+    - paragraph [ref=e23]:
+      - text: The claim has been stared at by everyone from Newton's students to modern philosophers of physics, usually on the question of whether it's true and what it would mean for free will if it were. That is an interesting question. It is not the one I want to write about. I want to write about the throwaway word in the middle of Laplace's sentence — the word
+      - emphasis [ref=e24]: velocity
+      - text: — and what happens when you take it seriously.
+    - paragraph [ref=e25]:
+      - text: Because the moment you put time on the same footing as space, which is where physics spent the twentieth century dragging it, velocity stops being a thing a particle
+      - emphasis [ref=e26]: has
+      - text: . It becomes something much stranger, and the demand Laplace put on his demon turns out to be a little more than a demand for coordinates. The shape of what you actually need to predict the future might tell us something about the shape of time itself.
+    - heading "The block universe, in one picture" [level=2] [ref=e27]
+    - paragraph [ref=e28]:
+      - text: Here's the setup everyone who has read a little relativity knows. You can stop thinking of time as a
+      - emphasis [ref=e29]: thing that flows
+      - text: and start thinking of it as another axis, like the three spatial ones. Events don't "happen" in this picture — they sit at particular coordinates. A particle doesn't "move"; it occupies a one-dimensional curve, called a
+      - emphasis [ref=e30]: worldline
+      - text: ", that cuts through the block of spacetime from earlier to later."
+    - paragraph [ref=e31]: "This is the block universe view and it's a perfectly consistent way to describe the world. It has a strange consequence that most people glide past: if the universe is a block, then the future is already in it. Not in the sense that we can see it, or that it's fated, but in the geometric sense — you can point at spacetime coordinates that belong to next Thursday the same way you can point at the back of your kitchen. Both exist in the same diagram. The only reason we experience one as memory and the other as anticipation is that our brains move along worldlines in a particular direction. The block does not."
+    - paragraph [ref=e32]:
+      - text: Once you accept that picture, Laplace's demon starts to look different. The demon was supposed to
+      - emphasis [ref=e33]: predict
+      - text: — to take a snapshot and crank it forward. But in a block universe, there's nothing to crank. The future is already drawn. The demon isn't predicting; the demon is
+      - emphasis [ref=e34]: reading
+      - text: a shape that already exists. "Prediction" was a word we used when we thought time flowed. In the block, it's just... a lookup.
+    - figure [ref=e35]:
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - generic [ref=e39]: the present — 0.50
+          - slider "the present — 0.50" [ref=e40] [cursor=pointer]: "0.5"
+        - button "Add worldline" [ref=e41] [cursor=pointer]
+        - button "Reset" [ref=e42] [cursor=pointer]
+      - generic [ref=e43]:
+        - generic [ref=e44]: Fig 1
+        - text: A block of spacetime. The horizontal axis is space (one dimension of it, for drawing). The vertical axis is time, running up. Each curve is a worldline — a particle's entire history from earlier to later. The bright horizontal line is "the present". Drag the slider and watch the present sweep through the block; the worldlines intersect it at different points, and those intersections are what you'd call "where the particles are right now". In a block universe, the motion of the particles is the same block, seen from a moving slice.
+    - paragraph [ref=e45]: Scrub the present slice from bottom to top. The dots at the intersection look exactly like an animation of particles moving — because that's what "particles moving" is. It's nothing other than the intersection of a sliding present with a static set of worldlines. The block itself doesn't change. Your reading of it does.
+    - heading "And then velocity disappears" [level=2] [ref=e46]
+    - paragraph [ref=e47]:
+      - text: Here is where Laplace gets uncomfortable. In the block universe, there is no such thing as
+      - emphasis [ref=e48]: velocity
+      - text: ", at least not in the sense of a rate of change over time. Rate of change over time assumes time is a flow. In the block, time is an axis. The analog of \"velocity\" is the"
+      - emphasis [ref=e49]: angle
+      - text: of the worldline in the block — its orientation. A worldline that tilts gently to the right is a particle moving slowly rightward. A worldline that tilts sharply is one moving fast. A vertical worldline is a particle at rest.
+    - paragraph [ref=e50]: This reframe sounds harmless, and for most purposes it is. But it has a consequence Laplace's original formulation hides. If you take a horizontal slice — a snapshot of the present — you get all the particle positions, but you've thrown out all the worldlines' tangents. You don't know, from a single slice, which way any of the worldlines were tilted. The particles have positions. They don't have futures.
+    - paragraph [ref=e51]:
+      - text: Which is why Laplace asked for positions
+      - emphasis [ref=e52]: and
+      - text: velocities. He wasn't being pedantic; he was silently smuggling in the tangent information that a snapshot alone doesn't carry. The velocity is the piece of the worldline you need to know
+      - emphasis [ref=e53]: in addition to
+      - text: the position, because without it you can't extend the worldline in either direction. Snapshot plus tangent gives you a short segment of the block. A tangent at every point of a snapshot gives you the block.
+    - paragraph [ref=e54]: "That's what \"predicting the future\" means in this picture: you are handed a slice with extra data attached at every point, and you use that data to walk the worldlines forward. The demon doesn't compute; it integrates. It follows the tangents."
+    - heading "The detail that bothers me" [level=2] [ref=e55]
+    - paragraph [ref=e56]:
+      - text: Here's what I can't let go of. The tangent isn't a position in space. It lives in a different kind of space — the space of directions at that point. In classical mechanics we hide this by just writing down three numbers and calling them "velocity components," but conceptually those three numbers are coordinates in a second space attached to the first. The mathematicians call the whole thing a
+      - emphasis [ref=e57]: tangent bundle
+      - text: ", and it doubles the dimensionality of your description. To specify a particle, you need six numbers, not three: three for position and three for the orientation of its worldline."
+    - paragraph [ref=e58]: You can see where this is going. If the tangent is really a different kind of coordinate, why do we keep pretending it isn't? Why do we write "position plus velocity" as if those are two different things, instead of admitting that our state space is twice as big as our physical space and moving on?
+    - paragraph [ref=e59]:
+      - text: And there's a sharper version of this that I find hard to shake. If orientation is what makes a worldline a worldline, then specifying a particle's state is really specifying a
+      - emphasis [ref=e60]: point plus a direction
+      - text: . But a point plus a direction is itself a point in a bigger space — one with more dimensions than the one you started with. What if that bigger space is the real one, and our four-dimensional spacetime is just the projection of it onto a smaller frame?
+    - figure [ref=e61]:
+      - generic [ref=e64]:
+        - generic [ref=e65]: tangent angle — 0°
+        - slider "tangent angle — 0°" [ref=e66] [cursor=pointer]: "0"
+      - generic [ref=e67]:
+        - generic [ref=e68]: Fig 2
+        - text: A single point in spacetime (the dot). The slider rotates the tangent — the direction of the worldline passing through that point. Every angle is a different future and a different past. A snapshot of the position alone gives you just the dot. You need the angle too, and the angle lives in a space the dot doesn't.
+    - heading "A quiet suggestion" [level=2] [ref=e69]
+    - paragraph [ref=e70]:
+      - text: There is something that always bothered me about how physicists treat time, and I only recently caught what it was. In the equations we write — Minkowski's interval, Schrödinger's wave equation, the rules of general relativity — time is
+      - emphasis [ref=e71]: almost
+      - text: a spatial dimension. But not quite. It has a minus sign where the spatial ones have plus signs. It has an arrow (entropy runs one way, not the other) that the spatial ones don't. Its derivatives show up asymmetrically in most of the equations where both kinds of derivatives appear.
+    - paragraph [ref=e72]:
+      - text: If time were just another spatial direction, these asymmetries would be mysterious. None of them follow from the geometry alone; they all have to be put in by hand. The standard response is to say "well, time just
+      - emphasis [ref=e73]: is
+      - text: different from space, we don't know why, get used to it."
+    - paragraph [ref=e74]: "But there's a second response, which I've seen physicists float in different forms without ever quite committing to: the asymmetries we attribute to time might be the shadow of something we've oversimplified. Maybe what we call \"time\" isn't one dimension but a compound — a pair of coordinates, or a coordinate paired with a constraint, or something whose projection into a single real number is what we observe. Under that reading, the minus sign in the metric, the arrow, the asymmetric derivatives — they stop being brute facts and start being the fingerprints of a richer geometry we've collapsed without meaning to."
+    - paragraph [ref=e75]:
+      - text: "I don't know if this is true. I am not a physicist. And the honest place to land this is not \"and therefore time is two-dimensional\" but something more careful: if you ever feel like our equations are treating time as a"
+      - emphasis [ref=e76]: first-class
+      - text: spatial dimension, they aren't, and the ways they aren't are consistent and suggestive enough that some people have looked at them and gone
+      - emphasis [ref=e77]: hmm
+      - text: . That's the rumor, and you're allowed to hold it lightly.
+    - generic [ref=e78]:
+      - generic [ref=e79]: Honest tension
+      - paragraph [ref=e80]: I'm cheating a little when I say "time has an arrow that space doesn't." The arrow is thermodynamic — it comes from the fact that entropy increases — and entropy increases because of the initial conditions of the universe, not because of anything in the equations themselves. If you reversed all the momenta in the universe, the equations would run backward without complaint. The arrow isn't in the physics; it's in the initial state. I still think there's something to the larger suggestion that time behaves weirdly in our equations in ways that deserve attention, but the arrow-of-time one is a softer piece of evidence than I made it sound.
+    - heading "Back to the demon" [level=2] [ref=e81]
+    - paragraph [ref=e82]: Here's what this whole detour means for Laplace's promise.
+    - paragraph [ref=e83]:
+      - text: If the universe is a block, the future is already drawn, and "predicting" is really just reading. The demon doesn't peer forward; it scans a shape that was there all along. That is a lot less dramatic than it sounds in 1814. It also makes the free-will worry kind of silly, because the worry assumed the demon could take a present state and
+      - emphasis [ref=e84]: determine
+      - text: a future — but the block universe says the present state doesn't
+      - emphasis [ref=e85]: determine
+      - text: anything. It sits next to the future in the same geometric object. Nothing causes anything; everything just coexists.
+    - paragraph [ref=e86]: If the universe is a block and the block is richer than four dimensions — because tangents live in a bigger space, or because time isn't really one coordinate — then even the reading is harder than Laplace thought. You can't stand at a slice and infer the worldlines from positions alone. You need the tangents. And the tangents may themselves be projections from an even bigger geometry we haven't figured out how to draw yet.
+    - paragraph [ref=e87]:
+      - text: None of this falsifies Laplace. It just makes clear what his promise was
+      - emphasis [ref=e88]: really
+      - text: "asking for: not just \"tell me where everything is,\" but \"tell me the complete shape of reality, from which 'where everything is' is a single slice.\" Once you see that, the demon stops looking like a sci-fi oracle and starts looking like a physicist's very specific fantasy about how much information the universe is willing to hand over in a single snapshot."
+    - heading "What survives" [level=2] [ref=e89]
+    - paragraph [ref=e90]: I'll tell you what I actually believe, such as it is. The block universe is the cleanest framing we have, and it deserves more weight than popular science gives it. Velocity-as-orientation is the move that makes the whole picture hang together, and once you make it, the idea that "prediction" is a separate act from "description" evaporates. And the weirdness of time in our equations is not necessarily a quirk we have to live with; it's the kind of thing that, historically, has turned out to be a clue.
+    - paragraph [ref=e91]: Is the clue pointing at extra time dimensions, or a tangent bundle we've been flattening, or something none of us have imagined? I don't know. But I'm fairly confident the right question isn't "is the universe deterministic?" — Laplace's framing — but "what shape is the universe, and how much of it can you read from any single slice?" Whatever answer we get, the demon will still be in the corner of the room, holding out its hand for information.
+    - separator [ref=e92]
+    - paragraph [ref=e93]:
+      - text: The
+      - link "infinite-universe post" [ref=e94] [cursor=pointer]:
+        - /url: /posts/infinite-universe.html
+      - text: "is the sister piece to this one: same habit of refusing to take a word at face value, applied to \"center\" instead of \"now\". If you want to argue about either, I'm at"
+      - link "hi@rnader.com" [ref=e95] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .
+  - contentinfo [ref=e96]:
+    - paragraph [ref=e98]:
+      - link "← back to home" [ref=e99] [cursor=pointer]:
+        - /url: ../
+      - text: 0 frameworks. Plain HTML, CSS and vanilla JS.

@@ -1,0 +1,97 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "Why truth is narrow" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 12
+        - text: · 7 min read · Essay
+    - paragraph [ref=e20]: Here is a question. Are there more possible true statements in the world, or more possible false ones?
+    - paragraph [ref=e21]: Think about it for a second. It's not a trick question in the sense of hiding a twist — the answer is the obvious one — but the implications are not obvious, and most people (including me, for most of my life) underweight them dramatically. The answer is that the false statements outnumber the true ones by an amount so extreme that "more" is the wrong word. There is no ratio. The true ones are a speck; the false ones are everything else.
+    - paragraph [ref=e22]: Consider any single fact about the world. The cup of coffee on my desk is about two-thirds full. There is roughly one true way to say that. There are, however, infinite ways to be wrong about it. The cup is empty. The cup is full. The cup is a lemon. The cup is a lemon painted red. The cup is a river. The cup is the Prime Minister of Canada. Each of these is a possible sentence, each of them is false, and I've barely started. For every single true claim there are unbounded variations of distortion, misremembering, invention, deliberate lie, and hallucinated nonsense — and reality has only the one narrow version to offer.
+    - paragraph [ref=e23]:
+      - text: This isn't a rhetorical point. It has a practical consequence, and the consequence is that
+      - emphasis [ref=e24]: default-believing
+      - text: a claim is not a neutral stance. It's a heavily loaded one, tilting you toward falsehood by the same ratio that false statements outnumber true ones. If you walk around accepting what arrives at your ears unless something trips your suspicion, the ambient statistics of the universe are not on your side.
+    - heading "What skepticism actually does" [level=2] [ref=e25]
+    - paragraph [ref=e26]:
+      - text: Skepticism has an image problem. In ordinary usage it gets conflated with cynicism — the posture of doubting out of reflex, or sneering at claims because sneering is fashionable. That is not what skepticism is. Skepticism is simply the act of
+      - emphasis [ref=e27]: not accepting a claim until it's earned
+      - text: ", and the reason to do it is not that claims are usually ill-intentioned. The reason is that claims are usually wrong, whether or not they mean to be, because the space of ways to be wrong is so much larger than the space of ways to be right that any randomly generated claim is almost certainly wrong."
+    - paragraph [ref=e28]:
+      - text: Most of the claims that reach you aren't randomly generated, of course. They're filtered. They come from friends, from writers, from journalists, from books, from search results. But filtering doesn't make them right — it just makes them
+      - emphasis [ref=e29]: plausible
+      - text: ", which is the property that gets them through the first layer. Plausibility and truth correlate, but loosely. Plausibility is what makes a claim"
+      - emphasis [ref=e30]: feel
+      - text: like it could be true. It does not require the claim to actually match reality. It only requires the claim to sound like one of the kinds of things that sometimes match reality. That's a much weaker bar than most people give it credit for.
+    - paragraph [ref=e31]:
+      - text: Skepticism is the second layer — the one that asks, after the plausibility filter has done its work, "okay, but
+      - emphasis [ref=e32]: is
+      - text: it true?" And the reason this layer keeps being left out of people's workflows is that it's slow and effortful. It takes time to check. It takes time to doubt the thing you already half-believe. Most of us skip it unless something is at stake, and then we do it in a mildly panicked way and quit the moment the panic subsides.
+    - figure [ref=e33]:
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - generic [ref=e37]: skepticism level — 0%
+          - slider "skepticism level — 0%" [ref=e38] [cursor=pointer]: "0"
+        - button "New stream" [ref=e39] [cursor=pointer]
+      - generic [ref=e40]:
+        - generic [ref=e41]: Fig 1
+        - text: A stream of claims pours in from the top. Only a tiny fraction of them are true. The slider sets how strict your filter is — how much scrutiny you apply before you accept a claim. At 0%, you accept everything and your beliefs are mostly wrong. Tighten the filter and you accept fewer claims, but the fraction that is actually true climbs dramatically. The right-hand column shows the composition of what you end up believing.
+    - heading "The \"open mind\" trap" [level=2] [ref=e42]
+    - paragraph [ref=e43]:
+      - text: There is a move people make in response to this, and I want to name it precisely because I keep running into it. The move is to claim that
+      - emphasis [ref=e44]: being open to everything
+      - text: "is a virtue, and that skepticism is a closed-minded defensive crouch. The claim usually goes: \"I keep an open mind. I don't dismiss things just because they sound weird.\""
+    - paragraph [ref=e45]: I don't want to attack this, because the impulse behind it is good. There's a real failure mode of being so set in your priors that you dismiss genuinely surprising evidence, and being open to that evidence is a virtue. But "open to evidence" is not the same as "willing to believe whatever's in the air." Evidence has an internal structure — it can be checked, traced, reproduced, compared against predictions. Claims that arrive without evidence have no such structure; they're just sentences. Being open to a sentence is not open-mindedness. It is, as someone put it to me once, leaving the front door unlocked and calling it hospitality.
+    - paragraph [ref=e46]:
+      - text: The phrase
+      - emphasis [ref=e47]: keep an open mind
+      - text: has become a socially acceptable substitute for "I don't want to do the work of checking". It is not, as presented, a virtue. It is the first stage of a two-stage filter that was only supposed to be about
+      - emphasis [ref=e48]: noticing
+      - text: "a claim, not about accepting it. The second stage — skepticism — is where the actual cognitive work gets done, and the people who skip it and congratulate themselves for their open minds are, in practice, believing things at roughly the rate that the false-to-true ratio in the universe predicts. Which is to say: wrong most of the time."
+    - heading "The wrong default question" [level=2] [ref=e49]
+    - paragraph [ref=e50]: Here's the habit I've been trying to train in myself, and I think it's a small move with a lot of leverage.
+    - paragraph [ref=e51]:
+      - text: "When I read a claim, the question I instinctively ask is:"
+      - emphasis [ref=e52]: could this be true?
+      - text: And I can almost always answer yes. Sure, it could be true. It's plausible. It's consistent with what I already believe. Fine. Moving on.
+    - paragraph [ref=e53]:
+      - text: "That's the wrong question. The right question is:"
+      - emphasis [ref=e54]: could this be false?
+      - text: Because "yes, it could be true" is a low bar — the space of plausible things is enormous, and almost anything can clear it — while "no, it couldn't be false" is a high one. It requires me to actually try to break the claim. It requires me to imagine the world in which the claim is wrong and check whether I have any reason to rule that world out.
+    - paragraph [ref=e55]: Most of the time, when I flip the question, I discover I had no reason to rule out the false version. I was accepting the claim because it fit a story I already half-believed, not because I had any positive evidence for it. That's the failure mode the "could this be true?" default hides.
+    - paragraph [ref=e56]: Flipping the question doesn't turn me into a cynic. It just makes me hold claims with the provisional grip they deserve until evidence promotes them. Most claims never get promoted, and that's fine — most claims aren't worth promoting, because most claims are wrong, because the space of wrong claims is so much larger than the space of right ones.
+    - generic [ref=e57]:
+      - generic [ref=e58]: Honest tension
+      - paragraph [ref=e59]: "There's a version of this argument that collapses into paralysis: if you can't trust anything without verification, and verification is expensive, you end up verifying nothing and acting on nothing. That's a real risk, and it's why skepticism has to be calibrated to the stakes. You don't verify what brand of milk your neighbor buys. You do verify what your doctor tells you about a surgery. The cost of being wrong scales with what's at stake, and the effort you put into verification should scale with it. Default-skeptic, but budget-aware."
+    - heading "Why this matters now" [level=2] [ref=e60]
+    - paragraph [ref=e61]: I didn't set out to write a timely post, but the asymmetry between true and false has gotten worse in practical terms in the last few years, and it's worth naming why. The cost of producing plausible-sounding claims has dropped to near zero. Language models can generate a thousand coherent, well-formed, confidently-delivered claims per minute, and the proportion of those that happen to be true is not meaningfully higher than the proportion of random plausible sentences that are true — which is to say, almost none. The generator doesn't know or care whether its output is right. It only cares that it sounds like the kind of thing that is right.
+    - paragraph [ref=e62]: The practical consequence is that the ambient flow of plausible claims reaching your attention is higher than it has ever been, and its signal-to-noise ratio is not improving. The part of you that filters by "does this sound true?" is being fed more and more inputs that were optimized for sounding true without reference to whether they are. If you don't have a habit of asking "could this be false?", you are going to absorb an awful lot of elegant nonsense and feel good about how much you know.
+    - paragraph [ref=e63]: "This isn't a rant against language models. I use them every day and they make me faster. But I use them the way I use a drunk friend with an encyclopedic memory: I check anything that matters, and I've gotten pretty good at noticing when something is too fluent to be true."
+    - heading "The short version" [level=2] [ref=e64]
+    - paragraph [ref=e65]: Truth is narrow. Falsehood is infinite. Default-believing is a losing strategy in a world with those statistics, not because the world is hostile but because it's asymmetric. Skepticism is not cynicism; it's the only rational response to the asymmetry. And the smallest practical move you can make, right now, is to stop asking "could this be true?" of claims you encounter and start asking "could this be false?" instead. The two questions look similar. They are not. One lets almost everything through. The other makes you check.
+    - separator [ref=e66]
+    - paragraph [ref=e67]:
+      - text: The practical shape of this — "how much more often does a signal happen when my belief is true vs how often it happens anyway?" — is also the whole of Bayes' rule, which
+      - link "I tried to write about here" [ref=e68] [cursor=pointer]:
+        - /url: /posts/bayes.html
+      - text: with about as much hand-waving as I could get away with. Argue with me at
+      - link "hi@rnader.com" [ref=e69] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .

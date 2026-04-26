@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The inside of a glass — Rodrigo Nader</title>
+<meta name="description" content="The most information that fits inside a region is capped by its surface — what that suggests about what 'inside' really is, and about the kilometer between two entangled photons.">
+<link rel="stylesheet" href="../style.css?v=4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <a href="../" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>The inside of a glass</h1>
+    <p class="post-meta">
+      <time datetime="2026-04-15">2026 · Apr 15</time>
+      <span class="sep">·</span>
+      <span>13 min read</span>
+      <span class="sep">·</span>
+      <span>Physics</span>
+    </p>
+  </header>
+
+  <p>Two photons are born in a crystal in a basement lab. They're created in the same instant, in a single shared quantum state — and then they go their separate ways. One travels down a hair-thin fiber to the south end of the building. The other goes north, sometimes a few meters, sometimes a kilometer, sometimes much more. At the ends of the fibers, two detectors wait.</p>
+
+  <p>Measure one photon, and the other one's state is fixed in the same instant. The pair has been behaving like a single object the whole way down the fibers, and the measurement is the moment that single object commits to a value.</p>
+
+  <p>Einstein argued against this for the rest of his life. He called it <em>spooky action at a distance</em> and spent decades looking for a way out. The way out has not been found. The popular thing to do, when you meet the result, is to shrug at how strange quantum mechanics is and move on.</p>
+
+  <p>But the strangeness isn't in the photons. It's in the word <em>distance</em>. Hold the lab in mind for a while. The answer to what's going on between the two photons begins in a glass on a kitchen counter.</p>
+
+  <h2>How much fits in a glass</h2>
+
+  <p>There's a glass on the table. You know how much water fits in it: the volume. Pour more and it spills.</p>
+
+  <p>Now stop pouring water. Pack the glass with the densest stuff you can imagine — and forget atoms, pack the <em>information</em> itself. Bits. How many fit?</p>
+
+  <p>Your first guess will be volume. It's the answer for every container you've ever used, and the story underneath is clean: every point in the interior is a cell where something can live, and the cells add up. Double the radius, eight times the capacity. Cubic growth, airtight.</p>
+
+  <p>Physics used to think this too. Count the cells, multiply by what each cell can hold, get the answer.</p>
+
+  <p>The crack showed up in the 1970s, from a question that sounded almost silly: what happens to the information in a book when you drop it into a black hole?</p>
+
+  <p>Jacob Bekenstein worked it out from thermodynamics. The argument is short and worth following slowly.</p>
+
+  <p>Suppose you could keep packing information into the glass past whatever ceiling the area of its surface might suggest. As you pack, the energy and weight of what's inside go up too — and at some point, the weight is enough to collapse the glass into a black hole. So far, fine.</p>
+
+  <p>But here's the trap. Black holes have a known information capacity, and it depends on the area of their boundary. If you could fit <em>more</em> information into the glass before the collapse than the resulting black hole holds, then the collapse just destroyed information. And destroying information violates the second law of thermodynamics — the rule that says the universe's information content cannot decrease.</p>
+
+  <p>So the supposition was wrong. A region of space cannot hold more information than the area of its boundary allows. The black hole sets the ceiling, and nothing else gets to climb above it.</p>
+
+  <p>A year later, Stephen Hawking confirmed the same number from a completely different direction, working from the radiation black holes emit. The number depends on the <em>area</em> of the horizon, not the interior it encloses.</p>
+
+  <p>And the argument doesn't care whether the region has a black hole in it. It applies to the glass on your desk, and to any region the universe contains.</p>
+
+  <figure class="viz">
+    <canvas id="v1-bars" style="height: 300px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">radius of the region — <span id="v1-r-readout">1</span></span>
+        <input type="range" id="v1-r" min="1" max="30" step="0.1" value="1">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 1</span>Two ways of counting the information that could fit inside a region. On the left, the volume you'd expect to use (grows as the radius cubed). On the right, the area that actually caps it (grows as the radius squared). Drag the slider. As the region gets bigger, the area bar falls further and further below the volume bar. The gap is interior your gut thought was usable that physics never lets you touch.</div>
+  </figure>
+
+  <div class="callout">
+    <span class="label">The bound</span>
+    <p>The most information any region of space can hold is set by the area of its boundary, not by its volume. Black holes are the only thing in nature that ever pushes the rule until it saturates. Everything else sits astronomically below the limit.</p>
+  </div>
+
+  <h2>Why the inside is smaller than it looks</h2>
+
+  <p>Your intuition is going to revolt. A cubic meter of air looks fine: each molecule is going about its business, free, doing its own thing. That's a volume's worth of independent stuff. How can the real count of distinct states be set by the surface, not the interior?</p>
+
+  <p>This was the part that took me longest. The answer is that the interior isn't really a volume's worth of independent things. The independence is an appearance the low density gives you. Push the density up and you find that the molecules aren't making free choices on their own — every piece inside the volume is statistically tied to every other piece, through correlations you couldn't see at low density but which were always there. What you'd been counting as freedom turns out to be structure.</p>
+
+  <h2>Space is the picture entanglement draws</h2>
+
+  <p>The physics word for "statistical tie between two quantum things" is <em>entanglement</em>. Two particles are entangled when knowing something about one tells you something about the other. Entanglement has been part of quantum mechanics for a century. The question physics has been creeping up on lately is what entanglement is <em>for</em>.</p>
+
+  <p>The most striking version of the answer comes from a 2010 paper by Mark Van Raamsdonk. He took a toy universe — a model that's simpler than ours but otherwise mathematically well-defined — and showed that the entire interior of that universe could be described as a pattern of entanglement on its boundary. Then he asked what would happen, in this model, if the entanglement between two halves of the boundary went to zero. The geometry of the corresponding interior didn't fade gradually. The interior fell into two disconnected pieces of spacetime, with no spatial bridge between them. Take the entanglement out of a region and the space inside it comes apart.</p>
+
+  <p>So here's the move. Space isn't the place where entangled things sit. Space is what entanglement looks like when you draw it. The relationships are the substrate; the geometry is the picture; we are reading the picture and calling it real because the picture is the only viewer we have. This is the heart of what physicists call the <em>holographic principle</em>, and it's where the popular line "the universe is a hologram" comes from.</p>
+
+  <p>Now put the basement lab back into the story. Two photons, born in the same crystal, sent down fibers to detectors a kilometer apart. From the picture's point of view — your point of view, anyone's point of view, the only point of view any of us has access to — the two photons sit on opposite sides of a building. From the substrate that draws the picture, they are maximally entangled, which on this account means they are the same thing, drawn twice.</p>
+
+  <div class="callout">
+    <span class="label">The map</span>
+    <p>"Far apart" is a property of the map, not the territory. The two photons in the lab are not signaling across a kilometer. The kilometer is what your viewer adds when it draws them. The thing that needs explaining isn't the connection between them — it's the separation.</p>
+  </div>
+
+  <h2>What the black hole strips</h2>
+
+  <p>Bring the glass back, and this time turn up the gravity until it can't be turned up any further.</p>
+
+  <p>Drop matter into a region until the region collapses. The matter doesn't go "inside" in any sense you can later verify. What you get is a horizon — a surface around the place where the region used to be, a little larger than before — and an interior that is no longer somewhere you can point to. Gravity has forced the matter into a state where every degree of freedom is entangled with every other one. The relational structure that used to be "the space between the pieces" has been compressed away, because there is no longer an interior for anything to be apart in.</p>
+
+  <div class="callout">
+    <span class="label">What collapses</span>
+    <p>A black hole isn't a hologram. It's the point at which the hologram collapses. The interior used to be the picture entanglement was drawing; once gravity compresses the relationships as hard as physics allows, there's no picture left to draw. Only the outer edge survives.</p>
+  </div>
+
+  <p>What survives on the outer edge is three numbers. Mass. Charge. Angular momentum. A cat and a library, dropped in with the same mass, charge, and spin, are indistinguishable from outside. The cat's whiskers are gone. The library's catalog is gone. <em>Position</em> is gone — because position was a relation between things, and the relations have been compressed away. Physicists call this the <em>no-hair theorem</em>: a stationary black hole carries no detail beyond those three numbers.</p>
+
+  <p>And the reason those three survive when everything else doesn't is what makes the whole thing click. They aren't coordinates. They're tied to symmetries of physics itself. Energy — and so mass — is the conserved quantity that goes with the laws being the same today and tomorrow. Charge is the conserved quantity that goes with a deeper symmetry of quantum phase. Angular momentum is the conserved quantity that goes with rotation; for a black hole, that's the spin. None of those need a "where" to mean anything. They're properties of the universe that exist without needing a space to exist in. Position depends on relations; mass, charge, and spin don't.</p>
+
+  <figure class="viz">
+    <canvas id="v2-collapse" style="height: 380px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">compression — <span id="v2-c-readout">0%</span></span>
+        <input type="range" id="v2-c" min="0" max="1" step="0.01" value="0">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 2</span>Inside the region: dots are particles, lines are relationships between them. Drag the slider to compress the region the way gravity would. The interior tangle pulls toward the boundary and the relationships dissolve. At maximum compression, only the outside is left — with three numbers describing everything that was ever in there.</div>
+  </figure>
+
+  <h2>Using the room to look at the room</h2>
+
+  <p>There's a part of all this that has been quietly there since the beginning, and it is harder to sit with than any of the rest. You have been using <em>space</em> to think about what space is. Every time you imagined the glass, you imagined an inside and an outside; every time you imagined the photons, you imagined two locations in a room. The viewer you have access to is itself a slice of the thing you're trying to explain.</p>
+
+  <p>That, I think, is why entanglement feels spooky. The spookiness lives in the conflict between the picture your cognition keeps drawing — two locations, separated, somehow signaling — and the description that lives one level beneath, in which the locations are derived and the relationships are primary. Your intuition keeps reasserting the picture, because the picture is the only way your intuition knows how to think.</p>
+
+  <h2>What's settled, what isn't</h2>
+
+  <p>The bound is real. The Bekenstein–Hawking result is derived from thermodynamics, confirmed from a completely different direction by Hawking's calculation, and double-checked many times since. The further claim — that the bound exists <em>because</em> space itself is emergent from entanglement, and the volume is what the entanglement draws — has worked out rigorously in a model universe with a clean boundary to talk about. Our actual universe doesn't have that boundary; it's expanding rather than contracting, which changes the shape of the problem in ways that haven't been resolved. The strongest version I'd defend is that there's a mathematically well-defined universe in which the story is completely correct, and the same machinery may turn out to apply to ours. That is stronger than it sounds, and weaker than the popular line that says the universe is a hologram.</p>
+
+  <h2>The glass, again</h2>
+
+  <p>There's a glass on your desk. Before this week, anyway, it had an inside, and the inside could hold things, and the size of the inside was the volume. The glass looks different to me now. I see a surface. Inferred from the surface, a tangle of relationships between whatever the universe's actual pieces are. And drawn as a picture of those relationships, the thing I used to call an inside.</p>
+
+  <p>The glass still holds water. I'm not revising that. But the holding is the kind a map does for a territory, not the kind a bucket does for a liquid. The map looks three-dimensional because the relationships it draws are dense and continuous. Compress the relationships hard enough — much harder than anything I'll ever see in this kitchen — and the three-dimensionality goes with them.</p>
+
+  <p>I don't know if this is right. The people whose job it is to know don't fully know either. What I do know is that I can't unsee it. When I set the glass back down, my first thought is no longer <em>how much fits</em>. It is <em>what is this really a picture of</em>. And when I think about the two photons in the basement, the surprise isn't that they're correlated across a kilometer of building. The surprise is that I read the kilometer as a thing at all.</p>
+
+  <hr>
+
+  <p>If this lands for you differently than it did for me, or if I got a piece of it wrong, I'd genuinely like to know — <a href="mailto:hi@rnader.com">hi@rnader.com</a>. The sister piece is <a href="/posts/review/infinite-universe.html">the boy and the infinite universe</a>, which plays a similar trick with the word "size".</p>
+</article>
+
+<script src="/script.js?v=3"></script>
+<script src="./viz-common.js?v=1"></script>
+<script>
+/* ---------- Fig 1: volume vs area bars ---------- */
+(function(){
+  const canvas = document.getElementById('v1-bars');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const rInput = document.getElementById('v1-r');
+  const rReadout = document.getElementById('v1-r-readout');
+
+  let r = 1;
+  function sync() {
+    r = parseFloat(rInput.value);
+    rReadout.textContent = r.toFixed(1);
+  }
+  rInput.addEventListener('input', sync);
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const volume = r * r * r;
+    const area = r * r;
+
+    // Normalize so the volume bar is always at (near) full height
+    // Area bar = area / volume * maxH = maxH / r
+    const maxH = rect.height - 120;
+    const volH = maxH;
+    const areaH = maxH * (area / volume); // = maxH / r
+
+    const barW = 70;
+    const gap = 80;
+    const cx = rect.width / 2;
+    const volX = cx - gap / 2 - barW;
+    const areaX = cx + gap / 2;
+    const baseY = rect.height - 70;
+
+    // Title above the bars
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('At radius ' + r.toFixed(1) + ', the bars tell you:', cx, 22);
+
+    // "volume" bar (naive expectation)
+    ctx.fillStyle = c.blue;
+    ctx.fillRect(volX, baseY - volH, barW, volH);
+    // "area" bar (actual limit) — in accent so it reads as "the answer"
+    ctx.fillStyle = c.accent;
+    ctx.fillRect(areaX, baseY - areaH, barW, areaH);
+
+    // Outline the full extent of the volume bar so the "gap" above the area bar is visible
+    ctx.strokeStyle = c.border;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(areaX - 0.5, baseY - volH - 0.5, barW + 1, volH + 1);
+
+    // Gap label — only when the gap is meaningful
+    if (volH - areaH > 22) {
+      ctx.fillStyle = c.fgDim;
+      ctx.font = 'italic 11px Charter, Georgia, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('interior you', areaX + barW / 2, baseY - areaH - (volH - areaH) / 2 - 6);
+      ctx.fillText("can't use", areaX + barW / 2, baseY - areaH - (volH - areaH) / 2 + 8);
+    }
+
+    // Bar labels (below)
+    ctx.fillStyle = c.fg;
+    ctx.font = 'bold 12px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('volume', volX + barW / 2, baseY + 18);
+    ctx.fillText('area', areaX + barW / 2, baseY + 18);
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.fillText('(what you expected)', volX + barW / 2, baseY + 34);
+    ctx.fillText('(what actually fits)', areaX + barW / 2, baseY + 34);
+
+    // Raw numbers inside (or above) the bars
+    ctx.font = 'bold 12px ui-monospace, monospace';
+    ctx.textAlign = 'center';
+    if (volH > 24) {
+      ctx.fillStyle = c.bg;
+      ctx.fillText(volume.toFixed(0), volX + barW / 2, baseY - volH + 16);
+    }
+    if (areaH > 24) {
+      ctx.fillStyle = c.bg;
+      ctx.fillText(area.toFixed(0), areaX + barW / 2, baseY - areaH + 16);
+    } else {
+      ctx.fillStyle = c.fg;
+      ctx.fillText(area.toFixed(0), areaX + barW / 2, baseY - areaH - 6);
+    }
+  }
+  sync();
+  vizCommon.animate(canvas, draw);
+})();
+
+/* ---------- Fig 2: compression to the surface ---------- */
+(function(){
+  const canvas = document.getElementById('v2-collapse');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cInput = document.getElementById('v2-c');
+  const cReadout = document.getElementById('v2-c-readout');
+
+  // Fixed seeded dots so the picture is stable between frames
+  const N = 22;
+  const dots = [];
+  // Deterministic pseudo-random via a simple LCG so no surprises on reload
+  let seed = 4242;
+  function rand() {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return (seed >>> 8) / 16777216;
+  }
+  for (let i = 0; i < N; i++) {
+    const ang = rand() * Math.PI * 2;
+    // Bias toward the interior so the "collapse outward" is visible
+    const rr = Math.sqrt(rand()) * 0.85;
+    dots.push({ ang, r: rr });
+  }
+  // Random pairs for the "entanglement" web (not too many, to keep it legible)
+  const edges = [];
+  for (let i = 0; i < N; i++) {
+    const k = 2 + Math.floor(rand() * 2); // 2–3 edges per dot
+    for (let j = 0; j < k; j++) {
+      const target = Math.floor(rand() * N);
+      if (target !== i) edges.push([i, target]);
+    }
+  }
+
+  let cVal = 0;
+  function sync() {
+    cVal = parseFloat(cInput.value);
+    cReadout.textContent = (cVal * 100).toFixed(0) + '%';
+  }
+  cInput.addEventListener('input', sync);
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const col = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = col.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const cx = rect.width / 2;
+    const cy = rect.height / 2 + 8;
+    const R = Math.min(rect.width, rect.height) * 0.36;
+
+    // Interior tint fades out as compression increases
+    ctx.fillStyle = col.gridFaint;
+    ctx.globalAlpha = 1 - cVal;
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    // Boundary
+    ctx.strokeStyle = col.fgDim;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Compute dot positions at the current compression
+    const points = dots.map((d) => {
+      const rr = vizCommon.lerp(d.r, 1, cVal);
+      return {
+        x: cx + Math.cos(d.ang) * rr * R,
+        y: cy + Math.sin(d.ang) * rr * R,
+      };
+    });
+
+    // Draw relationships (lines) — fade out with compression
+    ctx.strokeStyle = col.accentSoft;
+    ctx.lineWidth = 1;
+    ctx.globalAlpha = Math.max(0, 1 - cVal * 1.2);
+    edges.forEach(([a, b]) => {
+      const pa = points[a];
+      const pb = points[b];
+      ctx.beginPath();
+      ctx.moveTo(pa.x, pa.y);
+      ctx.lineTo(pb.x, pb.y);
+      ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+
+    // Draw dots
+    points.forEach((p) => {
+      ctx.fillStyle = col.accent;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3.5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Labels on the outside as compression completes
+    const labelAlpha = Math.max(0, (cVal - 0.6) / 0.4);
+    if (labelAlpha > 0) {
+      ctx.globalAlpha = labelAlpha;
+      ctx.fillStyle = col.fg;
+      ctx.font = 'italic 12px Charter, Georgia, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('mass', cx, cy - R - 16);
+      ctx.textAlign = 'left';
+      ctx.fillText('charge', cx + R + 12, cy + 4);
+      ctx.textAlign = 'right';
+      ctx.fillText('spin', cx - R - 12, cy + 4);
+      ctx.globalAlpha = 1;
+    }
+
+    // Caption strip inside the figure — explains the current state
+    ctx.fillStyle = col.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    let msg;
+    if (cVal < 0.1) {
+      msg = 'interior tangle of relationships — what "volume" looks like';
+    } else if (cVal < 0.9) {
+      msg = 'compressing — interior dots moving toward the boundary';
+    } else {
+      msg = 'only the boundary survives — three numbers describe the rest';
+    }
+    ctx.fillText(msg, cx, 22);
+  }
+  sync();
+  vizCommon.animate(canvas, draw);
+})();
+</script>
+</body>
+</html>

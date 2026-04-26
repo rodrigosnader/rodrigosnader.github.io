@@ -1,0 +1,57 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - main [ref=e16]:
+    - article [ref=e17]:
+      - heading "About" [level=1] [ref=e19]
+      - paragraph [ref=e20]: I'm Rodrigo S. Nader. I work on applied AI and product — currently building agent and automation tools for teams that want to move fast without becoming prisoners of their own stack.
+      - paragraph [ref=e21]: "Before this, I spent years in the usual places: startups where the roadmap changed every Monday, bigger companies where the roadmap never changed at all, and a few good and bad choices in between. Most of what I write here comes from that zigzag."
+      - paragraph [ref=e22]: I write because it's the best way I know to think slowly about things that happened fast. When a post helps you — or disagrees with something you believed — tell me. That's the metric I actually care about.
+      - heading "What you'll find here" [level=2] [ref=e23]
+      - paragraph [ref=e24]: "Three kinds of posts, loosely:"
+      - list [ref=e25]:
+        - listitem [ref=e26]:
+          - text: –
+          - strong [ref=e27]: Essays
+          - text: — longer pieces on ideas I want to get straight in my head. Sometimes opinionated, sometimes interactive, always slow-cooked.
+        - listitem [ref=e28]:
+          - text: –
+          - strong [ref=e29]: Notes
+          - text: — short observations from day-to-day work. A paragraph, maybe two.
+        - listitem [ref=e30]:
+          - text: –
+          - strong [ref=e31]: Links
+          - text: — writing by other people that I think is worth your time.
+      - heading "The site itself" [level=2] [ref=e32]
+      - paragraph [ref=e33]: This site is intentionally boring. No framework, no build step, no CMS. Just HTML, CSS, and a small amount of vanilla JavaScript for the interactive figures and the theme toggle. I like knowing that it'll still be readable in ten years without anyone maintaining it.
+      - paragraph [ref=e34]: If you want to see how the interactive figures are built, view source. Everything is inline. Nothing is obfuscated.
+      - heading "Contact" [level=2] [ref=e35]
+      - paragraph [ref=e36]:
+        - link "hi@rnader.com" [ref=e37] [cursor=pointer]:
+          - /url: mailto:hi@rnader.com
+        - text: ·
+        - link "Twitter" [ref=e38] [cursor=pointer]:
+          - /url: https://twitter.com/rnader_ai
+        - text: ·
+        - link "GitHub" [ref=e39] [cursor=pointer]:
+          - /url: https://github.com/rodrigo-nader
+  - contentinfo [ref=e40]:
+    - paragraph [ref=e42]:
+      - link "← back to home" [ref=e43] [cursor=pointer]:
+        - /url: /
+      - text: 0 frameworks. Plain HTML, CSS, a sprinkle of vanilla JS.

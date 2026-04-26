@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beyond Transformers: Architectural Ideas Toward More Efficient AI — Rodrigo Nader</title>
+<meta name="description" content="Interactive. Fourteen research bets on what could come after the Transformer — across tokenization, compute, memory, plasticity, learning, and system design.">
+<link rel="stylesheet" href="../style.css?v=4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <a href="../" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+      <nav class="site-nav">
+        <a href="../#writing">writing</a>
+        <a href="../#notes">notes</a>
+        <a href="../#links">links</a>
+        <a href="../#about">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>Beyond Transformers</h1>
+    <p class="post-subtitle">The Transformer won for real reasons — parallelism, stability, predictable scaling. But its core design creates inefficiencies that compound at scale. Fourteen architectural bets on what could come next, across six axes: input, compute, memory, plasticity, continuous learning, and system design.</p>
+    <p class="post-meta">
+      <time datetime="2026-03-15">2026 · Mar 15</time>
+      <span class="sep">·</span>
+      <span>22 min read</span>
+      <span class="sep">·</span>
+      <span>Interactive · AI</span>
+    </p>
+  </header>
+
+  <p>The Transformer architecture has dominated AI since 2017. Its core mechanism — self-attention — compares every token to every other token in the context window, producing O(n²·d) cost per layer. This scales poorly: a 128k-token context means an attention matrix with over 16 billion entries per head, per layer.</p>
+
+  <figure class="viz">
+    <canvas id="v1-attn" style="height: 320px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">context length — <span id="v1-n-r">8,192</span> tokens</span>
+        <input type="range" id="v1-n" min="7" max="17" step="1" value="13">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 1</span>Attention has to compare every token to every other token, so cost scales as n². Drag the slider and watch the matrix grow — doubling the context quadruples the work.</div>
+  </figure>
+
+  <p>Before proposing alternatives, it's worth understanding why Transformers won:</p>
+
+  <ul>
+    <li><strong>Parallelism.</strong> Unlike RNNs, all tokens can be processed simultaneously during training. This maps perfectly to GPU hardware.</li>
+    <li><strong>Gradient stability.</strong> Residual connections and layer normalization give Transformers remarkably stable training dynamics at scale.</li>
+    <li><strong>Predictable scaling.</strong> Scaling laws (Kaplan et al., Hoffmann et al.) showed that performance improves predictably with compute, data, and parameters. This made billion-dollar training investments less risky.</li>
+    <li><strong>Mature ecosystem.</strong> Hardware, compilers, frameworks, and optimization techniques are all built around Transformers.</li>
+  </ul>
+
+  <p>These are real advantages. Any alternative architecture must either match them or offer gains large enough to justify the switching cost.</p>
+
+  <p>That said, the Transformer's design carries structural inefficiencies that become increasingly costly at scale. Processing 100,000 tokens to answer a question that depends on 20 is not a feature — it's a limitation of the architecture. The ideas below explore directions that could address these limitations.<aside class="sidenote">They are organized into six thematic axes, ordered from input processing to system-level design. Each includes prior work, open problems, and an honest feasibility assessment.</aside></p>
+
+  <hr>
+
+  <h2 id="axis-1">Axis 1 — Input representation</h2>
+
+  <h3 id="1a-dynamic-tokenization">1A. Dynamic context-dependent tokenization</h3>
+
+  <p><strong>Problem.</strong> Current tokenization (BPE, Unigram) is fixed after training. The same text always produces the same tokens regardless of context. This is statistically rigid — the optimal granularity of tokenization depends on the task and content, but the tokenizer can't adapt.</p>
+
+  <p><strong>Proposal.</strong> Replace fixed tokenization with a lightweight learned module that receives raw characters (or bytes) and dynamically groups them into variable-length units based on the current semantic context, trained end-to-end with the main model.</p>
+
+  <p><strong>Prior work.</strong> Byte-level models (ByT5, MegaByte) process raw bytes directly. CANINE operates at the character level. MegaByte uses a patch-based approach to group bytes before a large model processes them. These demonstrate that learned grouping is viable but show mixed results on efficiency vs. subword baselines.</p>
+
+  <p><strong>Open problem.</strong> Discrete grouping decisions create a non-differentiable boundary in end-to-end training. This requires techniques like Gumbel-Softmax or straight-through estimators, which add training complexity and can be unstable. The segmentation must also be stable enough that the main model can build consistent representations — noisy tokenization propagates as noise through the entire system.</p>
+
+  <p><strong>Feasibility:</strong> <code>near-term research</code> — components exist, integration is the challenge.</p>
+
+  <h3 id="1b-bit-level">1B. Bit-level universal input</h3>
+
+  <p><strong>Problem.</strong> Current models receive modality-specific inputs: text tokens, image patches, audio spectrograms. Each modality has its own encoder. This creates hard boundaries between modalities that the model must learn to bridge.</p>
+
+  <p><strong>Proposal.</strong> Feed everything as raw binary sequences. Lightweight compression modules — likely specialized per modality structure — learn to group bits into meaningful units before the main model processes them. The main model's internal representation is homogeneous regardless of input modality.</p>
+
+  <p><strong>Prior work.</strong> Perceiver and Perceiver IO (Jaegle et al., 2021) accept arbitrary input modalities and project them into a shared latent space. This is conceptually similar but operates on preprocessed features rather than raw bits.</p>
+
+  <div class="callout">
+    <span class="label">Honest tension</span>
+    <p>If you need modality-specific compression experts, you've reintroduced structural bias per modality — which is precisely what current architectures already do. The gain would be that internal representations are homogeneous after compression, but the input stage is no longer "pure bits." This idea is philosophically appealing but practically converges toward existing multimodal architectures with extra steps.</p>
+  </div>
+
+  <p><strong>Additional challenge.</strong> Sequence length explodes at the bit level. A 1024×1024 RGB image is ~25 million bits. Even with aggressive compression, the input pipeline must reduce this by 3–4 orders of magnitude before the main model can process it.</p>
+
+  <p><strong>Feasibility:</strong> <code>requires paradigm shift</code> — interesting as a research direction, but likely impractical as described. A more realistic version is learned compression that operates on bytes or small byte groups rather than individual bits.</p>
+
+  <hr>
+
+  <h2 id="axis-2">Axis 2 — Adaptive compute</h2>
+
+  <h3 id="2a-progressive-context">2A. Progressive internal context expansion</h3>
+
+  <p><strong>Problem.</strong> Transformers process the entire context window for every response, even when the answer depends on only a few recent tokens. A question like "what's your name?" costs the same as "summarize everything we discussed about authentication."</p>
+
+  <p><strong>Proposal.</strong> The model starts by processing only the most recent portion of available context. It estimates whether this is sufficient to produce a confident response. If not, it progressively expands its active window — pulling in older context incrementally — until it reaches adequate confidence.</p>
+
+  <figure class="viz">
+    <canvas id="v2-expand" style="height: 300px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">question needs context reaching <span id="v2-d-r">3,200</span> tokens back</span>
+        <input type="range" id="v2-d" min="50" max="99000" step="50" value="3200">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 2</span>A 100,000-token conversation with progressive expansion. The model keeps doubling its active window until it has enough history to be confident. Easy questions finish in one or two expansions; harder ones pull in more. Total processed context scales with what the question needs, not with what's available.</div>
+  </figure>
+
+  <p><strong>Key difference from RAG.</strong> The entire history is already available. The expansion is internal, not a retrieval call to an external system.</p>
+
+  <p><strong>Prior work.</strong> Adaptive Computation Time (Graves, 2016) lets models decide how many computation steps to use per input. Universal Transformers apply variable depth per token. These address compute depth rather than context width, but the principle — allocate compute based on difficulty — is the same.</p>
+
+  <p><strong>Open problem.</strong> How does the model estimate confidence without having seen the full context? If it uses a sub-model to estimate sufficiency, that's additional cost. If it relies on its own uncertainty on partial context, it may not know what it's missing. This is a chicken-and-egg problem that the proposal must address explicitly.</p>
+
+  <p><strong>Feasibility:</strong> <code>near-term research</code> — the core mechanism (speculative processing with expansion) is implementable. The confidence estimation is the hard part.</p>
+
+  <h3 id="2b-sparse-activation">2B. Dynamic sparse activation</h3>
+
+  <p><strong>Problem.</strong> In dense models, every parameter is computed for every token. Empirically, many neurons are barely active for any given input.</p>
+
+  <p><strong>Proposal.</strong> A lightweight gating module analyzes each input and dynamically decides which blocks to activate. Unlike MoE, which has fixed expert boundaries, this allows activation patterns that vary per input.</p>
+
+  <p><strong>Prior work.</strong> Mixture of Experts (Shazeer et al., 2017; Lepikhin et al., 2020) is the dominant approach to conditional computation. Switch Transformer routes each token to one expert. Routing networks and early-exit strategies also reduce per-token compute.</p>
+
+  <div class="callout">
+    <span class="label">Honest tension</span>
+    <p>For real computational savings on current GPU hardware, sparsity must be structured — aligned with matrix dimensions so entire blocks can be skipped. But structured sparsity with fixed block boundaries converges toward MoE. "Fluid, overlapping activation patterns" sounds appealing but doesn't produce real savings on current hardware because matrix multiplications still execute at full size regardless of how many values are zero.</p>
+  </div>
+
+  <p><strong>Possible resolution.</strong> Hardware is evolving. Structured sparsity support in GPUs (e.g., NVIDIA's 2:4 sparsity, Ampere architecture) is improving. If hardware catches up to fine-grained sparsity, the gap between "fluid" and "structured" narrows. But today, this idea is hardware-limited.</p>
+
+  <p><strong>Feasibility:</strong> <code>near-term research</code> on structured variants; <code>requires paradigm shift</code> for truly fluid activation on current hardware.</p>
+
+  <hr>
+
+  <h2 id="axis-3">Axis 3 — Memory architecture</h2>
+
+  <p>This is the most interconnected axis. Rather than presenting separate ideas, it describes a progression from what's implementable today toward a longer-term vision.</p>
+
+  <h3 id="3-stage-1">Stage 1: Hierarchical compression before attention (implementable today)</h3>
+
+  <p><strong>Problem.</strong> A 100k-token context produces a massive attention matrix. Most comparisons are between tokens that have nothing to do with each other.</p>
+
+  <p><strong>Proposal.</strong> Before running attention, apply a compression layer with a recency gradient:</p>
+
+  <ul>
+    <li><strong>Most recent tokens:</strong> preserved at full resolution (1:1)</li>
+    <li><strong>Older tokens:</strong> grouped into compressed representations</li>
+    <li><strong>Very old tokens:</strong> heavily summarized</li>
+  </ul>
+
+  <p>Attention then runs on a much smaller sequence — for example, 2k recent tokens + 5k compressed representations instead of 100k raw tokens.</p>
+
+  <figure class="viz">
+    <canvas id="v3-comp" style="height: 360px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">recent window — <span id="v3-w-r">2,048</span> tokens at full resolution</span>
+        <input type="range" id="v3-w" min="256" max="16384" step="256" value="2048">
+      </label>
+      <label>
+        <span class="ctrl-label">compression decay — <span id="v3-d-r">2.5</span></span>
+        <input type="range" id="v3-dec" min="1.2" max="8" step="0.1" value="2.5">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 3</span>Hierarchical compression on a 100,000-token context. Recent tokens stay at full resolution; older ones are progressively summarized. Adjust the window and the decay curve to see what attention actually sees — and what the quadratic cost drops to as a result.</div>
+  </figure>
+
+  <p><strong>Prior work.</strong> Compressive Transformer (Rae et al., 2019) implements progressive compression with recency, storing compressed memories at multiple granularities. Landmark Attention uses special tokens as compressed summaries. Unlimiformer projects long sequences into a smaller set of memory slots. ALiBi and RoPE implement recency-based attention decay at the positional encoding level.</p>
+
+  <p><strong>What this adds beyond prior work.</strong> Most existing approaches use uniform compression or fixed-size memory slots. The proposal here is a smooth, continuous gradient where compression increases proportionally with distance. The difference may be incremental rather than fundamental — this should be validated empirically.</p>
+
+  <p><strong>Feasibility:</strong> <code>implementable today</code> — all components exist. The engineering challenge is tuning the compression curve.</p>
+
+  <h3 id="3-stage-2">Stage 2: Three-layer memory system (near-term)</h3>
+
+  <p><strong>Problem.</strong> Even with compression, a single mechanism can't efficiently handle information across all time scales.</p>
+
+  <p><strong>Proposal.</strong> Separate memory into three explicit layers:</p>
+
+  <table>
+    <thead>
+      <tr><th>Layer</th><th>Mechanism</th><th>Characteristics</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Short-term</strong></td><td>Local attention (last N tokens)</td><td>Full fidelity, high cost per token, small N</td></tr>
+      <tr><td><strong>Medium-term</strong></td><td>Recurrent / SSM compressed state</td><td>Compressed, O(n) update cost, lossy</td></tr>
+      <tr><td><strong>Long-term</strong></td><td>External structured memory (RAG-like)</td><td>Large capacity, on-demand retrieval, retrieval cost per query</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Prior work.</strong> Memorizing Transformers (Wu et al., 2022) add a kNN-based long-term memory. RETRO (Borgeaud et al., 2022) retrieves from a large database during generation. Hybrid models like Jamba (SSM + Transformer + MoE) combine attention with recurrent state but don't explicitly separate memory into tiers.</p>
+
+  <p><strong>Open problems:</strong></p>
+
+  <ul>
+    <li>Medium-term compression is lossy. If critical information lands in the compressed zone, the model loses access to details it may later need.</li>
+    <li>Retrieval cost for the long-term layer is O(log n) with good indexing (not O(1)). Retrieved content then requires processing, adding latency.</li>
+    <li>The boundaries between layers (what stays in short-term vs. gets compressed) need careful tuning or learning.</li>
+  </ul>
+
+  <p><strong>Feasibility:</strong> <code>near-term research</code> — individual components exist (local attention, SSM, RAG). The integration and the learned boundary management are the research problems.</p>
+
+  <h3 id="3-stage-3">Stage 3: Native hierarchical long-term memory (longer-term vision)</h3>
+
+  <p><strong>Problem.</strong> External memory (RAG) is a workaround with real limitations: retrieval noise, latency, and a disconnect between "what the model knows" and "what it retrieves." But it also has genuine advantages — it's inspectable, updatable, auditable, and separates knowledge from computation.</p>
+
+  <p><strong>Longer-term direction.</strong> If a model had true hierarchical memory built into the architecture, combined with continuous learning (see Axis 5), some RAG use cases could be absorbed natively. The model would:</p>
+
+  <ul>
+    <li>Store important information in compressed long-term internal memory</li>
+    <li>Retrieve it through internal mechanisms</li>
+    <li>Update it through online learning</li>
+    <li>Forget irrelevant information through natural decay</li>
+  </ul>
+
+  <p><strong>Why this doesn't simply "replace RAG".</strong> Internal memory loses the auditability and inspectability of external memory. Internal retrieval also makes errors — they're just harder to debug. The practical direction is likely a hybrid: native memory for frequently-accessed, high-value patterns; external memory for large, evolving knowledge bases.</p>
+
+  <p><strong>Feasibility:</strong> <code>requires paradigm shift</code> — requires solving hierarchical memory, dynamic capacity, and continuous learning simultaneously. Each is hard alone.</p>
+
+  <hr>
+
+  <h2 id="axis-4">Axis 4 — Model plasticity</h2>
+
+  <h3 id="4a-dynamic-capacity">4A. Dynamic capacity</h3>
+
+  <p><strong>Problem.</strong> Current models have fixed parameter counts. A 7B model is always 7B, whether answering "hello" or reasoning through a complex proof.</p>
+
+  <p><strong>Proposal.</strong> A model whose active capacity varies:</p>
+
+  <ul>
+    <li>Activates more structure when complexity demands it</li>
+    <li>Compresses or deactivates regions that become irrelevant</li>
+    <li>Maintains a persistent state that evolves over time</li>
+  </ul>
+
+  <p><strong>Prior work.</strong> Adaptive Computation Time (Graves, 2016) allows variable computation depth. Early-exit strategies (DeeBERT, CALM) let tokens exit the network at different layers. Mixture of Depths (Raposo et al., 2024) routes tokens through variable numbers of layers.</p>
+
+  <p><strong>Honest assessment.</strong> This idea is the vaguest in this collection. "Grows when complexity demands it" needs a concrete mechanism. Options include:</p>
+
+  <ul>
+    <li>Activating dormant parameter blocks (like MoE but with variable expert count)</li>
+    <li>Dynamically adjusting network depth per input (Mixture of Depths)</li>
+    <li>Expanding/contracting hidden dimensions</li>
+  </ul>
+
+  <p>The brain analogy (neural pathways forming and dissolving) is appealing but misleading — biological plasticity operates over days/weeks through physical growth, not through runtime compute allocation. A more honest framing: this is about adaptive compute allocation, not true structural plasticity.</p>
+
+  <p><strong>Feasibility:</strong> <code>near-term research</code> for depth/width variation; <code>requires paradigm shift</code> for true structural growth/shrinkage at runtime.</p>
+
+  <h3 id="4b-variable-embeddings">4B. Variable-dimension embeddings</h3>
+
+  <p><strong>Problem.</strong> Every token is represented by a vector of fixed dimension (e.g., 4096 floats). The word "the" gets the same representational budget as a complex technical term.</p>
+
+  <p><strong>Proposal.</strong> Allow embedding dimensions to vary based on the informational complexity of each token or concept.</p>
+
+  <p><strong>Prior work.</strong> Matryoshka Representation Learning (Kusupati et al., 2022) trains embeddings where truncated prefixes remain useful, allowing variable-length representations at retrieval time. Product quantization and mixed-precision representations also address this partially.</p>
+
+  <div class="callout">
+    <span class="label">Fundamental problem</span>
+    <p>This breaks standard matrix operations. You cannot multiply matrices with variable column widths on current hardware. This isn't a "challenge" — it's an architectural incompatibility. Possible workarounds (padding, packing, sparse representations) all either waste compute or require custom hardware support.</p>
+  </div>
+
+  <p><strong>More realistic variant.</strong> Rather than truly variable dimensions, use a fixed large dimension but with learned sparsity — most dimensions are zero for simple tokens, full for complex ones. Combined with structured sparsity support in hardware, this could achieve similar goals without breaking matrix operations.</p>
+
+  <p><strong>Feasibility:</strong> <code>requires paradigm shift</code> as described. The sparse-embedding variant is <code>near-term research</code>.</p>
+
+  <hr>
+
+  <h2 id="axis-5">Axis 5 — Continuous learning</h2>
+
+  <h3 id="5a-live-models">5A. Live models (online learning during deployment)</h3>
+
+  <p><strong>Problem.</strong> Current models are frozen after training. They don't learn from use. Every conversation starts from the same weights.</p>
+
+  <p><strong>Proposal.</strong> Models that update specific parameters in real time during deployment, adapting to users, domains, and evolving information through selective, localized updates.</p>
+
+  <p><strong>Prior work.</strong> Online learning and continual learning are mature research fields. Elastic Weight Consolidation (Kirkpatrick et al., 2017) protects important weights during sequential learning. Progressive Neural Networks (Rusu et al., 2016) add capacity for new tasks. Test-Time Training (Sun et al., 2020) updates model parameters using self-supervised objectives on each test input.</p>
+
+  <div class="callout">
+    <span class="label">Central unsolved problem</span>
+    <p><strong>Catastrophic forgetting.</strong> This isn't a footnote risk — it's the primary reason this doesn't work reliably today. When a model updates weights to accommodate new information, it degrades on previously learned tasks. All existing mitigation strategies (EWC, replay buffers, parameter isolation) involve significant tradeoffs between plasticity and stability.</p>
+  </div>
+
+  <p><strong>Additional practical challenge.</strong> Even LoRA-style low-rank updates during inference require storing optimizer states and computing gradients, which significantly increases latency and memory. This is viable for slow background adaptation but not for real-time per-response updates.</p>
+
+  <p><strong>Feasibility:</strong> <code>near-term research</code> for slow background adaptation (periodic fine-tuning, LoRA updates between sessions). <code>requires paradigm shift</code> for true real-time per-response learning.</p>
+
+  <h3 id="5b-loss-functions">5B. Multiple evolving loss functions</h3>
+
+  <p><strong>Problem.</strong> Current models are trained with essentially one loss function (next-token prediction), sometimes augmented by a small set of fixed auxiliary objectives. Complex intelligence arguably requires balancing many competing objectives simultaneously.</p>
+
+  <p><strong>Proposal.</strong> Instead of a single static loss:</p>
+
+  <ul>
+    <li><strong>Multiple loss functions</strong> operating simultaneously (semantic coherence, factual consistency, task completion, self-consistency)</li>
+    <li><strong>Dynamic weighting</strong> — the importance of each loss changes based on context and task</li>
+    <li><strong>Self-generated objectives</strong> — the model learns to create its own sub-goals</li>
+  </ul>
+
+  <p><strong>Prior work.</strong> Multi-task learning uses multiple losses routinely. GradNorm (Chen et al., 2018) dynamically balances task weights during training. Intrinsic motivation in RL (curiosity-driven exploration, Pathak et al., 2017) lets agents generate their own reward signals. RLHF/DPO already introduce secondary optimization beyond next-token prediction.</p>
+
+  <p><strong>Clarification on the brain analogy.</strong> The original motivation referenced the brain "developing its own loss functions." The brain's primary reward signals (dopamine, serotonin pathways) are largely hardwired by evolution, not self-generated. What does change over time is the learned association between stimuli and rewards — more analogous to learned reward shaping than to self-generated loss functions. The analogy should be stated more carefully.</p>
+
+  <p><strong>Open problems:</strong></p>
+
+  <ul>
+    <li>Multi-objective optimization with dynamic weights is notoriously hard to stabilize.</li>
+    <li>"Self-generated objectives" risks reward hacking — the model optimizing for objectives that are easy to satisfy rather than genuinely useful.</li>
+    <li>Defining what the loss functions should be remains a human design problem.</li>
+  </ul>
+
+  <p><strong>Feasibility:</strong> <code>near-term research</code> for dynamic multi-objective training. <code>speculative</code> for truly self-generated objectives.</p>
+
+  <hr>
+
+  <h2 id="axis-6">Axis 6 — System architecture</h2>
+
+  <h3 id="practical-endgame">The practical endgame: small model + hierarchical memory + tools</h3>
+
+  <p>The previous axes describe individual architectural innovations. This axis describes how they combine into a practical system.</p>
+
+  <p><strong>Core thesis.</strong> A model in the range of 15–30B active parameters, combined with:</p>
+
+  <ul>
+    <li>Hierarchical memory (Axis 3, Stages 1–2)</li>
+    <li>External tools (code execution, calculators, search, verification)</li>
+    <li>A reasoning loop (planner, self-reflection, chain-of-thought)</li>
+  </ul>
+
+  <p>could match the effective capability of much larger monolithic models across many tasks.</p>
+
+  <p><strong>Why this range?</strong> Below ~7B, models lack sufficient internal capacity for robust reasoning, compositional generalization, and reliable tool use. Between 7B and 30B, there's a significant jump in reasoning stability and robustness. Above 30B, the marginal gains per parameter diminish — especially when memory and tools handle knowledge retrieval and verification.</p>
+
+  <p><strong>What the model becomes.</strong> A cognitive processor — not a knowledge store. It handles:</p>
+
+  <ul>
+    <li>Semantic understanding</li>
+    <li>Short-range reasoning</li>
+    <li>Tool orchestration</li>
+    <li>Query formulation for memory retrieval</li>
+  </ul>
+
+  <p>Knowledge, long-range reasoning, and verification are externalized.</p>
+
+  <p><strong>What this doesn't solve.</strong> Robustness under ambiguity, graceful degradation when retrieval fails, and the meta-skill of knowing when to use which tool. These correlate with model scale in ways that are not yet fully understood.</p>
+
+  <p><strong>On active/continuous input.</strong> Any model can receive continuous input streams — this is a deployment decision, not an architectural one. The architectural contribution comes from the other axes: efficient processing of continuous input (Axis 2), hierarchical storage of ongoing experience (Axis 3), and learning from observation (Axis 5). The "always-on model" is an integration challenge built on top of these capabilities.</p>
+
+  <p><strong>Feasibility:</strong> <code>implementable today</code> with current open models (Llama, Qwen, Mistral at 20B–30B range) + existing memory/tool frameworks. The ceiling is engineering quality, not architectural impossibility.</p>
+
+  <hr>
+
+  <h2 id="how-axes-relate">How these axes relate</h2>
+
+  <p>These axes are not a sequential pipeline. They operate at different levels and different phases:</p>
+
+  <pre><code>┌─────────────────────────────────────────────────┐
+│                TRAINING TIME                    │
+│                                                 │
+│  Continuous Learning (Axis 5)                   │
+│    - Multiple loss functions                    │
+│    - Online weight updates                      │
+│                                                 │
+├─────────────────────────────────────────────────┤
+│              ARCHITECTURE                       │
+│                                                 │
+│  Input ──► Compute ──► Memory ──► Output        │
+│  (Axis 1)  (Axis 2)   (Axis 3)                  │
+│                                                 │
+│  Model Plasticity (Axis 4) spans all stages     │
+│                                                 │
+├─────────────────────────────────────────────────┤
+│              SYSTEM LEVEL                       │
+│                                                 │
+│  Small Model + Memory + Tools (Axis 6)          │
+│    - Orchestration                              │
+│    - External memory                            │
+│    - Tool use                                   │
+│    - Continuous input streams                   │
+│                                                 │
+└─────────────────────────────────────────────────┘</code></pre>
+
+  <p><strong>Dependencies:</strong></p>
+
+  <ul>
+    <li>Axis 2 (Adaptive Compute) benefits from Axis 1 (better input representation reduces sequence length)</li>
+    <li>Axis 3 (Memory) benefits from Axis 2 (adaptive compute decides what to store vs. discard)</li>
+    <li>Axis 5 (Continuous Learning) requires Axis 3 (somewhere to store what's learned)</li>
+    <li>Axis 6 (System) integrates all other axes</li>
+  </ul>
+
+  <p><strong>Independent research tracks:</strong></p>
+
+  <ul>
+    <li>Axes 1 and 4 can be pursued independently</li>
+    <li>Axes 2 and 3 are tightly coupled</li>
+    <li>Axis 5 benefits from all others but can be researched in isolation</li>
+  </ul>
+
+  <hr>
+
+  <h2 id="feasibility-summary">Feasibility summary</h2>
+
+  <table>
+    <thead>
+      <tr><th>Idea</th><th>Feasibility</th><th>Key blocker</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1A. Dynamic tokenization</td><td>Near-term research</td><td>Non-differentiable grouping, training stability</td></tr>
+      <tr><td>1B. Bit-level input</td><td>Requires paradigm shift</td><td>Sequence length, converges toward existing approaches</td></tr>
+      <tr><td>2A. Progressive context</td><td>Near-term research</td><td>Confidence estimation without full context</td></tr>
+      <tr><td>2B. Dynamic sparse activation</td><td>Near-term (structured)</td><td>Hardware support for fine-grained sparsity</td></tr>
+      <tr><td>3-Stage 1. Hierarchical compression</td><td><strong>Implementable today</strong></td><td>Tuning the compression curve</td></tr>
+      <tr><td>3-Stage 2. Three-layer memory</td><td>Near-term research</td><td>Integration and boundary management</td></tr>
+      <tr><td>3-Stage 3. Native long-term memory</td><td>Requires paradigm shift</td><td>Catastrophic forgetting, auditability loss</td></tr>
+      <tr><td>4A. Dynamic capacity</td><td>Near-term (depth/width)</td><td>Concrete mechanism for structural growth</td></tr>
+      <tr><td>4B. Variable embeddings</td><td>Requires paradigm shift</td><td>Breaks matrix operations on current hardware</td></tr>
+      <tr><td>5A. Live models</td><td>Near-term (background)</td><td>Catastrophic forgetting for real-time updates</td></tr>
+      <tr><td>5B. Multiple loss functions</td><td>Near-term (dynamic weighting)</td><td>Self-generated objectives risk reward hacking</td></tr>
+      <tr><td>6. Small model + system</td><td><strong>Implementable today</strong></td><td>Engineering quality, robustness under ambiguity</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2 id="falsification">What would prove these ideas wrong</h2>
+
+  <p>For these proposals to be worth pursuing, they need to be falsifiable. Here's what would indicate each direction is a dead end:</p>
+
+  <ul>
+    <li><strong>Adaptive compute (Axis 2):</strong> if models with fixed full-context processing consistently outperform adaptive variants even when controlling for total FLOPs, the overhead of deciding what to process exceeds the savings from skipping.</li>
+    <li><strong>Hierarchical memory (Axis 3):</strong> if information compressed into medium-term memory degrades quality on downstream tasks more than the compute savings justify, compression is a net negative.</li>
+    <li><strong>Model plasticity (Axis 4):</strong> if variable-capacity models fail to outperform fixed-size models of equivalent average compute, the routing/allocation overhead doesn't pay for itself.</li>
+    <li><strong>Continuous learning (Axis 5):</strong> if catastrophic forgetting remains unsolvable without losing more capability than the adaptation gains, frozen models with periodic retraining are strictly better.</li>
+    <li><strong>Small model + system (Axis 6):</strong> if robustness and reliability scale with parameter count in ways that external systems fundamentally cannot compensate for, there's a hard floor on model size that memory and tools can't lower.</li>
+  </ul>
+
+  <p>These are empirical questions. The answers may differ by domain, task type, and deployment context.</p>
+
+  <hr>
+
+  <h2 id="current-landscape">Current landscape (2025–2026)</h2>
+
+  <p>For context, here's where alternative architectures stand:</p>
+
+  <table>
+    <thead>
+      <tr><th>Direction</th><th>Key models</th><th>Relevance to these ideas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>State Space Models</td><td>Mamba, Mamba-2</td><td>Axis 3 (efficient medium-term memory via recurrent state)</td></tr>
+      <tr><td>Delta Rule Models</td><td>Gated DeltaNet</td><td>Axis 3 (more expressive state updates than SSM)</td></tr>
+      <tr><td>Modern RNNs</td><td>RWKV-7 "Goose"</td><td>Axis 3 (linear-cost sequence processing)</td></tr>
+      <tr><td>Modern LSTMs</td><td>xLSTM</td><td>Axis 3 (matrix memory, exponential gating)</td></tr>
+      <tr><td>Diffusion LLMs</td><td>Mercury 2, LLaDA 2.0</td><td>Orthogonal (parallel generation, not memory/compute efficiency)</td></tr>
+      <tr><td>Hybrids</td><td>Nemotron-H, Jamba 1.5</td><td>Axis 3 Stage 2 (combining attention + recurrent state)</td></tr>
+      <tr><td>Test-Time Training</td><td>TTT-E2E</td><td>Axis 5 (learning during inference)</td></tr>
+    </tbody>
+  </table>
+
+  <p>Most of these address Axis 3 — efficient memory and sequence processing. Axes 1, 2, 4, and 5 remain comparatively underexplored in production systems.</p>
+
+  <hr>
+
+  <h2 id="closing">Closing</h2>
+
+  <p>The Transformer's dominance is earned: parallelism, stability, predictable scaling, and ecosystem maturity are real advantages that any competitor must contend with.</p>
+
+  <p>But the Transformer's core design — uniform processing of all tokens, fixed capacity, no persistent memory, no adaptation — creates inefficiencies that compound as we push toward longer contexts, more modalities, and continuous interaction.</p>
+
+  <p>The directions outlined here are not a single unified architecture. They are research bets at different levels of the stack, with different timelines and different risk profiles. Some are implementable today. Some require hardware that doesn't exist yet. Some may turn out to be dead ends.</p>
+
+  <blockquote>
+    <p>The testable claim is this: a system combining a 15–30B parameter model with hierarchical memory, adaptive compute, and external tools can match the effective capability of models 10× its size across a meaningful set of tasks — at a fraction of the cost.</p>
+  </blockquote>
+
+  <p>If that claim holds, it changes who can build and deploy capable AI systems. If it doesn't, we learn something concrete about why scale matters in ways that architecture cannot replace.</p>
+
+  <p>Either outcome advances the field.</p>
+
+  <hr>
+
+  <p><em>Some of these ideas overlap with active research directions (cited inline). Others are novel combinations or extensions. All remain to be validated empirically. Prior work citations are representative, not exhaustive.</em></p>
+
+  <p>If you read this far and have a thought — agreement, disagreement, a pointer to prior work I missed — drop me a line at <a href="mailto:hi@rnader.com">hi@rnader.com</a>.</p>
+
+</article>
+
+<footer class="site-footer">
+  <div class="limiter">
+    <p class="colophon">
+      <a href="../" style="color: var(--text-dim); text-decoration: none;">← back to home</a><br>
+      0 frameworks. Plain HTML and CSS in two static files.
+    </p>
+  </div>
+</footer>
+
+<script>
+/* Theme toggle */
+(function(){
+  const root = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  const modes = ['auto','light','dark'];
+  const mq = matchMedia('(prefers-color-scheme: dark)');
+  const icons = {
+    auto: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" stroke="none"/></svg>',
+    light: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>',
+    dark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>'
+  };
+  function apply(mode){
+    if (mode === 'auto') {
+      root.removeAttribute('data-theme');
+      root.setAttribute('data-theme-resolved', mq.matches ? 'dark' : 'light');
+    } else {
+      root.setAttribute('data-theme', mode);
+      root.setAttribute('data-theme-resolved', mode);
+    }
+    btn.innerHTML = icons[mode];
+    btn.setAttribute('title', 'Theme: ' + mode);
+  }
+  apply(localStorage.getItem('theme') || 'auto');
+  btn.addEventListener('click', () => {
+    const cur = localStorage.getItem('theme') || 'auto';
+    const next = modes[(modes.indexOf(cur) + 1) % modes.length];
+    localStorage.setItem('theme', next);
+    apply(next);
+  });
+  mq.addEventListener('change', () => { if ((localStorage.getItem('theme') || 'auto') === 'auto') apply('auto'); });
+})();
+
+(function(){
+  const bar = document.getElementById('progress');
+  function onScroll(){
+    const h = document.documentElement;
+    const total = h.scrollHeight - h.clientHeight;
+    bar.style.transform = 'scaleX(' + (total > 0 ? h.scrollTop / total : 0) + ')';
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  document.addEventListener('keydown', (e) => {
+    if (e.target.matches('input,textarea,[contenteditable]')) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'Escape') window.location.href = '../';
+  });
+
+  document.querySelectorAll('h2[id], h3[id]').forEach(h => {
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.className = 'anchor';
+    a.textContent = '#';
+    h.appendChild(a);
+  });
+})();
+
+/* ---------- Interactive figures ---------- */
+function fitCanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+function themeColors() {
+  const cs = getComputedStyle(document.documentElement);
+  const v = k => cs.getPropertyValue(k).trim();
+  const isDark = document.documentElement.getAttribute('data-theme-resolved') === 'dark';
+  return {
+    isDark,
+    bg: v('--bg-elev') || (isDark ? '#211C17' : '#FAF4E2'),
+    text: v('--text') || (isDark ? '#EFE7D3' : '#1A1613'),
+    dim: v('--text-dim') || (isDark ? '#9B917E' : '#5F574C'),
+    faint: isDark ? 'rgba(239,231,211,0.2)' : 'rgba(26,22,19,0.2)',
+    accent: v('--accent') || '#C56B4A',
+    blue: '#4A6EA0'
+  };
+}
+function fmtNum(x) {
+  if (x >= 1e12) return (x/1e12).toFixed(2) + ' T';
+  if (x >= 1e9) return (x/1e9).toFixed(2) + ' B';
+  if (x >= 1e6) return (x/1e6).toFixed(2) + ' M';
+  if (x >= 1e3) return (x/1e3).toFixed(2) + ' K';
+  return String(Math.round(x));
+}
+
+/* ---------- Fig 1: Attention cost O(n²) ---------- */
+(function(){
+  const canvas = document.getElementById('v1-attn');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let logN = 13;
+
+  document.getElementById('v1-n').addEventListener('input', e => {
+    logN = parseInt(e.target.value);
+    document.getElementById('v1-n-r').textContent = (1 << logN).toLocaleString();
+    draw();
+  });
+
+  function draw() {
+    const rect = canvas.getBoundingClientRect();
+    const W = rect.width, H = rect.height;
+    const c = themeColors();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, W, H);
+
+    const n = 1 << logN;
+    const nMax = 1 << 17;
+
+    // Reference square: full 128k² — max size
+    const maxSide = Math.min(W * 0.42, H * 0.78);
+    const cx = W * 0.28, cy = H * 0.52;
+    // Outer frame (128k reference)
+    ctx.strokeStyle = c.faint;
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.strokeRect(cx - maxSide/2, cy - maxSide/2, maxSide, maxSide);
+    ctx.setLineDash([]);
+    // Current matrix — linear side in log space so you can see even small n
+    const sideRatio = n / nMax;
+    const side = maxSide * sideRatio;
+    // Gradient fill
+    const grad = ctx.createLinearGradient(cx - side/2, cy - side/2, cx + side/2, cy + side/2);
+    grad.addColorStop(0, c.accent);
+    grad.addColorStop(1, c.blue);
+    ctx.fillStyle = grad;
+    ctx.globalAlpha = 0.82;
+    ctx.fillRect(cx - side/2, cy - side/2, side, side);
+    ctx.globalAlpha = 1;
+    // Grid stripes inside current matrix to evoke "every-token-vs-every-token"
+    ctx.strokeStyle = c.bg;
+    ctx.lineWidth = 0.4;
+    const stripes = Math.min(logN, 14);
+    const stripeStep = side / stripes;
+    if (stripeStep > 1.5) {
+      for (let i = 1; i < stripes; i++) {
+        const px = cx - side/2 + i * stripeStep;
+        ctx.beginPath(); ctx.moveTo(px, cy - side/2); ctx.lineTo(px, cy + side/2); ctx.stroke();
+        const py = cy - side/2 + i * stripeStep;
+        ctx.beginPath(); ctx.moveTo(cx - side/2, py); ctx.lineTo(cx + side/2, py); ctx.stroke();
+      }
+    }
+
+    // 128k reference label
+    ctx.fillStyle = c.dim;
+    ctx.font = '10px ui-monospace, monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('128k × 128k reference', cx, cy + maxSide/2 + 18);
+
+    // Readout right side
+    const xr = Math.min(W * 0.58, cx + maxSide/2 + 40);
+    ctx.textAlign = 'left';
+    ctx.fillStyle = c.text;
+    ctx.font = 'bold 13px -apple-system, system-ui, sans-serif';
+    ctx.fillText('Attention matrix', xr, H * 0.22);
+
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.fillStyle = c.dim;
+    const rows = [
+      ['tokens   ', n.toLocaleString()],
+      ['entries  ', fmtNum(n*n)],
+      ['memory   ', (() => { const mb = (n*n*2)/(1024*1024); return mb < 1 ? (mb*1024).toFixed(1)+' KB' : mb.toFixed(1)+' MB'; })()],
+    ];
+    rows.forEach((r, i) => {
+      ctx.fillStyle = c.dim;
+      ctx.fillText(r[0], xr, H * 0.36 + i * 22);
+      ctx.fillStyle = c.accent;
+      ctx.fillText(r[1], xr + 68, H * 0.36 + i * 22);
+    });
+    ctx.fillStyle = c.dim;
+    ctx.font = '11px -apple-system, system-ui, sans-serif';
+    ctx.fillText('per head, per layer — fp16', xr, H * 0.88);
+  }
+
+  fitCanvas(canvas);
+  window.addEventListener('resize', () => { fitCanvas(canvas); draw(); });
+  draw();
+})();
+
+/* ---------- Fig 2: Progressive context expansion ---------- */
+(function(){
+  const canvas = document.getElementById('v2-expand');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const N = 100000;
+  let needed = 3200;
+
+  document.getElementById('v2-d').addEventListener('input', e => {
+    needed = parseInt(e.target.value);
+    document.getElementById('v2-d-r').textContent = needed.toLocaleString();
+    draw();
+  });
+
+  function draw() {
+    const rect = canvas.getBoundingClientRect();
+    const W = rect.width, H = rect.height;
+    const c = themeColors();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // Simulate doubling expansion
+    let win = 512;
+    const steps = [win];
+    while (win < needed && win < N) {
+      win = Math.min(win * 2, N);
+      steps.push(win);
+    }
+    const final = Math.min(win, N);
+
+    const padX = 28;
+    const stripX = padX, stripY = H * 0.52, stripW = W - 2*padX, stripH = 64;
+
+    // Background strip (full 100k)
+    ctx.fillStyle = c.isDark ? 'rgba(234,226,210,0.07)' : 'rgba(26,22,19,0.05)';
+    ctx.fillRect(stripX, stripY, stripW, stripH);
+    ctx.strokeStyle = c.faint;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(stripX, stripY, stripW, stripH);
+
+    // Each step as nested rectangles from the right
+    steps.forEach((sz, idx) => {
+      const frac = sz / N;
+      const w = stripW * frac;
+      const alpha = 0.15 + (idx / Math.max(steps.length, 1)) * 0.55;
+      ctx.fillStyle = `rgba(197,107,74,${alpha})`;
+      ctx.fillRect(stripX + stripW - w, stripY, w, stripH);
+    });
+
+    // Final window outline
+    const finalFrac = final / N;
+    const finalW = stripW * finalFrac;
+    ctx.strokeStyle = c.accent;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(stripX + stripW - finalW, stripY - 2, finalW, stripH + 4);
+
+    // Needed marker
+    const neededFrac = needed / N;
+    const neededX = stripX + stripW - stripW * neededFrac;
+    ctx.strokeStyle = c.isDark ? 'rgba(234,226,210,0.6)' : 'rgba(26,22,19,0.55)';
+    ctx.setLineDash([3, 4]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(neededX, stripY - 12);
+    ctx.lineTo(neededX, stripY + stripH + 8);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = c.dim;
+    ctx.font = '10px ui-monospace, monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('needed depth', neededX, stripY - 16);
+
+    // Axis labels
+    ctx.fillStyle = c.dim;
+    ctx.font = '11px ui-monospace, monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('100k ago', stripX, stripY + stripH + 18);
+    ctx.textAlign = 'right';
+    ctx.fillText('now', stripX + stripW, stripY + stripH + 18);
+
+    // Step trace
+    ctx.textAlign = 'left';
+    const trace = steps.map(s => s >= 1024 ? (s/1024).toFixed(s>=10240?0:1)+'k' : String(s)).join(' → ');
+    ctx.fillText(`expansion: ${trace}`, stripX, stripY + stripH + 38);
+
+    // Readout on top
+    ctx.fillStyle = c.text;
+    ctx.font = 'bold 13px -apple-system, system-ui, sans-serif';
+    ctx.fillText('Tokens processed', padX, 24);
+    ctx.font = 'bold 22px -apple-system, system-ui, sans-serif';
+    ctx.fillStyle = c.accent;
+    ctx.fillText(final.toLocaleString(), padX, 50);
+    ctx.fillStyle = c.dim;
+    ctx.font = '12px ui-monospace, monospace';
+    const saved = (1 - final/N) * 100;
+    ctx.fillText(`of 100,000 available  ·  ${saved.toFixed(0)}% skipped  ·  ${steps.length} expansion step${steps.length > 1 ? 's' : ''}`, padX, 70);
+  }
+
+  fitCanvas(canvas);
+  window.addEventListener('resize', () => { fitCanvas(canvas); draw(); });
+  draw();
+})();
+
+/* ---------- Fig 3: Hierarchical compression ---------- */
+(function(){
+  const canvas = document.getElementById('v3-comp');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const N = 100000;
+  let w = 2048, decay = 2.5;
+
+  document.getElementById('v3-w').addEventListener('input', e => {
+    w = parseInt(e.target.value);
+    document.getElementById('v3-w-r').textContent = w.toLocaleString();
+    draw();
+  });
+  document.getElementById('v3-dec').addEventListener('input', e => {
+    decay = parseFloat(e.target.value);
+    document.getElementById('v3-d-r').textContent = decay.toFixed(1);
+    draw();
+  });
+
+  function ratioAt(dist) {
+    if (dist < w) return 1;
+    const k = (dist - w) / w;
+    return 1 + Math.pow(k, decay);
+  }
+
+  function effectiveTokens() {
+    let total = 0;
+    const step = 50;
+    for (let d = 0; d < N; d += step) total += step / ratioAt(d);
+    return total;
+  }
+
+  function draw() {
+    const rect = canvas.getBoundingClientRect();
+    const W = rect.width, H = rect.height;
+    const c = themeColors();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, W, H);
+
+    const padX = 28;
+    const stripX = padX, stripY = H * 0.42, stripW = W - 2*padX, stripH = 120;
+
+    // Bars — old (left) to recent (right). Height is log-scaled so the
+    // decay curve is still visible when compression is aggressive.
+    const bars = 240;
+    const barW = stripW / bars;
+    const maxLogR = Math.log(500);
+    for (let i = 0; i < bars; i++) {
+      const dist = ((bars - 1 - i) + 0.5) * N / bars;
+      const r = ratioAt(dist);
+      const logT = Math.max(0, 1 - Math.log(r) / maxLogR); // 1 recent, 0 very compressed
+      const h = Math.max(2, stripH * logT);
+      const t = logT;
+      const cr = Math.round(74 + (197-74) * t);
+      const cg = Math.round(110 + (107-110) * t);
+      const cb = Math.round(160 + (74-160) * t);
+      ctx.fillStyle = `rgba(${cr},${cg},${cb},${0.32 + 0.6*t})`;
+      ctx.fillRect(stripX + i*barW, stripY + stripH - h, barW + 0.6, h);
+    }
+    // Frame
+    ctx.strokeStyle = c.faint;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(stripX, stripY, stripW, stripH);
+
+    // Recent-window marker
+    const wFrac = w / N;
+    const wPx = stripW * wFrac;
+    ctx.strokeStyle = c.isDark ? 'rgba(234,226,210,0.5)' : 'rgba(26,22,19,0.45)';
+    ctx.setLineDash([3, 4]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(stripX + stripW - wPx, stripY - 6);
+    ctx.lineTo(stripX + stripW - wPx, stripY + stripH + 4);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = c.dim;
+    ctx.font = '10px ui-monospace, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('← recent window', stripX + stripW - wPx - 4, stripY - 4);
+
+    // Axis labels
+    ctx.font = '11px ui-monospace, monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('100k ago', stripX, stripY + stripH + 18);
+    ctx.textAlign = 'right';
+    ctx.fillText('now', stripX + stripW, stripY + stripH + 18);
+
+    // Readout
+    const eff = effectiveTokens();
+    const costRatio = (eff/N) * (eff/N);
+    ctx.fillStyle = c.text;
+    ctx.font = 'bold 13px -apple-system, system-ui, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('Effective sequence length', padX, 24);
+    ctx.font = 'bold 22px -apple-system, system-ui, sans-serif';
+    ctx.fillStyle = c.accent;
+    ctx.fillText(`${Math.round(eff).toLocaleString()} tokens`, padX, 50);
+    ctx.fillStyle = c.dim;
+    ctx.font = '12px ui-monospace, monospace';
+    ctx.fillText(`from 100,000 raw  ·  attention cost ≈ ${(costRatio*100).toFixed(1)}% of baseline  ·  ${((1-costRatio)*100).toFixed(1)}% saved`, padX, 70);
+  }
+
+  fitCanvas(canvas);
+  window.addEventListener('resize', () => { fitCanvas(canvas); draw(); });
+  draw();
+})();
+</script>
+</body>
+</html>

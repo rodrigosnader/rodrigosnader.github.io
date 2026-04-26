@@ -1,0 +1,81 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e16]:
+    - generic [ref=e17]:
+      - heading "Explanations that don't eat their tail" [level=1] [ref=e18]
+      - paragraph [ref=e19]:
+        - time [ref=e20]: 2026 · Apr 16
+        - text: · 6 min read · Essay
+    - paragraph [ref=e21]: "\"What's a radius?\""
+    - paragraph [ref=e22]: "\"Half the diameter.\""
+    - paragraph [ref=e23]: "\"And a diameter?\""
+    - paragraph [ref=e24]: "\"Twice the radius.\""
+    - paragraph [ref=e25]: Both sentences are true. Together they explain nothing. If you didn't know what a radius was before reading them, you still don't. Each definition props up the other; neither one touches the ground.
+    - paragraph [ref=e26]: "I keep coming back to this pattern — not just in math definitions, but in code documentation, product explanations, the way people describe their own ideas. Something that sounds like an explanation, passes a casual reading, and collapses under one round of \"but why?\" The shape of the failure is always the same: a loop, disguised as a chain."
+    - heading "Levels mean dependency" [level=2] [ref=e27]
+    - paragraph [ref=e28]: "\"Higher-level\" and \"lower-level\" aren't about grandeur. They're about dependency. If you need concept B to make sense of concept A, then B is lower than A. That's all."
+    - paragraph [ref=e29]: "Radius and diameter are at the same level — neither depends on the other. You can define both by dropping one step: \"a circle is all the points equidistant from a center; the radius is that distance; the diameter is twice that distance.\" Now both rest on \"distance\" and \"point,\" which most people accept without further justification. Each layer sits on something cheaper underneath. That's how explanations are supposed to work."
+    - paragraph [ref=e30]: Consider the moon phases. You can say the moon is always half-lit by the sun, and the shape we see changes because our viewing angle changes — a geometric consequence of where we're standing. Or you can say "the moon is waxing." The first grounds in light and geometry. The second restates the observation with a fancier word.
+    - paragraph [ref=e31]: This is easier to see in code. A function that calls itself without a base case blows the stack — the compiler refuses. Natural language has no such enforcement. Circular explanations compile just fine in English, which is why careful writers do the check by hand.
+    - heading "The dormitive virtue" [level=2] [ref=e32]
+    - paragraph [ref=e33]:
+      - text: Molière staged the canonical version of this trap in 1673. In
+      - emphasis [ref=e34]: Le Malade imaginaire
+      - text: ", a medical candidate is asked why opium makes people sleep. He answers, in impressive Latin, that opium possesses a"
+      - emphasis [ref=e35]: virtus dormitiva
+      - text: — a "dormitive virtue" — whose nature is to cause the senses to slumber.
+    - paragraph [ref=e36]: "Translated: opium makes you sleepy because it has a sleepiness-making quality. The Latin dresses up the phenomenon as a cause."
+    - paragraph [ref=e37]: This matters because the trick scales. Replace "dormitive virtue" with any sufficiently technical-sounding mechanism, and the same empty move passes inspection. "Opium triggers the opioid receptors, which induce sleep." Is that an explanation? Only if someone can cash it out — ion channels, membrane potentials, signaling cascades, actual mechanism underneath the label. Until then, it's a promissory note. The phenomenon got a new name; the circle just got wider.
+    - figure [ref=e38]:
+      - generic [ref=e40]:
+        - button "radius & diameter" [ref=e41] [cursor=pointer]
+        - button "dormitive virtue" [ref=e42] [cursor=pointer]
+        - button "temperature (good)" [ref=e43] [cursor=pointer]
+        - button "molecule (good)" [active] [ref=e44] [cursor=pointer]
+      - generic [ref=e45]:
+        - generic [ref=e46]: Fig 1
+        - text: Switch between four dependency graphs. If the arrows form a loop, the explanation is circular — it never grounds out. If they reach primitive nodes (things you'd accept without further explanation), the explanation is rigorous. The first two are broken. The last two actually bottom out.
+    - heading "The why-test" [level=2] [ref=e47]
+    - paragraph [ref=e48]:
+      - text: There's a way to catch this. Take any explanation and keep asking
+      - emphasis [ref=e49]: why
+      - text: ", the way a child does before learning when to stop. Each answer is a new claim; ask why again. One of three things happens."
+    - paragraph [ref=e50]: You ground out. You reach something primitive — a physical mechanism, a definition, an observation you can point at — and the chain stops naturally. Ask why a refrigerator keeps food cold and you'll walk through compressor cycles, refrigerant phase changes, thermodynamics. Each step sits on the one below it.
+    - paragraph [ref=e51]: You run out of budget. You hit a place where going further would take you into a different field entirely, but the chain so far is solid. That's fine. Rigor doesn't mean bottoming out in particle physics. It means knowing where you stopped and that the floor held.
+    - paragraph [ref=e52]: You loop. You reach a claim you already passed through. "Why is this code slow?" "Performance bottleneck." "What's the bottleneck?" "The part that makes it slow." You're back where you started.
+    - paragraph [ref=e53]: The loop is the interesting case. It's almost always invisible from the inside — your head holds a circular explanation comfortably, and the return to the starting point registers as "arriving at the answer." The circle fits inside working memory, which is exactly why it feels like progress. Writing the chain down is what makes the loop visible. Linear text is harder to fool than a train of thought.
+    - heading "The illusion of explanatory depth" [level=2] [ref=e54]
+    - paragraph [ref=e55]: There's a reason circular explanations sit so comfortably in your head. Psychologists call it the illusion of explanatory depth. Ask someone how well they understand how a zipper works, and they'll rate themselves high. Then ask them to actually explain it — step by step, mechanism included. Within about three sentences, their confidence drops.
+    - paragraph [ref=e56]: "The self-assessment was based on a label: \"I know how zippers work.\" The label was attached to a vague image of teeth interlocking, not to a working model of how the slider forces them to engage. The why-test drops the label and asks for the model."
+    - paragraph [ref=e57]: I think this applies to more than anyone is comfortable admitting. You "know" what a neural network does until someone asks what one neuron does and why the multiplication is there. The first layer of understanding is a label, and the label rests on familiarity, not on mechanism.
+    - generic [ref=e58]:
+      - generic [ref=e59]: Honest tension
+      - paragraph [ref=e60]: You can't ground everything. At some point you take a concept as primitive and stop pushing. A physicist grounds in fields. A chemist stops at the atom. A cook stops at "salt." None of this is wrong. The discipline isn't "always go deeper" — it's knowing where you stopped, and being honest that you stopped there.
+    - heading "Top-down as scaffolding" [level=2] [ref=e61]
+    - paragraph [ref=e62]: Top-down explanation isn't the enemy. "A neural network is a function that maps inputs to outputs by stacking layers of weighted sums and nonlinearities" — that's top-down, and it's useful. It gives you the shape of the thing before you open it up.
+    - paragraph [ref=e63]: The problem is top-down that never touches the ground. A scaffold that doesn't reach the earth isn't a scaffold. Good explanations use top-down to orient and bottom-up to deliver. The textbooks that leave you confused after you finish them are usually the ones that stayed in the air.
+    - heading "One check" [level=2] [ref=e64]
+    - paragraph [ref=e65]: "I've mostly been talking about other people's explanations, but the most useful version of this is turned inward. Next time you're writing or teaching or trying to argue for something, pause and trace: where does this bottom out?"
+    - paragraph [ref=e66]: Every argument has a floor. A good one knows where its floor is. A bad one has a trap door in the middle that cycles back to the roof.
+    - separator [ref=e67]
+    - paragraph [ref=e68]:
+      - text: If you've got a favorite dormitive virtue hiding in plain sight, I want to hear about it —
+      - link "hi@rnader.com" [ref=e69] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .

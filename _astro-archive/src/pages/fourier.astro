@@ -1,0 +1,132 @@
+---
+import Base from "../layouts/Base.astro";
+import Figure from "../components/Figure.astro";
+import SquareWaveHarmonics from "../components/viz/SquareWaveHarmonics.tsx";
+import Epicycles from "../components/viz/Epicycles.tsx";
+import SignalBuilder from "../components/viz/SignalBuilder.tsx";
+---
+<Base title="Fourier Sem Matemática — Efeméride" wide>
+  <article>
+    <header class="article-header">
+      <div class="eyebrow">Ensaio · Análise de sinais</div>
+      <h1>Fourier Sem Matemática</h1>
+      <p class="dek">
+        Qualquer forma que se repita pode ser construída somando círculos
+        girando. Isto é, provavelmente, a afirmação mais estranha da
+        matemática do século XIX — e também uma das mais úteis.
+      </p>
+      <div class="byline">Efeméride · 10 de abril de 2026</div>
+    </header>
+
+    <p>
+      Em 1807, Joseph Fourier fez uma afirmação que deixou seus pares
+      furiosos: <em>qualquer função periódica pode ser escrita como uma soma
+      infinita de senos e cossenos</em>. Não importa o quanto ela seja
+      angular, quebrada, descontínua. Escolha uma forma. Se ela se repete,
+      ela é feita de ondas senoidais.
+    </p>
+
+    <p>
+      Os matemáticos da Academia rejeitaram a memória inicial. Lagrange
+      considerou a ideia absurda — como poderia uma soma de curvas
+      perfeitamente suaves produzir um canto? A resposta, reveladora, é
+      que poderia sim. Mas precisava de infinitas delas, e o preço das
+      <em>finitas</em> era uma certa ondulação residual teimosa. Hoje
+      chamamos essa ondulação de <em>fenômeno de Gibbs</em>. Fourier não
+      estava errado; estava adiantado.
+    </p>
+
+    <h2>Construindo uma onda quadrada</h2>
+
+    <p>
+      O exemplo clássico é a onda quadrada — aquele sinal binário que
+      alterna entre <em>em cima</em> e <em>embaixo</em> sem passar por
+      nenhum valor intermediário. Somando senos de frequências ímpares em
+      proporções cuidadosas, conseguimos aproximá-la cada vez melhor.
+    </p>
+
+    <p>
+      Aumente o número de harmônicos abaixo e veja a aproximação se
+      apertar contra o alvo. Os cantos nunca ficam perfeitos — eles
+      sempre mantêm aquela pequena orelha de sobressalto. É o famoso
+      Gibbs, cobrando seu pedágio pela finitude.
+    </p>
+
+    <Figure
+      label="Figura 1"
+      caption="A soma dos primeiros N harmônicos ímpares da série de Fourier de uma onda quadrada. Note como mais termos aproximam o corpo da onda, mas os cantos nunca convergem perfeitamente — ondulação residual chamada fenômeno de Gibbs."
+    >
+      <SquareWaveHarmonics client:only="react" />
+    </Figure>
+
+    <h2>Construa seu próprio som</h2>
+
+    <p>
+      Antes de avançar para a versão visual mais chamativa, vale brincar
+      com a ideia ao contrário. Em vez de tentar aproximar uma forma
+      pré-existente, escolha amplitudes para alguns harmônicos e veja
+      que formato sai.
+    </p>
+
+    <Figure
+      label="Figura 2"
+      caption="Quatro harmônicos puros sendo combinados livremente. Tente zerar todos menos o primeiro para ver a senoide fundamental; depois ative o terceiro para começar a formar algo que se parece com uma onda quadrada."
+    >
+      <SignalBuilder client:only="react" />
+    </Figure>
+
+    <h2>Círculos girando, desenhando formas</h2>
+
+    <p>
+      A visualização mais marcante da transformada de Fourier talvez seja
+      a dos <em>epiciclos</em>. A ideia é antiga — Ptolomeu já a usava
+      para descrever órbitas celestes de forma aproximada. Mas no
+      contexto de Fourier, ela ganha uma precisão cirúrgica: qualquer
+      curva fechada pode ser desenhada por uma cadeia de círculos girando
+      uns sobre os outros, cada um com uma frequência e um raio
+      específicos.
+    </p>
+
+    <p>
+      O desenho abaixo é um coração paramétrico. Sua silhueta foi
+      amostrada em duzentos pontos, e uma Transformada Discreta de
+      Fourier extraiu os cinquenta coeficientes mais significativos.
+      Cada coeficiente vira um círculo: a amplitude determina o raio, a
+      frequência determina a velocidade de rotação, a fase determina o
+      ângulo inicial. Somando os vetores, você chega à ponta da cauda —
+      e essa ponta, traçando no tempo, desenha a figura.
+    </p>
+
+    <Figure
+      label="Figura 3"
+      caption="Reconstrução de uma curva fechada por cadeia de epiciclos. Diminua o número de círculos para ver a aproximação grosseira, e aumente para ver o coração nascer ponto a ponto."
+    >
+      <Epicycles client:only="react" />
+    </Figure>
+
+    <h2>Por que isso importa</h2>
+
+    <p>
+      A conversa sobre Fourier é bonita por si só, mas seu valor está em
+      outro lugar: ela nos dá <em>óculos</em>. Em vez de olhar para um
+      sinal como uma sequência de amostras no tempo, passamos a olhá-lo
+      como uma mistura de frequências. É uma mudança de coordenadas. E
+      nessa nova coordenada, coisas difíceis se tornam fáceis.
+    </p>
+
+    <p>
+      Remover o ruído de uma gravação? Corte as frequências altas.
+      Comprimir uma imagem? Jogue fora os coeficientes pequenos — foi
+      exatamente o que o JPEG fez e o que continua fazendo, bilhões de
+      vezes por dia. Encontrar a nota que um violino tocou? Olhe onde
+      está o pico no espectro.
+    </p>
+
+    <p>
+      Fourier não sabia disso tudo em 1807. Ele estava tentando resolver
+      a equação do calor. Mas é assim que as ideias mais úteis costumam
+      chegar: pela porta dos fundos, como resposta a uma pergunta que
+      não tem nada a ver com o uso que fariam delas.
+    </p>
+  </article>
+</Base>

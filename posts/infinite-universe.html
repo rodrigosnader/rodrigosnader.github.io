@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The boy and the infinite universe — Rodrigo Nader</title>
+<meta name="description" content="A story about what it means for the universe to have no center, told as a bedtime conversation.">
+<link rel="stylesheet" href="../style.css?v=4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <a href="../" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>The boy and the infinite universe</h1>
+    <p class="post-meta">
+      <time datetime="2026-04-15">2026 · Apr 15</time>
+      <span class="sep">·</span>
+      <span>7 min read</span>
+      <span class="sep">·</span>
+      <span>Physics</span>
+    </p>
+  </header>
+
+  <p>The boy read the sentence in a library book and it refused to mean anything.</p>
+
+  <p><em>Every point in the universe is the center of the universe.</em></p>
+
+  <p>He tried, with the seriousness of someone who was nine and had time, to picture it. He couldn't. Pizzas had centers. Circles had centers. Even his grandmother's tomato garden had a center — it was the spot where the hose came out of the wall. How could every point be the center of anything?</p>
+
+  <p>So the boy did what he always did when a sentence refused to be a sentence. He asked it out loud, to the kind of voice you only hear when the room is quiet enough.</p>
+
+  <p>"How can every point be the center?"</p>
+
+  <p>Something answered.</p>
+
+  <h2>The balloon</h2>
+
+  <p>"Imagine a balloon," said the voice. "Draw dots on its surface. As the balloon inflates, every dot moves away from every other dot. From any dot's point of view, everything is running away from it. So every dot can claim to be the center."</p>
+
+  <p>The boy frowned.</p>
+
+  <p>"A balloon has a center, though. I know where it is. It's inside."</p>
+
+  <p>"The surface doesn't."</p>
+
+  <p>"But if I live on the surface and I walk in one direction long enough, I'll come back to where I started. The surface goes around. If the universe goes around, I should be able to walk in one direction forever and eventually see my own back."</p>
+
+  <p>The voice was quiet for a moment.</p>
+
+  <p>"That's a fair point. I forgot that part."</p>
+
+  <h2>The cake</h2>
+
+  <p>"Try a cake. A cake baking in the oven, with raisins scattered through the dough. As the dough rises, every raisin moves away from every other raisin. From any raisin's point of view —"</p>
+
+  <p>"Cakes have middles."</p>
+
+  <p>"Well —"</p>
+
+  <p>"There is a place inside the cake you can point to and say: this is the middle of the cake. And when the cake rises, the edges rise, but the middle is still the middle. You're telling me the universe is like a cake, and a cake has a middle, and therefore the universe has a middle, and I don't think that's what you meant."</p>
+
+  <p>The voice admitted this.</p>
+
+  <figure class="viz">
+    <canvas id="v1-balloon" style="height: 340px;"></canvas>
+    <div class="viz-caption"><span class="label">Fig 1</span>Two analogies, neither quite right. On the left, a balloon: dots drift apart on the surface, but the surface itself is finite and curved, so walking far enough in one direction brings you back. On the right, a cake: dots drift apart in a solid, but the solid has an edge. Neither is what "no center, no edge, infinite" is trying to describe.</div>
+  </figure>
+
+  <h2>The grid</h2>
+
+  <p>"Forget curved surfaces and rising dough. Imagine an infinite grid of dots. Evenly spaced. Going forever in every direction. There is no edge. There is no middle. And the distance between any two dots is increasing over time."</p>
+
+  <p>The boy tried to imagine it. He could make the grid stretch in his head and feel its lack of edge — but a new question arrived immediately.</p>
+
+  <p>"There was a Big Bang, though."</p>
+
+  <p>"Yes."</p>
+
+  <p>"Doesn't that mean the universe used to be small? Like, the size of a marble. I've seen it in textbooks."</p>
+
+  <p>"Ah."</p>
+
+  <p>"The part of the universe we can see was the size of a marble, back then. Because light hadn't had time to travel very far. But the whole universe — the whole thing — was already infinite, as far as we can tell. It didn't fit inside a marble. It was, and it still is, everywhere."</p>
+
+  <p>The boy held very still.</p>
+
+  <p>"Then what does it mean to say it was smaller?"</p>
+
+  <p>"It wasn't smaller the way a marble is smaller. It was <em>denser</em>. The same points, packed closer together."</p>
+
+  <h2>The aha</h2>
+
+  <p>Something shifted in the boy's head, quietly, the way a lock falls open when the tumblers line up without you meaning them to.</p>
+
+  <p>The universe had never been small. It had always been infinite. What had changed was not its size — it was how far apart its pieces sat from each other. The Big Bang was not an explosion in a point. It was an explosion everywhere at once, because it wasn't really an explosion at all. It was the moment when everything started to spread out.</p>
+
+  <p>You can picture it if you let go of "size" as a meaningful word for the whole thing. Take an infinite row of dots spaced a millimeter apart. That's the universe right after the Big Bang. Now let every gap grow a little. Now a lot. Now a lot more. You still have the same infinite row of dots. You haven't added any. You haven't made the row longer, because it was already endless. You've just made the dots less crowded.</p>
+
+  <figure class="viz">
+    <canvas id="v2-lattice" style="height: 380px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">expansion — <span id="v2-scale-readout">1.0</span>×</span>
+        <input type="range" id="v2-scale" min="0.4" max="3" step="0.02" value="1">
+      </label>
+      <button id="v2-recenter">Pick a random galaxy</button>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 2</span>An infinite grid of galaxies, extending past every edge of the window. Drag the slider to expand the space — watch how every galaxy recedes from every other one. Click "pick a random galaxy" and the view re-centers on a new one. It always looks the same: every direction is running away. No galaxy is special. None is at the center, because there is no center.</div>
+  </figure>
+
+  <p>"So all that stuff about the universe being the size of a marble —"</p>
+
+  <p>"Is the <em>observable</em> universe. The part we can see. Light hasn't had time to reach us from further than that, and it might never. The rest goes on forever, even now."</p>
+
+  <p>"Forever."</p>
+
+  <p>"Forever."</p>
+
+  <p>The boy thought about this for a while.</p>
+
+  <h2>The deeper question</h2>
+
+  <p>"Wait," said the boy, slowly. "If the universe was always infinite, and the thing that changed was how packed it was — then 'density' and 'size' aren't really two different things for the universe, are they?"</p>
+
+  <p>The voice didn't answer right away.</p>
+
+  <p>"That's a good question."</p>
+
+  <p>"I mean. For a pizza, I can tell you the size of the pizza and also how thick the cheese is. Those are independent. But you just told me size is meaningless for the universe and only density counts. So maybe the universe doesn't have a size at all. Maybe it only has density, and we've been calling it 'size' because we live inside it and we want it to have one."</p>
+
+  <p>"Some physicists are playing with ideas in that neighborhood — theories where space itself isn't fundamental, but comes out of something more basic. Whether any of them ends up where you just landed, nobody knows."</p>
+
+  <p>"So I wasn't crazy."</p>
+
+  <p>"Nobody knows yet."</p>
+
+  <h2>The quiet part</h2>
+
+  <p>The boy looked up. The stars, he noticed for the first time, were not floating in anything. The "anything" was the stars. The dots were the space, and the space was the dots, and there had never been an edge, and there had never been a middle, and the Big Bang had happened right under his feet at the same moment it happened everywhere else.</p>
+
+  <p>He felt the way you feel when a room you've been standing in all your life turns out to be a different shape.</p>
+
+  <p>He didn't know what to do with it, so he did what you do with things you don't know what to do with. He filed it away, promised himself he'd come back to it, and went to bed.</p>
+
+  <hr>
+
+  <p>If you liked this one, <a href="/posts/inside-glass.html">the post about the inside of a glass</a> plays a similar trick on the word "inside." And if it ever fell into place for you differently than it fell into place for the boy, I'd love to hear how — <a href="mailto:hi@rnader.com">hi@rnader.com</a>.</p>
+</article>
+
+<script src="/script.js?v=3"></script>
+<script src="./viz-common.js?v=1"></script>
+<script>
+/* ---------- Fig 1: balloon vs cake, both "wrong" ---------- */
+(function(){
+  const canvas = document.getElementById('v1-balloon');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  let t0 = performance.now();
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const phase = ((performance.now() - t0) / 3500) % 1;
+    const s = 0.72 + 0.28 * (0.5 - 0.5 * Math.cos(phase * Math.PI * 2));
+
+    const halfW = rect.width / 2;
+    ctx.strokeStyle = c.gridFaint;
+    ctx.beginPath();
+    ctx.moveTo(halfW, 20); ctx.lineTo(halfW, rect.height - 20); ctx.stroke();
+
+    // Left: balloon
+    const balCx = halfW / 2;
+    const balCy = rect.height / 2;
+    const balR = Math.min(halfW - 60, rect.height - 90) / 2 * s;
+    ctx.strokeStyle = c.fgDim;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(balCx, balCy, balR, 0, Math.PI * 2);
+    ctx.stroke();
+
+    const nDots = 10;
+    for (let i = 0; i < nDots; i++) {
+      const th = (i / nDots) * Math.PI * 2;
+      const x = balCx + Math.cos(th) * balR;
+      const y = balCy + Math.sin(th) * balR;
+      ctx.fillStyle = c.accent;
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('balloon — the surface wraps', balCx, rect.height - 18);
+
+    // Right: cake
+    const cakeCx = halfW + halfW / 2;
+    const cakeCy = rect.height / 2;
+    const cakeW = Math.min(halfW - 60, rect.height - 90) * s;
+    const cakeX = cakeCx - cakeW / 2;
+    const cakeY = cakeCy - cakeW / 2;
+
+    ctx.strokeStyle = c.fgDim;
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(cakeX, cakeY, cakeW, cakeW);
+
+    const raisinPositions = [
+      [0.25, 0.3], [0.7, 0.25], [0.5, 0.55],
+      [0.2, 0.72], [0.8, 0.72], [0.4, 0.85],
+      [0.6, 0.4], [0.3, 0.5],
+    ];
+    raisinPositions.forEach(([rx, ry]) => {
+      const x = cakeX + rx * cakeW;
+      const y = cakeY + ry * cakeW;
+      ctx.fillStyle = c.accent;
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    ctx.strokeStyle = c.accentWarm;
+    ctx.setLineDash([2, 3]);
+    ctx.beginPath();
+    ctx.moveTo(cakeCx - 10, cakeCy); ctx.lineTo(cakeCx + 10, cakeCy);
+    ctx.moveTo(cakeCx, cakeCy - 10); ctx.lineTo(cakeCx, cakeCy + 10);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = c.accentWarm;
+    ctx.font = 'italic 10px Charter, Georgia, serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('the cake has a middle', cakeCx + 14, cakeCy + 4);
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('cake — the dough has an edge', cakeCx, rect.height - 18);
+  }
+  vizCommon.animate(canvas, draw);
+})();
+
+/* ---------- Fig 2: the expanding lattice ---------- */
+(function(){
+  const canvas = document.getElementById('v2-lattice');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const scaleInput = document.getElementById('v2-scale');
+  const scaleReadout = document.getElementById('v2-scale-readout');
+  const recenterBtn = document.getElementById('v2-recenter');
+
+  let scale = 1;
+  let anchorIx = 0, anchorIy = 0;
+
+  scaleInput.addEventListener('input', () => {
+    scale = parseFloat(scaleInput.value);
+    scaleReadout.textContent = scale.toFixed(1);
+  });
+  recenterBtn.addEventListener('click', () => {
+    anchorIx = Math.floor((Math.random() - 0.5) * 10);
+    anchorIy = Math.floor((Math.random() - 0.5) * 10);
+  });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const baseSpacing = 44;
+    const spacing = baseSpacing * scale;
+
+    const nCols = Math.ceil(rect.width / spacing) + 4;
+    const nRows = Math.ceil(rect.height / spacing) + 4;
+
+    ctx.strokeStyle = c.gridFaint;
+    ctx.lineWidth = 1;
+    for (let i = -nCols; i <= nCols; i++) {
+      const x = cx + i * spacing;
+      ctx.beginPath();
+      ctx.moveTo(x, 0); ctx.lineTo(x, rect.height); ctx.stroke();
+    }
+    for (let j = -nRows; j <= nRows; j++) {
+      const y = cy + j * spacing;
+      ctx.beginPath();
+      ctx.moveTo(0, y); ctx.lineTo(rect.width, y); ctx.stroke();
+    }
+
+    for (let i = -nCols; i <= nCols; i++) {
+      for (let j = -nRows; j <= nRows; j++) {
+        const x = cx + i * spacing;
+        const y = cy + j * spacing;
+        if (x < -10 || x > rect.width + 10 || y < -10 || y > rect.height + 10) continue;
+        const dist = Math.hypot(i, j);
+        const isAnchor = (i === 0 && j === 0);
+        ctx.fillStyle = isAnchor ? c.accentWarm : c.accent;
+        const r = isAnchor ? 5 : 3;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+        if (!isAnchor && dist < 4.5) {
+          const vx = i / dist;
+          const vy = j / dist;
+          const arrowLen = 9 + Math.min(dist, 3) * 3;
+          ctx.strokeStyle = c.accentSoft;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(x + vx * 4, y + vy * 4);
+          ctx.lineTo(x + vx * (4 + arrowLen), y + vy * (4 + arrowLen));
+          ctx.stroke();
+        }
+      }
+    }
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = 'italic 11px Charter, Georgia, serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('centered on galaxy (' + anchorIx + ', ' + anchorIy + ')', 14, 20);
+    ctx.fillText('everything is running away from here', 14, 36);
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('grid continues past every edge of this window', rect.width - 14, rect.height - 14);
+  }
+  vizCommon.animate(canvas, draw);
+})();
+</script>
+</body>
+</html>

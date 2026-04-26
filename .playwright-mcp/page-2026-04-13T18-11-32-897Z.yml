@@ -1,0 +1,64 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - heading "Links" [level=1] [ref=e18]
+      - paragraph [ref=e19]: Articles, posts, and sites I keep coming back to.
+    - list [ref=e20]:
+      - listitem [ref=e21]:
+        - time [ref=e22]: Apr 07
+        - link "Internal Combustion Engine" [ref=e23] [cursor=pointer]:
+          - /url: https://ciechanow.ski
+        - text: ciechanow.ski
+        - paragraph [ref=e24]: The gold standard for teaching physical systems through interaction. If I could steal one presentation style, it would be this one.
+      - listitem [ref=e25]:
+        - time [ref=e26]: Apr 02
+        - link "Why Publishing Matters" [ref=e27] [cursor=pointer]:
+          - /url: https://distill.pub
+        - text: distill.pub
+        - paragraph [ref=e28]: Still the best argument for treating publication as a product, not as a dead archive.
+      - listitem [ref=e29]:
+        - time [ref=e30]: Mar 28
+        - link "Karpathy — Personal Site" [ref=e31] [cursor=pointer]:
+          - /url: https://karpathy.ai
+        - text: karpathy.ai
+        - paragraph [ref=e32]: "\"0 frameworks were used to make this simple responsive website.\" Everything I want to be when I grow up."
+      - listitem [ref=e33]:
+        - time [ref=e34]: Mar 15
+        - link "Simon Willison's TILs" [ref=e35] [cursor=pointer]:
+          - /url: https://simonwillison.net
+        - text: simonwillison.net
+        - paragraph [ref=e36]: The best case study I know for how public note-taking compounds over years.
+      - listitem [ref=e37]:
+        - time [ref=e38]: Feb 20
+        - link "Dan Luu's essays" [ref=e39] [cursor=pointer]:
+          - /url: https://danluu.com
+        - text: danluu.com
+        - paragraph [ref=e40]: Zero design, 100% substance. The antidote to every hot take on engineering management.
+      - listitem [ref=e41]:
+        - time [ref=e42]: Jan 30
+        - link "Julia Evans on debugging" [ref=e43] [cursor=pointer]:
+          - /url: https://jvns.ca
+        - text: jvns.ca
+        - paragraph [ref=e44]: If you ever wanted to understand how operating systems actually work, the zines are a gift.
+  - contentinfo [ref=e45]:
+    - paragraph [ref=e47]:
+      - link "← back to home" [ref=e48] [cursor=pointer]:
+        - /url: /
+      - text: 0 frameworks. Plain HTML, CSS, a sprinkle of vanilla JS.

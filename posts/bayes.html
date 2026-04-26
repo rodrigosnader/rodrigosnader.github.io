@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The one thing Bayes actually says — Rodrigo Nader</title>
+<meta name="description" content="The one question Bayes' rule is really asking — and why the textbook jargon makes more sense once you see it.">
+<link rel="stylesheet" href="../style.css?v=4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <a href="../" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>The one thing Bayes actually says</h1>
+    <p class="post-meta">
+      <time datetime="2026-04-12">2026 · Apr 12</time>
+      <span class="sep">·</span>
+      <span>8 min read</span>
+      <span class="sep">·</span>
+      <span>Essay</span>
+    </p>
+  </header>
+
+  <p>You just tested positive for a disease. The test is "95% accurate." How worried should you be?</p>
+
+  <p>Most people's gut says "95% worried." Mine certainly did. The honest answer is usually much lower, and the way to get there is called Bayes' rule.</p>
+
+  <p>If you've ever tried to look up what Bayes' rule is, you know the shape of it: an equation with three ingredients (prior, likelihood, evidence) that you're supposed to hold in your head and keep straight. I came away the first few times with a vague sense that Bayes was important and no real idea how to use it.</p>
+
+  <p>Here's where I think the textbook might fail. It decomposes the rule into three parts because the algebra has three parts. Then it tries to give each part a name and a role, which bleed into each other, and the student ends up with an equation that feels like separate ingredients being whisked around for no clear reason.</p>
+
+  <p>I spent an afternoon arguing with a language model until the whole thing made sense, boiled down to one question:</p>
+
+  <div class="callout">
+    <span class="label">The question</span>
+    <p>Is this evidence happening <em>because</em> my belief is true, or is it happening <em>anyway</em>?</p>
+  </div>
+
+  <p>Or, for this specific case: is <span class="gloss" tabindex="0" data-gloss="the evidence">this positive test</span> showing up <em>because</em> <span class="gloss" tabindex="0" data-gloss="my belief is true">I'm actually sick</span> — or does it <span class="gloss" tabindex="0" data-gloss="happen anyway">read positive for healthy people</span> <em>anyway</em>?</p>
+
+  <p>That's the entire rule. Once you have the question, everything else — prior, likelihood, evidence — starts to make sense. But I'm guessing that sentence doesn't land yet. It only clicks once you watch it play out on something real. Let's walk through the positive test slowly.</p>
+
+  <h2>Your positive test, slowly</h2>
+
+  <p>Let's suppose a disease like COVID affects 1% of the population. And let's say the test catches sick people 95% of the time (tests are not perfect). So for every 100 people, we'd have 0.95 caught as sick, on average — that's the <em>because</em> case (positives happening <em>because</em> the person is actually sick). The other 99 are healthy.</p>
+
+  <p>Let's also imagine that 5% of these healthy people get false positives (again, tests are not perfect!) — that gives us another 4.95 positives from healthy people. That's the <em>anyway</em> case (positives that happen <em>anyway</em>, even without anyone being sick).</p>
+
+  <p>Total positives in a group of 100: about <strong>5.9</strong>.</p>
+
+  <p>Notice how out of those 5.9 positives, only 0.95 came from the <em>because</em> group. The other 4.95 are the <em>anyway</em> group — false alarms. So even if your own test shows positive, your chance of really being sick is 0.95 out of 5.9 — roughly <strong>16%</strong>. Not 95%. There are just so many more healthy people to be wrong about than sick people to be right about, and the false positives swamp the real ones.</p>
+
+  <p>In other words: if your test shows positive, there are really only two ways it could have happened. It might be positive <em>because</em> you're actually sick. Or it might be showing positive <em>anyway</em>, the kind of false alarm the test throws on healthy people too. Weighing both together is what gives you your real chance of being sick.</p>
+
+  <p><em>How much more often does this happen <strong>because</strong> my guess is right, compared to how often it happens <strong>anyway</strong>?</em></p>
+
+  <figure class="viz">
+    <canvas id="v1-slice" style="height: 190px;"></canvas>
+    <div class="viz-result">
+      <span class="gloss" tabindex="0" data-gloss="prior × likelihood"><span id="v1-real">0.95</span></span>
+      <span class="viz-op">÷</span>
+      <span class="gloss gloss-neutral" tabindex="0" data-gloss="the evidence"><span id="v1-total">5.9</span></span>
+      <span class="viz-op">=</span>
+      <span class="gloss" tabindex="0" data-gloss="the posterior"><span id="v1-posterior">16%</span></span>
+    </div>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label"><span class="gloss" tabindex="0" data-gloss="prior">% sick</span> — <span id="v1-prev-readout">1.0</span>%</span>
+        <input type="range" id="v1-prev" min="0.1" max="50" step="0.1" value="1">
+      </label>
+      <label>
+        <span class="ctrl-label"><span class="gloss" tabindex="0" data-gloss="likelihood">detection rate</span> — <span id="v1-sens-readout">95</span>%</span>
+        <input type="range" id="v1-sens" min="50" max="100" step="1" value="95">
+      </label>
+      <label>
+        <span class="ctrl-label"><span class="gloss" tabindex="0" data-gloss="1 − specificity">false alarm rate</span> — <span id="v1-fpr-readout">5</span>%</span>
+        <input type="range" id="v1-fpr" min="0" max="30" step="1" value="5">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 1</span>All the positive tests you'd see in a group of 100 people. Orange = the <em>because</em> group (positives from actually sick people). Blue = the <em>anyway</em> group (false alarms from healthy people). The orange fraction <em>is</em> the answer: your chance of really being sick given a positive result.</div>
+  </figure>
+
+  <p>Drag the "% sick" slider. When the disease is rare, the blue swallows the bar — almost every positive is a false alarm, and the orange slice barely exists. Push it up and the orange grows, eating into the blue. That's Bayes in one picture: the orange fraction is your answer, and it only gets big when the disease itself is common enough to outweigh the false alarms.</p>
+
+  <h2>Where the textbook names fit</h2>
+
+  <p>If you go look up Bayes after this, you'll run into the same three ingredients — prior, likelihood, evidence — and now they map onto something concrete:</p>
+
+  <ol class="tight-list">
+    <li><strong>Prior</strong> — the 1-in-100 you started with. What you knew before the test.</li>
+    <li><strong>Likelihood</strong> — the 95%. How often the signal shows up when your guess is right.</li>
+    <li><strong>Evidence</strong> — the 5.9%. How often the signal shows up at all.</li>
+  </ol>
+
+  <p>The formulas wrap those three numbers into a fraction and spit out the 16% — just a compact way to write the same thing.</p>
+
+  <h2>Why this matters outside of tests</h2>
+
+  <p>The same question applies outside of medical tests. A suspicious email in your inbox: how often do real phishing attempts look like this, versus how often do legitimate messages happen to sound like this? A candidate with an impressive résumé: how often do great engineers have résumés like that, versus how often do mediocre ones polish theirs to look the same? A scientific result with a low p-value: how often does a real effect produce this, versus how often does chance alone?</p>
+
+  <p>Bayes is just the habit of always asking both halves instead of just the first. Most of the bad inference in the world — hiring mistakes, medical panic, conspiracy theories that "explain everything" — comes from forgetting to ask the second half. The signal looks strong, and you don't check how strong the signal is <em>anyway</em>.</p>
+
+  <p>So next time someone tells you they saw a flying saucer, ask:</p>
+
+  <ol class="tight-list">
+    <li>How often do reports like this end up having an ordinary explanation — a natural event, a trick of the light, a drifted memory?</li>
+    <li>How many flying saucers have ever been verified?</li>
+  </ol>
+
+  <p>The first number is big. The second is (probably) zero. Any single report is overwhelmingly <em>anyway</em>, not <em>because</em>.</p>
+
+  <p>This is the same cognitive blind spot I poked at in the <a href="/posts/review/skepticism.html">skepticism post</a>, from a different angle. False statements vastly outnumber true ones; weak evidence for something is still mostly evidence for nothing, because "nothing" is so much larger.</p>
+
+  <h2>The whole rule, one more time</h2>
+
+  <p>Bayes' rule is the habit of asking, for any piece of evidence:</p>
+
+  <p><em>How much of the evidence happens <strong>because</strong> my belief is true, versus how much would happen <strong>anyway</strong>?</em></p>
+
+  <p>That's the whole rule. The formulas and the three-part jargon are all ways of writing that one comparison down precisely. Once you have the habit, the rest is just notation.</p>
+
+  <hr>
+
+  <p>If this clicked, or if I'm still missing something that would make it click better, I genuinely want to know — <a href="mailto:hi@rnader.com">hi@rnader.com</a>.</p>
+</article>
+
+<script src="/script.js?v=3"></script>
+<script src="./viz-common.js?v=1"></script>
+<script>
+/* ---------- Fig 1: Positive-test slice ---------- */
+(function(){
+  const canvas = document.getElementById('v1-slice');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const prevInput = document.getElementById('v1-prev');
+  const sensInput = document.getElementById('v1-sens');
+  const fprInput = document.getElementById('v1-fpr');
+  const prevReadout = document.getElementById('v1-prev-readout');
+  const sensReadout = document.getElementById('v1-sens-readout');
+  const fprReadout = document.getElementById('v1-fpr-readout');
+  const realOut = document.getElementById('v1-real');
+  const totalOut = document.getElementById('v1-total');
+  const posteriorOut = document.getElementById('v1-posterior');
+
+  let prev = 0.01, sens = 0.95, fpr = 0.05;
+  function sync() {
+    prev = parseFloat(prevInput.value) / 100;
+    sens = parseFloat(sensInput.value) / 100;
+    fpr = parseFloat(fprInput.value) / 100;
+    prevReadout.textContent = (prev * 100).toFixed(1);
+    sensReadout.textContent = (sens * 100).toFixed(0);
+    fprReadout.textContent = (fpr * 100).toFixed(0);
+
+    const realPos = prev * sens * 100;
+    const falsePos = (1 - prev) * fpr * 100;
+    const totPos = realPos + falsePos;
+    const posterior = totPos > 0 ? realPos / totPos : 0;
+    realOut.textContent = realPos.toFixed(2);
+    totalOut.textContent = totPos.toFixed(2);
+    posteriorOut.textContent = (posterior * 100).toFixed(0) + '%';
+  }
+  [prevInput, sensInput, fprInput].forEach((el) => el.addEventListener('input', sync));
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    // Compute
+    const realPos = prev * sens * 100;
+    const falsePos = (1 - prev) * fpr * 100;
+    const totPos = realPos + falsePos;
+    const posterior = totPos > 0 ? realPos / totPos : 0;
+
+    // Layout
+    const padX = 40;
+    const barW = rect.width - padX * 2;
+    const barH = 56;
+    const barX = padX;
+    const barY = 48;
+
+    // Title above the bar
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('All positive tests in a group of 100 (' + totPos.toFixed(2) + ' of them)', rect.width / 2, barY - 14);
+
+    // Bar: orange (real) + blue (false)
+    const realW = totPos > 0 ? (realPos / totPos) * barW : 0;
+    const falseW = totPos > 0 ? (falsePos / totPos) * barW : 0;
+
+    ctx.fillStyle = c.accent;
+    ctx.fillRect(barX, barY, realW, barH);
+    ctx.fillStyle = c.blue;
+    ctx.fillRect(barX + realW, barY, falseW, barH);
+    ctx.strokeStyle = c.border;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(barX, barY, barW, barH);
+
+    // Inside-bar numbers (count + percent), shown only when the slice has room
+    ctx.textAlign = 'center';
+    if (realW > 60) {
+      ctx.fillStyle = c.bg;
+      ctx.font = 'bold 13px -apple-system, Inter, sans-serif';
+      ctx.fillText(realPos.toFixed(2), barX + realW / 2, barY + barH / 2 + 0);
+      ctx.font = '10px -apple-system, Inter, sans-serif';
+      ctx.fillText('(' + (posterior * 100).toFixed(0) + '%)', barX + realW / 2, barY + barH / 2 + 15);
+    }
+    if (falseW > 60) {
+      ctx.fillStyle = c.bg;
+      ctx.font = 'bold 13px -apple-system, Inter, sans-serif';
+      ctx.fillText(falsePos.toFixed(2), barX + realW + falseW / 2, barY + barH / 2 + 0);
+      ctx.font = '10px -apple-system, Inter, sans-serif';
+      ctx.fillText('(' + ((1 - posterior) * 100).toFixed(0) + '%)', barX + realW + falseW / 2, barY + barH / 2 + 15);
+    }
+
+    // Below-bar labels: "because" and "anyway"
+    ctx.font = 'italic 11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+
+    // "because" — clamped so it stays readable even when orange is tiny
+    const becauseX = realW > 60
+      ? barX + realW / 2
+      : Math.max(barX + 30, barX + realW + 20);
+    ctx.fillStyle = c.accent;
+    ctx.fillText('because', becauseX, barY + barH + 20);
+    if (realW <= 60 && realW > 0) {
+      // Count label next to "because" when there's no room inside the orange
+      ctx.font = 'bold 11px ui-monospace, monospace';
+      ctx.fillText(realPos.toFixed(2), becauseX, barY + barH + 36);
+      ctx.font = 'italic 11px -apple-system, Inter, sans-serif';
+      // Tiny leader from the orange boundary up to the label
+      ctx.strokeStyle = c.accent;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(barX + realW, barY + barH);
+      ctx.lineTo(barX + realW, barY + barH + 6);
+      ctx.stroke();
+    }
+
+    // "anyway" — centered under the blue segment
+    const anywayX = barX + realW + falseW / 2;
+    ctx.fillStyle = c.blue;
+    ctx.fillText('anyway', anywayX, barY + barH + 20);
+    if (falseW <= 60 && falseW > 0) {
+      ctx.font = 'bold 11px ui-monospace, monospace';
+      ctx.fillText(falsePos.toFixed(2), anywayX, barY + barH + 36);
+    }
+  }
+  sync();
+  vizCommon.animate(canvas, draw);
+})();
+
+</script>
+</body>
+</html>

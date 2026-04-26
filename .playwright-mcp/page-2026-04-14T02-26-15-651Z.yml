@@ -1,0 +1,140 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "The one thing Bayes actually says" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 12
+        - text: · 8 min read · Essay
+    - paragraph [ref=e20]: You just tested positive for a disease. The test is "95% accurate." How worried should you be?
+    - paragraph [ref=e21]: Most people's gut says "95% worried." Mine certainly did. The honest answer is usually much lower, and the way to get there is called Bayes' rule.
+    - paragraph [ref=e22]: "If you've ever tried to look up what Bayes' rule is, you know the shape of it: an equation with three ingredients (prior, likelihood, evidence) that you're supposed to hold in your head and keep straight. I came away the first few times with a vague sense that Bayes was important and no real idea how to use it."
+    - paragraph [ref=e23]: Here's where I think the textbook might fail. It decomposes the rule into three parts because the algebra has three parts. Then it tries to give each part a name and a role, which bleed into each other, and the student ends up with an equation that feels like separate ingredients being whisked around for no clear reason.
+    - paragraph [ref=e24]: "I spent an afternoon arguing with a language model until the whole thing made sense, boiled down to one question:"
+    - generic [ref=e25]:
+      - generic [ref=e26]: The question
+      - paragraph [ref=e27]:
+        - text: Is this evidence happening
+        - emphasis [ref=e28]: because
+        - text: my belief is true, or is it happening
+        - emphasis [ref=e29]: anyway
+        - text: "?"
+    - paragraph [ref=e30]:
+      - text: "Or, for this specific case: is this positive test the evidence showing up"
+      - emphasis [ref=e31]: because
+      - text: I'm actually sick my belief is true — or does it read positive for healthy people happen anyway
+      - emphasis [ref=e32]: anyway
+      - text: "?"
+    - paragraph [ref=e33]: That's the entire rule. Once you have the question, everything else — prior, likelihood, evidence — starts to make sense. But I'm guessing that sentence doesn't land yet. It only clicks once you watch it play out on something real. Let's walk through the positive test slowly.
+    - heading "Your positive test, slowly" [level=2] [ref=e34]
+    - paragraph [ref=e35]: Picture 100 random people walking in to take the test. Say one of them is actually sick and all of them do the test. The test catches that one person ~95% of the time — so even with that person sick, you'd have "0.95" people (proportionally, of course) caught as sick. The other 99 are healthy, but 5% of them get flagged by mistake — another 4.95 positives from healthy people.
+    - paragraph [ref=e36]:
+      - text: "Total positives in a group of 100: about"
+      - strong [ref=e37]: "5.9"
+      - text: .
+    - paragraph [ref=e38]:
+      - text: Notice how out of those 5.9 positives, only 0.95 came from someone who was actually sick. The other 4.95 are false alarms. So if your own test is positive, your chance of really being sick is 0.95 out of 5.9 — roughly
+      - strong [ref=e39]: 16%
+      - text: .
+    - paragraph [ref=e40]: Not 95%. Sixteen. There are just so many more healthy people to be wrong about than sick people to be right about, and the false positives swamp the real ones.
+    - paragraph [ref=e41]: Option A — 100 dots
+    - figure [ref=e42]:
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e46]: how many are sick — 1.0%
+          - slider "how many are sick — 1.0%" [ref=e47] [cursor=pointer]: "1"
+        - generic [ref=e48]:
+          - generic [ref=e49]: caught when sick — 95%
+          - slider "caught when sick — 95%" [ref=e50] [cursor=pointer]: "95"
+        - generic [ref=e51]:
+          - generic [ref=e52]: wrongly flagged when healthy — 5%
+          - slider "wrongly flagged when healthy — 5%" [ref=e53] [cursor=pointer]: "5"
+      - generic [ref=e54]:
+        - generic [ref=e55]: Fig 1A
+        - text: Each circle is one person in a group of 100. Orange dots are actually sick; faint dots are healthy. A ring around a dot means "that person's test came back positive." Notice how most of the positive rings land on healthy (faint) dots — those are the false alarms swamping the real ones.
+    - paragraph [ref=e56]: Option B — proportion flip
+    - figure [ref=e57]:
+      - generic [ref=e59]:
+        - generic [ref=e60]:
+          - generic [ref=e61]: how many are sick — 1.0%
+          - slider "how many are sick — 1.0%" [ref=e62] [cursor=pointer]: "1"
+        - generic [ref=e63]:
+          - generic [ref=e64]: caught when sick — 95%
+          - slider "caught when sick — 95%" [ref=e65] [cursor=pointer]: "95"
+        - generic [ref=e66]:
+          - generic [ref=e67]: wrongly flagged when healthy — 5%
+          - slider "wrongly flagged when healthy — 5%" [ref=e68] [cursor=pointer]: "5"
+      - generic [ref=e69]:
+        - generic [ref=e70]: Fig 1B
+        - text: "Top bar: the whole population (orange slice = sick, faint slice = healthy). Bottom bar: only the people who tested positive (orange = real positives, blue = false alarms). Watch how the bottom bar flips to mostly blue even though the population is almost entirely healthy — because there are so many more healthy people to be wrong about."
+    - paragraph [ref=e71]: Option C — unit square
+    - figure [ref=e72]:
+      - generic [ref=e74]:
+        - generic [ref=e75]:
+          - generic [ref=e76]: how many are sick — 1.0%
+          - slider "how many are sick — 1.0%" [ref=e77] [cursor=pointer]: "1"
+        - generic [ref=e78]:
+          - generic [ref=e79]: caught when sick — 95%
+          - slider "caught when sick — 95%" [ref=e80] [cursor=pointer]: "95"
+        - generic [ref=e81]:
+          - generic [ref=e82]: wrongly flagged when healthy — 5%
+          - slider "wrongly flagged when healthy — 5%" [ref=e83] [cursor=pointer]: "5"
+      - generic [ref=e84]:
+        - generic [ref=e85]: Fig 1C
+        - text: The whole square is everyone in the population. The top strip is the sick group; the big bottom strip is the healthy group. The solid orange bit is "sick and tests positive"; the striped bit is "healthy and tests positive anyway." Your real chance of being sick given a positive is mostly whichever of the two positive regions is bigger.
+    - paragraph [ref=e86]: Drag the prevalence slider below 1% and watch what happens. The solid "sick and positive" region shrinks into invisibility, while the striped "healthy and positive anyway" region barely changes. Almost every positive result is now a false alarm, and your real chance of being sick drops toward zero.
+    - paragraph [ref=e87]: Drag it past 10% and the opposite happens. The solid region dominates. Your real chance of being sick climbs. Nothing about the test itself has changed — what changed is how common the disease is, and the same positive result means something different against a different background.
+    - heading "Where the textbook names fit" [level=2] [ref=e88]
+    - paragraph [ref=e89]: "If you go look up Bayes after this, you'll run into the same three ingredients — prior, likelihood, evidence — and now they map onto something concrete:"
+    - list [ref=e90]:
+      - listitem [ref=e91]:
+        - strong [ref=e92]: Prior
+        - text: — the 1-in-100 you started with. What you knew before the test.
+      - listitem [ref=e93]:
+        - strong [ref=e94]: Likelihood
+        - text: — the 95%. How often the signal shows up when your guess is right.
+      - listitem [ref=e95]:
+        - strong [ref=e96]: Evidence
+        - text: — the 5.9%. How often the signal shows up at all.
+    - paragraph [ref=e97]: The formulas wrap those three numbers into a fraction and spit out the 16%. You already did the whole thing in prose — the math is just a shorter way to write it down.
+    - generic [ref=e98]:
+      - generic [ref=e99]: Honest caveat
+      - paragraph [ref=e100]: The "because vs anyway" framing makes the rule feel easy — and for this test, it is. For messier problems, computing the two frequencies can get subtle, and at some point the underlying algebra earns its keep. The math doesn't go away. It just helps to start from the question.
+    - heading "Why this matters outside of tests" [level=2] [ref=e101]
+    - paragraph [ref=e102]: "The same question applies outside of medical tests. A suspicious email in your inbox: how often do real phishing attempts look like this, versus how often do legitimate messages happen to sound like this? A candidate with an impressive résumé: how often do great engineers have résumés like that, versus how often do mediocre ones polish theirs to look the same? A scientific result with a low p-value: how often does a real effect produce this, versus how often does chance alone?"
+    - paragraph [ref=e103]:
+      - text: The questions rhyme because it's the same question. Bayes is just the habit of always asking both halves instead of just the first. Most of the bad inference in the world — hiring mistakes, medical panic, conspiracy theories that "explain everything" — comes from forgetting to ask the second half. The signal looks strong, and you don't check how strong the signal is
+      - emphasis [ref=e104]: anyway
+      - text: .
+    - paragraph [ref=e105]:
+      - text: This is the same cognitive blind spot I poked at in the
+      - link "skepticism post" [ref=e106] [cursor=pointer]:
+        - /url: /posts/skepticism.html
+      - text: ", from a different angle. False statements vastly outnumber true ones; weak evidence for something is still mostly evidence for nothing, because \"nothing\" is so much larger."
+    - heading "The whole rule, one more time" [level=2] [ref=e107]
+    - paragraph [ref=e108]: "Bayes' rule is the habit of asking, for any piece of evidence:"
+    - paragraph [ref=e109]:
+      - emphasis [ref=e110]: how much more often does this happen when my guess is right, compared to how often it happens anyway?
+    - paragraph [ref=e111]: That's the whole rule. The formulas and the three-part jargon are all ways of writing that one comparison down precisely. Once you have the habit, the rest is just notation.
+    - separator [ref=e112]
+    - paragraph [ref=e113]:
+      - text: If this clicked, or if I'm still missing something that would make it click better, I genuinely want to know —
+      - link "hi@rnader.com" [ref=e114] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .

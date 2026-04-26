@@ -1,0 +1,17 @@
+---
+interface Props {
+  label?: string;
+  caption?: string;
+  wide?: boolean;
+}
+const { label, caption, wide = false } = Astro.props;
+---
+<figure class={wide ? "figure figure-wide" : "figure"}>
+  <slot />
+  {caption && (
+    <figcaption class="figure-caption">
+      {label && <span class="label">{label}</span>}
+      <span set:html={caption} />
+    </figcaption>
+  )}
+</figure>

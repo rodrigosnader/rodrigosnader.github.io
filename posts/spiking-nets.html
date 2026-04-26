@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neurons that keep living between words — Rodrigo Nader</title>
+<meta name="description" content="What makes a spiking neural network actually different from a perceptron — and the one word most explanations bury.">
+<link rel="stylesheet" href="../style.css?v=4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <a href="../" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>Neurons that keep living between words</h1>
+    <p class="post-meta">
+      <time datetime="2026-04-15">2026 · Apr 15</time>
+      <span class="sep">·</span>
+      <span>11 min read</span>
+      <span class="sep">·</span>
+      <span>AI</span>
+    </p>
+  </header>
+
+  <p>You're listening to someone talk. Between syllables, the air goes quiet — but the neurons in your brainstem that tell you where the voice is coming from don't reset. They sit there, slowly bleeding membrane voltage, waiting for the next pulse to land close enough in time to matter. That slow bleed is the thing that makes them different from every neural net on your GPU.</p>
+
+  <p>Spiking neural networks try to copy this. On the surface they look like a slightly more biological version of the nets you already know. A neuron sums its inputs, hits a threshold, and fires. If that sounds like a ReLU unit with extra steps, you're not the first to think so. I spent an afternoon cycling through explanations that all felt like they were hiding the interesting part — and the answer turned out to be one word the usual treatments bury in paragraph six: the <em>leak</em>.</p>
+
+  <p>A spiking neuron has an internal state — the <em>membrane potential</em> — that doesn't just sit there waiting for the next input. It bleeds. At every instant, no matter what, some fraction of it drains away. You can't turn this off. You can't train it out. It isn't a choice the network makes; it's a property of the neuron itself. That single fact is what separates spiking networks from the other architectures I've seen, including the ones with explicit memory.</p>
+
+  <p>Not the spikes, not even the timing. The leak.</p>
+
+  <h2>The perceptron is <em>almost</em> the right picture</h2>
+
+  <p>A perceptron takes a bunch of numbers, multiplies each one by a weight, sums them, and passes the total through an activation function. If the total is big enough, the activation wakes up. Otherwise it stays quiet. A spiking neuron does, roughly, the same thing: it sums its inputs, and if the sum crosses a threshold, it fires a <em>spike</em>. From thirty feet away, the two are cousins.</p>
+
+  <p>Walk five feet closer and they start to look different. The perceptron takes a single snapshot of the inputs, computes an answer, and forgets. The next time you call it, it starts fresh. The spiking neuron holds its state between calls. Inputs that arrived a millisecond ago are still sitting inside it. So when a new input arrives, it adds to whatever was already there.</p>
+
+  <p>"Ah," you say, "so a spiking neuron has memory." Yes. But that's not the distinction either — RNNs have been doing this for thirty years. Every architecture that processes a sequence has some notion of state. If that were all spiking networks offered, they'd be an interesting biological footnote and nothing more.</p>
+
+  <p>The thing that makes them different is what happens to the state <em>when nothing is happening</em>.</p>
+
+  <h2>Walking through a sentence, slowly</h2>
+
+  <p>Take the sentence <em>the movie was good</em>. Four words. We'll pretend each word is a pulse into a single spiking neuron, with its own strength, and we'll walk through the neuron's membrane potential — call it P — one word at a time.</p>
+
+  <p>P starts at 0. The threshold, above which the neuron fires, is 0.8. The leak is 10% per tick, meaning P loses 10% of itself every time unit that passes without input.</p>
+
+  <ul class="tight-list">
+    <li><em>"the"</em> arrives and pushes 0.2 into the neuron. P is now 0.20.</li>
+    <li>Tick. Tick. Tick. During the gap, P leaks down to 0.17.</li>
+    <li><em>"movie"</em> arrives and pushes 0.30. P jumps to 0.47.</li>
+    <li>Tick. Tick. Tick. Leak. P is at 0.42.</li>
+    <li><em>"was"</em> arrives and pushes 0.10. P is at 0.52.</li>
+    <li>Tick. Tick. Tick. P is at 0.47.</li>
+    <li><em>"good"</em> arrives and pushes 0.35. P jumps to 0.82.</li>
+    <li>0.82 is above 0.80. The neuron fires a spike. P resets to 0.</li>
+  </ul>
+
+  <p>Now look at where the perceptron and the spiking neuron part ways. A perceptron fed those same four numbers would sum them — 0.20 + 0.30 + 0.10 + 0.35 = 0.95 — and fire, because 0.95 crosses any reasonable threshold. But the perceptron would fire no matter <em>when</em> the inputs arrived. A single word on Tuesday, another on Friday, a third in a year: if you sum them at the end, you get 0.95 either way. The perceptron has no way to know the gap mattered.</p>
+
+  <p>The spiking neuron absolutely knows the gap mattered. Stretch the pauses between words a bit longer and P would have leaked further each time — maybe down to 0.35 by the time <em>good</em> arrived, then to 0.70, and the neuron would not have fired. The sentence would have landed under threshold. Not because the words were weaker, but because the neuron had forgotten them.</p>
+
+  <p>That involuntary forgetting is the whole trick.</p>
+
+  <figure class="viz">
+    <canvas id="v1-lif" style="height: 380px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">leak rate — <span id="v1-leak-readout">0.10</span></span>
+        <input type="range" id="v1-leak" min="0" max="0.4" step="0.01" value="0.10">
+      </label>
+      <label>
+        <span class="ctrl-label">input gap — <span id="v1-gap-readout">3</span> ticks</span>
+        <input type="range" id="v1-gap" min="1" max="15" step="1" value="3">
+      </label>
+      <button id="v1-pause">Pause</button>
+      <button class="ghost" id="v1-reset">Reset</button>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 1</span>A leaky integrate-and-fire neuron. Each blue tick is an input pulse. The orange line is the membrane potential P. The dashed line is the threshold. Drag the gap slider to stretch time between pulses: watch P leak further between them, and watch the neuron stop firing entirely once the gap gets wide enough.</div>
+  </figure>
+
+  <h2>Why this isn't just "LSTM with biology"</h2>
+
+  <p>An LSTM has internal state too. So does a Transformer (in a weirder sense, by stacking up a context window's worth of activations). You'd think that would already cover everything a spiking neuron is doing. It doesn't, and the reason is worth dwelling on.</p>
+
+  <p>The state of an LSTM cell only changes when the network decides it should change. There's a "forget gate" and an "input gate" and their values are learned — they're parameters. If the network learns to keep the state, it keeps it. If it learns to drop it, it drops it. Either way, the changing is a function of the weights, and the weights are under the network's control.</p>
+
+  <p>A spiking neuron has no equivalent. Its state decays <em>regardless of what the weights say</em>. The leak is not a parameter. It's a constant of the neuron's physics. You can tune it, but you can't decide, on a per-input basis, to suspend it. The forgetting is always on, which means inputs close in time and inputs far apart produce fundamentally different downstream states. The neuron is a natural coincidence detector: two inputs within the leak window reinforce each other; two outside it don't.</p>
+
+  <p>That's how the brain locates sounds, in a classic model of the auditory brainstem. A sound reaches your left ear a few microseconds before your right ear, and there's a neuron whose leak window is tuned to exactly that delay. If both spikes arrive within the window, the neuron fires; if not, it doesn't. Timing encodes space. None of this works without an involuntary leak.</p>
+
+  <figure class="viz">
+    <canvas id="v3-sound" style="height: 420px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">sound angle — <span id="v3-angle-readout">0°</span></span>
+        <input type="range" id="v3-angle" min="-80" max="80" step="1" value="0">
+      </label>
+      <label>
+        <span class="ctrl-label">coincidence window — <span id="v3-sleak-readout">0.50</span></span>
+        <input type="range" id="v3-sleak" min="0" max="1" step="0.01" value="0.5">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 3</span>A row of coincidence-detector neurons below the head, each with a different internal axonal delay. The sound angle sets the interaural time difference (ITD) — the gap between when the two ears hear the pulse. Only the neuron whose internal delay cancels the ITD gets both inputs simultaneously, and it's the one that fires. Drag the angle: a <em>different</em> neuron lights up. Widen the coincidence window (low leak) and the selectivity blurs — several neurons fire at once, localization dies. Narrow it and only dead-center sounds register. Spatial hearing is the leak doing its job.</div>
+  </figure>
+
+  <h2>So how does a spiking network learn?</h2>
+
+  <p>Biological plausibility is great, but if your network can't learn, it's a pretty paperweight.</p>
+
+  <p>There are two real answers, and they're both compromises. The first is <em>spike-timing-dependent plasticity</em>, or STDP: a local rule that strengthens a connection when neuron A fires shortly before neuron B, and weakens it when A fires shortly after B. It's biologically grounded, requires no backprop, and works beautifully in small networks. It hits a wall in large ones, because nothing in the local rule tells a neuron whether its actions, way down in some deep layer, contributed to the network's final output. This is the <em>credit assignment problem</em>, and it's open.</p>
+
+  <p>The second answer is to fake it. Most practical spiking networks today use <em>surrogate gradients</em>: during the forward pass, spikes are the usual binary 0/1 events, but during the backward pass, the network pretends the spike function is a smooth differentiable curve and runs backprop as usual. It's a smoothed-out fiction during the backward pass, and it mostly works. It's what the PyTorch-style libraries do. Which means, from an engineering standpoint, the "spiking" part ends up being an inference-time property. Training is conventional backprop.</p>
+
+  <p>Neither answer is satisfying. STDP is biologically right and doesn't scale. Surrogate gradients scale and aren't biological. Whichever one you pick, you're compromising on exactly the thing that drew you in.</p>
+
+  <h2>When spiking networks actually win</h2>
+
+  <p>Are SNNs hype? It depends on two questions.</p>
+
+  <ol class="tight-list">
+    <li>Is the input naturally sparse and event-driven? (Audio from a microphone, yes. Visual data from an event camera, yes. Text, not really. Static images, not really.)</li>
+    <li>Do you have <em>neuromorphic</em> hardware — chips built to mimic neurons in silicon rather than simulate them in software? (Intel Loihi, IBM TrueNorth, SpiNNaker, yes. A GPU, not really.)</li>
+  </ol>
+
+  <p>On conventional hardware an SNN is slower than an equivalent non-spiking network. The simulation has to step through time, and every neuron has to be checked at every tick whether it's silent or not. The theoretical advantage of "sparse neurons cost nothing" only shows up on neuromorphic chips, which are literally built out of analog circuits that don't burn energy when a neuron is quiet. On those chips, a network processing sparse input can run at a fraction of the power of a GPU doing the same job. That's real, it matters, and it's why robotics labs and edge-sensor companies actually care about SNNs.</p>
+
+  <p>For language modeling — where the input is dense, symbolic, and not even <em>temporal</em> in the way an audio stream is — spiking networks are basically hype. A token 200 positions ago has to matter exactly as much as a token 1 position ago, and leak makes that structurally impossible. The leak, the thing that makes an SNN an SNN, pulls against long-range reasoning by design. Transformers win there, convincingly, and nothing I've seen in the SNN literature has changed that.</p>
+
+  <div class="callout">
+    <span class="label">Honest tension</span>
+    <p>It is very tempting to read "biology uses spikes" and conclude "therefore deep learning must eventually use spikes." I don't buy it. Biology uses spikes because wetware evolved in continuous time and couldn't afford clocked digital state — spikes are what you get when you build a neuron out of ion channels, and you have to decode them the best you can. Our models are not constrained by ion channels. Borrowing the spike representation might be helpful for some workloads, but it isn't a law.</p>
+  </div>
+
+  <h2>A pair of neurons, side by side</h2>
+
+  <p>The second visualization makes the gap between the two styles blatantly visible. Same input stream. One neuron is a leaky integrate-and-fire; the other is a ReLU-style perceptron that just sums its last input against a threshold. Watch how differently they respond to gaps in the input.</p>
+
+  <figure class="viz">
+    <canvas id="v2-compare" style="height: 340px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">input gap — <span id="v2-gap-readout">3</span> ticks</span>
+        <input type="range" id="v2-gap" min="1" max="15" step="1" value="3">
+      </label>
+      <button id="v2-pause">Pause</button>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 2</span>Top: a leaky spiking neuron. Bottom: a stateless unit that only fires when a single pulse is strong enough — it carries no memory of prior pulses at all. Both receive the same stream. Stretch the gap and watch the spiking neuron miss its rhythm, while the stateless unit doesn't know the difference.</div>
+  </figure>
+
+  <p>Notice what happens at large gaps. The spiking neuron fires less often, because its walkup gets reset by the leak between pulses. The stateless unit fires at exactly the same rate as at small gaps, because it has no concept of time passing. That's the entire observable difference between the two architectures. It's why they're good at coincidence detection, and why they'll never replace your language model.</p>
+
+  <h2>What this all adds up to</h2>
+
+  <p>Spiking networks aren't faster Transformers. They're a different machine. They forget on purpose, and in exchange they feel time passing. That's the trade. On the right hardware, handling the right kind of input, it pays off — it's how you get real-time audio processing on a button battery, or robot control loops that don't need a GPU.</p>
+
+  <p>On everything else — dense data, symbolic reasoning, anything that doesn't care whether two events were a millisecond or a minute apart — they lose to architectures built for exactly that. Knowing when spiking networks are the right tool and when they're the wrong tool wearing biology as a costume is the whole game.</p>
+
+  <p>The cleanest one-sentence summary I have: if you've ever tried to understand why a Transformer feels so different from a brain, the leak is most of the answer. Not the only part, but the part most explanations leave out.</p>
+
+  <hr>
+
+  <p>If this clicked or if I got something wrong about your favorite neuromorphic chip, tell me — <a href="mailto:hi@rnader.com">hi@rnader.com</a>.</p>
+</article>
+
+<script src="/script.js?v=3"></script>
+<script src="./viz-common.js?v=1"></script>
+<script>
+/* ---------- Fig 1: LIF neuron with input pulses ---------- */
+(function(){
+  const canvas = document.getElementById('v1-lif');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const leakInput = document.getElementById('v1-leak');
+  const gapInput = document.getElementById('v1-gap');
+  const leakReadout = document.getElementById('v1-leak-readout');
+  const gapReadout = document.getElementById('v1-gap-readout');
+  const pauseBtn = document.getElementById('v1-pause');
+  const resetBtn = document.getElementById('v1-reset');
+
+  const THRESH = 0.8;
+  const inputStrength = 0.28;
+  const W = 240;
+  let leak = 0.10;
+  let gap = 3;
+  let running = true;
+
+  let tick = 0;
+  let nextInput = 5;
+  let P = 0;
+  const history = [];
+  const pulses = [];
+
+  leakInput.addEventListener('input', () => {
+    leak = parseFloat(leakInput.value);
+    leakReadout.textContent = leak.toFixed(2);
+  });
+  gapInput.addEventListener('input', () => {
+    gap = parseInt(gapInput.value);
+    gapReadout.textContent = gap;
+  });
+  pauseBtn.addEventListener('click', () => {
+    running = !running;
+    pauseBtn.textContent = running ? 'Pause' : 'Resume';
+  });
+  resetBtn.addEventListener('click', () => {
+    tick = 0; nextInput = 5; P = 0;
+    history.length = 0; pulses.length = 0;
+  });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  let last = performance.now();
+  function loop(t) {
+    const dt = t - last;
+    if (running && dt > 45) {
+      last = t;
+      P = P * (1 - leak);
+      let fired = false;
+      if (tick >= nextInput) {
+        P += inputStrength + (Math.random() - 0.5) * 0.06;
+        pulses.push({ tick });
+        nextInput = tick + gap + Math.floor(Math.random() * 2);
+      }
+      if (P >= THRESH) {
+        fired = true;
+        P = 0;
+      }
+      history.push({ tick, P, fired });
+      if (history.length > W) history.shift();
+      while (pulses.length && pulses[0].tick < tick - W) pulses.shift();
+      tick++;
+    } else if (!running) {
+      last = t;
+    }
+
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const padL = 50, padR = 30, padT = 30, padB = 60;
+    const plotW = rect.width - padL - padR;
+    const plotH = rect.height - padT - padB;
+    const minTick = tick - W;
+
+    ctx.strokeStyle = c.border;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(padL, padT);
+    ctx.lineTo(padL, padT + plotH);
+    ctx.lineTo(padL + plotW, padT + plotH);
+    ctx.stroke();
+
+    const threshY = padT + plotH - (THRESH / 1.1) * plotH;
+    ctx.strokeStyle = c.fgDim;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(padL, threshY);
+    ctx.lineTo(padL + plotW, threshY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px ui-monospace, JetBrains Mono, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('threshold 0.80', padL + plotW - 6, threshY - 4);
+    ctx.textAlign = 'left';
+    ctx.fillText('0.0', 6, padT + plotH + 3);
+    ctx.fillText('1.0', 6, padT + 4);
+    ctx.fillText('P', 6, padT + plotH / 2);
+
+    ctx.strokeStyle = c.blue;
+    ctx.lineWidth = 2;
+    pulses.forEach((p) => {
+      const x = padL + ((p.tick - minTick) / W) * plotW;
+      if (x >= padL && x <= padL + plotW) {
+        ctx.beginPath();
+        ctx.moveTo(x, padT - 12);
+        ctx.lineTo(x, padT + 4);
+        ctx.stroke();
+      }
+    });
+    ctx.fillStyle = c.blue;
+    ctx.font = '10px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('input pulses', padL, padT - 16);
+
+    ctx.strokeStyle = c.accent;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    let prevFired = false;
+    history.forEach((h, i) => {
+      const x = padL + ((h.tick - minTick) / W) * plotW;
+      const y = padT + plotH - (h.P / 1.1) * plotH;
+      if (i === 0 || prevFired) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+      prevFired = h.fired;
+    });
+    ctx.stroke();
+
+    ctx.fillStyle = c.accentWarm;
+    history.forEach((h) => {
+      if (h.fired) {
+        const x = padL + ((h.tick - minTick) / W) * plotW;
+        ctx.beginPath();
+        ctx.arc(x, threshY, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = c.accentWarm;
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([2, 3]);
+        ctx.beginPath();
+        ctx.moveTo(x, padT + plotH);
+        ctx.lineTo(x, threshY);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    });
+
+    const lastH = history[history.length - 1];
+    if (lastH) {
+      ctx.fillStyle = c.fgDim;
+      ctx.font = '11px ui-monospace, monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText('P = ' + lastH.P.toFixed(2), padL + plotW, padT + plotH + 30);
+    }
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('time →', padL, padT + plotH + 30);
+  }
+  vizCommon.animate(canvas, loop);
+})();
+
+/* ---------- Fig 2: LIF vs stateless comparison ---------- */
+(function(){
+  const canvas = document.getElementById('v2-compare');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const gapInput = document.getElementById('v2-gap');
+  const gapReadout = document.getElementById('v2-gap-readout');
+  const pauseBtn = document.getElementById('v2-pause');
+
+  const THRESH = 0.8;
+  const inputStrength = 0.28;
+  const W = 240;
+  const LEAK = 0.10;
+  let gap = 3;
+  let running = true;
+
+  let tick = 0;
+  let nextInput = 5;
+  let P = 0;
+  const snnHistory = [];
+  const relHistory = [];
+  const pulses = [];
+
+  gapInput.addEventListener('input', () => {
+    gap = parseInt(gapInput.value);
+    gapReadout.textContent = gap;
+  });
+  pauseBtn.addEventListener('click', () => {
+    running = !running;
+    pauseBtn.textContent = running ? 'Pause' : 'Resume';
+  });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  let last = performance.now();
+  function loop(t) {
+    const dt = t - last;
+    if (running && dt > 45) {
+      last = t;
+      P = P * (1 - LEAK);
+      let snnFired = false;
+      let relFired = false;
+      let inputNow = 0;
+      if (tick >= nextInput) {
+        inputNow = inputStrength + (Math.random() - 0.5) * 0.06;
+        P += inputNow;
+        pulses.push({ tick });
+        nextInput = tick + gap + Math.floor(Math.random() * 2);
+      }
+      if (P >= THRESH) { snnFired = true; P = 0; }
+      if (inputNow > 0) relFired = true;
+
+      snnHistory.push({ tick, P, fired: snnFired });
+      relHistory.push({ tick, input: inputNow, fired: relFired });
+      if (snnHistory.length > W) { snnHistory.shift(); relHistory.shift(); }
+      while (pulses.length && pulses[0].tick < tick - W) pulses.shift();
+      tick++;
+    } else if (!running) {
+      last = t;
+    }
+
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const padL = 60, padR = 20, padT = 20;
+    const plotW = rect.width - padL - padR;
+    const rowH = (rect.height - padT - 10) / 2;
+    const minTick = tick - W;
+
+    function panel(y, label, history, isSNN) {
+      const plotH = rowH - 40;
+      ctx.strokeStyle = c.border;
+      ctx.beginPath();
+      ctx.moveTo(padL, y);
+      ctx.lineTo(padL, y + plotH);
+      ctx.lineTo(padL + plotW, y + plotH);
+      ctx.stroke();
+      const threshY = y + plotH - (THRESH / 1.1) * plotH;
+      ctx.strokeStyle = c.fgDim;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(padL, threshY);
+      ctx.lineTo(padL + plotW, threshY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = c.fg;
+      ctx.font = 'bold 11px -apple-system, Inter, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(label, padL, y - 4);
+      ctx.strokeStyle = c.blue;
+      ctx.lineWidth = 1.5;
+      pulses.forEach((p) => {
+        const x = padL + ((p.tick - minTick) / W) * plotW;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x, y + 5);
+        ctx.stroke();
+      });
+      let spikeCount = 0;
+      if (isSNN) {
+        ctx.strokeStyle = c.accent;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        let prevFired = false;
+        history.forEach((h, i) => {
+          const x = padL + ((h.tick - minTick) / W) * plotW;
+          const yy = y + plotH - (h.P / 1.1) * plotH;
+          if (i === 0 || prevFired) ctx.moveTo(x, yy);
+          else ctx.lineTo(x, yy);
+          prevFired = h.fired;
+        });
+        ctx.stroke();
+        history.forEach((h) => {
+          if (h.fired) {
+            spikeCount++;
+            const x = padL + ((h.tick - minTick) / W) * plotW;
+            ctx.fillStyle = c.accentWarm;
+            ctx.beginPath();
+            ctx.arc(x, threshY, 4, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        });
+      } else {
+        ctx.strokeStyle = c.accent;
+        ctx.lineWidth = 2;
+        history.forEach((h) => {
+          const x = padL + ((h.tick - minTick) / W) * plotW;
+          const yy = y + plotH - (h.input / 1.1) * plotH;
+          ctx.beginPath();
+          ctx.moveTo(x, y + plotH);
+          ctx.lineTo(x, yy);
+          ctx.stroke();
+          if (h.fired) {
+            spikeCount++;
+            ctx.fillStyle = c.accentWarm;
+            ctx.beginPath();
+            ctx.arc(x, threshY, 4, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        });
+      }
+      ctx.fillStyle = c.fgDim;
+      ctx.font = '11px ui-monospace, monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText('spikes: ' + spikeCount, padL + plotW, y - 4);
+    }
+
+    panel(padT + 16, 'spiking neuron (with leak)', snnHistory, true);
+    panel(padT + 16 + rowH + 6, 'stateless unit (no memory of past pulses)', relHistory, false);
+  }
+  vizCommon.animate(canvas, loop);
+})();
+
+/* ---------- Fig 3: sound localization via coincidence detection ---------- */
+(function(){
+  const canvas = document.getElementById('v3-sound');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const angleInput = document.getElementById('v3-angle');
+  const angleReadout = document.getElementById('v3-angle-readout');
+  const leakInput = document.getElementById('v3-sleak');
+  const leakReadout = document.getElementById('v3-sleak-readout');
+
+  let angle = 0;
+  let leak = 0.5;
+
+  angleInput.addEventListener('input', () => {
+    angle = parseFloat(angleInput.value);
+    angleReadout.textContent = angle.toFixed(0) + '°';
+  });
+  leakInput.addEventListener('input', () => {
+    leak = parseFloat(leakInput.value);
+    leakReadout.textContent = leak.toFixed(2);
+  });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const cx = rect.width / 2;
+    const cy = rect.height * 0.40;
+    const headR = 42;
+    const earGap = 50;
+
+    ctx.strokeStyle = c.fgDim;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, headR, 0, Math.PI * 2);
+    ctx.stroke();
+
+    const leftEarX = cx - earGap;
+    const rightEarX = cx + earGap;
+    ctx.fillStyle = c.accent;
+    ctx.beginPath(); ctx.arc(leftEarX, cy, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = c.blue;
+    ctx.beginPath(); ctx.arc(rightEarX, cy, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '10px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('L ear', leftEarX, cy + 22);
+    ctx.fillText('R ear', rightEarX, cy + 22);
+
+    const srcDist = 130;
+    const rad = angle * Math.PI / 180;
+    const srcX = cx + Math.sin(rad) * srcDist;
+    const srcY = cy - Math.cos(rad) * srcDist;
+
+    ctx.strokeStyle = c.gridFaint;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(cx, cy, srcDist, -Math.PI, 0);
+    ctx.stroke();
+
+    ctx.fillStyle = c.accentWarm;
+    ctx.beginPath(); ctx.arc(srcX, srcY, 9, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '10px -apple-system, Inter, sans-serif';
+    ctx.fillText('sound', srcX, srcY - 14);
+
+    const distL = Math.hypot(srcX - leftEarX, srcY - cy);
+    const distR = Math.hypot(srcX - rightEarX, srcY - cy);
+    ctx.strokeStyle = c.gridFaint;
+    ctx.setLineDash([3, 4]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(srcX, srcY); ctx.lineTo(leftEarX, cy);
+    ctx.moveTo(srcX, srcY); ctx.lineTo(rightEarX, cy);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    const itd = (distR - distL) * 0.12;
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px ui-monospace, JetBrains Mono, monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('ITD = ' + itd.toFixed(1) + ' ticks', 14, 22);
+
+    const nNeurons = 9;
+    const detY = rect.height * 0.82;
+    const detW = rect.width - 120;
+    const startX = (rect.width - detW) / 2;
+    const stepX = detW / (nNeurons - 1);
+    const maxItd = 10;
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = 'italic 11px Charter, Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('coincidence-detector neurons — each tuned to a different internal delay', rect.width / 2, detY - 46);
+
+    const sigma = Math.max(0.6, (1 - leak) * 8 + 0.4);
+    let responses = [];
+    for (let i = 0; i < nNeurons; i++) {
+      const internalDelay = -maxItd + (i / (nNeurons - 1)) * 2 * maxItd;
+      const mismatch = itd + internalDelay;
+      const response = Math.exp(-(mismatch * mismatch) / (2 * sigma * sigma));
+      responses.push({ internalDelay, response, x: startX + i * stepX });
+    }
+
+    responses.forEach((r) => {
+      const alpha = r.response;
+      const radius = 14 + alpha * 12;
+      ctx.fillStyle = 'rgba(202, 110, 80, ' + (0.08 + alpha * 0.85) + ')';
+      ctx.beginPath();
+      ctx.arc(r.x, detY, radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = c.border;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      ctx.fillStyle = c.fgDim;
+      ctx.font = '10px ui-monospace, monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(r.internalDelay.toFixed(0), r.x, detY + 32);
+    });
+
+    let firing = null;
+    let maxResp = 0;
+    for (const r of responses) {
+      if (r.response > maxResp) { maxResp = r.response; firing = r; }
+    }
+    if (firing && maxResp > 0.5) {
+      ctx.strokeStyle = c.green;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.arc(firing.x, detY, 22, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.fillStyle = c.green;
+      ctx.font = 'bold 11px -apple-system, Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('firing', firing.x, detY - 30);
+    }
+
+    const firingCount = responses.filter(r => r.response > 0.5).length;
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px ui-monospace, JetBrains Mono, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(firingCount + ' firing', rect.width - 14, 22);
+  }
+  vizCommon.animate(canvas, draw);
+})();
+</script>
+</body>
+</html>

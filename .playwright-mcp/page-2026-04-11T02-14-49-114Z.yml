@@ -1,0 +1,179 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link "Rodrigo Nader" [ref=e5] [cursor=pointer]:
+          - /url: /
+        - paragraph [ref=e6]: I build things with AI and product. I write here about what I learn while doing it — what works, what doesn't, and what I'd do differently if I were starting today.
+      - generic [ref=e7]:
+        - navigation "Sections" [ref=e8]:
+          - link "Writing" [ref=e9] [cursor=pointer]:
+            - /url: "#writing"
+          - link "Notes" [ref=e10] [cursor=pointer]:
+            - /url: "#notes"
+          - link "Links" [ref=e11] [cursor=pointer]:
+            - /url: "#links"
+          - link "About" [ref=e12] [cursor=pointer]:
+            - /url: "#about"
+          - link "RSS" [ref=e13] [cursor=pointer]:
+            - /url: /feed.xml
+        - generic [ref=e14]:
+          - generic [ref=e15]:
+            - link "Twitter" [ref=e16] [cursor=pointer]:
+              - /url: https://twitter.com/rnader_ai
+            - generic [ref=e17]: ·
+            - link "GitHub" [ref=e18] [cursor=pointer]:
+              - /url: https://github.com/rodrigo-nader
+            - generic [ref=e19]: ·
+            - link "Email" [ref=e20] [cursor=pointer]:
+              - /url: mailto:hi@rnader.com
+          - button "Toggle theme" [ref=e21] [cursor=pointer]: Auto
+  - main [ref=e22]:
+    - region "Highlights" [ref=e23]:
+      - heading "Highlights" [level=2] [ref=e24]
+      - list [ref=e25]:
+        - listitem [ref=e26]:
+          - link "Why I stopped believing in roadmaps" [ref=e27] [cursor=pointer]:
+            - /url: /posts/roadmaps.html
+          - generic [ref=e28]: How to organize work when the terrain shifts every week.
+        - listitem [ref=e29]:
+          - link "Agents are just loops with memory" [ref=e30] [cursor=pointer]:
+            - /url: /posts/agents-loops.html
+          - generic [ref=e31]: Breaking the hype down into three primitives.
+        - listitem [ref=e32]:
+          - link "The real cost of a big refactor" [ref=e33] [cursor=pointer]:
+            - /url: /posts/refactor-cost.html
+          - generic [ref=e34]: What nobody measures until it's too late.
+    - region "Writing" [ref=e35]:
+      - heading "Writing" [level=2] [ref=e36]
+      - list [ref=e37]:
+        - listitem [ref=e38]:
+          - time [ref=e39]: 2026 · Apr 08
+          - link "Why I stopped believing in roadmaps" [ref=e40] [cursor=pointer]:
+            - /url: /posts/roadmaps.html
+          - generic [ref=e41]: 12 min
+        - listitem [ref=e42]:
+          - time [ref=e43]: 2026 · Mar 22
+          - link "Agents are just loops with memory" [ref=e44] [cursor=pointer]:
+            - /url: /posts/agents-loops.html
+          - generic [ref=e45]: 18 min
+        - listitem [ref=e46]:
+          - time [ref=e47]: 2026 · Mar 03
+          - link "The real cost of a big refactor" [ref=e48] [cursor=pointer]:
+            - /url: /posts/refactor-cost.html
+          - generic [ref=e49]: 9 min
+        - listitem [ref=e50]:
+          - time [ref=e51]: 2026 · Feb 14
+          - link "Notes on long prompts" [ref=e52] [cursor=pointer]:
+            - /url: /posts/long-prompts.html
+          - generic [ref=e53]: 6 min
+        - listitem [ref=e54]:
+          - time [ref=e55]: 2026 · Jan 27
+          - link "How I pick tools" [ref=e56] [cursor=pointer]:
+            - /url: /posts/picking-tools.html
+          - generic [ref=e57]: 7 min
+        - listitem [ref=e58]:
+          - time [ref=e59]: 2026 · Jan 09
+          - link "1M context windows change less than you think" [ref=e60] [cursor=pointer]:
+            - /url: /posts/context-1m.html
+          - generic [ref=e61]: 11 min
+        - listitem [ref=e62]:
+          - time [ref=e63]: 2025 · Dec 18
+          - link "Evals first, model second" [ref=e64] [cursor=pointer]:
+            - /url: /posts/evals-first.html
+          - generic [ref=e65]: 8 min
+        - listitem [ref=e66]:
+          - time [ref=e67]: 2025 · Nov 30
+          - link "Why I went back to threads in Python" [ref=e68] [cursor=pointer]:
+            - /url: /posts/threads-again.html
+          - generic [ref=e69]: 14 min
+      - paragraph [ref=e70]:
+        - link "See full archive →" [ref=e71] [cursor=pointer]:
+          - /url: /writing
+    - region "Notes" [ref=e72]:
+      - heading "Notes" [level=2] [ref=e73]
+      - list [ref=e74]:
+        - listitem [ref=e75]:
+          - time [ref=e76]: Apr 09
+          - paragraph [ref=e77]:
+            - text: After trying
+            - code [ref=e78]: asyncio
+            - text: on three agent projects, I went back to threads. The ergonomics more than pay for any overhead people warn you about.
+            - link "→" [ref=e79] [cursor=pointer]:
+              - /url: "#"
+        - listitem [ref=e80]:
+          - time [ref=e81]: Apr 05
+          - paragraph [ref=e82]:
+            - text: "Snippet: debugging tool calls without losing your mind — a wrapper that logs args, return value and latency to JSONL."
+            - link "→" [ref=e83] [cursor=pointer]:
+              - /url: "#"
+        - listitem [ref=e84]:
+          - time [ref=e85]: Mar 30
+          - paragraph [ref=e86]:
+            - text: Not every "the model hallucinates" problem is the model. Most of the time it's an ambiguous system prompt.
+            - link "→" [ref=e87] [cursor=pointer]:
+              - /url: "#"
+        - listitem [ref=e88]:
+          - time [ref=e89]: Mar 21
+          - paragraph [ref=e90]:
+            - text: Tried building agent memory with vector search + a reranker. Concluded that a well-structured
+            - code [ref=e91]: prompt
+            - text: beats it for 80% of cases.
+            - link "→" [ref=e92] [cursor=pointer]:
+              - /url: "#"
+    - region "Links" [ref=e93]:
+      - heading "Links" [level=2] [ref=e94]
+      - list [ref=e95]:
+        - listitem [ref=e96]:
+          - time [ref=e97]: Apr 07
+          - link "Internal Combustion Engine" [ref=e98] [cursor=pointer]:
+            - /url: https://ciechanow.ski
+          - text: ciechanow.ski
+          - paragraph [ref=e99]: The gold standard for teaching physical systems through interaction. If I could steal one presentation style, it would be this one.
+        - listitem [ref=e100]:
+          - time [ref=e101]: Apr 02
+          - link "Why Publishing Matters" [ref=e102] [cursor=pointer]:
+            - /url: https://distill.pub
+          - text: distill.pub
+          - paragraph [ref=e103]: Still the best argument for treating publication as a product, not as a dead archive.
+        - listitem [ref=e104]:
+          - time [ref=e105]: Mar 28
+          - link "Karpathy — Personal Site" [ref=e106] [cursor=pointer]:
+            - /url: https://karpathy.ai
+          - text: karpathy.ai
+          - paragraph [ref=e107]: "\"0 frameworks were used to make this simple responsive website.\" Everything I want to be when I grow up."
+    - region "About" [ref=e108]:
+      - heading "About" [level=2] [ref=e109]
+      - paragraph [ref=e110]: I'm Rodrigo Nader. I work on applied AI and product — currently building agent and automation tools for teams that want to move fast without becoming prisoners of their own stack.
+      - paragraph [ref=e111]: I write here because it's the best way I know to think slowly about things that happened fast. If a post helped you, tell me — it's the best metric I have.
+      - paragraph [ref=e112]:
+        - link "hi@rnader.com" [ref=e113] [cursor=pointer]:
+          - /url: mailto:hi@rnader.com
+        - text: ·
+        - link "Twitter" [ref=e114] [cursor=pointer]:
+          - /url: https://twitter.com/rnader_ai
+        - text: ·
+        - link "GitHub" [ref=e115] [cursor=pointer]:
+          - /url: https://github.com/rodrigo-nader
+        - text: ·
+        - link "RSS" [ref=e116] [cursor=pointer]:
+          - /url: /feed.xml
+  - contentinfo [ref=e117]:
+    - generic [ref=e118]:
+      - navigation "Archive by year" [ref=e119]:
+        - generic [ref=e120]: Archive
+        - link "2026" [ref=e121] [cursor=pointer]:
+          - /url: /writing/2026
+        - link "2025" [ref=e122] [cursor=pointer]:
+          - /url: /writing/2025
+        - link "2024" [ref=e123] [cursor=pointer]:
+          - /url: /writing/2024
+        - link "2023" [ref=e124] [cursor=pointer]:
+          - /url: /writing/2023
+        - link "2022" [ref=e125] [cursor=pointer]:
+          - /url: /writing/2022
+        - link "2021" [ref=e126] [cursor=pointer]:
+          - /url: /writing/2021
+      - paragraph [ref=e127]:
+        - text: 0 frameworks. Plain HTML and CSS in two static files.
+        - text: g h home · g w writing · t theme · ? help

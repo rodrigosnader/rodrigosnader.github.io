@@ -1,0 +1,169 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "Neurons that keep living between words" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 15
+        - text: · 11 min read · AI
+    - paragraph [ref=e20]: You're listening to someone talk. Between syllables, the air goes quiet — but the neurons in your brainstem that tell you where the voice is coming from don't reset. They sit there, slowly bleeding membrane voltage, waiting for the next pulse to land close enough in time to matter. That slow bleed is the thing that makes them different from every neural net on your GPU.
+    - paragraph [ref=e21]:
+      - text: "Spiking neural networks try to copy this. On the surface they look like a slightly more biological version of the nets you already know. A neuron sums its inputs, hits a threshold, and fires. If that sounds like a ReLU unit with extra steps, you're not the first to think so. I spent an afternoon cycling through explanations that all felt like they were hiding the interesting part — and the answer turned out to be one word the usual treatments bury in paragraph six: the"
+      - emphasis [ref=e22]: leak
+      - text: .
+    - paragraph [ref=e23]:
+      - text: A spiking neuron has an internal state — the
+      - emphasis [ref=e24]: membrane potential
+      - text: — that doesn't just sit there waiting for the next input. It bleeds. At every instant, no matter what, some fraction of it drains away. You can't turn this off. You can't train it out. It isn't a choice the network makes; it's a property of the neuron itself. That single fact is what separates spiking networks from the other architectures I've seen, including the ones with explicit memory.
+    - paragraph [ref=e25]: Not the spikes, not even the timing. The leak.
+    - heading "The perceptron is almost the right picture" [level=2] [ref=e26]:
+      - text: The perceptron is
+      - emphasis [ref=e27]: almost
+      - text: the right picture
+    - paragraph [ref=e28]:
+      - text: "A perceptron takes a bunch of numbers, multiplies each one by a weight, sums them, and passes the total through an activation function. If the total is big enough, the activation wakes up. Otherwise it stays quiet. A spiking neuron does, roughly, the same thing: it sums its inputs, and if the sum crosses a threshold, it fires a"
+      - emphasis [ref=e29]: spike
+      - text: . From thirty feet away, the two are cousins.
+    - paragraph [ref=e30]: Walk five feet closer and they start to look different. The perceptron takes a single snapshot of the inputs, computes an answer, and forgets. The next time you call it, it starts fresh. The spiking neuron holds its state between calls. Inputs that arrived a millisecond ago are still sitting inside it. So when a new input arrives, it adds to whatever was already there.
+    - paragraph [ref=e31]: "\"Ah,\" you say, \"so a spiking neuron has memory.\" Yes. But that's not the distinction either — RNNs have been doing this for thirty years. Every architecture that processes a sequence has some notion of state. If that were all spiking networks offered, they'd be an interesting biological footnote and nothing more."
+    - paragraph [ref=e32]:
+      - text: The thing that makes them different is what happens to the state
+      - emphasis [ref=e33]: when nothing is happening
+      - text: .
+    - heading "Walking through a sentence, slowly" [level=2] [ref=e34]
+    - paragraph [ref=e35]:
+      - text: Take the sentence
+      - emphasis [ref=e36]: the movie was good
+      - text: . Four words. We'll pretend each word is a pulse into a single spiking neuron, with its own strength, and we'll walk through the neuron's membrane potential — call it P — one word at a time.
+    - paragraph [ref=e37]: P starts at 0. The threshold, above which the neuron fires, is 0.8. The leak is 10% per tick, meaning P loses 10% of itself every time unit that passes without input.
+    - list [ref=e38]:
+      - listitem [ref=e39]:
+        - text: –
+        - emphasis [ref=e40]: "\"the\""
+        - text: arrives and pushes 0.2 into the neuron. P is now 0.20.
+      - listitem [ref=e41]: – Tick. Tick. Tick. During the gap, P leaks down to 0.17.
+      - listitem [ref=e42]:
+        - text: –
+        - emphasis [ref=e43]: "\"movie\""
+        - text: arrives and pushes 0.30. P jumps to 0.47.
+      - listitem [ref=e44]: – Tick. Tick. Tick. Leak. P is at 0.42.
+      - listitem [ref=e45]:
+        - text: –
+        - emphasis [ref=e46]: "\"was\""
+        - text: arrives and pushes 0.10. P is at 0.52.
+      - listitem [ref=e47]: – Tick. Tick. Tick. P is at 0.47.
+      - listitem [ref=e48]:
+        - text: –
+        - emphasis [ref=e49]: "\"good\""
+        - text: arrives and pushes 0.35. P jumps to 0.82.
+      - listitem [ref=e50]: – 0.82 is above 0.80. The neuron fires a spike. P resets to 0.
+    - paragraph [ref=e51]:
+      - text: Now look at where the perceptron and the spiking neuron part ways. A perceptron fed those same four numbers would sum them — 0.20 + 0.30 + 0.10 + 0.35 = 0.95 — and fire, because 0.95 crosses any reasonable threshold. But the perceptron would fire no matter
+      - emphasis [ref=e52]: when
+      - text: "the inputs arrived. A single word on Tuesday, another on Friday, a third in a year: if you sum them at the end, you get 0.95 either way. The perceptron has no way to know the gap mattered."
+    - paragraph [ref=e53]:
+      - text: The spiking neuron absolutely knows the gap mattered. Stretch the pauses between words a bit longer and P would have leaked further each time — maybe down to 0.35 by the time
+      - emphasis [ref=e54]: good
+      - text: arrived, then to 0.70, and the neuron would not have fired. The sentence would have landed under threshold. Not because the words were weaker, but because the neuron had forgotten them.
+    - paragraph [ref=e55]: That involuntary forgetting is the whole trick.
+    - figure [ref=e56]:
+      - generic [ref=e58]:
+        - generic [ref=e59]:
+          - generic [ref=e60]: leak rate — 0.10
+          - slider "leak rate — 0.10" [ref=e61] [cursor=pointer]: "0.1"
+        - generic [ref=e62]:
+          - generic [ref=e63]: input gap — 3 ticks
+          - slider "input gap — 3 ticks" [ref=e64] [cursor=pointer]: "3"
+        - button "Pause" [ref=e65] [cursor=pointer]
+        - button "Reset" [ref=e66] [cursor=pointer]
+      - generic [ref=e67]:
+        - generic [ref=e68]: Fig 1
+        - text: "A leaky integrate-and-fire neuron. Each blue tick is an input pulse. The orange line is the membrane potential P. The dashed line is the threshold. Drag the gap slider to stretch time between pulses: watch P leak further between them, and watch the neuron stop firing entirely once the gap gets wide enough."
+    - heading "Why this isn't just \"LSTM with biology\"" [level=2] [ref=e69]
+    - paragraph [ref=e70]: An LSTM has internal state too. So does a Transformer (in a weirder sense, by stacking up a context window's worth of activations). You'd think that would already cover everything a spiking neuron is doing. It doesn't, and the reason is worth dwelling on.
+    - paragraph [ref=e71]: The state of an LSTM cell only changes when the network decides it should change. There's a "forget gate" and an "input gate" and their values are learned — they're parameters. If the network learns to keep the state, it keeps it. If it learns to drop it, it drops it. Either way, the changing is a function of the weights, and the weights are under the network's control.
+    - paragraph [ref=e72]:
+      - text: A spiking neuron has no equivalent. Its state decays
+      - emphasis [ref=e73]: regardless of what the weights say
+      - text: ". The leak is not a parameter. It's a constant of the neuron's physics. You can tune it, but you can't decide, on a per-input basis, to suspend it. The forgetting is always on, which means inputs close in time and inputs far apart produce fundamentally different downstream states. The neuron is a natural coincidence detector: two inputs within the leak window reinforce each other; two outside it don't."
+    - paragraph [ref=e74]: That's how the brain locates sounds, in a classic model of the auditory brainstem. A sound reaches your left ear a few microseconds before your right ear, and there's a neuron whose leak window is tuned to exactly that delay. If both spikes arrive within the window, the neuron fires; if not, it doesn't. Timing encodes space. None of this works without an involuntary leak.
+    - figure [ref=e75]:
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - generic [ref=e79]: sound angle — 0°
+          - slider "sound angle — 0°" [ref=e80] [cursor=pointer]: "0"
+        - generic [ref=e81]:
+          - generic [ref=e82]: coincidence window — 0.50
+          - slider "coincidence window — 0.50" [ref=e83] [cursor=pointer]: "0.5"
+      - generic [ref=e84]:
+        - generic [ref=e85]: Fig 3
+        - text: "A row of coincidence-detector neurons below the head, each with a different internal axonal delay. The sound angle sets the interaural time difference (ITD) — the gap between when the two ears hear the pulse. Only the neuron whose internal delay cancels the ITD gets both inputs simultaneously, and it's the one that fires. Drag the angle: a"
+        - emphasis [ref=e86]: different
+        - text: neuron lights up. Widen the coincidence window (low leak) and the selectivity blurs — several neurons fire at once, localization dies. Narrow it and only dead-center sounds register. Spatial hearing is the leak doing its job.
+    - heading "So how does a spiking network learn?" [level=2] [ref=e87]
+    - paragraph [ref=e88]: Biological plausibility is great, but if your network can't learn, it's a pretty paperweight.
+    - paragraph [ref=e89]:
+      - text: There are two real answers, and they're both compromises. The first is
+      - emphasis [ref=e90]: spike-timing-dependent plasticity
+      - text: ", or STDP: a local rule that strengthens a connection when neuron A fires shortly before neuron B, and weakens it when A fires shortly after B. It's biologically grounded, requires no backprop, and works beautifully in small networks. It hits a wall in large ones, because nothing in the local rule tells a neuron whether its actions, way down in some deep layer, contributed to the network's final output. This is the"
+      - emphasis [ref=e91]: credit assignment problem
+      - text: ", and it's open."
+    - paragraph [ref=e92]:
+      - text: The second answer is to fake it. Most practical spiking networks today use
+      - emphasis [ref=e93]: surrogate gradients
+      - text: ": during the forward pass, spikes are the usual binary 0/1 events, but during the backward pass, the network pretends the spike function is a smooth differentiable curve and runs backprop as usual. It's a smoothed-out fiction during the backward pass, and it mostly works. It's what the PyTorch-style libraries do. Which means, from an engineering standpoint, the \"spiking\" part ends up being an inference-time property. Training is conventional backprop."
+    - paragraph [ref=e94]: Neither answer is satisfying. STDP is biologically right and doesn't scale. Surrogate gradients scale and aren't biological. Whichever one you pick, you're compromising on exactly the thing that drew you in.
+    - heading "When spiking networks actually win" [level=2] [ref=e95]
+    - paragraph [ref=e96]: Are SNNs hype? It depends on two questions.
+    - list [ref=e97]:
+      - listitem [ref=e98]: Is the input naturally sparse and event-driven? (Audio from a microphone, yes. Visual data from an event camera, yes. Text, not really. Static images, not really.)
+      - listitem [ref=e99]:
+        - text: Do you have
+        - emphasis [ref=e100]: neuromorphic
+        - text: hardware — chips built to mimic neurons in silicon rather than simulate them in software? (Intel Loihi, IBM TrueNorth, SpiNNaker, yes. A GPU, not really.)
+    - paragraph [ref=e101]: On conventional hardware an SNN is slower than an equivalent non-spiking network. The simulation has to step through time, and every neuron has to be checked at every tick whether it's silent or not. The theoretical advantage of "sparse neurons cost nothing" only shows up on neuromorphic chips, which are literally built out of analog circuits that don't burn energy when a neuron is quiet. On those chips, a network processing sparse input can run at a fraction of the power of a GPU doing the same job. That's real, it matters, and it's why robotics labs and edge-sensor companies actually care about SNNs.
+    - paragraph [ref=e102]:
+      - text: For language modeling — where the input is dense, symbolic, and not even
+      - emphasis [ref=e103]: temporal
+      - text: in the way an audio stream is — spiking networks are basically hype. A token 200 positions ago has to matter exactly as much as a token 1 position ago, and leak makes that structurally impossible. The leak, the thing that makes an SNN an SNN, pulls against long-range reasoning by design. Transformers win there, convincingly, and nothing I've seen in the SNN literature has changed that.
+    - generic [ref=e104]:
+      - generic [ref=e105]: Honest tension
+      - paragraph [ref=e106]: It is very tempting to read "biology uses spikes" and conclude "therefore deep learning must eventually use spikes." I don't buy it. Biology uses spikes because wetware evolved in continuous time and couldn't afford clocked digital state — spikes are what you get when you build a neuron out of ion channels, and you have to decode them the best you can. Our models are not constrained by ion channels. Borrowing the spike representation might be helpful for some workloads, but it isn't a law.
+    - heading "A pair of neurons, side by side" [level=2] [ref=e107]
+    - paragraph [ref=e108]: The second visualization makes the gap between the two styles blatantly visible. Same input stream. One neuron is a leaky integrate-and-fire; the other is a ReLU-style perceptron that just sums its last input against a threshold. Watch how differently they respond to gaps in the input.
+    - figure [ref=e109]:
+      - generic [ref=e111]:
+        - generic [ref=e112]:
+          - generic [ref=e113]: input gap — 3 ticks
+          - slider "input gap — 3 ticks" [ref=e114] [cursor=pointer]: "3"
+        - button "Pause" [ref=e115] [cursor=pointer]
+      - generic [ref=e116]:
+        - generic [ref=e117]: Fig 2
+        - text: "Top: a leaky spiking neuron. Bottom: a stateless unit that only fires when a single pulse is strong enough — it carries no memory of prior pulses at all. Both receive the same stream. Stretch the gap and watch the spiking neuron miss its rhythm, while the stateless unit doesn't know the difference."
+    - paragraph [ref=e118]: Notice what happens at large gaps. The spiking neuron fires less often, because its walkup gets reset by the leak between pulses. The stateless unit fires at exactly the same rate as at small gaps, because it has no concept of time passing. That's the entire observable difference between the two architectures. It's why they're good at coincidence detection, and why they'll never replace your language model.
+    - heading "What this all adds up to" [level=2] [ref=e119]
+    - paragraph [ref=e120]: Spiking networks aren't faster Transformers. They're a different machine. They forget on purpose, and in exchange they feel time passing. That's the trade. On the right hardware, handling the right kind of input, it pays off — it's how you get real-time audio processing on a button battery, or robot control loops that don't need a GPU.
+    - paragraph [ref=e121]: On everything else — dense data, symbolic reasoning, anything that doesn't care whether two events were a millisecond or a minute apart — they lose to architectures built for exactly that. Knowing when spiking networks are the right tool and when they're the wrong tool wearing biology as a costume is the whole game.
+    - paragraph [ref=e122]: "The cleanest one-sentence summary I have: if you've ever tried to understand why a Transformer feels so different from a brain, the leak is most of the answer. Not the only part, but the part most explanations leave out."
+    - separator [ref=e123]
+    - paragraph [ref=e124]:
+      - text: If this clicked or if I got something wrong about your favorite neuromorphic chip, tell me —
+      - link "hi@rnader.com" [ref=e125] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .

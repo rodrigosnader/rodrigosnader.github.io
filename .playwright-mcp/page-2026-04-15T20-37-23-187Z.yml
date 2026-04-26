@@ -1,0 +1,151 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "Quantum gates without the hype" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 15
+        - text: · 9 min read · Physics
+    - paragraph [ref=e20]:
+      - text: The first gate anyone learns is the NOT. It flips a bit. 0 becomes 1. 1 becomes 0. The word
+      - emphasis [ref=e21]: flip
+      - text: captures it so perfectly that when someone tells you a
+      - emphasis [ref=e22]: quantum
+      - text: NOT gate also flips, you nod along. You feel like you're standing on familiar ground.
+    - paragraph [ref=e23]: You aren't.
+    - paragraph [ref=e24]:
+      - text: "\"Flip\" is technically accurate for a quantum NOT, but it hides what's actually being flipped. Quantum gates operate on something classical circuits don't have: an"
+      - emphasis [ref=e25]: amplitude
+      - text: — a hidden mathematical quantity whose square becomes the probability of an outcome. Flipping an amplitude is a different act from flipping a bit, and until you see what amplitudes are actually doing, most popular descriptions of quantum computing will feel like they're hiding the interesting part.
+    - paragraph [ref=e26]:
+      - text: The aim here is to lift the veil with as little notation as possible. By the end, you should understand what an X gate, a Hadamard gate, and a CNOT gate are actually doing — and why entanglement is something you can
+      - emphasis [ref=e27]: see
+      - text: in a simulation, not a mystery you have to take on faith.
+    - heading "What a qubit actually holds" [level=2] [ref=e28]
+    - paragraph [ref=e29]: "A classical bit is a fact about the world: it's 0 or it's 1. A qubit is a slightly weirder object. It has a 30% chance of being 0 and a 70% chance of being 1, say, and those probabilities don't settle into one value until the moment you measure it."
+    - paragraph [ref=e30]: That "30-70" picture is almost right. The only thing it gets wrong is what's actually stored inside the qubit. It isn't the probabilities. It's their square roots.
+    - paragraph [ref=e31]:
+      - text: Physicists call these numbers the
+      - emphasis [ref=e32]: amplitudes
+      - text: ". There's one for each possible outcome. For a single qubit you have α (for the 0 outcome) and β (for the 1 outcome), with the rule that α² + β² = 1. The notation |0⟩ — that vertical bar and angle bracket — is just how physicists write \"the state 0.\" Nothing more. When you measure, the outcome is 0 with probability α² and 1 with probability β². Take the square roots of 0.3 and 0.7: roughly 0.55 and 0.84. Those are the numbers that live in the qubit. The probabilities only appear when you square them."
+    - paragraph [ref=e33]:
+      - text: "\"Fine,\" you might say, \"isn't this just probability with an extra square root?\" The extra layer matters because amplitudes can"
+      - emphasis [ref=e34]: cancel each other out
+      - text: ", and probabilities cannot. Two amplitudes of +0.5 and −0.5 sum to zero. Two probabilities of 0.25 each sum to 0.5. That difference is the entire game."
+    - heading "Flipping, revisited" [level=2] [ref=e35]
+    - paragraph [ref=e36]:
+      - text: Now look at what a quantum NOT — the
+      - emphasis [ref=e37]: X gate
+      - text: — actually does to a qubit.
+    - paragraph [ref=e38]: Classically, you feed it a 0 or a 1 and it hands you back the opposite. Quantum-mechanically, you feed it α|0⟩ + β|1⟩ and out comes β|0⟩ + α|1⟩ — the two amplitudes swapped. A 30-70 split becomes a 70-30 split. The entire probability distribution shifts in one step.
+    - figure [ref=e39]:
+      - generic [ref=e41]:
+        - generic [ref=e42]:
+          - generic [ref=e43]: α — 0.55
+          - slider "α — 0.55" [ref=e44] [cursor=pointer]: "0.55"
+        - button "Apply X" [ref=e45] [cursor=pointer]
+        - button "Reset" [ref=e46] [cursor=pointer]
+      - generic [ref=e47]:
+        - generic [ref=e48]: Fig 1
+        - text: The two bars are α and β, the amplitudes of the |0⟩ and |1⟩ outcomes. The numbers below them are the probabilities (α², β²) — what you'd measure in practice. Pressing X swaps the two amplitudes. The probability distribution follows.
+    - paragraph [ref=e49]: "A classical flip is a binary discrete event. A quantum flip is a permutation of amplitudes. If the input happens to be a definite 0 — amplitudes (1, 0) — then yes, you get (0, 1) and the X gate is indistinguishable from a classical NOT. But the moment the input is any kind of superposition, the X gate does something a classical gate cannot: it rewrites a whole distribution with a single stroke."
+    - 'heading "The Hadamard gate: making superpositions out of thin air" [level=2] [ref=e50]'
+    - paragraph [ref=e51]: The X gate preserves definite-ness. Feed it a definite 0, you get a definite 1 back. It never manufactures a superposition from nothing.
+    - paragraph [ref=e52]:
+      - text: The
+      - emphasis [ref=e53]: Hadamard
+      - text: gate (named after Jacques Hadamard) does the opposite. Feed it a definite 0, and it hands you back an even 50-50 split. A qubit that was certainly 0 is now, amplitude-wise, a (1/√2, 1/√2) state. Measure it and it comes back 0 half the time and 1 half the time. The coin is in the air.
+    - paragraph [ref=e54]: "Apply H again, and the coin comes back down. H applied twice is the identity — the qubit returns to exactly 0. That doesn't sound surprising until you try to model it with probabilities and realize you can't: two 50-50 distributions, if you add them as probabilities, don't recombine into certainty. Amplitudes do, because they carry sign. The two paths through H have amplitudes that cancel in one direction and reinforce in the other. Interference is the word physicists use. It's what amplitudes do for a living."
+    - figure [ref=e55]:
+      - generic [ref=e57]:
+        - button "Apply H" [ref=e58] [cursor=pointer]
+        - button "Apply X" [ref=e59] [cursor=pointer]
+        - button "Reset" [ref=e60] [cursor=pointer]
+      - generic [ref=e61]:
+        - generic [ref=e62]: Fig 2
+        - text: "Two models of a single qubit, same starting state |0⟩. Left: signed amplitudes — the quantum model. Right: probabilities — the classical \"just a coin\" model. Press H. Both become 50/50. Press H again. The amplitude model returns"
+        - emphasis [ref=e63]: exactly
+        - text: to |0⟩; the probability model is stuck at 50/50 forever. Amplitudes have signs that can cancel. Probabilities don't. That's the entire gap between quantum and classical, in one pair of bars.
+    - generic [ref=e64]:
+      - generic [ref=e65]: Honest tension
+      - paragraph [ref=e66]:
+        - text: Real amplitudes are
+        - emphasis [ref=e67]: complex
+        - text: numbers, not just signed real ones. The phase — the rotation in the complex plane — is where most of the gate machinery lives, and it's what lets interference work in directions that have no real-number analogue. I'm glossing over that here because the real-valued story already shows the essential weirdness. The full picture is a rotation on a sphere, not a swap on a line. When you hear "Bloch sphere" later, that's what it's talking about.
+    - heading "Two qubits, one gate" [level=2] [ref=e68]
+    - paragraph [ref=e69]: If you remember one gate from this post, make it CNOT. Without it, "quantum computing" is just computing with extra steps.
+    - paragraph [ref=e70]:
+      - text: CNOT takes two qubits. The first is called the
+      - emphasis [ref=e71]: control
+      - text: . The second is the
+      - emphasis [ref=e72]: target
+      - text: ". The rule is the obvious one: if the control is 1, flip the target. If the control is 0, do nothing."
+    - paragraph [ref=e73]: If both qubits are in definite classical states, CNOT is boring. It's just a conditional NOT — something you could build with a handful of transistors. But feed it a superposition on the control, and it does something no classical gate can.
+    - paragraph [ref=e74]:
+      - text: Start with two qubits both sitting at |00⟩. Apply H to the first one. The system is now an even split between |00⟩ and |10⟩ — the first qubit is in superposition, the second is still definitely 0. Now apply CNOT. The |10⟩ amplitude has nowhere to go except |11⟩, because CNOT flips the target when the control is 1. What comes out is an even split between |00⟩ and |11⟩, with
+      - emphasis [ref=e75]: nothing
+      - text: in |01⟩ or |10⟩.
+    - figure [ref=e76]:
+      - generic [ref=e78]:
+        - button "H on q₁" [ref=e79] [cursor=pointer]
+        - button "H on q₂" [ref=e80] [cursor=pointer]
+        - button "X on q₁" [ref=e81] [cursor=pointer]
+        - button "X on q₂" [ref=e82] [cursor=pointer]
+        - button "CNOT" [ref=e83] [cursor=pointer]
+        - button "Reset" [ref=e84] [cursor=pointer]
+      - generic [ref=e85]:
+        - generic [ref=e86]: Fig 3
+        - text: "Four bars for the amplitudes of the four joint states |00⟩, |01⟩, |10⟩, |11⟩. The sign of each bar is shown by direction (up = positive, down = negative). Start from |00⟩, press H on q₁, then CNOT. The result is an entangled state: weight on |00⟩ and |11⟩, nothing in between."
+    - paragraph [ref=e87]:
+      - text: The two qubits are now
+      - emphasis [ref=e88]: entangled
+      - text: . Neither of them has its own probability distribution anymore. They have a joint one, and the joint one contains only two possible outcomes. If you measure either qubit and it comes back 0, the other is now certainly 0. If it comes back 1, the other is certainly 1. You cannot describe this situation as two independent random bits — the pattern you get when you repeat the experiment is impossible for independent bits to reproduce.
+    - heading "Why entanglement is not just correlation" [level=2] [ref=e89]
+    - paragraph [ref=e90]: "The first time you hear this story, the natural thing to say is: \"so the two qubits are perfectly correlated, fine, big deal.\" Correlation is a word we already have, and it seems to describe the same thing."
+    - paragraph [ref=e91]:
+      - text: "It doesn't. Correlation is a statement about many runs of an experiment:"
+      - emphasis [ref=e92]: on average
+      - text: ", the two bits come back the same. Entanglement is a statement about"
+      - emphasis [ref=e93]: one shared state
+      - text: ". Classically, if two bits are perfectly correlated, there's always a ground truth somewhere — a coin was flipped, both bits were set to the result, you just hadn't peeked yet. Entangled qubits have no ground truth until the measurement happens. The correlation isn't hiding a secret; there is no secret. This is what Bell's inequalities, tested in the 1970s and 80s, show: no"
+      - emphasis [ref=e94]: local
+      - text: hidden-variable theory (one where each particle carries its answer in its pocket) can reproduce the statistics you get from entangled particles. Whatever is going on, it isn't bookkeeping you could have done classically.
+    - heading "Why all of this has to be reversible" [level=2] [ref=e95]
+    - paragraph [ref=e96]:
+      - text: There's one detail we snuck past that matters. Every quantum gate is
+      - emphasis [ref=e97]: reversible
+      - text: ". Whatever X does, X undoes if you apply it again. Same for H. Same for CNOT. It's forced by the physics: Schrödinger evolution is unitary, and unitary operations are rotation-like — every one has an inverse."
+    - paragraph [ref=e98]: Classical logic doesn't have this property. An AND gate takes two inputs and produces one output; it destroys information. From the output, you cannot recover what went in. This is why erasing information has a thermodynamic cost at all — Landauer's principle puts a floor under the heat it takes to destroy a bit, and classical circuits destroy bits constantly.
+    - paragraph [ref=e99]:
+      - text: "Quantum gates never erase anything. Every operation is a rotation in some abstract space, and every rotation has an inverse. That's why interference is even possible: the amplitudes are being"
+      - emphasis [ref=e100]: turned
+      - text: ", not cut."
+    - heading "What you're actually buying" [level=2] [ref=e101]
+    - paragraph [ref=e102]:
+      - text: Because amplitudes can cancel, you can design quantum circuits that
+      - emphasis [ref=e103]: steer
+      - text: wrong answers toward zero and right answers toward one. That's the trick behind Shor's factoring algorithm and Grover's search. They don't "try everything at once" — that framing skips the whole point. They engineer an interference pattern where the non-solution amplitudes destructively cancel and the solution amplitudes reinforce. After enough gate operations, the probability mass ends up concentrated on the right answer. You measure, and there it is.
+    - paragraph [ref=e104]: A classical computer can't do this — not because it's slower, but because it doesn't have the right raw materials. Probabilities don't cancel. Classical logic destroys information. A deterministic gate can't hold a superposition long enough to interfere with itself.
+    - paragraph [ref=e105]: That's the gap. Quantum gates aren't a speed upgrade. They're a different operation on a different kind of state, and the difference lives at the level of amplitudes — the layer sitting underneath every probability you measure.
+    - separator [ref=e106]
+    - paragraph [ref=e107]:
+      - text: The visualization above is the fastest way to build intuition. Press buttons, watch the bars. That's what a quantum computer is doing under the hood, every single clock tick. If this was useful, tell me —
+      - link "hi@rnader.com" [ref=e108] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .

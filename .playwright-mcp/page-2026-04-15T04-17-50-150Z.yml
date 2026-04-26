@@ -1,0 +1,137 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "The inside of a glass" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 15
+        - text: · 13 min read · Physics
+    - paragraph [ref=e20]: Two photons are born in a crystal in a basement lab. They're created in the same instant, in a single shared quantum state — and then they go their separate ways. One travels down a hair-thin fiber to the south end of the building. The other goes north, sometimes a few meters, sometimes a kilometer, sometimes much more. At the ends of the fibers, two detectors wait.
+    - paragraph [ref=e21]:
+      - text: Measure one photon, and the other one's state is fixed in the same instant. Not "you can predict it."
+      - emphasis [ref=e22]: Fixed.
+      - text: The pair has been behaving like a single object the whole way down the fibers, and the measurement is the moment that single object commits to a value.
+    - paragraph [ref=e23]:
+      - text: Einstein hated this. He called it
+      - emphasis [ref=e24]: spooky action at a distance
+      - text: and spent the last decades of his life looking for a way out. The way out has not been found. The popular thing to do, when you meet the result, is to shrug at how strange quantum mechanics is and move on.
+    - paragraph [ref=e25]:
+      - text: I don't want to do that. I think the strangeness isn't in the photons. It's in the word
+      - emphasis [ref=e26]: distance
+      - text: . Hold the lab in mind for a while. The answer to what's actually going on between the two photons starts somewhere you wouldn't expect — a glass on a kitchen counter.
+    - heading "How much fits in a glass" [level=2] [ref=e27]
+    - paragraph [ref=e28]: "There's a glass on the table. You know how much water fits in it: the volume. Pour more and it spills. That has always been the answer."
+    - paragraph [ref=e29]:
+      - text: Now change the fluid. Instead of water, fill the glass with
+      - emphasis [ref=e30]: information
+      - text: — bits, the kind that live on a hard drive. How many bits fit?
+    - paragraph [ref=e31]: "Your first guess will be volume. It's the answer for every container you've ever used, and the story underneath is clean: every point in the interior is a cell where something can live, and the cells add up. Double the radius, eight times the capacity. Cubic growth, airtight."
+    - paragraph [ref=e32]: Physics used to think this too. The standard counting was degrees of freedom per cell × cells per volume. Nobody questioned it.
+    - paragraph [ref=e33]: "The crack showed up in the 1970s, from a question that sounded almost silly: what happens to the information in a book when you drop it into a black hole?"
+    - paragraph [ref=e34]:
+      - text: Jacob Bekenstein worked it out from thermodynamics. The argument is short and worth following slowly. Take any region of space. Suppose you could pack more information into it than the area of its surface allowed. Then you could keep adding matter until the region collapsed into a black hole. The resulting black hole would have
+      - emphasis [ref=e35]: less
+      - text: entropy than what was already inside — and that violates the second law of thermodynamics, one of the load-bearing rules of physics. So the original supposition has to be wrong. A region of space cannot hold more information than its surface area allows.
+    - paragraph [ref=e36]:
+      - text: A year later, Stephen Hawking confirmed the same number from a completely different direction, working from the radiation black holes emit. The number turned out to depend on the
+      - emphasis [ref=e37]: area
+      - text: of the horizon, not the interior it encloses.
+    - paragraph [ref=e38]: And the argument doesn't care whether the region has a black hole in it. It applies to the glass on your desk and to a cubic meter of empty space outside your window. It applies to any region the universe contains.
+    - figure [ref=e39]:
+      - generic [ref=e42]:
+        - generic [ref=e43]: radius of the region — 1
+        - slider "radius of the region — 1" [ref=e44] [cursor=pointer]: "1"
+      - generic [ref=e45]:
+        - generic [ref=e46]: Fig 1
+        - text: Two ways of counting the information that could fit inside a region. On the left, the volume you'd expect to use (grows as the radius cubed). On the right, the area that actually caps it (grows as the radius squared). Drag the slider. As the region gets bigger, the area bar falls further and further below the volume bar. The gap is interior your gut thought was usable that physics never lets you touch.
+    - generic [ref=e47]:
+      - generic [ref=e48]: The bound
+      - paragraph [ref=e49]: The most information any region of space can hold is set by the area of its boundary, not by its volume. Black holes aren't an exception. They are the only thing in nature that ever pushes the rule until it saturates — everything else sits astronomically below the limit.
+    - heading "Why the inside is smaller than it looks" [level=2] [ref=e50]
+    - paragraph [ref=e51]:
+      - text: Your intuition is going to revolt. Water in a glass is bounded by volume. You can
+      - emphasis [ref=e52]: see
+      - text: it. So how can information be different?
+    - paragraph [ref=e53]: Information is not water. Water is matter at low density, and at low density gravity barely shows up. The bound on information is the count of distinguishable states the stuff inside can be in — and packing more states means more energy, and more energy means more weight, and more weight bends space a little more. Push hard enough and the region collapses into a black hole long before you fill the "volume of information" you imagined. Gravity is the thing enforcing the ceiling. It steps in before the volume rule can.
+    - paragraph [ref=e54]: "That's the mechanism. It still doesn't satisfy the question I really wanted answered: a cubic meter of air looks fine. Each molecule is going about its business, free. The molecules look like a volume's worth of independent things. How can the count of distinct states be set by the surface, not the interior?"
+    - paragraph [ref=e55]: This was the part that took me longest. The answer is that the interior isn't really a volume's worth of independent things. The independence is an appearance the low density gives you. Push the density up and you find that the molecules aren't making free choices on their own — every degree of freedom inside the volume is statistically tied to every other one, through correlations you couldn't see at low density but which were always there. What you'd been counting as freedom turns out to be structure.
+    - heading "Space is the picture entanglement draws" [level=2] [ref=e56]
+    - paragraph [ref=e57]:
+      - text: The physics word for "statistical tie between two quantum things" is
+      - emphasis [ref=e58]: entanglement
+      - text: . Two particles are entangled when knowing something about one tells you something about the other. Entanglement has been part of quantum mechanics for a century. The question physics has been creeping up on lately is what entanglement is
+      - emphasis [ref=e59]: for
+      - text: .
+    - paragraph [ref=e60]: The most striking version of the answer comes from a 2010 paper by Mark Van Raamsdonk. He took a toy universe — a model that's simpler than ours but otherwise mathematically well-defined — and showed that the entire interior of that universe could be described as a pattern of entanglement on its boundary. Then he asked what would happen if you took two halves of the boundary and dialed the entanglement between them down toward zero. The geometry of the corresponding interior didn't fade gradually. It tore. The two halves became disconnected regions of spacetime with no spatial bridge between them. Take the entanglement out of a region, and the space inside it comes apart.
+    - paragraph [ref=e61]:
+      - text: The conclusion is hard to overstate, so let me say it as plainly as I can. Space isn't the place where entangled things sit. Space is what entanglement looks like when you draw it. The relationships are the substrate; the geometry is the picture; we are reading the picture and calling it real because the picture is the only viewer we have. This is the heart of what physicists call the
+      - emphasis [ref=e62]: holographic principle
+      - text: ", and it's where the popular line \"the universe is a hologram\" comes from."
+    - paragraph [ref=e63]: "Now put the basement lab back into the story. Two photons, born in the same crystal, sent down fibers to detectors a kilometer apart. From the picture's point of view — your point of view, anyone's point of view, the only point of view any of us has access to — the two photons sit on opposite sides of a building. From the substrate that draws the picture, they are maximally entangled, which on this account means: they are the same thing, drawn twice."
+    - generic [ref=e64]:
+      - generic [ref=e65]: The map
+      - paragraph [ref=e66]: "\"Far apart\" is a property of the map, not the territory. The two photons in the lab are not signaling across a kilometer. The kilometer is what your viewer adds when it draws them. The thing that needs explaining isn't the connection between them — it's the separation."
+    - heading "What the black hole strips" [level=2] [ref=e67]
+    - paragraph [ref=e68]: Bring the glass back, and this time turn up the gravity until it can't be turned up any further.
+    - paragraph [ref=e69]: Drop matter into a region until the region collapses. The matter doesn't go "inside" in any sense you can later verify. What you get is a horizon — a surface around the place where the region used to be, a little larger than before — and an interior that is no longer somewhere you can point to. Gravity has forced the matter into a state where every degree of freedom is entangled with every other one. The relational structure that used to be "the space between the pieces" has been compressed away, because there is no longer an interior for anything to be apart in.
+    - generic [ref=e70]:
+      - generic [ref=e71]: What collapses
+      - paragraph [ref=e72]: A black hole isn't a hologram. It's the point at which the hologram collapses. The interior used to be the picture entanglement was drawing; once gravity compresses the relationships as hard as physics allows, there's no picture left to draw. Only the outer edge survives.
+    - paragraph [ref=e73]:
+      - text: What survives on the outer edge is three numbers. Mass. Charge. Angular momentum. A cat and a library, dropped in with the same mass, charge, and spin, are indistinguishable from outside. The cat's whiskers are gone. The library's catalog is gone.
+      - emphasis [ref=e74]: Position
+      - text: is gone — because position was a relation between things, and the relations have been compressed away. Physicists call this the
+      - emphasis [ref=e75]: no-hair theorem
+      - text: ": a stationary black hole carries no detail beyond those three numbers."
+    - paragraph [ref=e76]: The reason those three numbers survive when everything else doesn't is the most interesting part of the whole story. They aren't coordinates. They're tied to symmetries of physics itself. Mass is the conserved quantity that goes with the laws of physics being the same today and tomorrow. Charge is the conserved quantity that goes with a deeper symmetry of quantum phase. Spin is the conserved quantity that goes with the laws not caring which way you face. None of those need a "where" to mean anything. They are properties of the universe that exist without needing a space to exist in. Position depends on relations; mass, charge, and spin don't.
+    - figure [ref=e77]:
+      - generic [ref=e80]:
+        - generic [ref=e81]: compression — 0%
+        - slider "compression — 0%" [ref=e82] [cursor=pointer]: "0"
+      - generic [ref=e83]:
+        - generic [ref=e84]: Fig 2
+        - text: "Inside the region: dots are particles, lines are relationships between them. Drag the slider to compress the region the way gravity would. The interior tangle pulls toward the boundary and the relationships dissolve. At maximum compression, only the outside is left — with three numbers describing everything that was ever in there."
+    - heading "Using the room to look at the room" [level=2] [ref=e85]
+    - paragraph [ref=e86]:
+      - text: There's a part of all this that has been quietly there since the beginning, and is harder to sit with than any of the rest. You have been using
+      - emphasis [ref=e87]: space
+      - text: to think about what space is. Every time you imagined the glass, you imagined an inside and an outside; every time you imagined the photons, you imagined two locations in a room. The viewer you have access to is itself a slice of the thing you're trying to explain.
+    - paragraph [ref=e88]: That, I think, is why entanglement feels spooky. The spookiness isn't in the physics. It's in the conflict between the picture your cognition keeps drawing — two locations, separated, somehow signaling — and the description that lives one level beneath the picture, in which the locations are derived and the relationships are primary. Your intuition keeps reasserting the picture, because the picture is the only way your intuition knows how to think.
+    - heading "The glass, again" [level=2] [ref=e89]
+    - paragraph [ref=e90]: There's a glass on your desk. Before this week — for me, before this week, anyway — it had an inside, and the inside could hold things, and the size of the inside was the volume. The glass looks different to me now. I see a surface. Inferred from the surface, a tangle of relationships between whatever the universe's actual pieces are. And drawn as a picture of those relationships, the thing I used to call an inside.
+    - paragraph [ref=e91]:
+      - text: Let me be careful about what I've been claiming, because the holographic story is seductive and easy to oversell. The bound is real. The Bekenstein–Hawking result is derived from thermodynamics, confirmed from a completely different direction by Hawking's calculation, and not controversial among physicists who work on gravity. It is as solid as physics gets. The further claim — that the bound exists
+      - emphasis [ref=e92]: because
+      - text: space itself is emergent from entanglement, and the volume is what the entanglement draws — has worked out rigorously in a model universe with a clean boundary to talk about. Our actual universe doesn't have that boundary; it's expanding rather than contracting, which changes the shape of the problem in ways that haven't been resolved. The strongest version I'd defend is that there is a mathematically well-defined universe in which the story is completely correct, and the same machinery may turn out to apply to ours. That is stronger than it sounds, and weaker than the popular line that says the universe is a hologram.
+    - paragraph [ref=e93]: The glass still holds water. I'm not revising that. But the holding is the kind a map does for a territory, not the kind a bucket does for a liquid. The map looks three-dimensional because the relationships it draws are dense and continuous. Compress the relationships hard enough — much harder than anything I'll ever see in this kitchen — and the three-dimensionality goes with them.
+    - paragraph [ref=e94]:
+      - text: I don't know if this is right. The people whose job it is to know don't fully know either. What I do know is that I can't unsee it. When I set the glass back down, my first thought is no longer
+      - emphasis [ref=e95]: how much fits
+      - text: . It is
+      - emphasis [ref=e96]: what is this really a picture of
+      - text: . And when I think about the two photons in the basement, the surprise isn't that they're correlated across a kilometer of building. The surprise is that I read the kilometer as a thing at all.
+    - separator [ref=e97]
+    - paragraph [ref=e98]:
+      - text: If this lands for you differently than it did for me, or if I got a piece of it wrong, I'd genuinely like to know —
+      - link "hi@rnader.com" [ref=e99] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: . The sister piece is
+      - link "the boy and the infinite universe" [ref=e100] [cursor=pointer]:
+        - /url: /posts/review/infinite-universe.html
+      - text: ", which plays a similar trick with the word \"size\"."

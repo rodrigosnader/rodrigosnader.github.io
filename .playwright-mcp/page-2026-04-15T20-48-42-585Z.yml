@@ -1,0 +1,104 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "Explanations that don't eat their tail" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 15
+        - text: · 7 min read · Essay
+    - paragraph [ref=e20]: A radius is half the length of a diameter.
+    - paragraph [ref=e21]: And a diameter? A diameter is twice the length of a radius.
+    - paragraph [ref=e22]: Done. You should now know what a radius is.
+    - paragraph [ref=e23]: Except you don't. The two sentences above are mutually consistent, each one is individually true, and together they explain nothing. If you didn't know what a radius was before reading them, you still don't. I can keep talking — I can tell you that circumference equals π times diameter, and that π is the ratio of circumference to diameter — but every sentence I add will rest on a word that only makes sense in terms of another word I'm also defining. The whole structure floats, held up by its own hair.
+    - paragraph [ref=e24]: This is what an explanation eating its own tail looks like. Once you can see it, a surprising amount of expert prose turns out to be exactly this — including mine, sometimes.
+    - heading "Concepts are dependencies, not sizes" [level=2] [ref=e25]
+    - paragraph [ref=e26]:
+      - text: "\"Higher-level\" and \"lower-level\" concepts are not about grandeur. They're about dependency. A concept B is"
+      - emphasis [ref=e27]: lower
+      - text: than concept A if you need B to make sense of A. To explain a molecule, you need "atom" already available, because a molecule is atoms bonded together. To explain an atom, you need "electron" and "nucleus", because that's what an atom is made of. The dependency goes one way. You ground down, not sideways.
+    - paragraph [ref=e28]: Radius and diameter sit at the same level. Neither depends on the other. You can define both in terms of a simpler idea — "a circle is the set of all points equidistant from a center; the radius is that distance, the diameter is twice that distance" — and now the dependency graph drops one step to "distance" and "point" and "center", which most readers will accept without further definition. That's how explanations are supposed to work. Each layer earns its keep by sitting on something cheaper underneath.
+    - paragraph [ref=e29]: Programming is where this discipline is easiest to see. You can't write a function that depends on itself without eventually causing the stack to blow up — the compiler refuses. Prose has no such enforcement. Circular explanations compile just fine in natural language, which is why careful writers keep doing the check by hand.
+    - paragraph [ref=e30]: If your explanation can't do this — if it's a graph of concepts that all depend on each other and never reach anything primitive — it's broken.
+    - heading "The dormitive virtue" [level=2] [ref=e31]
+    - paragraph [ref=e32]:
+      - text: Molière staged this in 1673. In
+      - emphasis [ref=e33]: Le Malade imaginaire
+      - text: ", a would-be doctor is being examined on what makes opium put people to sleep. He answers, in impressive Latin, that opium has a"
+      - emphasis [ref=e34]: virtus dormitiva
+      - text: "whose nature is to cause the senses to slumber. Translated: \"opium makes you sleepy because it has a sleepiness-making quality.\" He passes the exam. He should not have."
+    - paragraph [ref=e35]: "\"Dormitive virtue\" is a label stuck on the phenomenon it was supposed to explain. The phenomenon is \"opium makes you sleepy.\" The explanation is \"opium has a sleepiness-making thing in it.\" Ask what the sleepiness-making thing is, and the only answer the explanation can offer is \"it's the thing that makes opium make you sleepy\" — sending you back to where you started. The explanation is a loop, and the loop has one step."
+    - paragraph [ref=e36]: This matters because the trick is almost undetectable when you do it with modern vocabulary. Replace "dormitive virtue" with any sufficiently impressive-sounding receptor, mechanism, or brand of theory, and the same empty move slides past most readers.
+    - paragraph [ref=e37]: "Consider: \"opium triggers the opioid receptors, which induce sleep.\" Is that an explanation? It's a promissory note. If the receptors-induce-sleep step ever gets cashed out in ion channels, membrane potentials, and signaling cascades, you've got a real explanation. If not, you've renamed the mystery."
+    - figure [ref=e38]:
+      - generic [ref=e40]:
+        - button "radius & diameter" [ref=e41] [cursor=pointer]
+        - button "dormitive virtue" [ref=e42] [cursor=pointer]
+        - button "temperature (good)" [ref=e43] [cursor=pointer]
+        - button "molecule (good)" [ref=e44] [cursor=pointer]
+      - generic [ref=e45]:
+        - generic [ref=e46]: Fig 1
+        - text: Click a concept and watch its dependency graph light up. If the graph grounds out in primitive nodes — things you'd accept without further explanation — the explanation is
+        - emphasis [ref=e47]: rigorous
+        - text: . If it loops back on itself, the cycle lights up in red, and the explanation is
+        - emphasis [ref=e48]: circular
+        - text: . The two bad examples are broken. The two good ones really do bottom out.
+    - heading "The why-test" [level=2] [ref=e49]
+    - paragraph [ref=e50]:
+      - text: Take any explanation you're unsure about and start asking
+      - emphasis [ref=e51]: why
+      - text: like an irritating child. Each answer is a new claim; ask why of that one. Keep going. One of three things will happen.
+    - paragraph [ref=e52]: You ground out. You reach a claim that feels primitive — a physical mechanism, a mathematical definition, a sense observation, something you don't feel the need to push further. The explanation is rigorous, at least from here down.
+    - paragraph [ref=e53]:
+      - text: You run out of budget. You reach a place where further questioning would require a different field of expertise, but the chain you traced so far is sound. That's fine. Rigor doesn't require you to ground in the Standard Model; it requires you to ground
+      - emphasis [ref=e54]: somewhere solid
+      - text: ", and to acknowledge where you stopped."
+    - paragraph [ref=e55]: You loop. You reach a claim you already passed through. At that point the explanation is broken, and you should know it's broken before you build anything on top of it.
+    - paragraph [ref=e56]: "The loop case is the interesting one, because the loop is usually invisible in the moment. You don't notice you're back where you started until someone else is patient enough to trace the chain. This is why writing things down helps: linear prose forces the loop to become visible. Your head can hold a circular explanation and feel productive about it, because the circle fits inside working memory and the return-to-start feels like \"arriving at the answer.\""
+    - heading "The illusion of explanatory depth" [level=2] [ref=e57]
+    - paragraph [ref=e58]:
+      - text: "Psychologists have a name for what's happening in your head when you fall for a circular explanation: the"
+      - emphasis [ref=e59]: illusion of explanatory depth
+      - text: (Rozenblit & Keil, 2002). Ask someone how confident they are that they understand how a zipper works, and they'll rate themselves pretty high. Then ask them to actually explain how a zipper works, step by step, mechanism included. Their confidence plummets within about three sentences. The self-assessment was based on a
+      - emphasis [ref=e60]: label
+      - text: — "I know how zippers work" — and the label was indexed to a vague mental image, not to a working model.
+    - paragraph [ref=e61]: This applies to everything. You "know" what a neural network does, until someone asks what one neuron does and why the multiplication is there. The first layer of understanding is held up by the label, and the label is held up by nothing. The why-test drops the label and asks for the mechanism.
+    - generic [ref=e62]:
+      - generic [ref=e63]: Honest tension
+      - paragraph [ref=e64]: You can't ground everything. At some point you have to take a concept as primitive, and different communities accept different primitives. A physicist is willing to push down to fields. A chemist usually stops at the atom. A cook stops at "salt" and isn't pretending otherwise. None of this is wrong. Rigor isn't about grounding forever — it's about knowing where you stopped and why that floor was safe.
+    - heading "Top-down isn't a sin" [level=2] [ref=e65]
+    - paragraph [ref=e66]:
+      - text: Top-down is great as
+      - emphasis [ref=e67]: scaffolding
+      - text: . "A neural network is a function that maps inputs to outputs by stacking layers of weighted sums and nonlinearities" is a top-down sentence and it's useful — it tells you the shape of the thing before you dive into the pieces.
+    - paragraph [ref=e68]:
+      - text: The problem isn't top-down. The problem is top-down that
+      - emphasis [ref=e69]: never
+      - text: touches the ground. A scaffold that never touches the ground isn't a scaffold. Good writing uses top-down to orient the reader and then grinds through the bottom-up to actually deliver the payoff. Most textbooks do some of this. The ones that don't are the ones you still feel confused by after finishing.
+    - heading "One takeaway" [level=2] [ref=e70]
+    - paragraph [ref=e71]:
+      - text: "I've mostly been talking about reading other people's explanations, but the most useful application of this is to your own. The next time you catch yourself writing or teaching or trying to convince someone of something, pause and ask:"
+      - emphasis [ref=e72]: where does this bottom out?
+      - text: Every argument has a floor, and a good one knows what its floor is. A bad one has either no floor or a secret trap door in the middle that cycles back to the top.
+    - paragraph [ref=e73]: You can make a lot of your thinking sharper by just doing this one check. Not on every sentence — that would be exhausting — but on any claim that seems to be doing heavy lifting. Trace it down. See if it grounds. If it doesn't, you've been holding the air and calling it a building.
+    - separator [ref=e74]
+    - paragraph [ref=e75]:
+      - text: If you've got a favorite example of a dormitive virtue in the wild, or a discipline that's especially bad at grounding its own explanations, send it my way —
+      - link "hi@rnader.com" [ref=e76] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .

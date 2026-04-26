@@ -1,0 +1,41 @@
+---
+import "../styles/global.css";
+interface Props {
+  title: string;
+  description?: string;
+  wide?: boolean;
+}
+const { title, description = "Ensaios interativos sobre ciência, matemática e máquinas.", wide = false } = Astro.props;
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <style>
+      :root {
+        --font-serif: "Charter", "Iowan Old Style", "Apple Garamond",
+          "Baskerville", Georgia, "Times New Roman", serif;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="/" class="brand">Efeméride</a>
+      <div class="nav-links">
+        <a href="/">Ensaios</a>
+        <a href="#sobre">Sobre</a>
+      </div>
+    </nav>
+    <main class={wide ? "site-wide" : "site"}>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>
+        Efeméride · Ensaios interativos · {new Date().getFullYear()}
+      </p>
+    </footer>
+  </body>
+</html>

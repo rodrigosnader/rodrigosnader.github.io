@@ -1,0 +1,131 @@
+---
+import Base from "../layouts/Base.astro";
+import Figure from "../components/Figure.astro";
+import NeuronLine from "../components/viz/NeuronLine.tsx";
+import GradientDescent from "../components/viz/GradientDescent.tsx";
+import XORNetwork from "../components/viz/XORNetwork.tsx";
+---
+<Base title="Como uma Rede Neural Pensa — Efeméride" wide>
+  <article>
+    <header class="article-header">
+      <div class="eyebrow">Ensaio · Aprendizado de máquina</div>
+      <h1>Como uma Rede Neural Pensa</h1>
+      <p class="dek">
+        Não há magia. Há uma linha — e depois várias linhas, dobradas umas
+        sobre as outras até que o impossível se torne possível.
+      </p>
+      <div class="byline">Efeméride · 10 de abril de 2026</div>
+    </header>
+
+    <p>
+      O nome é quase injusto. “Rede neural” evoca neurônios de verdade, axônios,
+      sinapses — toda uma metáfora biológica que, na prática, atrapalha mais do
+      que ajuda. O que acontece dentro de uma rede não é uma fagulha viajando
+      por células. É álgebra. E a álgebra, felizmente, é algo que podemos
+      desenhar.
+    </p>
+
+    <h2>Um único neurônio é uma reta</h2>
+
+    <p>
+      O bloco básico de qualquer rede é um objeto ridiculamente simples: ele
+      pega alguns números, multiplica cada um por um peso, soma tudo, joga o
+      resultado dentro de uma função não-linear e devolve um número final.
+      Quando há dois inputs, esse bloco inteiro não passa de <em>uma reta</em>
+      dividindo o plano em dois.
+    </p>
+
+    <p>
+      Mexa os três botões abaixo. À esquerda da reta, o neurônio diz “azul”.
+      À direita, diz “laranja”. É só isso. Os pontos coloridos representam
+      exemplos que queremos classificar — o objetivo é achar pesos que separem
+      as duas cores.
+    </p>
+
+    <Figure
+      label="Figura 1"
+      caption="Um único neurônio com dois inputs. Os pesos controlam a inclinação da reta; o viés controla o quanto ela se afasta da origem. A cor de fundo mostra a saída contínua da sigmoide."
+    >
+      <NeuronLine client:only="react" />
+    </Figure>
+
+    <p>
+      Um neurônio só, portanto, só sabe resolver problemas <em>linearmente
+      separáveis</em> — aqueles onde existe alguma reta que dá conta de
+      distinguir as duas classes. A boa notícia é que a maioria dos problemas
+      interessantes do mundo real não é assim.
+    </p>
+
+    <h2>Aprender é descer uma ladeira</h2>
+
+    <p>
+      E como é que o neurônio <em>aprende</em> os pesos certos? A receita é
+      velha e quase ofensiva na sua simplicidade: medimos o quanto ele está
+      errando — a <em>perda</em> — e ajustamos cada peso na direção que
+      diminui esse erro. Repete. Repete. Repete.
+    </p>
+
+    <p>
+      É como soltar uma bolinha numa paisagem montanhosa e esperar que ela
+      role até o fundo de um vale. Cada passo é proporcional ao gradiente
+      local: a direção de maior descida. Clique em qualquer ponto do mapa
+      abaixo para soltar uma nova bolinha e veja a trajetória que ela toma.
+      Aumente a taxa de aprendizado o suficiente e vai ver o que acontece —
+      ela começa a pular o vale em vez de cair dentro dele.
+    </p>
+
+    <Figure
+      label="Figura 2"
+      caption="Descida de gradiente em uma paisagem de perda artificial. Curvas mais escuras marcam regiões de maior erro. Taxas de aprendizado muito altas fazem a bolinha saltar; muito baixas, e ela não chega a lugar nenhum."
+    >
+      <GradientDescent client:only="react" />
+    </Figure>
+
+    <h2>Empilhando retas, curvando o mundo</h2>
+
+    <p>
+      Mas voltamos ao problema: e se nenhuma reta resolver? O exemplo clássico
+      é o XOR — um “ou exclusivo”. Temos quatro pontos: (0,0) e (1,1) são uma
+      classe, (0,1) e (1,0) são outra. Não há reta no universo que separe esses
+      dois grupos. Tente. Não existe.
+    </p>
+
+    <p>
+      A solução, hoje trivial, custou décadas para ser reabilitada no
+      campo: empilhe os neurônios. Cada neurônio da primeira camada desenha
+      sua própria reta. O neurônio da camada seguinte recebe esses valores
+      já transformados — um espaço onde as retas antigas viraram coordenadas
+      novas. E <em>nesse espaço transformado</em>, uma única reta é suficiente.
+    </p>
+
+    <p>
+      Abaixo, uma rede minúscula (dois inputs, seis neurônios ocultos, uma
+      saída) treinando o XOR ao vivo. À esquerda, a fronteira de decisão se
+      esculpe a cada passo. No meio, a rede em si: cada aresta é um peso,
+      espessura é magnitude, cor é sinal. À direita, a perda caindo.
+    </p>
+
+    <Figure
+      label="Figura 3"
+      caption="Treinamento de uma rede 2-6-1 no XOR via descida de gradiente. Note como, nos primeiros passos, a fronteira é quase reta — e como, depois de algumas centenas de iterações, ela se dobra para cercar os dois pontos de cada classe."
+    >
+      <XORNetwork client:only="react" />
+    </Figure>
+
+    <h2>Um jeito diferente de entender</h2>
+
+    <p>
+      O que você está vendo se generaliza com assombrosa facilidade. Troque
+      XOR por dígitos manuscritos, seis neurônios por seis milhões, duas
+      dimensões por setecentas e oitenta e quatro: é o mesmo algoritmo. A
+      mesma bolinha rolando. As mesmas retas empilhadas, dobradas, recurvadas
+      umas sobre as outras até formarem superfícies capazes de reconhecer
+      gatos, traduzir línguas, compor música.
+    </p>
+
+    <p>
+      Não é magia. É geometria. Ela só fica mais bonita quando ninguém mais
+      consegue desenhar.
+    </p>
+  </article>
+</Base>

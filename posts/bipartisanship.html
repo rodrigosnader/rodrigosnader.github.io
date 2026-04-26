@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gamifying cooperation — Rodrigo Nader</title>
+<meta name="description" content="Political extremism is a rational response to a payoff matrix. Change the matrix, and one small tweak might do most of the work.">
+<link rel="stylesheet" href="../style.css?v=4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <a href="../" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>Gamifying cooperation</h1>
+    <p class="post-meta">
+      <time datetime="2026-04-15">2026 · Apr 15</time>
+      <span class="sep">·</span>
+      <span>7 min read</span>
+      <span class="sep">·</span>
+      <span>Essay</span>
+    </p>
+  </header>
+
+  <p>Imagine a senator who's spent six years building a reputation as a workhorse. She votes for a bipartisan infrastructure bill. It's a good bill — both sides got real concessions, it passes, things get built. A few months later she's primaried by someone whose entire campaign is a clip of her shaking hands with a senator from the other party. She loses. The seat flips to a harder version of her own side.</p>
+
+  <p>Multiply that scene by a decade of election cycles and you end up with the legislators we actually have. The system didn't get unlucky. It selected for this. Anyone who voted for compromise lost to someone who didn't, and the ones still standing are the ones who learned the lesson. Extremism is a rational response to the incentive structure — the incentive structure rewards it — so a durable fix has to change the incentives, not the players.</p>
+
+  <p>The good news is that incentive structures are things you can actually design — sketch out the payoffs, compute the equilibrium, tweak the numbers. This post is about one such tweak. The smallest I can think of. Here it is: tie campaign funding to cross-party cooperation.</p>
+
+  <p>Some version of this gets floated every few years, and I'm going to end up fairly skeptical of it by the end. But thinking through <em>why</em> it might work and <em>how</em> it could fail is more useful than another round of moral hectoring about the state of political discourse.</p>
+
+  <h2>The game as it is</h2>
+
+  <p>Picture two parties. Each has a choice, in any given legislative fight, between <em>cooperate</em> (vote for a compromise that includes pieces of the other party's priorities) and <em>defect</em> (block the bill, blame the other side, rally the base).</p>
+
+  <p>Under the rules that currently apply, the payoff structure looks something like this: if both cooperate, a moderate bill passes, both parties get a little credit, the coverage is boring ("they worked together" doesn't make the evening news), and both bases grumble. If one defects and the other cooperates, the defector gets to look tough and fundraise off the outrage; the cooperator looks weak. If both defect, nothing passes, each side blames the other, and each fundraises off the story that "the other side is destroying America."</p>
+
+  <p>Pick numbers where defection dominates cooperation — which is the normal case in this setup — and you get a classic <em>prisoner's dilemma</em>: a game where each player does better by betraying, even though both would be better off if neither did. The only stable outcome is mutual defection, and that's what we see.</p>
+
+  <p>This is why moral appeals don't work. A moral appeal says: "please accept the lower payoff in exchange for being a good citizen." Maybe the first cohort does that. The system punishes them for it. They get primaried. They lose their seats. The ones who didn't accept the worse outcome end up running the show. One big reason the "why can't they get along" commentary keeps missing is selection, not character.</p>
+
+  <h2>The fix, in one sentence</h2>
+
+  <p><em>Tie campaign funding — or any resource that actually matters to running for office — to a measurable record of cross-party bill support.</em></p>
+
+  <p>The mechanism could look like many things. A public campaign finance pool that scales with the fraction of your votes cast for bipartisan legislation. A formula where bills passed with cross-aisle support generate more "campaign credit" for both parties than bills passed along party lines. A penalty for pure obstruction — blocking a bill without proposing an alternative reduces your next round's resource allocation. The specific design is a separate question; let me handle that below. What matters for the argument is that cooperating now has a direct, material payoff that defection doesn't.</p>
+
+  <p>If the bonus is big enough, the matrix flips. Cooperate-cooperate becomes the best outcome for both sides, because the added funding outweighs the benefit of making the other side look bad. Neither party wants to unilaterally defect, because defection costs you the bonus you'd have gotten from cooperating.</p>
+
+  <p>Below a certain threshold, the bonus isn't big enough to overcome the reasons to defect, and nothing changes. Above it, the equilibrium flips. You can watch it happen in the figure below. Notice how sharp the threshold is — it's not a slow dissolve, it's a switch.</p>
+
+  <figure class="viz">
+    <canvas id="v1-game" style="height: 440px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">cooperation bonus — <span id="v1-bonus-readout">0</span></span>
+        <input type="range" id="v1-bonus" min="0" max="6" step="0.1" value="0">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 1</span>A prisoner's-dilemma-style payoff matrix between two parties. The left number in each cell is A's payoff, the right is B's. The "cooperation bonus" slider adds a constant to any cell where a party cooperated. At bonus 0 the Nash equilibrium (the cell where neither side can improve by unilaterally switching) is defect-defect. As the bonus grows, there's a threshold where cooperate-cooperate becomes stable instead.</div>
+  </figure>
+
+  <h2>How you count "cooperation"</h2>
+
+  <p>This is where the plan gets hard, and I don't want to pretend it doesn't. Measuring cooperation in a way that can't be gamed is a genuine design problem. Here are the traps I can think of, in roughly the order they'd hit.</p>
+
+  <p><strong>Symbolic votes.</strong> Parties could game the system by cooperating on low-stakes procedural votes — naming post offices, renewing holiday resolutions — while defecting on anything that mattered. The fix is to weight votes by substance. This is hard to automate and politically sensitive, because any weighting scheme is itself a political choice, but some version of it (bills flagged by nonpartisan staff as "significant") is probably necessary.</p>
+
+  <p><strong>Fake bills.</strong> The more devious failure mode is that the majority party introduces deliberately weak bills, gets a few members of the minority to vote for them, claims the cooperation bonus, and counts it as bipartisan. The fix is to also measure the <em>amount</em> of cross-party support — not just "at least one person from the other party voted yes" but a real fraction. Maybe 30% or more of the minority party has to vote yes for a bill to count. Pick a number and defend it.</p>
+
+  <p><strong>Obstruction without alternatives.</strong> A party can refuse to cooperate without proposing anything, and currently pay no cost. Any serious version of this mechanism would penalize that — if you block a bill, you have to offer a counter-proposal you'd be willing to pass. This is hard to formalize, but some version of "you can vote no on the other side's bill, but you can't vote no without <em>also</em> putting forward your own version for a vote" is tractable.</p>
+
+  <p><strong>Gaming the measurement itself.</strong> Any numeric measurement will be reverse-engineered by parties whose campaigns depend on it — when a measure becomes a target, it stops measuring what you wanted (Goodhart's Law). The mitigation isn't to make the measurement perfect — there's no such thing — it's to have it overseen by a body insulated from the parties it measures, and to update the rules when gaming becomes visible. Hard, but tractable.</p>
+
+  <div class="callout">
+    <span class="label">Honest tension</span>
+    <p>The honest version of this proposal is that it requires the people who benefit from the current system to vote for a change to the current system. The same people whose power depends on defection would have to pass a law that rewards cooperation. Economists call this a second-order collective action problem — cooperation itself has to be cooperated-on to exist — and it's genuinely hard. I don't have a clever answer. The best I can offer is that the mechanism could start small, as a pilot at the state level, and scale up if it works.</p>
+  </div>
+
+  <h2>Why this might still fail</h2>
+
+  <p>The hardest objection to this plan isn't about design. It's about the voters.</p>
+
+  <p><strong>The base problem.</strong> Even if the funding incentive flips the equilibrium among <em>politicians</em>, the primary voter base might still punish cooperation. A representative who votes yes on a compromise bill might get extra campaign money <em>and</em> face a primary challenge from someone promising purity. In that case, the cooperation bonus has to be large enough to outweigh the primary risk, and I don't know what that number looks like. It might be bigger than any feasible public finance scheme could deliver. This is the objection that worries me most; the others are engineering problems and this one isn't.</p>
+
+  <figure class="viz">
+    <canvas id="v2-base" style="height: 420px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">primary-voter purity pressure — <span id="v2-press-readout">3</span></span>
+        <input type="range" id="v2-press" min="0" max="10" step="0.1" value="3">
+      </label>
+      <label>
+        <span class="ctrl-label">funding bonus — <span id="v2-fund-readout">3</span></span>
+        <input type="range" id="v2-fund" min="0" max="10" step="0.1" value="3">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 2</span>A 2D view of a politician's survival. X-axis: funding bonus from cooperating. Y-axis: primary-voter pressure punishing cooperation. Green region: the politician survives the next election. Orange: primaried. The dot is the current politician. Drag the purity pressure up and watch the survival region shrink. Try to rescue them by cranking the bonus. At pressure 7, you need a bonus of 10+ just to break even — the "any feasible public finance scheme" edge of the chart. That's the number the post worries about.</div>
+  </figure>
+
+  <p><strong>The shadow of the future.</strong> Game-theoretic results about cooperation usually assume the same players will interact repeatedly and care about future payoffs nearly as much as present ones. In electoral politics, the "future" is two years, and politicians discount outcomes beyond their next election pretty steeply. A cooperation bonus that pays out over ten years might not influence someone whose horizon is two.</p>
+
+  <p><strong>The coordination failure.</strong> The whole premise assumes both parties can be affected by the mechanism. If one party captures the measurement body and uses it selectively against the other, you've introduced a new weapon instead of a new equilibrium. The risk scales with how much discretion the measuring body has.</p>
+
+  <h2>Why I still think it's worth trying</h2>
+
+  <p>The thing we actually need to change — the incentive structure — is the thing most "fix democracy" proposals refuse to touch. Everyone wants to change the media environment, the candidates, the rules of redistricting, the voter demographics. These are all reasonable, and most of them are entangled with the payoff matrix rather than downstream of it — redistricting especially, because safe seats directly produce the primary pressure that makes defection profitable. Entangled is different from downstream. Upstream moves are rare.</p>
+
+  <p>A cooperation bonus is a candidate for one. It touches the payoff matrix directly. Tweak the matrix and at least some of the rest of the system shifts around it — the voters are the piece that won't, which is the base-problem objection above. If it works, the effect is disproportionate to the policy's size. If it fails in a pilot, it fails for reasons we can learn from. The cost of trying a small version is cheap compared to another decade of moral appeals.</p>
+
+  <p>I'm not confident enough to say "we should do this." I am confident that the conversation about political dysfunction should move from "these people are awful" to "this matrix is awful," and that most of the energy currently spent on the first question would be better spent on the second.</p>
+
+  <hr>
+
+  <p>If you have a more robust version of this mechanism, or if you think I'm wrong about the upstream-ness of the payoff matrix, tell me — <a href="mailto:hi@rnader.com">hi@rnader.com</a>. The <a href="/posts/free-will.html">free-will post</a> is the philosophical sibling of this one — same habit of blaming the structure rather than the agent.</p>
+</article>
+
+<script src="/script.js?v=3"></script>
+<script src="./viz-common.js?v=1"></script>
+<script>
+/* ---------- Fig 1: payoff matrix with adjustable cooperation bonus ---------- */
+(function(){
+  const canvas = document.getElementById('v1-game');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const bonusInput = document.getElementById('v1-bonus');
+  const bonusReadout = document.getElementById('v1-bonus-readout');
+
+  let bonus = 0;
+  bonusInput.addEventListener('input', () => {
+    bonus = parseFloat(bonusInput.value);
+    bonusReadout.textContent = bonus.toFixed(1);
+  });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function payoff(aStrat, bStrat) {
+    let a = 0, bp = 0;
+    if (aStrat === 'C' && bStrat === 'C') { a = 3; bp = 3; }
+    else if (aStrat === 'C' && bStrat === 'D') { a = 0; bp = 5; }
+    else if (aStrat === 'D' && bStrat === 'C') { a = 5; bp = 0; }
+    else { a = 1; bp = 1; }
+    if (aStrat === 'C') a += bonus;
+    if (bStrat === 'C') bp += bonus;
+    return [a, bp];
+  }
+
+  function findNash() {
+    const strats = ['C', 'D'];
+    const equilibria = [];
+    for (const aS of strats) {
+      for (const bS of strats) {
+        const [a0, b0] = payoff(aS, bS);
+        const aDev = aS === 'C' ? 'D' : 'C';
+        const bDev = bS === 'C' ? 'D' : 'C';
+        const aDevPay = payoff(aDev, bS)[0];
+        const bDevPay = payoff(aS, bDev)[1];
+        if (a0 >= aDevPay && b0 >= bDevPay) {
+          equilibria.push([aS, bS]);
+        }
+      }
+    }
+    return equilibria;
+  }
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const matX = 80;
+    const matY = 90;
+    const cell = Math.min((rect.width * 0.55 - matX) / 2, (rect.height - matY - 60) / 2);
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '12px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('B cooperates', matX + cell / 2, matY - 18);
+    ctx.fillText('B defects', matX + cell + cell / 2, matY - 18);
+    ctx.save();
+    ctx.translate(matX - 22, matY + cell / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('A cooperates', 0, 0);
+    ctx.restore();
+    ctx.save();
+    ctx.translate(matX - 22, matY + cell + cell / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('A defects', 0, 0);
+    ctx.restore();
+
+    const equilibria = findNash();
+    const cells = [
+      { strat: ['C', 'C'], row: 0, col: 0 },
+      { strat: ['C', 'D'], row: 0, col: 1 },
+      { strat: ['D', 'C'], row: 1, col: 0 },
+      { strat: ['D', 'D'], row: 1, col: 1 },
+    ];
+    cells.forEach((cellInfo) => {
+      const x = matX + cellInfo.col * cell;
+      const y = matY + cellInfo.row * cell;
+      const [a, bp] = payoff(cellInfo.strat[0], cellInfo.strat[1]);
+      const isEq = equilibria.some((e) => e[0] === cellInfo.strat[0] && e[1] === cellInfo.strat[1]);
+      const isCoop = cellInfo.strat[0] === 'C' && cellInfo.strat[1] === 'C';
+
+      if (isEq) {
+        ctx.fillStyle = isCoop ? 'rgba(110, 150, 90, 0.25)' : 'rgba(197, 107, 74, 0.25)';
+      } else {
+        ctx.fillStyle = c.gridFaint;
+      }
+      ctx.fillRect(x, y, cell, cell);
+
+      ctx.strokeStyle = isEq ? (isCoop ? c.green : c.accent) : c.border;
+      ctx.lineWidth = isEq ? 2.5 : 1;
+      ctx.strokeRect(x, y, cell, cell);
+
+      ctx.fillStyle = c.fg;
+      ctx.font = 'bold 20px -apple-system, Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('(' + a.toFixed(1) + ', ' + bp.toFixed(1) + ')', x + cell / 2, y + cell / 2 + 7);
+
+      if (isEq) {
+        ctx.fillStyle = isCoop ? c.green : c.accent;
+        ctx.font = 'bold 10px -apple-system, Inter, sans-serif';
+        ctx.fillText('NASH EQUILIBRIUM', x + cell / 2, y + cell - 10);
+      }
+    });
+
+    const rightX = matX + cell * 2 + 50;
+    const rightY = matY;
+    ctx.fillStyle = c.fgDim;
+    ctx.font = 'italic 11px Charter, Georgia, serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('bonus added to any payoff', rightX, rightY);
+    ctx.fillText('where that party cooperated.', rightX, rightY + 16);
+
+    const firstEq = equilibria[0] || null;
+    ctx.fillStyle = c.fg;
+    ctx.font = 'bold 15px -apple-system, Inter, sans-serif';
+    if (firstEq) {
+      const isCoopEq = firstEq[0] === 'C' && firstEq[1] === 'C';
+      ctx.fillStyle = isCoopEq ? c.green : c.accent;
+      if (isCoopEq) {
+        ctx.fillText('equilibrium: cooperate', rightX, rightY + 58);
+      } else if (firstEq[0] === 'D' && firstEq[1] === 'D') {
+        ctx.fillText('equilibrium: defect', rightX, rightY + 58);
+      } else {
+        ctx.fillText('equilibrium: mixed', rightX, rightY + 58);
+      }
+    }
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.fillText('threshold for the flip: bonus ≈ 2.0', rightX, rightY + 92);
+    ctx.fillText('below that, defecting pays more.', rightX, rightY + 108);
+    ctx.fillText('above it, cooperating pays more.', rightX, rightY + 124);
+
+    ctx.fillStyle = c.accentWarm;
+    ctx.font = 'bold 36px -apple-system, Inter, sans-serif';
+    ctx.fillText('+' + bonus.toFixed(1), rightX, rightY + 180);
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.fillText('current bonus', rightX, rightY + 198);
+  }
+  vizCommon.animate(canvas, draw);
+})();
+
+/* ---------- Fig 2: the base problem — survival region vs primary pressure ---------- */
+(function(){
+  const canvas = document.getElementById('v2-base');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const pressInput = document.getElementById('v2-press');
+  const pressReadout = document.getElementById('v2-press-readout');
+  const fundInput = document.getElementById('v2-fund');
+  const fundReadout = document.getElementById('v2-fund-readout');
+
+  let press = 3;
+  let fund = 3;
+
+  pressInput.addEventListener('input', () => {
+    press = parseFloat(pressInput.value);
+    pressReadout.textContent = press.toFixed(1);
+  });
+  fundInput.addEventListener('input', () => {
+    fund = parseFloat(fundInput.value);
+    fundReadout.textContent = fund.toFixed(1);
+  });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function survives(bonus, pressure) {
+    return bonus >= 1.5 * pressure - 1;
+  }
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const padL = 70, padR = 30, padT = 40, padB = 60;
+    const plotW = rect.width - padL - padR;
+    const plotH = rect.height - padT - padB;
+    const xMax = 10;
+    const yMax = 10;
+
+    const toX = (v) => padL + (v / xMax) * plotW;
+    const toY = (v) => padT + plotH - (v / yMax) * plotH;
+
+    const step = 12;
+    for (let xPix = 0; xPix < plotW; xPix += step) {
+      for (let yPix = 0; yPix < plotH; yPix += step) {
+        const xVal = (xPix / plotW) * xMax;
+        const yVal = yMax - (yPix / plotH) * yMax;
+        const ok = survives(xVal, yVal);
+        ctx.fillStyle = ok
+          ? 'rgba(110, 150, 90, 0.20)'
+          : 'rgba(197, 107, 74, 0.18)';
+        ctx.fillRect(padL + xPix, padT + yPix, step, step);
+      }
+    }
+
+    ctx.strokeStyle = c.fgDim;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let p = 0; p <= yMax; p += 0.1) {
+      const requiredBonus = 1.5 * p - 1;
+      if (requiredBonus < 0) continue;
+      if (requiredBonus > xMax) continue;
+      const px = toX(requiredBonus);
+      const py = toY(p);
+      if (p === 0 || requiredBonus === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = 'italic 10px Charter, Georgia, serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('break-even', toX(xMax - 2), toY(yMax - 0.5));
+
+    ctx.strokeStyle = c.border;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(padL, padT, plotW, plotH);
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('funding bonus →', padL + plotW / 2, padT + plotH + 32);
+    ctx.save();
+    ctx.translate(padL - 42, padT + plotH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('primary pressure →', 0, 0);
+    ctx.restore();
+
+    for (let i = 0; i <= xMax; i += 2) {
+      ctx.fillStyle = c.fgDim;
+      ctx.font = '10px ui-monospace, monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(i.toString(), toX(i), padT + plotH + 14);
+    }
+    for (let i = 0; i <= yMax; i += 2) {
+      ctx.textAlign = 'right';
+      ctx.fillText(i.toString(), padL - 6, toY(i) + 3);
+    }
+
+    const dotX = toX(fund);
+    const dotY = toY(press);
+    const ok = survives(fund, press);
+    ctx.fillStyle = ok ? c.green : c.accent;
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, 8, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = c.bg;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.fillStyle = ok ? c.green : c.accent;
+    ctx.font = 'bold 13px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(ok ? 'survives' : 'primaried', dotX + 14, dotY + 4);
+
+    const requiredBonus = 1.5 * press - 1;
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px ui-monospace, JetBrains Mono, monospace';
+    ctx.textAlign = 'left';
+    if (requiredBonus > xMax) {
+      ctx.fillStyle = c.accent;
+      ctx.fillText('required bonus: ' + requiredBonus.toFixed(1) + '  (off the chart)', padL, 24);
+    } else {
+      ctx.fillText('required bonus at this pressure: ' + Math.max(0, requiredBonus).toFixed(1), padL, 24);
+    }
+  }
+  vizCommon.animate(canvas, draw);
+})();
+</script>
+</body>
+</html>

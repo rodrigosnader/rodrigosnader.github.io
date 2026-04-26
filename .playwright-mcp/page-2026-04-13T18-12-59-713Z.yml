@@ -1,0 +1,144 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "You, included in the universe" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 12
+        - text: · 11 min read · Essay
+    - paragraph [ref=e20]: There is a standard argument against free will that almost everyone who has taken an undergraduate philosophy class has heard. It goes like this. Your brain is a physical object. Physical objects obey physical laws. Given the exact state of the universe at any moment, the next state is fixed. Therefore, any decision you make is the inevitable consequence of prior causes. Therefore, you have no free will.
+    - paragraph [ref=e21]:
+      - text: The argument is deductively valid, which is why it keeps showing up. You can't dismiss it by pointing at quantum randomness (a dice-roll isn't a choice either) or by retreating to "we don't
+      - emphasis [ref=e22]: feel
+      - text: determined" (feelings are not a physics experiment). The argument stands. The conclusion follows.
+    - paragraph [ref=e23]:
+      - text: The trouble is that the argument is doing something sneaky, and once you see it you can't un-see it. It's subtracting
+      - emphasis [ref=e24]: you
+      - text: from the universe. It's treating "you" as a thing that stands outside the causal chain and then complaining that the thing outside the chain doesn't get to intervene. Of course it doesn't. Nothing outside the chain does. But that was never the question.
+    - paragraph [ref=e25]: This essay is an attempt to say, clearly and without either hand-wringing or hand-waving, what happens when you put "you" back into the universe where it belongs. I think the classic free-will question stops being unanswerable once you do that. I think it stops being a question at all.
+    - heading "What \"you\" actually are" [level=2] [ref=e26]
+    - paragraph [ref=e27]:
+      - text: Take everything that has ever shaped the particular collection of atoms you call yourself. Your genes. The way your mother spoke to you when you were two. The books you happened to read at twelve. The first heartbreak, the first promotion, the last bad night's sleep. Every input that has landed on your brain, every chemical that has risen and fallen in it, every habit those inputs trained. That entire causal history is what you are. There is no you
+      - emphasis [ref=e28]: in addition to
+      - text: that history — no little pilot sitting in a command chair behind your eyes, reading the inputs and making the outputs. The pilot is a fiction. There's only the history.
+    - paragraph [ref=e29]:
+      - text: I don't think this claim is controversial in the sense of "most serious neuroscientists disagree." I think it's controversial in the sense of "most people, when they hear it, want to hold on to the pilot." The pilot is comforting. It's the self you talk to in the shower. It's the thing that seems to notice the thoughts rather than
+      - emphasis [ref=e30]: be
+      - text: the thoughts. Giving it up sounds like a loss.
+    - paragraph [ref=e31]: But giving it up isn't a loss. It's a correction. And if you make the correction cleanly, the free-will question answers itself.
+    - heading "Two questions that sound like one" [level=2] [ref=e32]
+    - paragraph [ref=e33]: Let me split the free-will question into two questions that get tangled together in most discussions.
+    - paragraph [ref=e34]:
+      - strong [ref=e35]: Question A.
+      - text: Given the exact state of the universe right now, could your brain be in a different state than it is?
+    - paragraph [ref=e36]: "Answer: no. Of course not. If the universe is exactly as it is, including all the physics, then your brain — which is part of the universe — is exactly as it is. To say otherwise would be to say \"the universe is exactly as it is, except for this one piece, which is different.\" That's not a coherent claim."
+    - paragraph [ref=e37]:
+      - strong [ref=e38]: Question B.
+      - text: Did you decide?
+    - paragraph [ref=e39]:
+      - text: "Answer: yes. The decision was produced by a process that weighed your reasons, balanced them against your values, considered possibilities and rejected most of them. That process is what your brain was doing between the input and the output. And that process is what you"
+      - emphasis [ref=e40]: are
+      - text: .
+    - paragraph [ref=e41]:
+      - text: The standard argument against free will answers Question A and pretends it's also answered Question B. It hasn't. Saying "your brain couldn't have been different" is not the same as saying "you didn't decide". The brain couldn't have been different
+      - emphasis [ref=e42]: because the brain is you
+      - text: ", and you did the thing you did. Those two sentences are not in conflict. They're different pictures of the same event."
+    - heading "Compatibilism in one sentence" [level=2] [ref=e43]
+    - paragraph [ref=e44]:
+      - text: "The view I'm describing has a name: compatibilism. It's the idea that free will and determinism are not enemies, because free will was never about freedom from causation. It was about freedom from"
+      - emphasis [ref=e45]: the wrong kind
+      - text: of causation — coercion, manipulation, external override, all the ways in which something that isn't you pushes you around. A decision made by you, through your reasons, using your values, is free. A decision made by somebody else holding a gun to your head is not. The difference between the two is not whether physics was operating (it was, in both cases), but whether the decision flowed from your internal process or from something cutting in from outside.
+    - paragraph [ref=e46]: Compatibilism, when stated this flatly, sounds like a semantic trick. It sounds like we've redefined "free" to mean "not coerced" and congratulated ourselves on solving the problem. I get the objection. I used to have it. And I think it's wrong, but the reason it's wrong needs its own section, so hold that thought.
+    - heading "What libertarian free will is actually asking for" [level=2] [ref=e47]
+    - paragraph [ref=e48]:
+      - text: Opposite compatibilism is a stance called
+      - emphasis [ref=e49]: libertarian free will
+      - text: (no relation to the political sense). The libertarian demand is that free will requires the genuine ability to have done otherwise
+      - emphasis [ref=e50]: under identical conditions
+      - text: . Not metaphorically. Not counterfactually. Really. Given the exact state of the universe, including your brain, including your reasons, including the laws of nature, a truly free agent must be able to have chosen differently.
+    - paragraph [ref=e51]: Let's take this demand seriously for a moment. What, exactly, would need to vary in order for the choice to come out differently?
+    - paragraph [ref=e52]: If the past is fixed, then the state of your brain at the moment of decision is fixed. If your brain is fixed, then the pattern of neural firing it was doing — what we'd call your "deliberation" — is also fixed. If the deliberation is fixed, then the output of the deliberation is fixed. If the output is fixed, then the choice is fixed. Every piece is nailed down, because each piece follows from the previous one.
+    - paragraph [ref=e53]:
+      - text: So for the libertarian demand to be satisfied,
+      - emphasis [ref=e54]: something
+      - text: has to vary that isn't covered by "the past" or "your brain" or "the laws." There has to be a piece of the picture that isn't in the picture. There has to be a
+      - emphasis [ref=e55]: you
+      - text: that is somehow separate from the physical process and capable of making the process produce a different output, without being different in any way that would show up in a physical description.
+    - paragraph [ref=e56]: That's a ghost in the machine. Specifically, it's a ghost whose job is to override the machine without being part of the machine's description. And when you state the requirement that plainly, you can feel how much it is asking for.
+    - heading "The chooser behind the chooser" [level=2] [ref=e57]
+    - paragraph [ref=e58]: Here is why I think this framing is a category error and not just a weird metaphysics. If the chooser is separate from the physical process, then the chooser itself must either be determined by something (in which case, where's the freedom?) or be random (in which case, it isn't a chooser, it's a dice roll). There is no third option. Every attempt to describe a "free chooser" ends up being either a hidden determinist process or a hidden randomizer, wearing a robe.
+    - paragraph [ref=e59]:
+      - text: And if the chooser is a hidden process, then we can ask the same libertarian question of
+      - emphasis [ref=e60]: it
+      - text: ": given the chooser's state and its history, could it have chosen differently? And we are back where we started, with the regress one level deeper. There's a chooser behind the chooser behind the chooser. At every level we ask for \"freedom\", and at every level the answer is either \"no, it's determined\" or \"no, it's random\", and we never reach a level where freedom lives. Libertarian free will is not a solution; it's a request for a thing that can't exist."
+    - figure [ref=e61]:
+      - generic [ref=e64]:
+        - checkbox "add a separate chooser" [ref=e65]
+        - generic [ref=e66]: add a separate chooser
+      - generic [ref=e67]:
+        - generic [ref=e68]: Fig 1
+        - text: "A decision being made. Inputs (memory, reasons, values) flow into a central process, which produces an output. Label the whole process \"you\" and you have compatibilist free will — nothing is missing. Toggle the box and the libertarian version appears: a chooser floats above the process with no inputs of its own. What tells it what to choose? Nothing visible. That's the problem."
+    - heading "It's not just semantics" [level=2] [ref=e69]
+    - paragraph [ref=e70]:
+      - text: Here's the usual pushback. "Fine, but all you've done is redefine free will so that it means 'the process that produced your choice was inside your skull'. That's just a semantic move. You haven't shown I have any
+      - emphasis [ref=e71]: real
+      - text: freedom."
+    - paragraph [ref=e72]: I want to take this pushback seriously, because it feels right, and yet I think it's wrong, and the reason is worth stating precisely.
+    - paragraph [ref=e73]: It's not a semantic move. It's a claim about which of two models is coherent. The compatibilist model says "you are the process". That model has no gaps — every part of the story has a referent in the physical world. The libertarian model says "you are something that can override the process without being part of it". That model has a gap — a chooser-sized hole that doesn't get filled by anything. You can call that hole "the self" or "the will" or "the soul", but naming it doesn't supply it with an internal structure. And the moment you try to supply one, you're back to a process, and you're back to compatibilism whether you like it or not.
+    - paragraph [ref=e74]: So the argument isn't "let's use the word 'free' for the thing that actually exists". It's "one of these two stories is internally consistent and the other one has a blank spot in the middle where the thing we care about is supposed to live". The compatibilist wins not because she gets to pick the dictionary, but because she's describing something real. The libertarian is describing a requirement.
+    - generic [ref=e75]:
+      - generic [ref=e76]: Honest tension
+      - paragraph [ref=e77]:
+        - text: Compatibilism doesn't rescue
+        - emphasis [ref=e78]: ultimate
+        - text: "moral responsibility in the sense of \"deep down, you deserve your praise and blame\" — there's a cottage industry of philosophers (Galen Strawson, Derk Pereboom) who think it doesn't, and they may be right. What compatibilism does rescue is the pragmatic framework: the one that lets us talk about agents, reasons, deliberation, growth, regret, and learning. That's not everything. But it is more than I used to think it was, and it is enough to act on."
+    - heading "What survives" [level=2] [ref=e79]
+    - paragraph [ref=e80]: Here's what I mean by "enough to act on". Everything that makes "having free will" matter in practice survives the compatibilist reframing untouched.
+    - paragraph [ref=e81]:
+      - text: You deliberate. That is a real thing your brain does. The deliberation is caused — yes — but that's what makes it
+      - emphasis [ref=e82]: yours
+      - text: . A random coin flip isn't a decision because no process produced it. Your decisions are decisions because a process did.
+    - paragraph [ref=e83]: You regret. That's a real thing your brain does after the fact, and it's not undermined by determinism. Regret is the signal that your process has learned something that would have produced a different output, and the next similar situation will go differently because of it. Regret is how the causal chain teaches itself. A creature without regret would never grow.
+    - paragraph [ref=e84]:
+      - text: "You are responsible for what you do. Not in a metaphysical sense of cosmic deservedness, but in the pragmatic sense that matters in every actual human interaction: your actions flowed from your reasons, and holding you accountable changes your future reasons, and that loop is how societies work. Nothing about determinism breaks this loop. The loop"
+      - emphasis [ref=e85]: runs on
+      - text: determinism.
+    - paragraph [ref=e86]: And you can change. Every time you encounter a new idea, every time you read a book that shifts how you think, every time you have a conversation that reframes a long-standing belief, the process that is you updates. The update is real. You are a different person afterward. Determinism does not stop this; it's what makes it possible. Only a determined process can carry information from one moment to the next and use it. A truly un-determined chooser would be amnesiac by design.
+    - heading "The line I've landed on" [level=2] [ref=e87]
+    - paragraph [ref=e88]: Here is what I believe, after thinking about this for longer than I care to admit.
+    - paragraph [ref=e89]: The standard argument against free will is correct about its premises and wrong about its conclusion, because the conclusion depends on a silent assumption the premises don't justify. The silent assumption is that "you" means something separable from the causal history of your brain. It doesn't. Once you put "you" back inside the causal history, the question "did you do it freely?" stops being "did the universe allow you to override its laws?" and starts being "was the decision produced by the process that constitutes you, operating without external coercion?" — which is a question with a clean yes-or-no answer in every case you actually care about.
+    - paragraph [ref=e90]:
+      - text: Determinism does not destroy agency. It explains what agency is made of. And the libertarian demand — that you could have done otherwise under identical conditions, including identical
+      - emphasis [ref=e91]: you
+      - text: — is not a deeper kind of freedom we're missing. It's a contradiction disguised as an aspiration, a request for a ghost that isn't there and never could be.
+    - paragraph [ref=e92]: "If you were hoping for a verdict: yes, you have free will. In the only sense that was ever going to be coherent. It might not be the one you were picturing when you first asked the question, but it is the one that actually matters in practice, which is a better deal than it looks."
+    - separator [ref=e93]
+    - paragraph [ref=e94]:
+      - text: This is the first philosophy-leaning post I've written for this site, and I'd love to hear whether it landed cleanly or whether I papered over something important —
+      - link "hi@rnader.com" [ref=e95] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: . The
+      - link "time-as-a-direction post" [ref=e96] [cursor=pointer]:
+        - /url: /posts/time-dimension.html
+      - text: "is the physics-side companion to this one: same habit of refusing to take a word at face value, applied to \"now\" instead of \"you\"."
+  - contentinfo [ref=e97]:
+    - paragraph [ref=e99]:
+      - link "← back to home" [ref=e100] [cursor=pointer]:
+        - /url: ../
+      - text: 0 frameworks. Plain HTML, CSS and vanilla JS.

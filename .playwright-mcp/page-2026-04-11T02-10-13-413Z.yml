@@ -1,0 +1,47 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Efeméride" [ref=e3] [cursor=pointer]:
+      - /url: /
+    - generic [ref=e4]:
+      - link "Ensaios" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - link "Sobre" [ref=e6] [cursor=pointer]:
+        - /url: "#sobre"
+  - main [ref=e7]:
+    - generic [ref=e8]:
+      - heading "Efeméride" [level=1] [ref=e9]
+      - paragraph [ref=e10]: Ensaios interativos sobre as ideias que sustentam a ciência, a computação e o mundo que elas construíram.
+    - list [ref=e11]:
+      - listitem [ref=e12]:
+        - generic [ref=e13]: Mecânica Celeste · 12 min
+        - heading "A Geometria Oculta das Órbitas" [level=2] [ref=e14]:
+          - link "A Geometria Oculta das Órbitas" [ref=e15] [cursor=pointer]:
+            - /url: /orbitas
+        - paragraph [ref=e16]: Por que os planetas traçam elipses, e não círculos — e o que um monge alemão descobriu ao olhar para Marte por vinte anos.
+      - listitem [ref=e17]:
+        - generic [ref=e18]: Aprendizado de máquina · 10 min
+        - heading "Como uma Rede Neural Pensa" [level=2] [ref=e19]:
+          - link "Como uma Rede Neural Pensa" [ref=e20] [cursor=pointer]:
+            - /url: /redes-neurais
+        - paragraph [ref=e21]: Não há magia. Há uma linha — e depois várias linhas, dobradas umas sobre as outras até que o impossível se torne possível.
+      - listitem [ref=e22]:
+        - generic [ref=e23]: Análise de sinais · 11 min
+        - heading "Fourier Sem Matemática" [level=2] [ref=e24]:
+          - link "Fourier Sem Matemática" [ref=e25] [cursor=pointer]:
+            - /url: /fourier
+        - paragraph [ref=e26]: Qualquer forma que se repita pode ser construída somando círculos girando. Isto é, provavelmente, a afirmação mais estranha da matemática do século XIX — e também uma das mais úteis.
+  - contentinfo [ref=e27]:
+    - paragraph [ref=e28]: Efeméride · Ensaios interativos · 2026
+  - generic [ref=e31]:
+    - button "Menu" [ref=e32]:
+      - img [ref=e34]
+      - generic: Menu
+    - button "Inspect" [ref=e38]:
+      - img [ref=e40]
+      - generic: Inspect
+    - button "Audit" [ref=e42]:
+      - img [ref=e44]
+      - generic: Audit
+    - button "Settings" [ref=e47]:
+      - img [ref=e49]
+      - generic: Settings

@@ -1,0 +1,107 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e16]:
+    - generic [ref=e17]:
+      - heading "Gamifying cooperation" [level=1] [ref=e18]
+      - paragraph [ref=e19]:
+        - time [ref=e20]: 2026 · Apr 12
+        - text: · 7 min read · Essay
+    - paragraph [ref=e21]: If you look at political extremism and think "this is a failure of character" or "we just need better people", you are making an unforced mistake. Extremism is not a failure of character. It is a perfectly rational response to the incentive structure that currently governs democratic politics. The system rewards it. Anyone who doesn't play that way loses to someone who does, and after enough election cycles, the people who didn't play that way are gone. The remaining players are exactly the ones the system selected for.
+    - paragraph [ref=e22]: "This sounds fatalistic, but it's actually the opposite. If extremism is a consequence of incentives, you don't have to reform the players. You have to reform the incentives. And the nice thing about incentive structures is that they're engineering objects — you can sketch out the payoffs, compute the equilibrium, tweak the numbers, and see what falls out. This post is about one such tweak. A small one. Maybe the smallest. The tweak is: tie campaign funding to cross-party cooperation."
+    - paragraph [ref=e23]:
+      - text: I don't think it's an original idea (some version of it gets floated every few years), and I'm going to end up fairly skeptical of it by the end. But the exercise of thinking through
+      - emphasis [ref=e24]: why
+      - text: it might work and
+      - emphasis [ref=e25]: how
+      - text: it could fail is, I think, more valuable than another round of moral hectoring about the state of political discourse. The discourse isn't the problem. The payoff matrix is the problem.
+    - heading "The game as it is" [level=2] [ref=e26]
+    - paragraph [ref=e27]:
+      - text: Picture two parties. Each has a choice, in any given legislative fight, between
+      - emphasis [ref=e28]: cooperate
+      - text: (vote for a compromise that includes pieces of the other party's priorities) and
+      - emphasis [ref=e29]: defect
+      - text: (block the bill, blame the other side, rally the base).
+    - paragraph [ref=e30]: Under the rules that currently apply, the payoff structure looks something like this. If both parties cooperate, a moderate bill passes. Both parties get a little credit, but the coverage is boring — "they worked together" doesn't make the evening news — and both bases grumble that their party compromised. If one defects and the other cooperates, the defector gets to look tough, blame the other side's moderation, and fundraise off the outrage; the cooperator looks weak. If both defect, nothing passes, each side blames the other, and each gets to fundraise off the story that "the other side is destroying America".
+    - paragraph [ref=e31]: "If you write down the numbers in any reasonable way, you get a classic prisoner's dilemma. Defection dominates cooperation, which means: regardless of what the other side does, you're better off defecting. The payoff matrix makes the choice for you. The only stable outcome is mutual defection, and that's what we see."
+    - paragraph [ref=e32]: "This is why moral appeals don't work. A moral appeal says: \"please accept the lower payoff in exchange for being a good citizen.\" Maybe the first cohort of politicians does that, and they accept the worse outcome. But the system punishes them for it. They get primaried. They lose their seats. The ones who didn't accept the worse outcome end up running the show. Decades of \"why can't they just get along\" commentary have failed for a reason that is not about human nature. It's about selection."
+    - heading "The fix, in one sentence" [level=2] [ref=e33]
+    - paragraph [ref=e34]:
+      - text: Here it is.
+      - emphasis [ref=e35]: Tie campaign funding — or any resource that actually matters to running for office — to a measurable record of cross-party bill support.
+    - paragraph [ref=e36]:
+      - text: The mechanism could look like many things. A public campaign finance pool that scales with the fraction of your votes that are cast for bipartisan legislation. A formula where bills passed with cross-aisle support generate more "campaign credit" for both parties than bills passed along party lines. A penalty for pure obstruction — blocking a bill without proposing an alternative reduces your next round's resource allocation. The specific design doesn't matter for the argument. What matters is that
+      - emphasis [ref=e37]: cooperating
+      - text: now has a direct, material payoff that defection doesn't, and that payoff is large enough to change what the dominant strategy is.
+    - paragraph [ref=e38]: If the bonus is big enough, the matrix flips. Cooperation-cooperation becomes the best outcome for both sides, because the added funding outweighs the benefit of making the other side look bad. Neither party wants to unilaterally defect, because defection costs you the bonus you'd have gotten from cooperating, and the other side's cooperation gives them more resources for the next cycle than your defection gives you attention.
+    - paragraph [ref=e39]:
+      - text: The interesting thing about this is that it has a
+      - emphasis [ref=e40]: threshold
+      - text: . Below a certain level, the bonus isn't big enough to overcome the reasons to defect, and nothing changes. Above that level, the equilibrium flips cleanly. You can watch it happen in the little animation below.
+    - figure [ref=e41]:
+      - generic [ref=e44]:
+        - generic [ref=e45]: cooperation bonus — 0
+        - slider "cooperation bonus — 0" [ref=e46] [cursor=pointer]: "0"
+      - generic [ref=e47]:
+        - generic [ref=e48]: Fig 1
+        - text: "A prisoner's-dilemma-style payoff matrix between two parties. The left number in each cell is A's payoff, the right is B's. The \"cooperation bonus\" slider adds a constant to any cell where a party cooperated. At bonus 0 the Nash equilibrium is defect-defect (red). As the bonus grows, the equilibrium walks: there's a threshold where cooperate-cooperate becomes stable (green). Notice how sharp the threshold is."
+    - heading "How you count \"cooperation\"" [level=2] [ref=e49]
+    - paragraph [ref=e50]: This is where the plan gets hard, and I don't want to pretend it doesn't. Measuring cooperation in a way that can't be gamed is a genuine design problem. Here are the traps I can think of, in roughly the order they'd hit.
+    - paragraph [ref=e51]: Symbolic votes. Parties could game the system by cooperating on low-stakes procedural votes — naming post offices, renewing holiday resolutions, etc. — while defecting on anything that mattered. The fix is to weight votes by substance. This is hard to automate and politically sensitive, because any weighting scheme is itself a political choice, but some version of it (bills flagged by nonpartisan staff as "significant") is probably necessary.
+    - paragraph [ref=e52]:
+      - text: Fake bills. The more devious failure mode is that the majority party introduces deliberately weak bills, gets a few members of the minority to vote for them, claims the cooperation bonus, and counts it as bipartisan. The fix here is to also measure the
+      - emphasis [ref=e53]: amount
+      - text: of cross-party support — not just "at least one person from the other party voted yes" but a real fraction. Maybe 30% or more of the minority party has to vote yes for a bill to count. Pick a number and defend it.
+    - paragraph [ref=e54]:
+      - text: Obstruction without alternatives. A party can refuse to cooperate without proposing anything, and currently pay no cost. Any serious version of this mechanism would penalize that — if you block a bill, you have to offer a counter-proposal that you'd be willing to pass. This is hard to formalize, but some version of "you can vote no on the other side's bill, but you can't vote no without
+      - emphasis [ref=e55]: also
+      - text: putting forward your own version for a vote" is tractable.
+    - paragraph [ref=e56]: Gaming the measurement itself. Any numeric measurement will be reverse-engineered by parties whose campaigns depend on it. That's how Goodhart's Law works. The mitigation isn't to make the measurement perfect — there's no such thing — it's to have the measurement overseen by a body that's insulated from the parties it measures, and to update the rules when gaming becomes visible. Neither of these is easy. Both are possible.
+    - generic [ref=e57]:
+      - generic [ref=e58]: Honest tension
+      - paragraph [ref=e59]:
+        - text: The honest version of this proposal is that it requires the people who benefit from the current system to vote for a change to the current system. The same people whose power depends on defection would have to pass a law that rewards cooperation. This is the kind of problem the literature calls
+        - emphasis [ref=e60]: second-order free-riding
+        - text: and it's genuinely hard. I don't have a clever answer. The best I can offer is that the mechanism could start small — a pilot at the state level, say — and scale up if it works. Not glorious, but possible.
+    - heading "Why this might still fail" [level=2] [ref=e61]
+    - paragraph [ref=e62]: Let me be honest about the ways this could go wrong, because I don't want to sell a solution I don't fully believe in.
+    - paragraph [ref=e63]:
+      - text: The base problem. Even if the funding incentive flips the equilibrium among
+      - emphasis [ref=e64]: politicians
+      - text: ", the primary voter base might still punish cooperation. A representative who votes yes on a compromise bill might get extra campaign money but also face a primary challenge from someone promising purity. In that case, the cooperation bonus has to be large enough to outweigh the primary risk, and I don't know what that number looks like. It might be bigger than any feasible public finance scheme."
+    - paragraph [ref=e65]: The measurement problem. Every concrete proposal for measuring "cooperation" I've seen has holes. Most of them could be refined, but "refinement" is itself a political process that the current players control. This isn't a reason to give up, but it is a reason to be humble about timelines.
+    - paragraph [ref=e66]: The shadow of the future. Game-theoretic results about cooperation usually assume that the same players will interact repeatedly, and that they care about future payoffs nearly as much as present ones. In electoral politics, the "future" is two years, not fifty, and a politician discounts outcomes beyond their next election pretty steeply. A cooperation bonus that pays out over ten years might not influence a politician whose horizon is two.
+    - paragraph [ref=e67]: The coordination failure. The whole premise assumes both parties can be affected by the mechanism. If one party captures the measurement body and uses it selectively against the other, you've introduced a new weapon instead of a new equilibrium. The risk scales with how much discretion the measuring body has.
+    - heading "Why I still think it's worth trying" [level=2] [ref=e68]
+    - paragraph [ref=e69]: I want to end on the reason I keep coming back to this idea despite all those caveats. It's that the thing we actually need to change — the incentive structure — is the thing most "fix democracy" proposals refuse to touch. Everyone wants to change the media environment, the social media algorithms, the quality of the candidates, the rules of redistricting, the voter demographics. These are all reasonable things to work on, but they are all downstream of the payoff matrix. If the matrix keeps rewarding defection, none of the downstream fixes matter for long.
+    - paragraph [ref=e70]: A cooperation bonus is upstream. It touches the payoff matrix directly. If you tweak the matrix, you change the strategy without having to change the players, the media, or the voters. That's a hell of a lot of leverage for a single policy. If it works, it's dramatic. If it fails, it fails for reasons we can learn from. Either way, the cost of trying a pilot is cheap compared to another decade of moral appeals.
+    - paragraph [ref=e71]: I don't know if this is the right move. I'm not confident enough to say "we should do this." But I am confident that the conversation about political dysfunction should move from "these people are awful" to "this matrix is awful," and that most of the energy currently spent on the first question would be better spent on the second.
+    - separator [ref=e72]
+    - paragraph [ref=e73]:
+      - text: If you have a more robust version of this mechanism, or if you think I'm wrong about the upstream-ness of the payoff matrix, tell me —
+      - link "hi@rnader.com" [ref=e74] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: . The
+      - link "free-will post" [ref=e75] [cursor=pointer]:
+        - /url: /posts/free-will.html
+      - text: "is the philosophical sibling of this one: same habit of blaming the structure rather than the agent."
+  - contentinfo [ref=e76]:
+    - paragraph [ref=e78]:
+      - link "← back to home" [ref=e79] [cursor=pointer]:
+        - /url: ../
+      - text: 0 frameworks. Plain HTML, CSS and vanilla JS.

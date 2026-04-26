@@ -1,0 +1,90 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "R. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+      - generic [ref=e6]:
+        - navigation [ref=e7]:
+          - link "Writing" [ref=e8] [cursor=pointer]:
+            - /url: ../#writing
+          - link "Notes" [ref=e9] [cursor=pointer]:
+            - /url: ../#notes
+          - link "Links" [ref=e10] [cursor=pointer]:
+            - /url: ../#links
+          - link "About" [ref=e11] [cursor=pointer]:
+            - /url: ../#about
+        - generic [ref=e12]:
+          - link "← voltar" [ref=e14] [cursor=pointer]:
+            - /url: ../
+          - button "Trocar tema" [ref=e15] [cursor=pointer]: Auto
+  - article [ref=e16]:
+    - generic [ref=e17]:
+      - heading "Por que eu parei de acreditar em roadmaps" [level=1] [ref=e18]
+      - paragraph [ref=e19]:
+        - time [ref=e20]: 2026 · Abr 08
+        - text: · 12 min de leitura · Produto
+    - paragraph [ref=e21]: "Passei a primeira metade da minha carreira tentando fazer roadmaps funcionarem e a segunda metade tentando entender por que eles raramente funcionam. A conclusão é chata: roadmaps são uma ferramenta de comunicação fingindo ser uma ferramenta de planejamento, e essa confusão custa caro."
+    - paragraph [ref=e22]: Não estou dizendo pra parar de planejar. Estou dizendo pra parar de confundir o mapa com o território — especialmente quando o território tá em chamas metade do tempo.
+    - complementary [ref=e23]: Essa metáfora é do Korzybski, 1931. Ainda assim, cinquenta anos depois, a gente continua pintando mapas em cima de vulcões.
+    - paragraph
+    - heading "O problema não é o roadmap#" [level=2] [ref=e24]:
+      - text: O problema não é o roadmap
+      - link "#" [ref=e25] [cursor=pointer]:
+        - /url: "#o-problema"
+    - paragraph [ref=e26]: "O problema é o contrato implícito. Quando você desenha um roadmap de 6 meses, três coisas acontecem ao mesmo tempo:"
+    - list [ref=e27]:
+      - listitem [ref=e28]: – Engenharia lê como um cronograma de entregas
+      - listitem [ref=e29]: – Vendas lê como uma promessa ao cliente
+      - listitem [ref=e30]: – Liderança lê como um compromisso de execução
+    - paragraph [ref=e31]: Três contratos diferentes, um único artefato. Quando a realidade muda — e ela sempre muda — você não tem como renegociar um sem quebrar os outros dois.
+    - generic [ref=e32]:
+      - generic [ref=e33]: Trivia
+      - paragraph [ref=e34]: O termo "roadmap" veio do Departamento de Transportes dos EUA nos anos 40. Era literalmente um mapa de estradas. A metáfora assumia terreno estável. Software não é terreno estável.
+    - heading "O que funciona pra mim#" [level=2] [ref=e35]:
+      - text: O que funciona pra mim
+      - link "#" [ref=e36] [cursor=pointer]:
+        - /url: "#o-que-funciona"
+    - paragraph [ref=e37]: "Depois de anos queimando as mãos, cheguei num modelo de três camadas que separa o que é fixo do que é negociável:"
+    - list [ref=e38]:
+      - listitem [ref=e39]:
+        - strong [ref=e40]: Direção
+        - text: — para onde o produto tá indo nos próximos 12 meses. Muda raramente. Uma frase.
+      - listitem [ref=e41]:
+        - strong [ref=e42]: Apostas
+        - text: — três a cinco hipóteses que a gente tá testando agora. Muda por trimestre.
+      - listitem [ref=e43]:
+        - strong [ref=e44]: Trabalho ativo
+        - text: — o que tá em execução essa semana. Muda toda segunda.
+    - paragraph [ref=e45]: A chave é que cada camada tem uma frequência de mudança diferente e um público diferente. Liderança olha pra direção. Times olham pras apostas. Engenheiros olham pro trabalho ativo.
+    - complementary [ref=e46]: Shreyas Doshi chama isso de "time horizons of decision". Vale ler tudo que ele escreveu sobre isso.
+    - paragraph
+    - heading "Um exemplo concreto#" [level=2] [ref=e47]:
+      - text: Um exemplo concreto
+      - link "#" [ref=e48] [cursor=pointer]:
+        - /url: "#exemplo"
+    - paragraph [ref=e49]: No último trimestre, a gente tinha uma aposta que era "agentes conseguem operar ferramentas de CRM sem supervisão humana em 80% dos casos". Essa aposta gerou cinco semanas de trabalho ativo antes de a gente concluir que 80% era agressivo demais — o número real ficou em 62%.
+    - blockquote [ref=e50]:
+      - paragraph [ref=e51]: O ponto não é acertar a previsão. O ponto é que a gente errou cedo, sem ter prometido nada pra cliente nenhum, e pôde pivotar pra uma aposta nova no trimestre seguinte sem ter que pedir desculpa.
+      - generic [ref=e52]: — Eu, pro meu time, na retro de Março
+    - paragraph [ref=e53]: Se isso tivesse sido um item de roadmap com data de entrega, o movimento seria bem mais doloroso.
+    - heading "Como comunicar pra fora#" [level=2] [ref=e54]:
+      - text: Como comunicar pra fora
+      - link "#" [ref=e55] [cursor=pointer]:
+        - /url: "#como-comunicar"
+    - paragraph [ref=e56]: "A parte mais difícil não é o processo interno. É explicar pra gente de fora — vendas, investidores, clientes — por que você não tem um Gantt bonito pra mostrar. O script que funcionou comigo:"
+    - code [ref=e58]: "Direção: [frase de uma linha] Estamos apostando em: [3 coisas] Essa semana: [o que tá saindo] O que vai mudar: [quase tudo abaixo da direção]"
+    - paragraph [ref=e59]: Ninguém reclama quando você é honesto sobre o que é fixo e o que é mutável. As pessoas reclamam quando você promete fixidez e entrega mutabilidade.
+    - generic [ref=e60]:
+      - generic [ref=e61]: Nota
+      - paragraph [ref=e62]: Esse modelo não funciona em todo lugar. Se você tá construindo hardware, ou trabalha num setor regulado, ou tem dependências externas rígidas — roadmap tradicional ainda faz sentido. O que eu tô descrevendo vale pra software de produto em ambiente de alta incerteza.
+    - separator [ref=e63]
+    - paragraph [ref=e64]:
+      - text: Se você leu até aqui e ficou com alguma dúvida, me escreve —
+      - link "hi@rnader.com" [ref=e65] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: . É a melhor forma de me fazer escrever mais sobre um assunto.
+  - contentinfo [ref=e66]:
+    - paragraph [ref=e68]:
+      - link "← voltar pra home" [ref=e69] [cursor=pointer]:
+        - /url: ../
+      - text: 0 frameworks. HTML e CSS puros em dois arquivos estáticos.

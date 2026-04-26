@@ -1,0 +1,632 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: ../#writing
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: ../#notes
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: ../#links
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: ../#about
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e16]:
+    - generic [ref=e17]:
+      - heading "Beyond Transformers" [level=1] [ref=e18]
+      - paragraph [ref=e19]: "The Transformer won for real reasons — parallelism, stability, predictable scaling. But its core design creates inefficiencies that compound at scale. Fourteen architectural bets on what could come next, across six axes: input, compute, memory, plasticity, continuous learning, and system design."
+      - paragraph [ref=e20]:
+        - time [ref=e21]: 2026 · Mar 15
+        - text: · 22 min read · Interactive · AI
+    - paragraph [ref=e22]: "The Transformer architecture has dominated AI since 2017. Its core mechanism — self-attention — compares every token to every other token in the context window, producing O(n²·d) cost per layer. This scales poorly: a 128k-token context means an attention matrix with over 16 billion entries per head, per layer."
+    - figure [ref=e23]:
+      - generic [ref=e26]:
+        - generic [ref=e27]: context length — 8,192 tokens
+        - slider "context length — 8,192 tokens" [ref=e28] [cursor=pointer]: "13"
+      - generic [ref=e29]:
+        - generic [ref=e30]: Fig 1
+        - text: Attention has to compare every token to every other token, so cost scales as n². Drag the slider and watch the matrix grow — doubling the context quadruples the work.
+    - paragraph [ref=e31]: "Before proposing alternatives, it's worth understanding why Transformers won:"
+    - list [ref=e32]:
+      - listitem [ref=e33]:
+        - text: –
+        - strong [ref=e34]: Parallelism.
+        - text: Unlike RNNs, all tokens can be processed simultaneously during training. This maps perfectly to GPU hardware.
+      - listitem [ref=e35]:
+        - text: –
+        - strong [ref=e36]: Gradient stability.
+        - text: Residual connections and layer normalization give Transformers remarkably stable training dynamics at scale.
+      - listitem [ref=e37]:
+        - text: –
+        - strong [ref=e38]: Predictable scaling.
+        - text: Scaling laws (Kaplan et al., Hoffmann et al.) showed that performance improves predictably with compute, data, and parameters. This made billion-dollar training investments less risky.
+      - listitem [ref=e39]:
+        - text: –
+        - strong [ref=e40]: Mature ecosystem.
+        - text: Hardware, compilers, frameworks, and optimization techniques are all built around Transformers.
+    - paragraph [ref=e41]: These are real advantages. Any alternative architecture must either match them or offer gains large enough to justify the switching cost.
+    - paragraph [ref=e42]: That said, the Transformer's design carries structural inefficiencies that become increasingly costly at scale. Processing 100,000 tokens to answer a question that depends on 20 is not a feature — it's a limitation of the architecture. The ideas below explore directions that could address these limitations.
+    - complementary [ref=e43]: They are organized into six thematic axes, ordered from input processing to system-level design. Each includes prior work, open problems, and an honest feasibility assessment.
+    - paragraph
+    - separator [ref=e44]
+    - heading "Axis 1 — Input representation#" [level=2] [ref=e45]:
+      - text: Axis 1 — Input representation
+      - link "#" [ref=e46] [cursor=pointer]:
+        - /url: "#axis-1"
+    - heading "1A. Dynamic context-dependent tokenization#" [level=3] [ref=e47]:
+      - text: 1A. Dynamic context-dependent tokenization
+      - link "#" [ref=e48] [cursor=pointer]:
+        - /url: "#1a-dynamic-tokenization"
+    - paragraph [ref=e49]:
+      - strong [ref=e50]: Problem.
+      - text: Current tokenization (BPE, Unigram) is fixed after training. The same text always produces the same tokens regardless of context. This is statistically rigid — the optimal granularity of tokenization depends on the task and content, but the tokenizer can't adapt.
+    - paragraph [ref=e51]:
+      - strong [ref=e52]: Proposal.
+      - text: Replace fixed tokenization with a lightweight learned module that receives raw characters (or bytes) and dynamically groups them into variable-length units based on the current semantic context, trained end-to-end with the main model.
+    - paragraph [ref=e53]:
+      - strong [ref=e54]: Prior work.
+      - text: Byte-level models (ByT5, MegaByte) process raw bytes directly. CANINE operates at the character level. MegaByte uses a patch-based approach to group bytes before a large model processes them. These demonstrate that learned grouping is viable but show mixed results on efficiency vs. subword baselines.
+    - paragraph [ref=e55]:
+      - strong [ref=e56]: Open problem.
+      - text: Discrete grouping decisions create a non-differentiable boundary in end-to-end training. This requires techniques like Gumbel-Softmax or straight-through estimators, which add training complexity and can be unstable. The segmentation must also be stable enough that the main model can build consistent representations — noisy tokenization propagates as noise through the entire system.
+    - paragraph [ref=e57]:
+      - strong [ref=e58]: "Feasibility:"
+      - code [ref=e59]: near-term research
+      - text: — components exist, integration is the challenge.
+    - heading "1B. Bit-level universal input#" [level=3] [ref=e60]:
+      - text: 1B. Bit-level universal input
+      - link "#" [ref=e61] [cursor=pointer]:
+        - /url: "#1b-bit-level"
+    - paragraph [ref=e62]:
+      - strong [ref=e63]: Problem.
+      - text: "Current models receive modality-specific inputs: text tokens, image patches, audio spectrograms. Each modality has its own encoder. This creates hard boundaries between modalities that the model must learn to bridge."
+    - paragraph [ref=e64]:
+      - strong [ref=e65]: Proposal.
+      - text: Feed everything as raw binary sequences. Lightweight compression modules — likely specialized per modality structure — learn to group bits into meaningful units before the main model processes them. The main model's internal representation is homogeneous regardless of input modality.
+    - paragraph [ref=e66]:
+      - strong [ref=e67]: Prior work.
+      - text: Perceiver and Perceiver IO (Jaegle et al., 2021) accept arbitrary input modalities and project them into a shared latent space. This is conceptually similar but operates on preprocessed features rather than raw bits.
+    - generic [ref=e68]:
+      - generic [ref=e69]: Honest tension
+      - paragraph [ref=e70]: If you need modality-specific compression experts, you've reintroduced structural bias per modality — which is precisely what current architectures already do. The gain would be that internal representations are homogeneous after compression, but the input stage is no longer "pure bits." This idea is philosophically appealing but practically converges toward existing multimodal architectures with extra steps.
+    - paragraph [ref=e71]:
+      - strong [ref=e72]: Additional challenge.
+      - text: Sequence length explodes at the bit level. A 1024×1024 RGB image is ~25 million bits. Even with aggressive compression, the input pipeline must reduce this by 3–4 orders of magnitude before the main model can process it.
+    - paragraph [ref=e73]:
+      - strong [ref=e74]: "Feasibility:"
+      - code [ref=e75]: requires paradigm shift
+      - text: — interesting as a research direction, but likely impractical as described. A more realistic version is learned compression that operates on bytes or small byte groups rather than individual bits.
+    - separator [ref=e76]
+    - heading "Axis 2 — Adaptive compute#" [level=2] [ref=e77]:
+      - text: Axis 2 — Adaptive compute
+      - link "#" [ref=e78] [cursor=pointer]:
+        - /url: "#axis-2"
+    - heading "2A. Progressive internal context expansion#" [level=3] [ref=e79]:
+      - text: 2A. Progressive internal context expansion
+      - link "#" [ref=e80] [cursor=pointer]:
+        - /url: "#2a-progressive-context"
+    - paragraph [ref=e81]:
+      - strong [ref=e82]: Problem.
+      - text: Transformers process the entire context window for every response, even when the answer depends on only a few recent tokens. A question like "what's your name?" costs the same as "summarize everything we discussed about authentication."
+    - paragraph [ref=e83]:
+      - strong [ref=e84]: Proposal.
+      - text: The model starts by processing only the most recent portion of available context. It estimates whether this is sufficient to produce a confident response. If not, it progressively expands its active window — pulling in older context incrementally — until it reaches adequate confidence.
+    - figure [ref=e85]:
+      - generic [ref=e88]:
+        - generic [ref=e89]: question needs context reaching 3,200 tokens back
+        - slider "question needs context reaching 3,200 tokens back" [ref=e90] [cursor=pointer]: "3200"
+      - generic [ref=e91]:
+        - generic [ref=e92]: Fig 2
+        - text: A 100,000-token conversation with progressive expansion. The model keeps doubling its active window until it has enough history to be confident. Easy questions finish in one or two expansions; harder ones pull in more. Total processed context scales with what the question needs, not with what's available.
+    - paragraph [ref=e93]:
+      - strong [ref=e94]: Key difference from RAG.
+      - text: The entire history is already available. The expansion is internal, not a retrieval call to an external system.
+    - paragraph [ref=e95]:
+      - strong [ref=e96]: Prior work.
+      - text: Adaptive Computation Time (Graves, 2016) lets models decide how many computation steps to use per input. Universal Transformers apply variable depth per token. These address compute depth rather than context width, but the principle — allocate compute based on difficulty — is the same.
+    - paragraph [ref=e97]:
+      - strong [ref=e98]: Open problem.
+      - text: How does the model estimate confidence without having seen the full context? If it uses a sub-model to estimate sufficiency, that's additional cost. If it relies on its own uncertainty on partial context, it may not know what it's missing. This is a chicken-and-egg problem that the proposal must address explicitly.
+    - paragraph [ref=e99]:
+      - strong [ref=e100]: "Feasibility:"
+      - code [ref=e101]: near-term research
+      - text: — the core mechanism (speculative processing with expansion) is implementable. The confidence estimation is the hard part.
+    - heading "2B. Dynamic sparse activation#" [level=3] [ref=e102]:
+      - text: 2B. Dynamic sparse activation
+      - link "#" [ref=e103] [cursor=pointer]:
+        - /url: "#2b-sparse-activation"
+    - paragraph [ref=e104]:
+      - strong [ref=e105]: Problem.
+      - text: In dense models, every parameter is computed for every token. Empirically, many neurons are barely active for any given input.
+    - paragraph [ref=e106]:
+      - strong [ref=e107]: Proposal.
+      - text: A lightweight gating module analyzes each input and dynamically decides which blocks to activate. Unlike MoE, which has fixed expert boundaries, this allows activation patterns that vary per input.
+    - paragraph [ref=e108]:
+      - strong [ref=e109]: Prior work.
+      - text: Mixture of Experts (Shazeer et al., 2017; Lepikhin et al., 2020) is the dominant approach to conditional computation. Switch Transformer routes each token to one expert. Routing networks and early-exit strategies also reduce per-token compute.
+    - generic [ref=e110]:
+      - generic [ref=e111]: Honest tension
+      - paragraph [ref=e112]: For real computational savings on current GPU hardware, sparsity must be structured — aligned with matrix dimensions so entire blocks can be skipped. But structured sparsity with fixed block boundaries converges toward MoE. "Fluid, overlapping activation patterns" sounds appealing but doesn't produce real savings on current hardware because matrix multiplications still execute at full size regardless of how many values are zero.
+    - paragraph [ref=e113]:
+      - strong [ref=e114]: Possible resolution.
+      - text: Hardware is evolving. Structured sparsity support in GPUs (e.g., NVIDIA's 2:4 sparsity, Ampere architecture) is improving. If hardware catches up to fine-grained sparsity, the gap between "fluid" and "structured" narrows. But today, this idea is hardware-limited.
+    - paragraph [ref=e115]:
+      - strong [ref=e116]: "Feasibility:"
+      - code [ref=e117]: near-term research
+      - text: on structured variants;
+      - code [ref=e118]: requires paradigm shift
+      - text: for truly fluid activation on current hardware.
+    - separator [ref=e119]
+    - heading "Axis 3 — Memory architecture#" [level=2] [ref=e120]:
+      - text: Axis 3 — Memory architecture
+      - link "#" [ref=e121] [cursor=pointer]:
+        - /url: "#axis-3"
+    - paragraph [ref=e122]: This is the most interconnected axis. Rather than presenting separate ideas, it describes a progression from what's implementable today toward a longer-term vision.
+    - 'heading "Stage 1: Hierarchical compression before attention (implementable today)#" [level=3] [ref=e123]':
+      - text: "Stage 1: Hierarchical compression before attention (implementable today)"
+      - link "#" [ref=e124] [cursor=pointer]:
+        - /url: "#3-stage-1"
+    - paragraph [ref=e125]:
+      - strong [ref=e126]: Problem.
+      - text: A 100k-token context produces a massive attention matrix. Most comparisons are between tokens that have nothing to do with each other.
+    - paragraph [ref=e127]:
+      - strong [ref=e128]: Proposal.
+      - text: "Before running attention, apply a compression layer with a recency gradient:"
+    - list [ref=e129]:
+      - listitem [ref=e130]:
+        - text: –
+        - strong [ref=e131]: "Most recent tokens:"
+        - text: preserved at full resolution (1:1)
+      - listitem [ref=e132]:
+        - text: –
+        - strong [ref=e133]: "Older tokens:"
+        - text: grouped into compressed representations
+      - listitem [ref=e134]:
+        - text: –
+        - strong [ref=e135]: "Very old tokens:"
+        - text: heavily summarized
+    - paragraph [ref=e136]: Attention then runs on a much smaller sequence — for example, 2k recent tokens + 5k compressed representations instead of 100k raw tokens.
+    - figure [ref=e137]:
+      - generic [ref=e139]:
+        - generic [ref=e140]:
+          - generic [ref=e141]: recent window — 2,048 tokens at full resolution
+          - slider "recent window — 2,048 tokens at full resolution" [ref=e142] [cursor=pointer]: "2048"
+        - generic [ref=e143]:
+          - generic [ref=e144]: compression decay — 2.5
+          - slider "compression decay — 2.5" [ref=e145] [cursor=pointer]: "2.5"
+      - generic [ref=e146]:
+        - generic [ref=e147]: Fig 3
+        - text: Hierarchical compression on a 100,000-token context. Recent tokens stay at full resolution; older ones are progressively summarized. Adjust the window and the decay curve to see what attention actually sees — and what the quadratic cost drops to as a result.
+    - paragraph [ref=e148]:
+      - strong [ref=e149]: Prior work.
+      - text: Compressive Transformer (Rae et al., 2019) implements progressive compression with recency, storing compressed memories at multiple granularities. Landmark Attention uses special tokens as compressed summaries. Unlimiformer projects long sequences into a smaller set of memory slots. ALiBi and RoPE implement recency-based attention decay at the positional encoding level.
+    - paragraph [ref=e150]:
+      - strong [ref=e151]: What this adds beyond prior work.
+      - text: Most existing approaches use uniform compression or fixed-size memory slots. The proposal here is a smooth, continuous gradient where compression increases proportionally with distance. The difference may be incremental rather than fundamental — this should be validated empirically.
+    - paragraph [ref=e152]:
+      - strong [ref=e153]: "Feasibility:"
+      - code [ref=e154]: implementable today
+      - text: — all components exist. The engineering challenge is tuning the compression curve.
+    - 'heading "Stage 2: Three-layer memory system (near-term)#" [level=3] [ref=e155]':
+      - text: "Stage 2: Three-layer memory system (near-term)"
+      - link "#" [ref=e156] [cursor=pointer]:
+        - /url: "#3-stage-2"
+    - paragraph [ref=e157]:
+      - strong [ref=e158]: Problem.
+      - text: Even with compression, a single mechanism can't efficiently handle information across all time scales.
+    - paragraph [ref=e159]:
+      - strong [ref=e160]: Proposal.
+      - text: "Separate memory into three explicit layers:"
+    - table [ref=e161]:
+      - rowgroup [ref=e162]:
+        - row "Layer Mechanism Characteristics" [ref=e163]:
+          - columnheader "Layer" [ref=e164]
+          - columnheader "Mechanism" [ref=e165]
+          - columnheader "Characteristics" [ref=e166]
+      - rowgroup [ref=e167]:
+        - row "Short-term Local attention (last N tokens) Full fidelity, high cost per token, small N" [ref=e168]:
+          - cell "Short-term" [ref=e169]:
+            - strong [ref=e170]: Short-term
+          - cell "Local attention (last N tokens)" [ref=e171]
+          - cell "Full fidelity, high cost per token, small N" [ref=e172]
+        - row "Medium-term Recurrent / SSM compressed state Compressed, O(n) update cost, lossy" [ref=e173]:
+          - cell "Medium-term" [ref=e174]:
+            - strong [ref=e175]: Medium-term
+          - cell "Recurrent / SSM compressed state" [ref=e176]
+          - cell "Compressed, O(n) update cost, lossy" [ref=e177]
+        - row "Long-term External structured memory (RAG-like) Large capacity, on-demand retrieval, retrieval cost per query" [ref=e178]:
+          - cell "Long-term" [ref=e179]:
+            - strong [ref=e180]: Long-term
+          - cell "External structured memory (RAG-like)" [ref=e181]
+          - cell "Large capacity, on-demand retrieval, retrieval cost per query" [ref=e182]
+    - paragraph [ref=e183]:
+      - strong [ref=e184]: Prior work.
+      - text: Memorizing Transformers (Wu et al., 2022) add a kNN-based long-term memory. RETRO (Borgeaud et al., 2022) retrieves from a large database during generation. Hybrid models like Jamba (SSM + Transformer + MoE) combine attention with recurrent state but don't explicitly separate memory into tiers.
+    - paragraph [ref=e185]:
+      - strong [ref=e186]: "Open problems:"
+    - list [ref=e187]:
+      - listitem [ref=e188]: – Medium-term compression is lossy. If critical information lands in the compressed zone, the model loses access to details it may later need.
+      - listitem [ref=e189]: – Retrieval cost for the long-term layer is O(log n) with good indexing (not O(1)). Retrieved content then requires processing, adding latency.
+      - listitem [ref=e190]: – The boundaries between layers (what stays in short-term vs. gets compressed) need careful tuning or learning.
+    - paragraph [ref=e191]:
+      - strong [ref=e192]: "Feasibility:"
+      - code [ref=e193]: near-term research
+      - text: — individual components exist (local attention, SSM, RAG). The integration and the learned boundary management are the research problems.
+    - 'heading "Stage 3: Native hierarchical long-term memory (longer-term vision)#" [level=3] [ref=e194]':
+      - text: "Stage 3: Native hierarchical long-term memory (longer-term vision)"
+      - link "#" [ref=e195] [cursor=pointer]:
+        - /url: "#3-stage-3"
+    - paragraph [ref=e196]:
+      - strong [ref=e197]: Problem.
+      - text: "External memory (RAG) is a workaround with real limitations: retrieval noise, latency, and a disconnect between \"what the model knows\" and \"what it retrieves.\" But it also has genuine advantages — it's inspectable, updatable, auditable, and separates knowledge from computation."
+    - paragraph [ref=e198]:
+      - strong [ref=e199]: Longer-term direction.
+      - text: "If a model had true hierarchical memory built into the architecture, combined with continuous learning (see Axis 5), some RAG use cases could be absorbed natively. The model would:"
+    - list [ref=e200]:
+      - listitem [ref=e201]: – Store important information in compressed long-term internal memory
+      - listitem [ref=e202]: – Retrieve it through internal mechanisms
+      - listitem [ref=e203]: – Update it through online learning
+      - listitem [ref=e204]: – Forget irrelevant information through natural decay
+    - paragraph [ref=e205]:
+      - strong [ref=e206]: Why this doesn't simply "replace RAG".
+      - text: "Internal memory loses the auditability and inspectability of external memory. Internal retrieval also makes errors — they're just harder to debug. The practical direction is likely a hybrid: native memory for frequently-accessed, high-value patterns; external memory for large, evolving knowledge bases."
+    - paragraph [ref=e207]:
+      - strong [ref=e208]: "Feasibility:"
+      - code [ref=e209]: requires paradigm shift
+      - text: — requires solving hierarchical memory, dynamic capacity, and continuous learning simultaneously. Each is hard alone.
+    - separator [ref=e210]
+    - heading "Axis 4 — Model plasticity#" [level=2] [ref=e211]:
+      - text: Axis 4 — Model plasticity
+      - link "#" [ref=e212] [cursor=pointer]:
+        - /url: "#axis-4"
+    - heading "4A. Dynamic capacity#" [level=3] [ref=e213]:
+      - text: 4A. Dynamic capacity
+      - link "#" [ref=e214] [cursor=pointer]:
+        - /url: "#4a-dynamic-capacity"
+    - paragraph [ref=e215]:
+      - strong [ref=e216]: Problem.
+      - text: Current models have fixed parameter counts. A 7B model is always 7B, whether answering "hello" or reasoning through a complex proof.
+    - paragraph [ref=e217]:
+      - strong [ref=e218]: Proposal.
+      - text: "A model whose active capacity varies:"
+    - list [ref=e219]:
+      - listitem [ref=e220]: – Activates more structure when complexity demands it
+      - listitem [ref=e221]: – Compresses or deactivates regions that become irrelevant
+      - listitem [ref=e222]: – Maintains a persistent state that evolves over time
+    - paragraph [ref=e223]:
+      - strong [ref=e224]: Prior work.
+      - text: Adaptive Computation Time (Graves, 2016) allows variable computation depth. Early-exit strategies (DeeBERT, CALM) let tokens exit the network at different layers. Mixture of Depths (Raposo et al., 2024) routes tokens through variable numbers of layers.
+    - paragraph [ref=e225]:
+      - strong [ref=e226]: Honest assessment.
+      - text: "This idea is the vaguest in this collection. \"Grows when complexity demands it\" needs a concrete mechanism. Options include:"
+    - list [ref=e227]:
+      - listitem [ref=e228]: – Activating dormant parameter blocks (like MoE but with variable expert count)
+      - listitem [ref=e229]: – Dynamically adjusting network depth per input (Mixture of Depths)
+      - listitem [ref=e230]: – Expanding/contracting hidden dimensions
+    - paragraph [ref=e231]: "The brain analogy (neural pathways forming and dissolving) is appealing but misleading — biological plasticity operates over days/weeks through physical growth, not through runtime compute allocation. A more honest framing: this is about adaptive compute allocation, not true structural plasticity."
+    - paragraph [ref=e232]:
+      - strong [ref=e233]: "Feasibility:"
+      - code [ref=e234]: near-term research
+      - text: for depth/width variation;
+      - code [ref=e235]: requires paradigm shift
+      - text: for true structural growth/shrinkage at runtime.
+    - heading "4B. Variable-dimension embeddings#" [level=3] [ref=e236]:
+      - text: 4B. Variable-dimension embeddings
+      - link "#" [ref=e237] [cursor=pointer]:
+        - /url: "#4b-variable-embeddings"
+    - paragraph [ref=e238]:
+      - strong [ref=e239]: Problem.
+      - text: Every token is represented by a vector of fixed dimension (e.g., 4096 floats). The word "the" gets the same representational budget as a complex technical term.
+    - paragraph [ref=e240]:
+      - strong [ref=e241]: Proposal.
+      - text: Allow embedding dimensions to vary based on the informational complexity of each token or concept.
+    - paragraph [ref=e242]:
+      - strong [ref=e243]: Prior work.
+      - text: Matryoshka Representation Learning (Kusupati et al., 2022) trains embeddings where truncated prefixes remain useful, allowing variable-length representations at retrieval time. Product quantization and mixed-precision representations also address this partially.
+    - generic [ref=e244]:
+      - generic [ref=e245]: Fundamental problem
+      - paragraph [ref=e246]: This breaks standard matrix operations. You cannot multiply matrices with variable column widths on current hardware. This isn't a "challenge" — it's an architectural incompatibility. Possible workarounds (padding, packing, sparse representations) all either waste compute or require custom hardware support.
+    - paragraph [ref=e247]:
+      - strong [ref=e248]: More realistic variant.
+      - text: Rather than truly variable dimensions, use a fixed large dimension but with learned sparsity — most dimensions are zero for simple tokens, full for complex ones. Combined with structured sparsity support in hardware, this could achieve similar goals without breaking matrix operations.
+    - paragraph [ref=e249]:
+      - strong [ref=e250]: "Feasibility:"
+      - code [ref=e251]: requires paradigm shift
+      - text: as described. The sparse-embedding variant is
+      - code [ref=e252]: near-term research
+      - text: .
+    - separator [ref=e253]
+    - heading "Axis 5 — Continuous learning#" [level=2] [ref=e254]:
+      - text: Axis 5 — Continuous learning
+      - link "#" [ref=e255] [cursor=pointer]:
+        - /url: "#axis-5"
+    - heading "5A. Live models (online learning during deployment)#" [level=3] [ref=e256]:
+      - text: 5A. Live models (online learning during deployment)
+      - link "#" [ref=e257] [cursor=pointer]:
+        - /url: "#5a-live-models"
+    - paragraph [ref=e258]:
+      - strong [ref=e259]: Problem.
+      - text: Current models are frozen after training. They don't learn from use. Every conversation starts from the same weights.
+    - paragraph [ref=e260]:
+      - strong [ref=e261]: Proposal.
+      - text: Models that update specific parameters in real time during deployment, adapting to users, domains, and evolving information through selective, localized updates.
+    - paragraph [ref=e262]:
+      - strong [ref=e263]: Prior work.
+      - text: Online learning and continual learning are mature research fields. Elastic Weight Consolidation (Kirkpatrick et al., 2017) protects important weights during sequential learning. Progressive Neural Networks (Rusu et al., 2016) add capacity for new tasks. Test-Time Training (Sun et al., 2020) updates model parameters using self-supervised objectives on each test input.
+    - generic [ref=e264]:
+      - generic [ref=e265]: Central unsolved problem
+      - paragraph [ref=e266]:
+        - strong [ref=e267]: Catastrophic forgetting.
+        - text: This isn't a footnote risk — it's the primary reason this doesn't work reliably today. When a model updates weights to accommodate new information, it degrades on previously learned tasks. All existing mitigation strategies (EWC, replay buffers, parameter isolation) involve significant tradeoffs between plasticity and stability.
+    - paragraph [ref=e268]:
+      - strong [ref=e269]: Additional practical challenge.
+      - text: Even LoRA-style low-rank updates during inference require storing optimizer states and computing gradients, which significantly increases latency and memory. This is viable for slow background adaptation but not for real-time per-response updates.
+    - paragraph [ref=e270]:
+      - strong [ref=e271]: "Feasibility:"
+      - code [ref=e272]: near-term research
+      - text: for slow background adaptation (periodic fine-tuning, LoRA updates between sessions).
+      - code [ref=e273]: requires paradigm shift
+      - text: for true real-time per-response learning.
+    - heading "5B. Multiple evolving loss functions#" [level=3] [ref=e274]:
+      - text: 5B. Multiple evolving loss functions
+      - link "#" [ref=e275] [cursor=pointer]:
+        - /url: "#5b-loss-functions"
+    - paragraph [ref=e276]:
+      - strong [ref=e277]: Problem.
+      - text: Current models are trained with essentially one loss function (next-token prediction), sometimes augmented by a small set of fixed auxiliary objectives. Complex intelligence arguably requires balancing many competing objectives simultaneously.
+    - paragraph [ref=e278]:
+      - strong [ref=e279]: Proposal.
+      - text: "Instead of a single static loss:"
+    - list [ref=e280]:
+      - listitem [ref=e281]:
+        - text: –
+        - strong [ref=e282]: Multiple loss functions
+        - text: operating simultaneously (semantic coherence, factual consistency, task completion, self-consistency)
+      - listitem [ref=e283]:
+        - text: –
+        - strong [ref=e284]: Dynamic weighting
+        - text: — the importance of each loss changes based on context and task
+      - listitem [ref=e285]:
+        - text: –
+        - strong [ref=e286]: Self-generated objectives
+        - text: — the model learns to create its own sub-goals
+    - paragraph [ref=e287]:
+      - strong [ref=e288]: Prior work.
+      - text: Multi-task learning uses multiple losses routinely. GradNorm (Chen et al., 2018) dynamically balances task weights during training. Intrinsic motivation in RL (curiosity-driven exploration, Pathak et al., 2017) lets agents generate their own reward signals. RLHF/DPO already introduce secondary optimization beyond next-token prediction.
+    - paragraph [ref=e289]:
+      - strong [ref=e290]: Clarification on the brain analogy.
+      - text: The original motivation referenced the brain "developing its own loss functions." The brain's primary reward signals (dopamine, serotonin pathways) are largely hardwired by evolution, not self-generated. What does change over time is the learned association between stimuli and rewards — more analogous to learned reward shaping than to self-generated loss functions. The analogy should be stated more carefully.
+    - paragraph [ref=e291]:
+      - strong [ref=e292]: "Open problems:"
+    - list [ref=e293]:
+      - listitem [ref=e294]: – Multi-objective optimization with dynamic weights is notoriously hard to stabilize.
+      - listitem [ref=e295]: – "Self-generated objectives" risks reward hacking — the model optimizing for objectives that are easy to satisfy rather than genuinely useful.
+      - listitem [ref=e296]: – Defining what the loss functions should be remains a human design problem.
+    - paragraph [ref=e297]:
+      - strong [ref=e298]: "Feasibility:"
+      - code [ref=e299]: near-term research
+      - text: for dynamic multi-objective training.
+      - code [ref=e300]: speculative
+      - text: for truly self-generated objectives.
+    - separator [ref=e301]
+    - heading "Axis 6 — System architecture#" [level=2] [ref=e302]:
+      - text: Axis 6 — System architecture
+      - link "#" [ref=e303] [cursor=pointer]:
+        - /url: "#axis-6"
+    - 'heading "The practical endgame: small model + hierarchical memory + tools#" [level=3] [ref=e304]':
+      - text: "The practical endgame: small model + hierarchical memory + tools"
+      - link "#" [ref=e305] [cursor=pointer]:
+        - /url: "#practical-endgame"
+    - paragraph [ref=e306]: The previous axes describe individual architectural innovations. This axis describes how they combine into a practical system.
+    - paragraph [ref=e307]:
+      - strong [ref=e308]: Core thesis.
+      - text: "A model in the range of 15–30B active parameters, combined with:"
+    - list [ref=e309]:
+      - listitem [ref=e310]: – Hierarchical memory (Axis 3, Stages 1–2)
+      - listitem [ref=e311]: – External tools (code execution, calculators, search, verification)
+      - listitem [ref=e312]: – A reasoning loop (planner, self-reflection, chain-of-thought)
+    - paragraph [ref=e313]: could match the effective capability of much larger monolithic models across many tasks.
+    - paragraph [ref=e314]:
+      - strong [ref=e315]: Why this range?
+      - text: Below ~7B, models lack sufficient internal capacity for robust reasoning, compositional generalization, and reliable tool use. Between 7B and 30B, there's a significant jump in reasoning stability and robustness. Above 30B, the marginal gains per parameter diminish — especially when memory and tools handle knowledge retrieval and verification.
+    - paragraph [ref=e316]:
+      - strong [ref=e317]: What the model becomes.
+      - text: "A cognitive processor — not a knowledge store. It handles:"
+    - list [ref=e318]:
+      - listitem [ref=e319]: – Semantic understanding
+      - listitem [ref=e320]: – Short-range reasoning
+      - listitem [ref=e321]: – Tool orchestration
+      - listitem [ref=e322]: – Query formulation for memory retrieval
+    - paragraph [ref=e323]: Knowledge, long-range reasoning, and verification are externalized.
+    - paragraph [ref=e324]:
+      - strong [ref=e325]: What this doesn't solve.
+      - text: Robustness under ambiguity, graceful degradation when retrieval fails, and the meta-skill of knowing when to use which tool. These correlate with model scale in ways that are not yet fully understood.
+    - paragraph [ref=e326]:
+      - strong [ref=e327]: On active/continuous input.
+      - text: "Any model can receive continuous input streams — this is a deployment decision, not an architectural one. The architectural contribution comes from the other axes: efficient processing of continuous input (Axis 2), hierarchical storage of ongoing experience (Axis 3), and learning from observation (Axis 5). The \"always-on model\" is an integration challenge built on top of these capabilities."
+    - paragraph [ref=e328]:
+      - strong [ref=e329]: "Feasibility:"
+      - code [ref=e330]: implementable today
+      - text: with current open models (Llama, Qwen, Mistral at 20B–30B range) + existing memory/tool frameworks. The ceiling is engineering quality, not architectural impossibility.
+    - separator [ref=e331]
+    - heading "How these axes relate#" [level=2] [ref=e332]:
+      - text: How these axes relate
+      - link "#" [ref=e333] [cursor=pointer]:
+        - /url: "#how-axes-relate"
+    - paragraph [ref=e334]: "These axes are not a sequential pipeline. They operate at different levels and different phases:"
+    - code [ref=e336]: ┌─────────────────────────────────────────────────┐ │ TRAINING TIME │ │ │ │ Continuous Learning (Axis 5) │ │ - Multiple loss functions │ │ - Online weight updates │ │ │ ├─────────────────────────────────────────────────┤ │ ARCHITECTURE │ │ │ │ Input ──► Compute ──► Memory ──► Output │ │ (Axis 1) (Axis 2) (Axis 3) │ │ │ │ Model Plasticity (Axis 4) spans all stages │ │ │ ├─────────────────────────────────────────────────┤ │ SYSTEM LEVEL │ │ │ │ Small Model + Memory + Tools (Axis 6) │ │ - Orchestration │ │ - External memory │ │ - Tool use │ │ - Continuous input streams │ │ │ └─────────────────────────────────────────────────┘
+    - paragraph [ref=e337]:
+      - strong [ref=e338]: "Dependencies:"
+    - list [ref=e339]:
+      - listitem [ref=e340]: – Axis 2 (Adaptive Compute) benefits from Axis 1 (better input representation reduces sequence length)
+      - listitem [ref=e341]: – Axis 3 (Memory) benefits from Axis 2 (adaptive compute decides what to store vs. discard)
+      - listitem [ref=e342]: – Axis 5 (Continuous Learning) requires Axis 3 (somewhere to store what's learned)
+      - listitem [ref=e343]: – Axis 6 (System) integrates all other axes
+    - paragraph [ref=e344]:
+      - strong [ref=e345]: "Independent research tracks:"
+    - list [ref=e346]:
+      - listitem [ref=e347]: – Axes 1 and 4 can be pursued independently
+      - listitem [ref=e348]: – Axes 2 and 3 are tightly coupled
+      - listitem [ref=e349]: – Axis 5 benefits from all others but can be researched in isolation
+    - separator [ref=e350]
+    - heading "Feasibility summary#" [level=2] [ref=e351]:
+      - text: Feasibility summary
+      - link "#" [ref=e352] [cursor=pointer]:
+        - /url: "#feasibility-summary"
+    - table [ref=e353]:
+      - rowgroup [ref=e354]:
+        - row "Idea Feasibility Key blocker" [ref=e355]:
+          - columnheader "Idea" [ref=e356]
+          - columnheader "Feasibility" [ref=e357]
+          - columnheader "Key blocker" [ref=e358]
+      - rowgroup [ref=e359]:
+        - row "1A. Dynamic tokenization Near-term research Non-differentiable grouping, training stability" [ref=e360]:
+          - cell "1A. Dynamic tokenization" [ref=e361]
+          - cell "Near-term research" [ref=e362]
+          - cell "Non-differentiable grouping, training stability" [ref=e363]
+        - row "1B. Bit-level input Requires paradigm shift Sequence length, converges toward existing approaches" [ref=e364]:
+          - cell "1B. Bit-level input" [ref=e365]
+          - cell "Requires paradigm shift" [ref=e366]
+          - cell "Sequence length, converges toward existing approaches" [ref=e367]
+        - row "2A. Progressive context Near-term research Confidence estimation without full context" [ref=e368]:
+          - cell "2A. Progressive context" [ref=e369]
+          - cell "Near-term research" [ref=e370]
+          - cell "Confidence estimation without full context" [ref=e371]
+        - row "2B. Dynamic sparse activation Near-term (structured) Hardware support for fine-grained sparsity" [ref=e372]:
+          - cell "2B. Dynamic sparse activation" [ref=e373]
+          - cell "Near-term (structured)" [ref=e374]
+          - cell "Hardware support for fine-grained sparsity" [ref=e375]
+        - row "3-Stage 1. Hierarchical compression Implementable today Tuning the compression curve" [ref=e376]:
+          - cell "3-Stage 1. Hierarchical compression" [ref=e377]
+          - cell "Implementable today" [ref=e378]:
+            - strong [ref=e379]: Implementable today
+          - cell "Tuning the compression curve" [ref=e380]
+        - row "3-Stage 2. Three-layer memory Near-term research Integration and boundary management" [ref=e381]:
+          - cell "3-Stage 2. Three-layer memory" [ref=e382]
+          - cell "Near-term research" [ref=e383]
+          - cell "Integration and boundary management" [ref=e384]
+        - row "3-Stage 3. Native long-term memory Requires paradigm shift Catastrophic forgetting, auditability loss" [ref=e385]:
+          - cell "3-Stage 3. Native long-term memory" [ref=e386]
+          - cell "Requires paradigm shift" [ref=e387]
+          - cell "Catastrophic forgetting, auditability loss" [ref=e388]
+        - row "4A. Dynamic capacity Near-term (depth/width) Concrete mechanism for structural growth" [ref=e389]:
+          - cell "4A. Dynamic capacity" [ref=e390]
+          - cell "Near-term (depth/width)" [ref=e391]
+          - cell "Concrete mechanism for structural growth" [ref=e392]
+        - row "4B. Variable embeddings Requires paradigm shift Breaks matrix operations on current hardware" [ref=e393]:
+          - cell "4B. Variable embeddings" [ref=e394]
+          - cell "Requires paradigm shift" [ref=e395]
+          - cell "Breaks matrix operations on current hardware" [ref=e396]
+        - row "5A. Live models Near-term (background) Catastrophic forgetting for real-time updates" [ref=e397]:
+          - cell "5A. Live models" [ref=e398]
+          - cell "Near-term (background)" [ref=e399]
+          - cell "Catastrophic forgetting for real-time updates" [ref=e400]
+        - row "5B. Multiple loss functions Near-term (dynamic weighting) Self-generated objectives risk reward hacking" [ref=e401]:
+          - cell "5B. Multiple loss functions" [ref=e402]
+          - cell "Near-term (dynamic weighting)" [ref=e403]
+          - cell "Self-generated objectives risk reward hacking" [ref=e404]
+        - row "6. Small model + system Implementable today Engineering quality, robustness under ambiguity" [ref=e405]:
+          - cell "6. Small model + system" [ref=e406]
+          - cell "Implementable today" [ref=e407]:
+            - strong [ref=e408]: Implementable today
+          - cell "Engineering quality, robustness under ambiguity" [ref=e409]
+    - separator [ref=e410]
+    - heading "What would prove these ideas wrong#" [level=2] [ref=e411]:
+      - text: What would prove these ideas wrong
+      - link "#" [ref=e412] [cursor=pointer]:
+        - /url: "#falsification"
+    - paragraph [ref=e413]: "For these proposals to be worth pursuing, they need to be falsifiable. Here's what would indicate each direction is a dead end:"
+    - list [ref=e414]:
+      - listitem [ref=e415]:
+        - text: –
+        - strong [ref=e416]: "Adaptive compute (Axis 2):"
+        - text: if models with fixed full-context processing consistently outperform adaptive variants even when controlling for total FLOPs, the overhead of deciding what to process exceeds the savings from skipping.
+      - listitem [ref=e417]:
+        - text: –
+        - strong [ref=e418]: "Hierarchical memory (Axis 3):"
+        - text: if information compressed into medium-term memory degrades quality on downstream tasks more than the compute savings justify, compression is a net negative.
+      - listitem [ref=e419]:
+        - text: –
+        - strong [ref=e420]: "Model plasticity (Axis 4):"
+        - text: if variable-capacity models fail to outperform fixed-size models of equivalent average compute, the routing/allocation overhead doesn't pay for itself.
+      - listitem [ref=e421]:
+        - text: –
+        - strong [ref=e422]: "Continuous learning (Axis 5):"
+        - text: if catastrophic forgetting remains unsolvable without losing more capability than the adaptation gains, frozen models with periodic retraining are strictly better.
+      - listitem [ref=e423]:
+        - text: –
+        - strong [ref=e424]: "Small model + system (Axis 6):"
+        - text: if robustness and reliability scale with parameter count in ways that external systems fundamentally cannot compensate for, there's a hard floor on model size that memory and tools can't lower.
+    - paragraph [ref=e425]: These are empirical questions. The answers may differ by domain, task type, and deployment context.
+    - separator [ref=e426]
+    - heading "Current landscape (2025–2026)#" [level=2] [ref=e427]:
+      - text: Current landscape (2025–2026)
+      - link "#" [ref=e428] [cursor=pointer]:
+        - /url: "#current-landscape"
+    - paragraph [ref=e429]: "For context, here's where alternative architectures stand:"
+    - table [ref=e430]:
+      - rowgroup [ref=e431]:
+        - row "Direction Key models Relevance to these ideas" [ref=e432]:
+          - columnheader "Direction" [ref=e433]
+          - columnheader "Key models" [ref=e434]
+          - columnheader "Relevance to these ideas" [ref=e435]
+      - rowgroup [ref=e436]:
+        - row "State Space Models Mamba, Mamba-2 Axis 3 (efficient medium-term memory via recurrent state)" [ref=e437]:
+          - cell "State Space Models" [ref=e438]
+          - cell "Mamba, Mamba-2" [ref=e439]
+          - cell "Axis 3 (efficient medium-term memory via recurrent state)" [ref=e440]
+        - row "Delta Rule Models Gated DeltaNet Axis 3 (more expressive state updates than SSM)" [ref=e441]:
+          - cell "Delta Rule Models" [ref=e442]
+          - cell "Gated DeltaNet" [ref=e443]
+          - cell "Axis 3 (more expressive state updates than SSM)" [ref=e444]
+        - row "Modern RNNs RWKV-7 \"Goose\" Axis 3 (linear-cost sequence processing)" [ref=e445]:
+          - cell "Modern RNNs" [ref=e446]
+          - cell "RWKV-7 \"Goose\"" [ref=e447]
+          - cell "Axis 3 (linear-cost sequence processing)" [ref=e448]
+        - row "Modern LSTMs xLSTM Axis 3 (matrix memory, exponential gating)" [ref=e449]:
+          - cell "Modern LSTMs" [ref=e450]
+          - cell "xLSTM" [ref=e451]
+          - cell "Axis 3 (matrix memory, exponential gating)" [ref=e452]
+        - row "Diffusion LLMs Mercury 2, LLaDA 2.0 Orthogonal (parallel generation, not memory/compute efficiency)" [ref=e453]:
+          - cell "Diffusion LLMs" [ref=e454]
+          - cell "Mercury 2, LLaDA 2.0" [ref=e455]
+          - cell "Orthogonal (parallel generation, not memory/compute efficiency)" [ref=e456]
+        - row "Hybrids Nemotron-H, Jamba 1.5 Axis 3 Stage 2 (combining attention + recurrent state)" [ref=e457]:
+          - cell "Hybrids" [ref=e458]
+          - cell "Nemotron-H, Jamba 1.5" [ref=e459]
+          - cell "Axis 3 Stage 2 (combining attention + recurrent state)" [ref=e460]
+        - row "Test-Time Training TTT-E2E Axis 5 (learning during inference)" [ref=e461]:
+          - cell "Test-Time Training" [ref=e462]
+          - cell "TTT-E2E" [ref=e463]
+          - cell "Axis 5 (learning during inference)" [ref=e464]
+    - paragraph [ref=e465]: Most of these address Axis 3 — efficient memory and sequence processing. Axes 1, 2, 4, and 5 remain comparatively underexplored in production systems.
+    - separator [ref=e466]
+    - heading "Closing#" [level=2] [ref=e467]:
+      - text: Closing
+      - link "#" [ref=e468] [cursor=pointer]:
+        - /url: "#closing"
+    - paragraph [ref=e469]: "The Transformer's dominance is earned: parallelism, stability, predictable scaling, and ecosystem maturity are real advantages that any competitor must contend with."
+    - paragraph [ref=e470]: But the Transformer's core design — uniform processing of all tokens, fixed capacity, no persistent memory, no adaptation — creates inefficiencies that compound as we push toward longer contexts, more modalities, and continuous interaction.
+    - paragraph [ref=e471]: The directions outlined here are not a single unified architecture. They are research bets at different levels of the stack, with different timelines and different risk profiles. Some are implementable today. Some require hardware that doesn't exist yet. Some may turn out to be dead ends.
+    - blockquote [ref=e472]:
+      - paragraph [ref=e473]: "The testable claim is this: a system combining a 15–30B parameter model with hierarchical memory, adaptive compute, and external tools can match the effective capability of models 10× its size across a meaningful set of tasks — at a fraction of the cost."
+    - paragraph [ref=e474]: If that claim holds, it changes who can build and deploy capable AI systems. If it doesn't, we learn something concrete about why scale matters in ways that architecture cannot replace.
+    - paragraph [ref=e475]: Either outcome advances the field.
+    - separator [ref=e476]
+    - paragraph [ref=e477]:
+      - emphasis [ref=e478]: Some of these ideas overlap with active research directions (cited inline). Others are novel combinations or extensions. All remain to be validated empirically. Prior work citations are representative, not exhaustive.
+    - paragraph [ref=e479]:
+      - text: If you read this far and have a thought — agreement, disagreement, a pointer to prior work I missed — drop me a line at
+      - link "hi@rnader.com" [ref=e480] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .
+  - contentinfo [ref=e481]:
+    - paragraph [ref=e483]:
+      - link "← back to home" [ref=e484] [cursor=pointer]:
+        - /url: ../
+      - text: 0 frameworks. Plain HTML and CSS in two static files.

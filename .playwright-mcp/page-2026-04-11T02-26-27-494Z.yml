@@ -1,0 +1,88 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Rodrigo Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+      - generic [ref=e6]:
+        - navigation [ref=e7]:
+          - link "Writing" [ref=e8] [cursor=pointer]:
+            - /url: ../#writing
+          - link "Notes" [ref=e9] [cursor=pointer]:
+            - /url: ../#notes
+          - link "Links" [ref=e10] [cursor=pointer]:
+            - /url: ../#links
+          - link "About" [ref=e11] [cursor=pointer]:
+            - /url: ../#about
+        - link "← back" [ref=e14] [cursor=pointer]:
+          - /url: ../
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "Why I stopped believing in roadmaps" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 08
+        - text: · 12 min read · Product
+    - paragraph [ref=e20]: "I spent the first half of my career trying to make roadmaps work and the second half trying to understand why they rarely do. The conclusion is boring: roadmaps are a communication tool pretending to be a planning tool, and that confusion is expensive."
+    - paragraph [ref=e21]: I'm not saying stop planning. I'm saying stop confusing the map with the territory — especially when the territory is on fire half the time.
+    - complementary [ref=e22]: That metaphor is Korzybski's, 1931. Fifty years later, we're still painting maps on top of volcanoes.
+    - paragraph
+    - heading "The problem isn't the roadmap#" [level=2] [ref=e23]:
+      - text: The problem isn't the roadmap
+      - link "#" [ref=e24] [cursor=pointer]:
+        - /url: "#the-problem"
+    - paragraph [ref=e25]: "The problem is the implicit contract. When you draw a 6-month roadmap, three things happen at once:"
+    - list [ref=e26]:
+      - listitem [ref=e27]: – Engineering reads it as a delivery schedule
+      - listitem [ref=e28]: – Sales reads it as a promise to the customer
+      - listitem [ref=e29]: – Leadership reads it as an execution commitment
+    - paragraph [ref=e30]: Three different contracts, one single artifact. When reality shifts — and it always does — you can't renegotiate one without breaking the other two.
+    - generic [ref=e31]:
+      - generic [ref=e32]: Trivia
+      - paragraph [ref=e33]: The word "roadmap" comes from the US Department of Transportation in the 40s. It was literally a map of roads. The metaphor assumed stable terrain. Software isn't stable terrain.
+    - heading "What works for me#" [level=2] [ref=e34]:
+      - text: What works for me
+      - link "#" [ref=e35] [cursor=pointer]:
+        - /url: "#what-works"
+    - paragraph [ref=e36]: "After years of burning my hands, I landed on a three-layer model that separates what's fixed from what's negotiable:"
+    - list [ref=e37]:
+      - listitem [ref=e38]:
+        - strong [ref=e39]: Direction
+        - text: — where the product is headed over the next 12 months. Changes rarely. One sentence.
+      - listitem [ref=e40]:
+        - strong [ref=e41]: Bets
+        - text: — three to five hypotheses we're testing right now. Changes quarterly.
+      - listitem [ref=e42]:
+        - strong [ref=e43]: Active work
+        - text: — what's in execution this week. Changes every Monday.
+    - paragraph [ref=e44]: The key is that each layer has a different change frequency and a different audience. Leadership looks at direction. Teams look at the bets. Engineers look at active work.
+    - complementary [ref=e45]: Shreyas Doshi calls these "time horizons of decision." Worth reading everything he's written on it.
+    - paragraph
+    - heading "A concrete example#" [level=2] [ref=e46]:
+      - text: A concrete example
+      - link "#" [ref=e47] [cursor=pointer]:
+        - /url: "#example"
+    - paragraph [ref=e48]: Last quarter, one of our bets was "agents can operate CRM tools without human supervision in 80% of cases." That bet generated five weeks of active work before we concluded 80% was too aggressive — the real number landed at 62%.
+    - blockquote [ref=e49]:
+      - paragraph [ref=e50]: The point isn't getting the forecast right. The point is that we got it wrong early, without having promised anything to a customer, and we could pivot to a new bet the following quarter without having to apologize.
+      - generic [ref=e51]: — Me, to my team, in the March retro
+    - paragraph [ref=e52]: If that had been a roadmap item with a delivery date, the move would have been much more painful.
+    - heading "Communicating outward#" [level=2] [ref=e53]:
+      - text: Communicating outward
+      - link "#" [ref=e54] [cursor=pointer]:
+        - /url: "#communicating-out"
+    - paragraph [ref=e55]: "The hardest part isn't the internal process. It's explaining to people outside — sales, investors, customers — why you don't have a pretty Gantt to show them. The script that worked for me:"
+    - code [ref=e57]: "Direction: [one-line statement] We're betting on: [3 things] This week: [what's shipping] What will change: [almost everything below direction]"
+    - paragraph [ref=e58]: Nobody complains when you're honest about what's fixed and what's mutable. People complain when you promise fixedness and deliver mutability.
+    - generic [ref=e59]:
+      - generic [ref=e60]: Note
+      - paragraph [ref=e61]: This model doesn't work everywhere. If you're building hardware, or work in a regulated industry, or have rigid external dependencies — traditional roadmaps still make sense. What I'm describing applies to product software in high-uncertainty environments.
+    - separator [ref=e62]
+    - paragraph [ref=e63]:
+      - text: If you read this far and have a question, drop me a line —
+      - link "hi@rnader.com" [ref=e64] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: . It's the best way to make me write more about a topic.
+  - contentinfo [ref=e65]:
+    - paragraph [ref=e67]:
+      - link "← back to home" [ref=e68] [cursor=pointer]:
+        - /url: ../
+      - text: 0 frameworks. Plain HTML and CSS in two static files.

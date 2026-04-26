@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What if time is just a direction? — Rodrigo Nader</title>
+<meta name="description" content="Laplace's demon in a block universe — and the strange consequences of taking time seriously as a dimension.">
+<link rel="stylesheet" href="../style.css?v=4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <a href="../" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>What if time is just a direction?</h1>
+    <p class="post-meta">
+      <time datetime="2026-04-15">2026 · Apr 15</time>
+      <span class="sep">·</span>
+      <span>10 min read</span>
+      <span class="sep">·</span>
+      <span>Physics</span>
+    </p>
+  </header>
+
+  <p>In 1814, Pierre-Simon Laplace made one of the most famous bets in the history of science. Give me, he wrote, the exact position and velocity of every particle in the universe, and I will hand you back the future. The whole of it. Not an approximation — everything that will ever happen.</p>
+
+  <p>The claim has been argued over by Newton's students, modern philosophers of physics, anyone who's worried about determinism and free will. I want to look at the throwaway word in the middle of Laplace's sentence — the word <em>velocity</em> — and what happens when you take it seriously.</p>
+
+  <p>The moment you put time on the same footing as space, which is what physics spent the twentieth century pulling it toward without ever quite getting there, velocity stops being a property of a particle. It becomes an orientation. And Laplace's demand turns out to be a little more than a demand for coordinates.</p>
+
+  <h2>The block universe, in one picture</h2>
+
+  <p>You can stop thinking of time as a thing that flows and start thinking of it as another axis, like the three spatial ones. Events don't "happen" in this picture — they sit at particular coordinates. A particle doesn't "move"; it occupies a one-dimensional curve, called a <em>worldline</em>, that cuts through the block of spacetime from earlier to later.</p>
+
+  <p>This is the block universe view, and it's a perfectly consistent way to describe the world. It has a strange consequence that most people glide past: if the universe is a block, then the future is already in it. Not in the sense that we can see it, or that it's fated, but in the geometric sense — you can point at spacetime coordinates that belong to next Thursday the same way you can point at the back of your kitchen. Both exist in the same diagram. The only reason we experience one as memory and the other as anticipation is that our brains move along worldlines in a particular direction. The block does not.</p>
+
+  <p>Once you accept that picture, Laplace's demon starts to look different. The demon was supposed to <em>predict</em> — to take a snapshot and crank it forward. But in a block universe there's nothing to crank. The future is already drawn. The demon isn't predicting; it's <em>reading</em> a shape that already exists.</p>
+
+  <figure class="viz">
+    <canvas id="v1-block" style="height: 440px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">the present — <span id="v1-t-readout">0.50</span></span>
+        <input type="range" id="v1-t" min="0" max="1" step="0.01" value="0.5">
+      </label>
+      <button id="v1-add">Add worldline</button>
+      <button class="ghost" id="v1-reset">Reset</button>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 1</span>A block of spacetime. The horizontal axis is space (one dimension of it, for drawing). The vertical axis is time, running up. Each curve is a worldline — a particle's entire history from earlier to later. The bright horizontal line is "the present". Drag the slider and watch the present sweep through the block; the worldlines intersect it at different points, and those intersections are what you'd call "where the particles are right now". In a block universe, the motion of the particles is the same block, seen from a moving slice.</div>
+  </figure>
+
+  <p>Scrub the present slice from bottom to top. The dots at the intersection look exactly like an animation of particles moving — because that's what "particles moving" is. It's the intersection of a sliding present with a static set of worldlines. The block itself doesn't change. Your reading of it does.</p>
+
+  <h2>And then velocity disappears</h2>
+
+  <p>This is where Laplace's picture gets uncomfortable. In the block universe there is no such thing as <em>velocity</em>, at least not in the sense of a rate of change over time. Rate of change over time assumes time is a flow. In the block, time is an axis. The analog of velocity is the <em>angle</em> of the worldline — its orientation. A worldline that tilts gently to the right is a particle moving slowly rightward. A worldline that tilts sharply is one moving fast. A vertical worldline is a particle at rest.</p>
+
+  <p>The reframe has a consequence Laplace's original formulation hides. Take a horizontal slice — a snapshot of the present — and you get all the particle positions, but you've thrown out all the worldlines' tangents. You don't know, from a single slice, which way any of the worldlines were tilted. The particles have positions. They don't have futures.</p>
+
+  <p>Which is why Laplace asked for positions <em>and</em> velocities. He wasn't being pedantic; he was silently smuggling in the tangent information that a snapshot alone doesn't carry. Without it, you can't extend the worldline in either direction.</p>
+
+  <p>That's what "predicting the future" means in this picture: you're handed a slice with extra data attached at every point, and you use that data to walk the worldlines forward. The demon doesn't compute. It integrates. It follows the tangents.</p>
+
+  <h2>The detail that bothers me</h2>
+
+  <p>The tangent isn't a position in space. It lives in a different kind of space — the space of directions at that point. In classical mechanics we hide this by writing down three numbers and calling them "velocity components," but those three numbers are coordinates in a second space attached to the first. Mathematicians call the whole thing a <em>tangent bundle</em>, and it doubles the dimensionality of your description. To specify a particle, you need six numbers, not three: three for position and three for the orientation of its worldline.</p>
+
+  <p>If the tangent really is a different kind of coordinate, why do we keep pretending it isn't? Why do we write "position plus velocity" as if those are two different things, instead of admitting that our state space is twice as big as our physical space and moving on?</p>
+
+  <p>And there's a sharper version of the question. If orientation is what makes a worldline a worldline, then specifying a particle's state is really specifying a <em>point plus a direction</em>. But a point plus a direction is itself a point in a bigger space — one with more dimensions than the one you started with. What if that bigger space is the real one, and our four-dimensional spacetime is just the projection of it onto a smaller frame?</p>
+
+  <figure class="viz">
+    <canvas id="v2-tangent" style="height: 360px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">tangent angle — <span id="v2-angle-readout">0°</span></span>
+        <input type="range" id="v2-angle" min="-60" max="60" step="1" value="0">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 2</span>A single point in spacetime (the dot). The slider rotates the tangent — the direction of the worldline passing through that point. Every angle is a different future and a different past. A snapshot of the position alone gives you just the dot. You need the angle too, and the angle lives in a space the dot doesn't.</div>
+  </figure>
+
+  <h2>A quiet suggestion</h2>
+
+  <p>I'm not a physicist. Something has always bothered me about how physicists treat time, though, and I only recently caught what it was. In the equations we write, time is <em>almost</em> a spatial dimension. But not quite.</p>
+
+  <p>In the equation for distance in spacetime, the time coordinate gets a minus sign where the space coordinates get a plus. That tiny sign is doing enormous work, and nobody knows why it's there. Time derivatives and space derivatives don't behave the same way either — look at the wave equation, or Schrödinger's equation, and the asymmetry is everywhere. And then there's the arrow: entropy runs one way, not the other (though see the caveat below).</p>
+
+  <p>If time were just another spatial direction, those asymmetries would be unexpected. None of them follow from the geometry alone; they all have to be put in by hand. The standard response is to say "well, time just <em>is</em> different from space, we don't know why, get used to it."</p>
+
+  <p>There's a second response I've seen physicists float in different forms without ever quite committing to: the asymmetries we attribute to time might be the shadow of something we've flattened. Maybe what we call "time" isn't one dimension but a compound — a coordinate paired with a constraint, or two coordinates whose projection into a single real number is what we observe. Under that reading, the minus sign in the metric and the asymmetric derivatives stop being brute facts and start being a hint about a richer geometry.</p>
+
+  <p>I don't know if this is true. The honest place to land is not "and therefore time is two-dimensional" but something more careful: the ways our equations treat time as <em>almost</em> spatial are consistent and suggestive enough that some people have looked at them and gone "hmm." That's the rumor, and you're allowed to hold it lightly.</p>
+
+  <div class="callout">
+    <span class="label">Honest tension</span>
+    <p>The arrow-of-time piece above is the softest of the three. Entropy increases because of the initial conditions of the universe, not because of anything in the equations themselves. If you reversed all the momenta in the universe, the equations would run backward without complaint. The arrow isn't in the physics; it's in the initial state. The minus sign and the asymmetric derivatives are firmer evidence that time is doing something other than "being a spatial dimension in disguise."</p>
+  </div>
+
+  <h2>Back to the demon</h2>
+
+  <p>If the universe is a block, the future is already drawn, and "predicting" is really just reading. The demon doesn't peer forward; it scans a shape that was there all along. That's a lot less dramatic than it sounds in 1814. It also makes the free-will worry kind of silly, because the worry assumed the demon could take a present state and <em>determine</em> a future — but the block universe says the present state sits next to the future in the same geometric object. Nothing <em>happens</em>; everything coexists in a particular order.</p>
+
+  <p>If the block is richer than four dimensions — because tangents live in a bigger space, or because time isn't really one coordinate — then even the reading is harder than Laplace thought. You can't stand at a slice and infer the worldlines from positions alone. You need the tangents. And the tangents may themselves be projections from an even bigger geometry we haven't figured out how to draw yet.</p>
+
+  <p>Laplace's promise was <em>really</em> asking for the complete shape of reality, with "where everything is" as a single slice of it. Once you see that, the demon stops looking like a sci-fi oracle and starts looking like a physicist's very specific fantasy about how much information the universe is willing to hand over in a single snapshot.</p>
+
+  <h2>What survives</h2>
+
+  <p>What I actually believe, such as it is. I find the block universe the cleanest of the usual framings, and I think popular science underweights it. Velocity-as-orientation is the move that makes the whole picture hang together, and once you make it, the idea that "prediction" is a separate act from "description" evaporates. And the weirdness of time in our equations is not necessarily a quirk we have to live with; it's the kind of thing that, historically, has turned out to be a clue.</p>
+
+  <p>Is the clue pointing at extra time dimensions, a tangent bundle we've been flattening, or something none of us have imagined? I don't know. But I'm fairly confident the right question isn't "is the universe deterministic?" — Laplace's framing — but "what shape is the universe, and how much of it can you read from any single slice?" Whatever answer we get, the demon will still be in the corner of the room, holding out its hand for information.</p>
+
+  <hr>
+
+  <p>The <a href="/posts/infinite-universe.html">infinite-universe post</a> is the sister piece to this one — same habit of refusing to take a word at face value, applied to "center" instead of "now." Argue at <a href="mailto:hi@rnader.com">hi@rnader.com</a>.</p>
+</article>
+
+<script src="/script.js?v=3"></script>
+<script src="./viz-common.js?v=1"></script>
+<script>
+/* ---------- Fig 1: spacetime block with scrubbable "present" ---------- */
+(function(){
+  const canvas = document.getElementById('v1-block');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const tInput = document.getElementById('v1-t');
+  const tReadout = document.getElementById('v1-t-readout');
+  const addBtn = document.getElementById('v1-add');
+  const resetBtn = document.getElementById('v1-reset');
+
+  const defaultLines = () => [
+    { x0: 0.15, vx: 0.4, name: 'I' },
+    { x0: 0.45, vx: -0.1, name: 'II' },
+    { x0: 0.75, vx: 0.2, name: 'III' },
+    { x0: 0.6, vx: -0.35, name: 'IV' },
+  ];
+  let lines = defaultLines();
+  let tSlice = 0.5;
+
+  tInput.addEventListener('input', () => {
+    tSlice = parseFloat(tInput.value);
+    tReadout.textContent = tSlice.toFixed(2);
+  });
+  addBtn.addEventListener('click', () => {
+    lines.push({
+      x0: Math.random() * 0.9 + 0.05,
+      vx: (Math.random() - 0.5) * 0.8,
+      name: String.fromCharCode(64 + lines.length + 1),
+    });
+  });
+  resetBtn.addEventListener('click', () => { lines = defaultLines(); });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function lineX(line, t) {
+    return line.x0 + line.vx * t;
+  }
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const padL = 60, padR = 30, padT = 30, padB = 40;
+    const w = rect.width - padL - padR;
+    const h = rect.height - padT - padB;
+
+    ctx.strokeStyle = c.border;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(padL, padT, w, h);
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('space →', padL + w / 2, padT + h + 26);
+    ctx.save();
+    ctx.translate(padL - 36, padT + h / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('time ↑', 0, 0);
+    ctx.restore();
+
+    ctx.strokeStyle = c.gridFaint;
+    for (let i = 1; i < 5; i++) {
+      const x = padL + (i / 5) * w;
+      ctx.beginPath();
+      ctx.moveTo(x, padT); ctx.lineTo(x, padT + h); ctx.stroke();
+    }
+    for (let i = 1; i < 5; i++) {
+      const y = padT + (i / 5) * h;
+      ctx.beginPath();
+      ctx.moveTo(padL, y); ctx.lineTo(padL + w, y); ctx.stroke();
+    }
+
+    const colors = [c.accent, c.blue, c.green, c.purple, c.gold];
+    lines.forEach((ln, idx) => {
+      ctx.strokeStyle = colors[idx % colors.length];
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let k = 0; k <= 80; k++) {
+        const tt = k / 80;
+        const xx = lineX(ln, tt);
+        const px = padL + xx * w;
+        const py = padT + h - tt * h;
+        if (k === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.stroke();
+    });
+
+    const presentY = padT + h - tSlice * h;
+    ctx.strokeStyle = c.accentWarm;
+    ctx.setLineDash([5, 3]);
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(padL, presentY); ctx.lineTo(padL + w, presentY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = c.accentWarm;
+    ctx.font = 'italic 11px Charter, Georgia, serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('present', padL + w - 6, presentY - 5);
+
+    lines.forEach((ln, idx) => {
+      const xx = lineX(ln, tSlice);
+      const px = padL + xx * w;
+      const py = presentY;
+      ctx.fillStyle = colors[idx % colors.length];
+      ctx.beginPath();
+      ctx.arc(px, py, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = c.bg;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    });
+  }
+  vizCommon.animate(canvas, draw);
+})();
+
+/* ---------- Fig 2: a single point with a rotatable tangent ---------- */
+(function(){
+  const canvas = document.getElementById('v2-tangent');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const angleInput = document.getElementById('v2-angle');
+  const angleReadout = document.getElementById('v2-angle-readout');
+
+  let angle = 0;
+  angleInput.addEventListener('input', () => {
+    angle = parseFloat(angleInput.value);
+    angleReadout.textContent = angle.toFixed(0) + '°';
+  });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const padL = 60, padR = 30, padT = 30, padB = 40;
+    const w = rect.width - padL - padR;
+    const h = rect.height - padT - padB;
+    ctx.strokeStyle = c.border;
+    ctx.strokeRect(padL, padT, w, h);
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('space →', padL + w / 2, padT + h + 26);
+    ctx.save();
+    ctx.translate(padL - 36, padT + h / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText('time ↑', 0, 0);
+    ctx.restore();
+
+    const cx = padL + w / 2;
+    const cy = padT + h / 2;
+    const rad = angle * Math.PI / 180;
+
+    ctx.strokeStyle = c.gridFaint;
+    ctx.lineWidth = 1;
+    for (let a = -60; a <= 60; a += 10) {
+      if (a === Math.round(angle)) continue;
+      const r = a * Math.PI / 180;
+      const dx = Math.sin(r);
+      const dy = -Math.cos(r);
+      const L = Math.min(w, h) * 0.5;
+      ctx.beginPath();
+      ctx.moveTo(cx - dx * L, cy - dy * L);
+      ctx.lineTo(cx + dx * L, cy + dy * L);
+      ctx.stroke();
+    }
+
+    const dx = Math.sin(rad);
+    const dy = -Math.cos(rad);
+    const L = Math.min(w, h) * 0.55;
+
+    ctx.strokeStyle = c.accent;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + dx * L, cy + dy * L);
+    ctx.stroke();
+
+    ctx.strokeStyle = c.accentSoft;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx - dx * L, cy - dy * L);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = c.fg;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = c.bg;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    const labelL = Math.min(L * 0.55, 120);
+    ctx.fillStyle = c.accent;
+    ctx.font = 'italic 11px Charter, Georgia, serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('future', cx + dx * labelL + 8, cy + dy * labelL + 4);
+    ctx.fillStyle = c.accentSoft;
+    ctx.fillText('past', cx - dx * labelL - 32, cy - dy * labelL - 4);
+    ctx.fillStyle = c.fgDim;
+    ctx.fillText('the tangent is the bit a snapshot doesn\u2019t carry', padL + 12, padT + 18);
+  }
+  vizCommon.animate(canvas, draw);
+})();
+</script>
+</body>
+</html>

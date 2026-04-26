@@ -1,0 +1,109 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "Why truth is narrow" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 15
+        - text: · 8 min read · Essay
+    - paragraph [ref=e20]: "Here's a question: are there more possible true statements about the world, or more possible false ones?"
+    - paragraph [ref=e21]: Sit with it for a second. It isn't a trick — the answer is the obvious one — but the size of the gap is not obvious, and the implications are even less so.
+    - paragraph [ref=e22]: The cup of coffee on my desk is about two-thirds full. There's roughly one true way to say that. There are, however, unbounded ways to be wrong about it. The cup is empty. The cup is full. The cup is a lemon. The cup is a lemon painted red. The cup is the Prime Minister of Canada. Each of those is a possible sentence, and each of them is false.
+    - paragraph [ref=e23]: For any single fact in the world, there's a thin sliver of statements that match it and a continent of statements that don't. The gap is huge enough that "ratio" stops feeling like the right word for it. Truth is narrow; everything else is everywhere.
+    - generic [ref=e24]:
+      - generic [ref=e25]: The asymmetry
+      - paragraph [ref=e26]: For every claim that accurately describes the world, there are unbounded variations that distort, misremember, invent, or simply miss. Reality has the one narrow version. The space of false versions is the rest of language.
+    - paragraph [ref=e27]:
+      - emphasis [ref=e28]: Default-believing
+      - text: a claim, then, is not a neutral stance. It's a loaded one, tilted toward falsehood by the same gap. If you walk around accepting things that arrive at your ears unless something trips your suspicion, the ambient statistics of the universe are not on your side.
+    - heading "The plausibility filter is a weak filter" [level=2] [ref=e29]
+    - paragraph [ref=e30]: Of course most claims you encounter aren't generated at random. They've been filtered. They come from friends, writers, journalists, books, search results. The filter has done a lot of work before the claim ever reaches you.
+    - paragraph [ref=e31]:
+      - text: But the filter is plausibility, and plausibility is a weaker bar than it sounds. Plausibility is what makes a claim
+      - emphasis [ref=e32]: feel
+      - text: like the kind of thing that could be true. It does not require the claim to actually match reality. It only requires the claim to sound like one of the kinds of things that sometimes match reality. That bar is much lower than people give it credit for.
+    - paragraph [ref=e33]:
+      - text: Skepticism is the second layer — the one that asks, after the plausibility filter has done its work,
+      - emphasis [ref=e34]: is it actually true?
+      - text: And the reason this layer keeps getting left out of people's workflows is that it's slow, effortful, and unrewarding in the moment. It takes time to check. It takes time to doubt the thing you already half-believe. Most of us skip it unless something is at stake.
+    - figure [ref=e35]:
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - generic [ref=e39]: how strict your filter is — 0%
+          - slider "how strict your filter is — 0%" [ref=e40] [cursor=pointer]: "0"
+        - button "New stream" [ref=e41] [cursor=pointer]
+      - generic [ref=e42]:
+        - generic [ref=e43]: Fig 1
+        - text: A stream of claims pours in from the top — green if it happens to be true, orange if it doesn't. The slider sets how strict your filter is. At 0% you accept everything and the column on the right (the things you now believe) is mostly orange. Tighten the filter and you accept fewer claims, but the green fraction climbs fast. The composition of what you end up believing is set entirely by where you put the slider — not by how the world is.
+    - heading "The \"open mind\" trap" [level=2] [ref=e44]
+    - paragraph [ref=e45]:
+      - text: There's a move people make in response, and I keep running into it. The move is to claim that
+      - emphasis [ref=e46]: being open to everything
+      - text: "is a virtue, and that skepticism is a closed-minded defensive crouch. It usually arrives in the shape of: \"I keep an open mind. I don't dismiss things just because they sound weird.\""
+    - paragraph [ref=e47]: I don't want to attack the impulse, because the impulse is good. There's a real failure mode of being so locked into your priors that you dismiss surprising evidence, and being open to that evidence is a virtue. But "open to evidence" is not the same as "willing to believe whatever's in the air." Evidence has an internal structure — it can be checked, traced, reproduced, compared against predictions. Claims that arrive without evidence have no such structure. They are sentences. Being open to a sentence is not open-mindedness; it is leaving the front door unlocked and calling it hospitality.
+    - paragraph [ref=e48]:
+      - text: The phrase
+      - emphasis [ref=e49]: keep an open mind
+      - text: has become a socially polite substitute for
+      - emphasis [ref=e50]: I don't want to do the work of checking
+      - text: . It's doing the job of the first stage of a two-stage filter — noticing a claim — and being asked to do the second stage too. The stage where the actual cognitive work happens is the one that gets skipped.
+    - heading "One question to flip" [level=2] [ref=e51]
+    - paragraph [ref=e52]: Here's the small habit I've been trying to train in myself.
+    - paragraph [ref=e53]:
+      - text: "When I read a claim, the question I instinctively ask is:"
+      - emphasis [ref=e54]: could this be true?
+      - text: And I can almost always answer yes. Sure, it could be true. It's plausible. It's consistent with what I already believe. Fine. Moving on.
+    - generic [ref=e55]:
+      - generic [ref=e56]: The flip
+      - paragraph [ref=e57]:
+        - text: The right question isn't
+        - emphasis [ref=e58]: could this be true?
+        - text: — it's
+        - emphasis [ref=e59]: could this be false?
+        - text: The first lets almost everything through. The second makes you imagine the world in which the claim is wrong, and check whether you actually have any reason to rule that world out.
+    - paragraph [ref=e60]: Most of the time, when I flip the question, I discover I had no reason to rule out the false version. I was accepting the claim because it fit a story I already half-believed, not because I had any positive evidence for it. That's the failure mode the "could this be true?" default hides.
+    - figure [ref=e61]:
+      - button "New stream" [ref=e64] [cursor=pointer]
+      - generic [ref=e65]:
+        - generic [ref=e66]: Fig 2
+        - text: "The same stream of claims, filtered two ways. Left lane: \"could this be true?\" — accept if you can't immediately rule it out. Right lane: \"could this be false?\" — accept only if you can't imagine a world where it's wrong. Watch the color of each accepted pile. The left pile fills fast with orange. The right pile fills slowly, almost entirely with green."
+    - paragraph [ref=e67]: Flipping the question doesn't turn me into a cynic. It just makes me hold claims with the provisional grip they deserve until evidence promotes them. Most claims never get promoted, and that's fine.
+    - heading "Why this is worse now than it used to be" [level=2] [ref=e68]
+    - paragraph [ref=e69]: The asymmetry has gotten worse in practical terms over the last few years, and it's worth naming why.
+    - paragraph [ref=e70]: The cost of producing plausible-sounding claims has dropped to almost nothing. A language model can generate a thousand coherent, well-formed, confidently-delivered claims per minute, and the generator isn't optimizing for truth — it's optimizing for sounding like the kind of thing that's true. Sometimes those coincide. Often they don't.
+    - paragraph [ref=e71]: The practical consequence is that the ambient flow of plausible claims reaching you is higher than it's ever been, and I don't think the signal-to-noise ratio is improving. The part of you that filters by "does this sound true?" is being fed inputs that were optimized for sounding true without reference to whether they are. If you don't have a habit of asking "could this be false?", you're going to absorb a lot of elegant nonsense and feel good about how much you know.
+    - paragraph [ref=e72]: I'm not arguing against language models. I use them every day and they make me faster. I use them the way I would use a brilliant friend with a slightly unreliable memory — I check anything that matters, and I've gotten pretty good at noticing when something is too fluent to be the truth.
+    - generic [ref=e73]:
+      - generic [ref=e74]: Honest tension
+      - paragraph [ref=e75]: "There's a version of this argument that collapses into paralysis: if you can't trust anything without verification, and verification is expensive, you end up acting on nothing. That's a real risk, and it's why skepticism has to be calibrated to stakes. You don't verify what brand of milk your neighbor buys. You do verify what your doctor tells you about a surgery. Default-skeptic, budget-aware."
+    - paragraph [ref=e76]:
+      - text: Truth is narrow. Falsehood is everywhere. The smallest move you can make is to stop asking
+      - emphasis [ref=e77]: could this be true?
+      - text: of claims you encounter and start asking
+      - emphasis [ref=e78]: could this be false?
+    - paragraph [ref=e79]: The two questions look almost identical. They are not. One lets almost everything through. The other makes you check.
+    - separator [ref=e80]
+    - paragraph [ref=e81]:
+      - text: The mechanical shape of "how much more often does a signal happen when my belief is true vs how often it happens anyway?" is the whole of Bayes' rule, which
+      - link "I tried to write about here" [ref=e82] [cursor=pointer]:
+        - /url: /posts/bayes.html
+      - text: . Argue with me at
+      - link "hi@rnader.com" [ref=e83] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .

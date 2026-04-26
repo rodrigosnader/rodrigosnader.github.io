@@ -1,0 +1,141 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: ../
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "The experiment that doesn't need you to look" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Apr 15
+        - text: · 9 min read · Physics
+    - paragraph [ref=e20]:
+      - text: There's a certain pop-science story about quantum mechanics that goes like this. Particles behave like waves until you
+      - emphasis [ref=e21]: look
+      - text: at them, at which point they collapse into definite particles. "Observation" creates reality. Consciousness is somehow tangled up in the plumbing of the universe. If you ever wondered whether a tree falling in a forest makes a sound, now you have physics to back you up.
+    - paragraph [ref=e22]:
+      - text: It's the wrong story — and the experiment it's built on is saying something much weirder than the popular telling lets on. The experiment is the double slit and its sneaky cousin, the
+      - emphasis [ref=e23]: delayed-choice quantum eraser
+      - text: (a version where the which-path detector is turned on or off
+      - emphasis [ref=e24]: after
+      - text: the particle has already passed the slits). The real message is weirder, more precise, and has nothing to do with consciousness.
+    - generic [ref=e25]:
+      - generic [ref=e26]: The whole claim
+      - paragraph [ref=e27]:
+        - text: An interference pattern exists if and only if the information about which path a particle took is
+        - emphasis [ref=e28]: nowhere recoverable
+        - text: . The moment a recoverable record exists in the environment, the pattern vanishes. Un-entangle the marker before the record goes classical, and the pattern comes back.
+    - paragraph [ref=e29]: "There are no observers in the story. There is only a bookkeeping question: does the universe contain a physical trace of which path was taken? If yes, no pattern. If no, pattern. And if the bookkeeping is un-done before it solidifies, the pattern returns."
+    - paragraph [ref=e30]: Once you see the experiment through that lens, the weirdness doesn't disappear. It stops being about you.
+    - heading "The double slit, one more time" [level=2] [ref=e31]
+    - paragraph [ref=e32]: Shoot particles — say, photons — one at a time at a barrier with two slits in it. Put a screen behind the barrier. Each particle makes a dot where it lands. Run thousands of particles. The dots will accumulate into a pattern.
+    - paragraph [ref=e33]:
+      - text: If the particles were marbles, you'd expect two smudges behind the two slits. That's not what you get. You get an
+      - emphasis [ref=e34]: interference pattern
+      - text: — a series of bright bands where the particles land often and dark bands where they never land, stretching across the screen. That's the wave-behavior half of the story. Each particle is, in some real sense, going through both slits and interfering with itself.
+    - paragraph [ref=e35]: Now add a detector that can tell which slit each particle went through. Same setup, same particles, same screen — but this time there's something in the path that records a piece of information. The interference pattern vanishes. You get two smudges. Particles, not waves.
+    - paragraph [ref=e36]:
+      - text: The popular version of this story is that "measurement collapses the wavefunction," and that sounds like something a human did. It isn't. The detector is not a person. Plug in a blind, dumb, non-conscious piece of equipment that records which path and throws the record into a filing cabinet. The interference is gone. Put a human in the room and unplug the detector, and the interference is back. What matters is not the person. What matters is whether the
+      - emphasis [ref=e37]: record exists
+      - text: .
+    - figure [ref=e38]:
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - checkbox "path detector on" [ref=e42]
+          - generic [ref=e43]: path detector on
+        - button "Reset pattern" [ref=e44] [cursor=pointer]
+      - generic [ref=e45]:
+        - generic [ref=e46]: Fig 1
+        - text: A double slit experiment. Each dot is a particle that landed on the screen. With no path detector, the pattern on the right builds into interference bands. Flip the detector on and the pattern gradually dissolves into two smudges — one per slit — exactly as if each particle had gone through one or the other like a marble. Nothing conscious is watching either way.
+    - heading "It's the information, not the observer" [level=2] [ref=e47]
+    - paragraph [ref=e48]: You can prove "observer" is the wrong word with a thought experiment.
+    - paragraph [ref=e49]:
+      - text: Set up the double slit. Put a detector that records which path the particle took — but have it record into a system you
+      - emphasis [ref=e50]: never
+      - text: look at. A hard drive you plan to destroy. A piece of paper you plan to burn. It doesn't matter. If the record exists as a physical correlation in the environment, the interference vanishes. The experiment doesn't care that you never intend to read the record.
+    - paragraph [ref=e51]: Now imagine a slightly more devious version. Instead of a detector with a dedicated hard drive, let the particle brush against a single stray atom on its way through one of the slits. That atom now "knows" something about which path was taken — the knowledge is encoded in its slightly different state. You haven't built a detector. You've let the particle leak path-information into the environment. The interference vanishes anyway. The stray atom is, in every sense that matters, a detector, and the universe's bookkeeping doesn't care whether a human installed it on purpose.
+    - heading "Wheeler's trick" [level=2] [ref=e52]
+    - paragraph [ref=e53]:
+      - text: In 1978, John Wheeler noticed that this framing leads to an even weirder version of the experiment. What if you let the particle pass through the slits, and
+      - emphasis [ref=e54]: then
+      - text: — after it's already on its way to the screen, after the "decision" about which path to take would have to have been made — you decide whether or not to turn on a detector that records the path?
+    - paragraph [ref=e55]:
+      - text: "Wheeler's claim was: if you switch the detector on"
+      - emphasis [ref=e56]: after the fact
+      - text: ", the particle will have behaved like it went through one slit. Leave the detector off, and it will have behaved like it went through both. The present decision somehow reaches back and determines the past."
+    - paragraph [ref=e57]: Except it doesn't. The correct reading — and the way experimentalists have read it since Jacques et al. ran the delayed-choice version in 2007 — is that the particle never had a definite path in the first place. Treat the wavefunction as the real object. It evolves, and the only question is whether the experimental setup allows or prevents a recoverable path-record at any point in the process. Recover it (even late) and interference gets wiped. Don't, and it doesn't. Nothing traveled back in time. We were asking a question — "which slit did it go through?" — that the universe was under no obligation to answer until our equipment forced it to.
+    - heading "The eraser, and the thing that undid me" [level=2] [ref=e58]
+    - paragraph [ref=e59]:
+      - text: This is where the delayed-choice
+      - emphasis [ref=e60]: eraser
+      - text: comes in, and where I finally got what the experiment was saying. Run the setup with the detector on. Two smudges, as before.
+    - paragraph [ref=e61]: Now un-entangle the marker before the record becomes classical. Real eraser experiments do this with beam splitters or polarizers that mix the which-path information back out of the marker states, while the record is still a quantum correlation and hasn't solidified into a macroscopic trace.
+    - paragraph [ref=e62]: The interference pattern comes back. Sort of.
+    - paragraph [ref=e63]: The first time I read this I thought it was a trick. How can the pattern come back? The particle has already landed. The dots are already on the screen. You can't reach back in time and rearrange them.
+    - paragraph [ref=e64]:
+      - text: Here's the resolution. Real eraser experiments use
+      - emphasis [ref=e65]: entangled photon pairs
+      - text: ": a signal photon that goes to the screen, and an idler photon that carries the which-path marker. When you un-entangle the marker (or route the idler through a beam splitter that mixes the two paths back together), the dots on the screen"
+      - emphasis [ref=e66]: as a whole
+      - text: still look like a smudge. But sort the signal dots by which idler detector their partner ended up at, and each subset forms an interference pattern — the two subsets are mirror images, and they sum to the smudge. You never lost the interference. You lost the ability to see it, and the sorting gives it back.
+    - figure [ref=e67]:
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - checkbox "marker un-entangled (eraser on)" [checked] [ref=e71]
+          - generic [ref=e72]: marker un-entangled (eraser on)
+        - button "all dots" [ref=e73] [cursor=pointer]
+        - button "subset A only" [ref=e74] [cursor=pointer]
+        - button "subset B only" [ref=e75] [cursor=pointer]
+        - button "Reset pattern" [ref=e76] [cursor=pointer]
+      - generic [ref=e77]:
+        - generic [ref=e78]: Fig 2
+        - text: Every dot on the screen has a hidden partner that went to one of two idler detectors (A or B). With the eraser on, "all dots" looks like a featureless smudge. Click "subset A only" — an interference pattern emerges from the exact same dots. Click "subset B only" — the mirror image. Uncheck the eraser (classical record exists, no sorting rescues anything) and both subsets collapse into two Gaussians at the slit positions. The interference wasn't lost; it was sorted.
+    - paragraph [ref=e79]:
+      - text: The eraser doesn't retroactively change the universe. It changes what you can
+      - emphasis [ref=e80]: recover
+      - text: from the same set of dots. When the marker gets un-entangled, the sorting that hid the interference becomes possible, and the pattern becomes visible again — not because the particles retroactively behaved differently, but because the filter that was averaging two interference patterns into a smudge is gone.
+    - heading "The black hole test" [level=2] [ref=e81]
+    - paragraph [ref=e82]: Here's a corollary I love, because it kills a sloppy version of the story.
+    - paragraph [ref=e83]: Imagine the detector records the path information, and you later throw the detector into a black hole. Does the interference pattern come back?
+    - paragraph [ref=e84]: "No. This is the tightening the earlier rule needs: it isn't quite \"nowhere recoverable in the universe,\" it's \"no macroscopic record anywhere in the environment.\" The moment the detector has correlated a macroscopic number of its particles with the path, the record is classical for all practical purposes, and the interference is gone for good. Throwing the detector into a black hole makes the record physically inaccessible, but it doesn't un-entangle it. Once a macroscopic record forms, for every practical purpose the collapse is done."
+    - paragraph [ref=e85]:
+      - text: The eraser works
+      - emphasis [ref=e86]: because
+      - text: it operates on quantum records — states that haven't solidified into macroscopic correlations yet. Undoing only works while the information is still quantum, not after it's become classical-for-all-practical-purposes history.
+    - generic [ref=e87]:
+      - generic [ref=e88]: Honest tension
+      - paragraph [ref=e89]: "I'm using the language of \"collapse\" and \"records\" loosely. In more careful language — many-worlds, decoherence theory, consistent histories — there is no collapse; there is only the entangled state of the particle, the detector, and the environment, and the \"pattern\" is what you see when you trace out the detector. The story I'm telling here is the pragmatic one, and it gets you to the right predictions every time. Smarter versions drop the collapse word entirely and talk about the information-theoretic properties of the joint state. Both end at the same place: the observer isn't the relevant variable."
+    - heading "What this actually means" [level=2] [ref=e90]
+    - paragraph [ref=e91]: "The lesson the quantum eraser actually teaches is about information. The rule: if a piece of information about a superposition is recoverable as a classical correlation in the environment, the superposition collapses with respect to that information. If the information stays quantum, the superposition survives. No observers, no minds, no human required."
+    - paragraph [ref=e92]:
+      - text: It's a stranger universe than the classical one, but it's also a lot less
+      - emphasis [ref=e93]: anthropic
+      - text: than the pop-sci telling makes it sound. You're not required for anything to happen. The detector isn't required either; a stray atom will do. What's required is a
+      - emphasis [ref=e94]: record
+      - text: . The universe keeps books, and the books determine what the particles are allowed to have been doing.
+    - paragraph [ref=e95]:
+      - text: The thing that unsettles me isn't the "observation" part. It's the "recoverable" part. It's hard not to say the universe
+      - emphasis [ref=e96]: cares
+      - text: about the difference between quantum and classical information, and that the rules we use are an accounting system for tracking that care. Something about reality, at the fundamental level, is ledger-shaped. I don't know what to do with that, and I don't think anyone else does either. What I'm sure of is that it's not about whether anyone was looking.
+    - separator [ref=e97]
+    - paragraph [ref=e98]:
+      - text: If this connected for you, or if I'm using "information" in a way that makes a physicist friend of yours wince, tell me —
+      - link "hi@rnader.com" [ref=e99] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: . For the flip side of this coin — what "measurement" actually does in a quantum circuit —
+      - link "the quantum gates post" [ref=e100] [cursor=pointer]:
+        - /url: /posts/quantum-gates.html
+      - text: is where to go.
