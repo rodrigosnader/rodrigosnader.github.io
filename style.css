@@ -92,6 +92,11 @@ a:hover { color: var(--link-hover); }
   align-items: center;
   gap: 24px;
 }
+.brand-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 .brand {
   font-family: var(--font-serif);
   font-size: 21px;
@@ -103,6 +108,14 @@ a:hover { color: var(--link-hover); }
 }
 .brand strong { font-weight: 700; }
 .brand:hover { color: var(--link); }
+.brand-sub {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text-dim);
+  letter-spacing: 0;
+  line-height: 1;
+}
 .site-nav {
   display: flex;
   gap: 28px;
