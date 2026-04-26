@@ -84,8 +84,8 @@ a:hover { color: var(--link-hover); }
   margin-bottom: 56px;
 }
 .site-header .limiter {
-  max-width: var(--w-header);
-  padding: 0 40px;
+  max-width: var(--w-text);
+  padding: 0 24px;
 }
 .header-row {
   display: flex;
@@ -247,16 +247,18 @@ main section { margin-bottom: 64px; }
   counter-reset: none;
 }
 .post-list li {
-  display: grid;
-  grid-template-columns: 110px 1fr auto;
-  gap: 18px;
+  display: flex;
   align-items: baseline;
+  gap: 18px;
   padding: 11px 0;
   border-bottom: 1px solid var(--border);
   position: relative;
   user-select: none;
   -webkit-user-select: none;
 }
+.post-list li > time { flex: 0 0 100px; }
+.post-list li > a { flex: 0 1 auto; min-width: 0; }
+.post-list li > .read-time { flex: 0 0 auto; }
 .post-list li:last-child { border-bottom: none; }
 .post-list time {
   font-family: var(--font-mono);
