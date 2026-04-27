@@ -1,0 +1,104 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "Rodrigo S. Nader" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - strong [ref=e7]: Rodrigo
+          - text: S. Nader
+        - generic [ref=e8]: AI, rationality and the universe.
+      - navigation "Sections" [ref=e9]:
+        - link "writing" [ref=e10] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e11] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e12] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e13] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e14] [cursor=pointer]:
+        - img [ref=e15]
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - heading "Recent" [level=2] [ref=e20]
+      - list [ref=e21]:
+        - listitem [ref=e22]:
+          - time [ref=e23]: Apr 16, 2026
+          - generic [ref=e24]:
+            - heading "Explanations that don't eat their tail" [level=3] [ref=e25]:
+              - link "Explanations that don't eat their tail" [ref=e26] [cursor=pointer]:
+                - /url: /posts/rigor.html
+            - paragraph [ref=e27]: Both sentences are true. Together they explain nothing. If you didn't know what a radius was before reading them, you still don't…
+            - text: 6 min read
+        - listitem [ref=e28]:
+          - time [ref=e29]: Apr 15, 2026
+          - generic [ref=e30]:
+            - heading "The inside of a glass" [level=3] [ref=e31]:
+              - link "The inside of a glass" [ref=e32] [cursor=pointer]:
+                - /url: /posts/inside-glass.html
+            - paragraph [ref=e33]: Two photons are born in a crystal in a basement lab. They're created in the same instant, in a single shared quantum state — and then they go their separate ways…
+            - text: 13 min read
+        - listitem [ref=e34]:
+          - time [ref=e35]: Apr 15, 2026
+          - generic [ref=e36]:
+            - heading "Why truth is narrow" [level=3] [ref=e37]:
+              - link "Why truth is narrow" [ref=e38] [cursor=pointer]:
+                - /url: /posts/skepticism.html
+            - paragraph [ref=e39]: "Here's a question: are there more possible true statements about the world, or more possible false ones?"
+            - text: 8 min read
+        - listitem [ref=e40]:
+          - time [ref=e41]: Apr 15, 2026
+          - generic [ref=e42]:
+            - heading "The boy and the infinite universe" [level=3] [ref=e43]:
+              - link "The boy and the infinite universe" [ref=e44] [cursor=pointer]:
+                - /url: /posts/infinite-universe.html
+            - paragraph [ref=e45]: The boy read the sentence in a library book and it refused to mean anything. Every point in the universe is the center of the universe…
+            - text: 7 min read
+        - listitem [ref=e46]:
+          - time [ref=e47]: Apr 15, 2026
+          - generic [ref=e48]:
+            - heading "What if time is just a direction?" [level=3] [ref=e49]:
+              - link "What if time is just a direction?" [ref=e50] [cursor=pointer]:
+                - /url: /posts/time-dimension.html
+            - paragraph [ref=e51]: In 1814, Pierre-Simon Laplace made one of the most famous bets in the history of science. Give me, he wrote, the exact position and velocity of every particle, and I will hand you back the future…
+            - text: 10 min read
+    - generic [ref=e52]:
+      - heading "More" [level=2] [ref=e53]
+      - list [ref=e54]:
+        - listitem [ref=e55]:
+          - time: 2026 · Apr 15
+          - link "Quantum gates without the hype" [ref=e56] [cursor=pointer]:
+            - /url: /posts/quantum-gates.html
+          - generic: 9 min
+        - listitem [ref=e57]:
+          - time: 2026 · Apr 15
+          - link "The experiment that doesn't need you to look" [ref=e58] [cursor=pointer]:
+            - /url: /posts/quantum-eraser.html
+          - generic: 9 min
+        - listitem [ref=e59]:
+          - time: 2026 · Apr 15
+          - link "You, included in the universe" [ref=e60] [cursor=pointer]:
+            - /url: /posts/free-will.html
+          - generic: 11 min
+        - listitem [ref=e61]:
+          - time: 2026 · Apr 15
+          - link "Neurons that keep living between words" [ref=e62] [cursor=pointer]:
+            - /url: /posts/spiking-nets.html
+          - generic: 11 min
+        - listitem [ref=e63]:
+          - time: 2026 · Apr 15
+          - link "Gamifying cooperation" [ref=e64] [cursor=pointer]:
+            - /url: /posts/bipartisanship.html
+          - generic: 7 min
+        - listitem [ref=e65]:
+          - time: 2026 · Apr 12
+          - link "The one thing Bayes actually says" [ref=e66] [cursor=pointer]:
+            - /url: /posts/bayes.html
+          - generic: 8 min
+      - paragraph [ref=e67]:
+        - link "See full archive →" [ref=e68] [cursor=pointer]:
+          - /url: /writing.html
+  - contentinfo [ref=e69]:
+    - paragraph [ref=e71]:
+      - text: 0 frameworks. Plain HTML, CSS, a sprinkle of vanilla JS.
+      - text: g h home · g w writing · ? help

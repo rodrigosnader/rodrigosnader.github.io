@@ -1,0 +1,53 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - main [ref=e16]:
+    - article [ref=e17]:
+      - generic [ref=e18]:
+        - img "Rodrigo S. Nader" [ref=e19]
+        - generic [ref=e20]:
+          - heading "Hi, I'm Rodrigo." [level=1] [ref=e21]
+          - paragraph [ref=e22]: This is where I think out loud — usually about AI, sometimes physics, often whatever has been catching my attention this week.
+      - paragraph [ref=e23]: The rhythm is usually the same. I get curious about something. The explanations I find don't quite land. I argue with them until something clicks. Then I write the post I wish I'd found in the first place.
+      - paragraph [ref=e24]: So this blog is downstream of curiosity, not credentials. Most of what I write about — quantum mechanics, cosmology, free will, Bayesian reasoning — I have no official authority on. I'm just someone who couldn't move on until he understood it well enough to explain it.
+      - heading "What I do" [level=2] [ref=e25]
+      - paragraph [ref=e26]:
+        - text: I'm co-founder and product lead at
+        - link "Langflow" [ref=e27] [cursor=pointer]:
+          - /url: https://langflow.org
+        - text: — an open-source platform for visually building AI agents and applications. Most days I'm thinking about the architecture, the UX, and the abstractions that let people compose complex agentic systems without starting from scratch. The work sits between product, engineering, and open source, which mostly means listening to what developers actually run into and turning it into something they don't have to fight.
+      - heading "Things I'm into" [level=2] [ref=e28]
+      - paragraph [ref=e29]: Physics — especially quantum mechanics, where the math is small and the implications won't sit still. Cosmology, slowly, the way someone might read poetry in a language they're still learning. Quantum computing, more out of curiosity than belief in any particular timeline. Rationality and Bayesian reasoning, ever since they broke the way I update beliefs and I couldn't go back. Computational neuroscience whenever it brushes against AI. Game theory when politics gets weird enough to feel like a coordination problem.
+      - paragraph [ref=e30]: If you find me deep in a rabbit hole, it's probably one of these.
+      - heading "The site itself" [level=2] [ref=e31]
+      - paragraph [ref=e32]: Intentionally boring. No framework, no build step, no CMS. Just HTML, CSS, and a small amount of vanilla JavaScript for the interactive figures and the theme toggle. View source — everything is inline, nothing is obfuscated.
+      - heading "Contact" [level=2] [ref=e33]
+      - paragraph [ref=e34]:
+        - link "hi@rnader.com" [ref=e35] [cursor=pointer]:
+          - /url: mailto:hi@rnader.com
+        - text: ·
+        - link "Twitter" [ref=e36] [cursor=pointer]:
+          - /url: https://twitter.com/rnader_ai
+        - text: ·
+        - link "GitHub" [ref=e37] [cursor=pointer]:
+          - /url: https://github.com/rodrigo-nader
+  - contentinfo [ref=e38]:
+    - paragraph [ref=e40]:
+      - link "← back to home" [ref=e41] [cursor=pointer]:
+        - /url: /
+      - text: 0 frameworks. Plain HTML, CSS, a sprinkle of vanilla JS.
