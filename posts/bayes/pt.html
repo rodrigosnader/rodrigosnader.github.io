@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A única coisa que Bayes está dizendo — Rodrigo Nader</title>
+<meta name="description" content="A única pergunta que a regra de Bayes está realmente fazendo — e por que o jargão dos livros faz mais sentido depois que você vê isso.">
+<link rel="stylesheet" href="../../style.css?v=5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <a href="/" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>A única coisa que Bayes está dizendo</h1>
+    <p class="post-meta">
+      <time datetime="2026-04-12">2026 · Abr 12</time>
+      <span class="sep">·</span>
+      <span>8 min de leitura</span>
+      <span class="sep">·</span>
+      <span>Ensaio</span>
+      <span class="sep">·</span>
+      <span class="lang-switch"><a href="index.html">EN</a> · <strong>PT</strong></span>
+    </p>
+  </header>
+
+  <p>Você acabou de testar positivo pra uma doença. O teste é "95% preciso". Quanto você deveria se preocupar?</p>
+
+  <p>A intuição da maioria das pessoas grita "95% preocupado". A minha gritava. A resposta honesta costuma ser bem menor, e o jeito de chegar nela se chama regra de Bayes.</p>
+
+  <p>Se você já tentou pesquisar o que é a regra de Bayes, sabe a forma do bicho: uma equação com três ingredientes (prior, likelihood, evidência) que você tem que segurar na cabeça e não confundir. Saí das primeiras vezes com uma sensação vaga de que Bayes era importante e nenhuma ideia real de como usar.</p>
+
+  <p>Aqui é onde acho que o livro-texto tropeça. Ele decompõe a regra em três partes porque a álgebra tem três partes. Aí tenta dar a cada parte um nome e um papel, que vão se sobrepondo, e o estudante acaba com uma equação que parece um monte de ingredientes batidos sem motivo claro.</p>
+
+  <p>Passei uma tarde discutindo com um modelo de linguagem até a coisa toda fazer sentido, condensada numa única pergunta:</p>
+
+  <div class="callout">
+    <span class="label">A pergunta</span>
+    <p>Essa evidência está acontecendo <em>porque</em> minha crença é verdadeira, ou ela acontece <em>de qualquer jeito</em>?</p>
+  </div>
+
+  <p>Ou, pro caso específico: <span class="gloss" tabindex="0" data-gloss="a evidência">esse teste positivo</span> está aparecendo <em>porque</em> <span class="gloss" tabindex="0" data-gloss="minha crença é verdadeira">eu realmente estou doente</span> — ou <span class="gloss" tabindex="0" data-gloss="acontece de qualquer jeito">ele dá positivo pra gente saudável</span> <em>de qualquer jeito</em>?</p>
+
+  <p>É a regra inteira. Quando você tem a pergunta, todo o resto — prior, likelihood, evidência — começa a fazer sentido. Mas é provável que essa frase ainda não tenha caído. Só engata quando você vê acontecer em algo real. Bora caminhar devagar pelo teste positivo.</p>
+
+  <h2>Seu teste positivo, devagar</h2>
+
+  <p>Suponha uma doença que, tipo COVID, afeta 1% da população. E digamos que o teste pega gente doente 95% das vezes (testes não são perfeitos). Pra cada 100 pessoas, em média 0,95 sairia pega como doente — esse é o caso <em>porque</em> (positivos acontecendo <em>porque</em> a pessoa está realmente doente). As outras 99 estão saudáveis.</p>
+
+  <p>Imagina também que 5% dessas pessoas saudáveis dão falso positivo (de novo, testes não são perfeitos!) — isso dá mais 4,95 positivos vindos de gente saudável. Esse é o caso <em>de qualquer jeito</em> (positivos que acontecem <em>de qualquer jeito</em>, mesmo sem ninguém estar doente).</p>
+
+  <p>Total de positivos num grupo de 100: cerca de <strong>5,9</strong>.</p>
+
+  <p>Repara: dos 5,9 positivos, só 0,95 vieram do grupo <em>porque</em>. Os outros 4,95 são o grupo <em>de qualquer jeito</em> — alarmes falsos. Então mesmo se o seu teste der positivo, sua chance de estar realmente doente é 0,95 sobre 5,9 — uns <strong>16%</strong>. Não 95%. É que tem muito mais gente saudável pra errar do que gente doente pra acertar, e os falsos positivos engolem os verdadeiros.</p>
+
+  <p>Em outras palavras: se seu teste aparece positivo, só tem dois caminhos pra isso ter acontecido. Pode estar positivo <em>porque</em> você está realmente doente. Ou pode estar dando positivo <em>de qualquer jeito</em>, o tipo de alarme falso que o teste joga em gente saudável também. Pesar os dois juntos é o que te dá sua chance real de estar doente.</p>
+
+  <p><em>Quantas vezes mais isso acontece <strong>porque</strong> meu palpite está certo, comparado com quantas vezes acontece <strong>de qualquer jeito</strong>?</em></p>
+
+  <figure class="viz">
+    <canvas id="v1-slice" style="height: 190px;"></canvas>
+    <div class="viz-result">
+      <span class="gloss" tabindex="0" data-gloss="prior × likelihood"><span id="v1-real">0.95</span></span>
+      <span class="viz-op">÷</span>
+      <span class="gloss gloss-neutral" tabindex="0" data-gloss="a evidência"><span id="v1-total">5.9</span></span>
+      <span class="viz-op">=</span>
+      <span class="gloss" tabindex="0" data-gloss="a posterior"><span id="v1-posterior">16%</span></span>
+    </div>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label"><span class="gloss" tabindex="0" data-gloss="prior">% doentes</span> — <span id="v1-prev-readout">1.0</span>%</span>
+        <input type="range" id="v1-prev" min="0.1" max="50" step="0.1" value="1">
+      </label>
+      <label>
+        <span class="ctrl-label"><span class="gloss" tabindex="0" data-gloss="likelihood">taxa de detecção</span> — <span id="v1-sens-readout">95</span>%</span>
+        <input type="range" id="v1-sens" min="50" max="100" step="1" value="95">
+      </label>
+      <label>
+        <span class="ctrl-label"><span class="gloss" tabindex="0" data-gloss="1 − especificidade">taxa de falso alarme</span> — <span id="v1-fpr-readout">5</span>%</span>
+        <input type="range" id="v1-fpr" min="0" max="30" step="1" value="5">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 1</span>Todos os testes positivos que você veria num grupo de 100 pessoas. Laranja = grupo <em>porque</em> (positivos vindos de gente realmente doente). Azul = grupo <em>de qualquer jeito</em> (alarmes falsos vindos de gente saudável). A fração laranja <em>é</em> a resposta: sua chance de estar realmente doente dado um resultado positivo.</div>
+  </figure>
+
+  <p>Arrasta o slider "% doentes". Quando a doença é rara, o azul engole a barra — quase todo positivo é alarme falso, e a fatia laranja quase não existe. Empurra pra cima e o laranja cresce, comendo o azul. Isso é Bayes numa imagem só: a fração laranja é a sua resposta, e ela só fica grande quando a doença em si é comum o bastante pra superar os alarmes falsos.</p>
+
+  <h2>Onde os nomes dos livros encaixam</h2>
+
+  <p>Se você for procurar Bayes depois disso, vai esbarrar nos mesmos três ingredientes — prior, likelihood, evidência — e agora eles correspondem a algo concreto:</p>
+
+  <ol class="tight-list">
+    <li><strong>Prior</strong> — o 1 em 100 com que você começou. O que você sabia antes do teste.</li>
+    <li><strong>Likelihood</strong> — os 95%. Quantas vezes o sinal aparece quando seu palpite está certo.</li>
+    <li><strong>Evidência</strong> — os 5,9%. Quantas vezes o sinal aparece, no total.</li>
+  </ol>
+
+  <p>As fórmulas embrulham esses três números numa fração e cospem os 16% — só uma forma compacta de escrever a mesma coisa.</p>
+
+  <h2>Por que isso importa fora dos testes</h2>
+
+  <p>A mesma pergunta vale fora de testes médicos. Um e-mail suspeito na sua caixa de entrada: quantas tentativas reais de phishing são parecidas com essa, comparadas com quantas mensagens legítimas acabam soando assim? Um candidato com um currículo impressionante: quantos engenheiros excelentes têm currículo desse jeito, comparados com quantos medianos polem o deles pra parecer o mesmo? Um resultado científico com p-valor baixo: quantas vezes um efeito real produz isso, comparado com quantas vezes só o acaso produz?</p>
+
+  <p>Bayes é só o hábito de sempre perguntar as duas metades, em vez de só a primeira. A maior parte das inferências ruins do mundo — erros de contratação, pânico médico, teorias da conspiração que "explicam tudo" — vem de esquecer de perguntar a segunda metade. O sinal parece forte, e você não checa quão forte ele é <em>de qualquer jeito</em>.</p>
+
+  <p>Então da próxima vez que alguém te disser que viu um disco voador, pergunta:</p>
+
+  <ol class="tight-list">
+    <li>Quantos relatos desse tipo acabam tendo uma explicação comum — um evento natural, um truque de luz, uma memória distorcida?</li>
+    <li>Quantos discos voadores já foram, de fato, verificados?</li>
+  </ol>
+
+  <p>O primeiro número é grande. O segundo é (provavelmente) zero. Qualquer relato isolado é avassaladoramente <em>de qualquer jeito</em>, não <em>porque</em>.</p>
+
+  <p>É o mesmo ponto cego cognitivo que cutuquei no <a href="/posts/review/skepticism.html">post sobre ceticismo</a>, por outro ângulo. Frases falsas excedem em muito as verdadeiras; evidência fraca pra alguma coisa ainda é, na maior parte, evidência pra nada — porque "nada" é tão maior.</p>
+
+  <h2>A regra inteira, mais uma vez</h2>
+
+  <p>A regra de Bayes é o hábito de perguntar, pra qualquer evidência:</p>
+
+  <p><em>Quanto da evidência acontece <strong>porque</strong> minha crença é verdadeira, comparado a quanto aconteceria <strong>de qualquer jeito</strong>?</em></p>
+
+  <p>É a regra inteira. As fórmulas e o jargão de três partes são todos jeitos de escrever essa comparação com precisão. Quando você tem o hábito, o resto é só notação.</p>
+
+  <hr>
+
+  <p>Se isso engatou, ou se ainda tô deixando passar alguma coisa que faria engatar melhor, eu quero saber de verdade — <a href="mailto:hi@rnader.com">hi@rnader.com</a>.</p>
+</article>
+
+<script src="/script.js?v=5"></script>
+<script src="../viz-common.js?v=1"></script>
+<script>
+/* ---------- Fig 1: Positive-test slice ---------- */
+(function(){
+  const canvas = document.getElementById('v1-slice');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const prevInput = document.getElementById('v1-prev');
+  const sensInput = document.getElementById('v1-sens');
+  const fprInput = document.getElementById('v1-fpr');
+  const prevReadout = document.getElementById('v1-prev-readout');
+  const sensReadout = document.getElementById('v1-sens-readout');
+  const fprReadout = document.getElementById('v1-fpr-readout');
+  const realOut = document.getElementById('v1-real');
+  const totalOut = document.getElementById('v1-total');
+  const posteriorOut = document.getElementById('v1-posterior');
+
+  let prev = 0.01, sens = 0.95, fpr = 0.05;
+  function sync() {
+    prev = parseFloat(prevInput.value) / 100;
+    sens = parseFloat(sensInput.value) / 100;
+    fpr = parseFloat(fprInput.value) / 100;
+    prevReadout.textContent = (prev * 100).toFixed(1);
+    sensReadout.textContent = (sens * 100).toFixed(0);
+    fprReadout.textContent = (fpr * 100).toFixed(0);
+
+    const realPos = prev * sens * 100;
+    const falsePos = (1 - prev) * fpr * 100;
+    const totPos = realPos + falsePos;
+    const posterior = totPos > 0 ? realPos / totPos : 0;
+    realOut.textContent = realPos.toFixed(2);
+    totalOut.textContent = totPos.toFixed(2);
+    posteriorOut.textContent = (posterior * 100).toFixed(0) + '%';
+  }
+  [prevInput, sensInput, fprInput].forEach((el) => el.addEventListener('input', sync));
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const realPos = prev * sens * 100;
+    const falsePos = (1 - prev) * fpr * 100;
+    const totPos = realPos + falsePos;
+    const posterior = totPos > 0 ? realPos / totPos : 0;
+
+    const padX = 40;
+    const barW = rect.width - padX * 2;
+    const barH = 56;
+    const barX = padX;
+    const barY = 48;
+
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Todos os positivos num grupo de 100 (' + totPos.toFixed(2) + ' deles)', rect.width / 2, barY - 14);
+
+    const realW = totPos > 0 ? (realPos / totPos) * barW : 0;
+    const falseW = totPos > 0 ? (falsePos / totPos) * barW : 0;
+
+    ctx.fillStyle = c.accent;
+    ctx.fillRect(barX, barY, realW, barH);
+    ctx.fillStyle = c.blue;
+    ctx.fillRect(barX + realW, barY, falseW, barH);
+    ctx.strokeStyle = c.border;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(barX, barY, barW, barH);
+
+    ctx.textAlign = 'center';
+    if (realW > 60) {
+      ctx.fillStyle = c.bg;
+      ctx.font = 'bold 13px -apple-system, Inter, sans-serif';
+      ctx.fillText(realPos.toFixed(2), barX + realW / 2, barY + barH / 2 + 0);
+      ctx.font = '10px -apple-system, Inter, sans-serif';
+      ctx.fillText('(' + (posterior * 100).toFixed(0) + '%)', barX + realW / 2, barY + barH / 2 + 15);
+    }
+    if (falseW > 60) {
+      ctx.fillStyle = c.bg;
+      ctx.font = 'bold 13px -apple-system, Inter, sans-serif';
+      ctx.fillText(falsePos.toFixed(2), barX + realW + falseW / 2, barY + barH / 2 + 0);
+      ctx.font = '10px -apple-system, Inter, sans-serif';
+      ctx.fillText('(' + ((1 - posterior) * 100).toFixed(0) + '%)', barX + realW + falseW / 2, barY + barH / 2 + 15);
+    }
+
+    ctx.font = 'italic 11px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'center';
+
+    const becauseX = realW > 60
+      ? barX + realW / 2
+      : Math.max(barX + 30, barX + realW + 20);
+    ctx.fillStyle = c.accent;
+    ctx.fillText('porque', becauseX, barY + barH + 20);
+    if (realW <= 60 && realW > 0) {
+      ctx.font = 'bold 11px ui-monospace, monospace';
+      ctx.fillText(realPos.toFixed(2), becauseX, barY + barH + 36);
+      ctx.font = 'italic 11px -apple-system, Inter, sans-serif';
+      ctx.strokeStyle = c.accent;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(barX + realW, barY + barH);
+      ctx.lineTo(barX + realW, barY + barH + 6);
+      ctx.stroke();
+    }
+
+    const anywayX = barX + realW + falseW / 2;
+    ctx.fillStyle = c.blue;
+    ctx.fillText('de qualquer jeito', anywayX, barY + barH + 20);
+    if (falseW <= 60 && falseW > 0) {
+      ctx.font = 'bold 11px ui-monospace, monospace';
+      ctx.fillText(falsePos.toFixed(2), anywayX, barY + barH + 36);
+    }
+  }
+  sync();
+  vizCommon.animate(canvas, draw);
+})();
+
+</script>
+</body>
+</html>

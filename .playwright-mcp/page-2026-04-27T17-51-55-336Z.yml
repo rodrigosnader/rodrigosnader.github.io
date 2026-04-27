@@ -1,0 +1,100 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "Rodrigo S. Nader" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - strong [ref=e6]: Rodrigo
+        - text: S. Nader
+      - navigation [ref=e7]:
+        - link "writing" [ref=e8] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e9] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e10] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e11] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e12] [cursor=pointer]:
+        - img [ref=e13]
+  - article [ref=e15]:
+    - generic [ref=e16]:
+      - heading "Explicações que tocam o chão" [level=1] [ref=e17]
+      - paragraph [ref=e18]:
+        - time [ref=e19]: 2026 · Abr 16
+        - text: · 6 min de leitura · Ensaio ·
+        - generic [ref=e20]:
+          - link "EN" [ref=e21] [cursor=pointer]:
+            - /url: index.html
+          - text: ·
+          - strong [ref=e22]: PT
+    - blockquote [ref=e23]:
+      - paragraph [ref=e24]: "\"O que é um raio?\" \"Metade do diâmetro.\""
+      - paragraph [ref=e25]: "\"E o diâmetro?\" \"Duas vezes o raio.\""
+    - paragraph [ref=e26]: As duas frases são verdadeiras. Juntas, não explicam nada. Se você não sabia o que era um raio antes de ler, continua não sabendo. Cada definição aponta pra outra; nenhuma encosta no chão.
+    - paragraph [ref=e27]: Esse padrão me persegue. Algo que tem cara de explicação, passa numa leitura desatenta, e desmorona à primeira pergunta de "mas por quê?"
+    - paragraph [ref=e28]: "A forma da falha é sempre a mesma: um loop disfarçado de cadeia."
+    - heading "Nível é dependência" [level=2] [ref=e29]
+    - paragraph [ref=e30]: "Quando a gente diz que um conceito é \"mais baixo\" que outro, quer dizer uma coisa só: você precisa dele pra entender o de cima. Se você precisa de B pra entender A, B está abaixo. É isso."
+    - paragraph [ref=e31]: Então o que está um nível abaixo de raio e diâmetro? O centro do círculo. Um círculo é o conjunto dos pontos equidistantes de um centro. O raio é a distância do centro até a borda. O diâmetro é a distância de uma ponta à outra, passando pelo centro. Nenhuma das palavras precisa da outra; as duas precisam do centro. E "centro", "distância", "borda" — nesse contexto, são palavras que você já tem. Não precisam ser explicadas. Esse é o chão.
+    - paragraph [ref=e32]: "Cada camada se apoia em conceitos que pedem menos de você — conceitos mais perto de coisas que você só faria que sim com a cabeça. É isso que \"mais baixo\" quer dizer aqui: não necessariamente mais simples ou menor, só mais perto de uma base que você já está pisando."
+    - paragraph [ref=e33]: Pergunta por que um programa quebrou e "porque tinha um bug" não te dá nada — é a quebra reformulada com outra palavra. "A função recebeu null porque a API devolveu uma resposta vazia e ninguém checou isso" tem etapas, cada uma apoiada na anterior. A primeira é um loop. A segunda é uma cadeia.
+    - paragraph [ref=e34]: Isso é mais fácil de ver em código do que em texto. Uma função que se chama sem caso base estoura a stack — o compilador recusa. Linguagem natural não tem essa proteção. Explicações circulares compilam de boa em português, e é por isso que escritor cuidadoso faz a checagem na mão.
+    - heading "A virtude dormitiva" [level=2] [ref=e35]
+    - paragraph [ref=e36]:
+      - link "Molière" [ref=e37] [cursor=pointer]:
+        - /url: https://en.wikipedia.org/wiki/Le_Malade_imaginaire
+      - text: encenou a versão canônica dessa armadilha em 1673. Em
+      - emphasis [ref=e38]: Le Malade imaginaire
+      - text: (
+      - emphasis [ref=e39]: O doente imaginário
+      - text: ), um candidato a médico é questionado por que o ópio faz dormir. Ele responde, em latim impressionante, que o ópio possui uma
+      - emphasis [ref=e40]: virtus dormitiva
+      - text: — uma "virtude dormitiva" — cuja natureza é fazer os sentidos adormecerem.
+    - blockquote [ref=e41]:
+      - paragraph [ref=e42]: "Traduzindo: o ópio te dá sono porque tem uma qualidade-que-causa-sono. O latim disfarça o fenômeno como se fosse a causa dele."
+    - paragraph [ref=e43]: Isso importa porque o truque escala. Troca "virtude dormitiva" por qualquer mecanismo com cara técnica suficiente, e o mesmo movimento vazio passa pela inspeção. "O ópio ativa os receptores opioides, que induzem o sono." Isso é uma explicação? Depende se "receptores opioides" se desdobra em algo mais baixo — canais iônicos, potenciais de membrana, cascatas de sinalização. Se desdobra, você acrescentou um passo de verdade à cadeia.
+    - figure [ref=e44]:
+      - generic [ref=e46]:
+        - button "raio & diâmetro" [ref=e47] [cursor=pointer]
+        - button "temperatura" [ref=e48] [cursor=pointer]
+      - generic [ref=e49]:
+        - generic [ref=e50]: Fig 1
+        - text: Alterna entre uma explicação quebrada e uma aterrada. Se as setas formam um loop, a explicação é circular — nunca toca o chão. Se chegam em nós primitivos (coisas que você aceita sem precisar de explicação), é rigorosa.
+    - heading "O teste do \"por quê?\"" [level=2] [ref=e51]
+    - paragraph [ref=e52]:
+      - text: A boa notícia é que tem como pegar isso. Pega qualquer explicação e fica perguntando
+      - emphasis [ref=e53]: por quê
+      - text: ", do jeito que criança faz antes de aprender quando parar. Cada resposta é uma nova afirmação; pergunta por quê de novo. Uma de três coisas acontece:"
+    - paragraph [ref=e54]:
+      - text: "1. Você toca o chão. Chega em algo que não precisa de mais definição — um conceito perto o bastante da rocha-mãe pra você parar naturalmente. Tem uma demonstração linda disso na Wikipedia: pega qualquer artigo, clica no primeiro link do corpo do texto, e segue. Cerca de 97% dos artigos eventualmente caem em"
+      - emphasis [ref=e55]: Filosofia
+      - text: . As definições vão encadeando em conceitos cada vez mais baixos até não sobrar pra onde ir além do estudo do próprio pensar.
+    - figure [ref=e56]:
+      - generic [ref=e58]:
+        - button "Cat" [ref=e59] [cursor=pointer]
+        - button "Guitar" [ref=e60] [cursor=pointer]
+        - button "Love" [ref=e61] [cursor=pointer]
+        - button "Chocolate" [ref=e62] [cursor=pointer]
+        - button "Football" [ref=e63] [cursor=pointer]
+      - generic [ref=e64]:
+        - generic [ref=e65]: Fig 2
+        - text: Escolhe uma palavra de partida e segue a cadeia do primeiro link da Wikipedia em inglês até
+        - emphasis [ref=e66]: Philosophy
+        - text: . Cerca de 97% dos artigos chegam lá. Caminhos traçados em abril de 2026 — eles mudam conforme a Wikipedia é editada. Faça o seu em
+        - link "pathtophilosophy.com" [ref=e67] [cursor=pointer]:
+          - /url: https://pathtophilosophy.com
+        - text: .
+    - paragraph [ref=e68]: 2. Você fica sem orçamento. A cadeia tá sólida até aqui, mas o próximo passo te levaria pra um campo totalmente diferente. Tudo bem — rigor não é sobre chegar no fundo de todo conhecimento. É sobre saber onde a sua cadeia termina e que o elo onde você parou aguenta peso.
+    - paragraph [ref=e69]: 3. Digamos que você loope. Você chega numa afirmação por onde já tinha passado, e a explicação está quebrada. Esse é o caso mais difícil de pegar — o círculo cabe confortavelmente na cabeça, e voltar ao ponto de partida tem cara de chegar a uma resposta. Escrever a cadeia no papel é o que torna ela visível. Texto linear é mais difícil de enganar do que linha de raciocínio.
+    - heading "A ilusão de profundidade explicativa" [level=2] [ref=e70]
+    - paragraph [ref=e71]: "Tem motivo pra explicações circulares parecerem ok dentro da cabeça. Psicólogos chamam isso de ilusão de profundidade explicativa: você acha que entende algo até ser convidado a explicar de verdade. Tenta explicar o que é um brinquedo sem mencionar pra que serve — sem brincar, sem diversão, sem entretenimento. Um objeto que... criança segura? Algo de plástico? Cada tentativa ou contrabandeia a função de volta com outra palavra, ou não diz nada útil. O conceito parecia sólido até a restrição revelar que ele estava todo apoiado na única coisa que você não podia dizer."
+    - paragraph [ref=e72]: Acho que isso se aplica a mais coisa do que a gente tem coragem de admitir. Você "sabe" o que uma rede neural faz até alguém perguntar o que um neurônio faz e por que tem uma multiplicação ali. A primeira camada de entendimento é um nome — e o nome se apoia em familiaridade, não em mecanismo.
+    - paragraph [ref=e73]: Não dá pra aterrar tudo. Em algum momento você toma um conceito como primitivo e para de empurrar. Físico aterra em campos. Químico para no átomo. Cozinheiro para em "sal". E provavelmente está tudo bem. Rigor não é sobre ir mais fundo — é sobre saber onde você parou.
+    - paragraph [ref=e74]: "Então da próxima vez que você estiver escrevendo, ensinando ou tentando defender alguma coisa, pausa e traça: até onde isso desce?"
+    - paragraph [ref=e75]: Toda argumentação tem um chão. Uma boa sabe onde o dela está.
+    - separator [ref=e76]
+    - paragraph [ref=e77]:
+      - text: Se você tem uma virtude dormitiva favorita escondida à vista de todo mundo, quero ouvir —
+      - link "hi@rnader.com" [ref=e78] [cursor=pointer]:
+        - /url: mailto:hi@rnader.com
+      - text: .

@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explanations that don't eat their tail — Rodrigo Nader</title>
+<meta name="description" content="Why some explanations explain and others just sound like they do — and a simple test to tell the difference.">
+<link rel="stylesheet" href="../../style.css?v=5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <a href="/" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>Explanations that don't eat their tail</h1>
+    <p class="post-meta">
+      <time datetime="2026-04-16">2026 · Apr 16</time>
+      <span class="sep">·</span>
+      <span>6 min read</span>
+      <span class="sep">·</span>
+      <span>Essay</span>
+      <span class="sep">·</span>
+      <span class="lang-switch"><strong>EN</strong> · <a href="pt.html">PT</a></span>
+    </p>
+  </header>
+
+  <blockquote>
+    <p>"What's a radius?" "Half the diameter."</p>
+    <p>"And a diameter?" "Twice the radius."</p>
+  </blockquote>
+
+  <p>Both sentences are true. Together they explain nothing. If you didn't know what a radius was before reading them, you still don't. Each definition refers to the other; neither one touches the ground.</p>
+
+  <p>I keep coming back to this pattern. Something that sounds like an explanation, passes a casual reading, and collapses under one round of "but why?"</p>
+
+  <p>The shape of the failure is always the same: a loop, disguised as a chain.</p>
+
+  <h2>Levels mean dependency</h2>
+
+  <p>When we say a concept is "lower-level" than another, we mean one thing: you need it to make sense of the other first. If you need B to understand A, then B is lower than A. That's all.</p>
+
+  <p>So what sits one level below radius and diameter? The center of the circle. A circle is all the points equidistant from a center. The radius is the distance from center to edge. The diameter is the distance straight across, through the center. Neither word needs the other; both need the center. And, for this context, "center," "distance," "edge" — those are words you already have. You don't need them explained. That's the floor.</p>
+
+  <p>Each layer rests on concepts that require less from you — concepts closer to things you'd just nod at. That's what "lower" means here: not necessarily simpler or smaller, just closer to a foundation you're already standing on.</p>
+
+  <p>Ask why a program crashed and "because there was a bug" gives you nothing — it's the crash restated with a different word. "The function received null because the API returned an empty response and nothing checked for that" has steps, each one sitting on the previous. The first is a loop. The second is a chain.</p>
+
+  <p>This is easier to see in code than in prose. A function that calls itself without a base case blows the stack — the "compiler" refuses. Natural language has no such enforcement. Circular explanations compile just fine in English, which is why careful writers do the check by hand.</p>
+
+  <h2>The dormitive virtue</h2>
+
+  <p><a href="https://en.wikipedia.org/wiki/Le_Malade_imaginaire">Molière</a> staged the canonical version of this trap in 1673. In <em>Le Malade imaginaire</em>, a medical candidate is asked why opium makes people sleep. He answers, in impressive Latin, that opium possesses a <em>virtus dormitiva</em> — a "dormitive virtue" — whose nature is to cause the senses to slumber.</p>
+
+  <blockquote><p>Translated: opium makes you sleepy because it has a sleepiness-making quality. The Latin dresses up the phenomenon as a cause.</p></blockquote>
+
+  <p>This matters because the trick scales. Replace "dormitive virtue" with any sufficiently technical-sounding mechanism, and the same empty move passes inspection. "Opium triggers the opioid receptors, which induce sleep." Is that an explanation? It depends on whether "opioid receptors" unpacks into something lower — ion channels, membrane potentials, signaling cascades. If it does, you've added a real step to the chain.</p>
+
+  <figure class="viz">
+    <canvas id="v1-cycle" style="height: 400px;"></canvas>
+    <div class="viz-controls">
+      <button id="v1-case-a">radius &amp; diameter</button>
+      <button id="v1-case-c">temperature</button>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 1</span>Switch between a broken and a grounded explanation. If arrows form a loop, the explanation is circular — it never touches the ground. If they reach primitive nodes (things you'd accept without further explanation), it's rigorous.</div>
+  </figure>
+
+  <h2>The why-test</h2>
+
+  <p>The good news is that there's a way to catch this. Take any explanation and keep asking <em>why</em>, the way a child does before learning when to stop. Each answer is a new claim; ask why again. One of three things happens:</p>
+
+  <p>1. You ground out. You reach something that doesn't need further definition — a concept close enough to bedrock that you stop naturally. There's a beautiful demonstration of this on Wikipedia: pick any article, click the first link in the body text, and keep going. About 97% of articles eventually land on <em>Philosophy</em>. The definitions keep chaining into lower-level concepts until there's nowhere left to go but the study of thought itself.</p>
+
+  <figure class="viz">
+    <canvas id="v2-wiki" style="height: 260px;"></canvas>
+    <div class="viz-controls">
+      <button class="v2-word" data-word="Cat">Cat</button>
+      <button class="v2-word" data-word="Guitar">Guitar</button>
+      <button class="v2-word" data-word="Love">Love</button>
+      <button class="v2-word" data-word="Chocolate">Chocolate</button>
+      <button class="v2-word" data-word="Football">Football</button>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 2</span>Pick a starting word and follow Wikipedia's first-link chain to Philosophy. About 97% of all articles get there. Paths traced in April 2026 — they shift as Wikipedia is edited. Try your own at <a href="https://pathtophilosophy.com">pathtophilosophy.com</a>.</div>
+  </figure>
+
+  <p>2. You run out of budget. The chain is solid so far, but the next step would take you into a different field entirely. That's fine — rigor isn't about reaching the bottom of all knowledge. It's about knowing where your chain stops and that the link you stopped at holds weight.</p>
+
+  <p>3. Say you loop. You reach a claim you already passed through, and the explanation is broken. This is the hardest case to catch — the circle fits comfortably in your head, and the return to the starting point feels like arriving at an answer. Writing the chain down is what makes it visible. Linear text is harder to fool than a train of thought.</p>
+
+  <h2>The illusion of explanatory depth</h2>
+
+  <p>There's a reason circular explanations feel fine in your head. Psychologists call it the illusion of explanatory depth: you think you understand something until you're asked to actually explain it. Try explaining what a toy is without mentioning what it's for — no play, no fun, no entertainment. An object that... children hold? Something made of plastic? Each attempt either smuggles the function back under a different word or says nothing useful at all. The concept felt solid until the constraint revealed it was built entirely on the one thing you weren't allowed to say.</p>
+
+  <p>I think this applies to more than anyone is comfortable admitting. You "know" what a neural network does until someone asks what one neuron does and why the multiplication is there. The first layer of understanding is a name — and the name rests on familiarity, not on mechanism.</p>
+
+  <p>You can't ground everything. At some point you take a concept as primitive and stop pushing. A physicist grounds in fields. A chemist stops at the atom. A cook stops at "salt." And that's probably fine. Rigor isn't about going deeper — it's about knowing where you stopped.</p>
+
+  <p>So next time you're writing or teaching or trying to argue for something, pause and trace: where does this bottom out?</p>
+
+  <p>Every argument has a floor. A good one knows where its floor is.</p>
+
+  <hr>
+
+  <p>If you've got a favorite dormitive virtue hiding in plain sight, I want to hear about it — <a href="mailto:hi@rnader.com">hi@rnader.com</a>.</p>
+</article>
+
+<script src="/script.js?v=5"></script>
+<script src="../viz-common.js?v=1"></script>
+<script>
+/* ---------- Fig 1: dependency graph with cycle detection ---------- */
+(function(){
+  const canvas = document.getElementById('v1-cycle');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const cases = {
+    a: {
+      label: 'radius & diameter',
+      nodes: [
+        { id: 'radius', label: 'radius', x: 0.3, y: 0.45, primitive: false },
+        { id: 'diameter', label: 'diameter', x: 0.7, y: 0.45, primitive: false },
+      ],
+      edges: [
+        { from: 'radius', to: 'diameter', text: 'half of' },
+        { from: 'diameter', to: 'radius', text: 'twice' },
+      ],
+      circular: true,
+      msg: 'circular: neither concept grounds out',
+    },
+    c: {
+      label: 'temperature',
+      nodes: [
+        { id: 'temp', label: 'temperature', x: 0.5, y: 0.22, primitive: false },
+        { id: 'ke', label: 'kinetic energy', x: 0.5, y: 0.48, primitive: false },
+        { id: 'mv', label: 'mass, velocity', x: 0.5, y: 0.74, primitive: true },
+      ],
+      edges: [
+        { from: 'temp', to: 'ke', text: 'avg of' },
+        { from: 'ke', to: 'mv', text: 'computed from' },
+      ],
+      circular: false,
+      msg: 'grounds in measurable quantities',
+    },
+  };
+  let activeKey = 'a';
+
+  document.getElementById('v1-case-a').addEventListener('click', () => activeKey = 'a');
+  document.getElementById('v1-case-c').addEventListener('click', () => activeKey = 'c');
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  const nodeH = 38;
+
+  function boxEdge(p, size, angle) {
+    const cos = Math.cos(angle), sin = Math.sin(angle);
+    const hw = size.w / 2, hh = size.h / 2;
+    const t = Math.abs(sin) < 1e-9 ? hw / Math.abs(cos)
+            : Math.abs(cos) < 1e-9 ? hh / Math.abs(sin)
+            : Math.min(hw / Math.abs(cos), hh / Math.abs(sin));
+    return { x: p.x + cos * t, y: p.y + sin * t };
+  }
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const data = cases[activeKey];
+    const pad = 40;
+    const w = rect.width - pad * 2;
+    const h = rect.height - pad * 2;
+
+    // Compute positions and sizes
+    ctx.font = '13px -apple-system, Inter, sans-serif';
+    const positions = {};
+    const sizes = {};
+    data.nodes.forEach((n) => {
+      positions[n.id] = { x: pad + n.x * w, y: pad + n.y * h };
+      sizes[n.id] = { w: Math.max(ctx.measureText(n.label).width + 28, 110), h: nodeH };
+    });
+
+    const edgeColor = data.circular ? c.accent : c.fg;
+
+    // Pre-compute edge geometry so arrowheads can be drawn on top of nodes
+    const edgeGeom = data.edges.map((e) => {
+      const p1 = positions[e.from], p2 = positions[e.to];
+      const s1 = sizes[e.from], s2 = sizes[e.to];
+      if (data.circular) {
+        const mx = (p1.x + p2.x) / 2, my = (p1.y + p2.y) / 2;
+        const dx = p2.x - p1.x, dy = p2.y - p1.y;
+        const nx = -dy, ny = dx;
+        const len = Math.hypot(nx, ny) || 1;
+        const offset = 36;
+        const cpx = mx + (nx / len) * offset;
+        const cpy = my + (ny / len) * offset;
+        const startAngle = Math.atan2(cpy - p1.y, cpx - p1.x);
+        const arrivalAngle = Math.atan2(p2.y - cpy, p2.x - cpx);
+        const startPt = boxEdge(p1, s1, startAngle);
+        const endPt = boxEdge(p2, s2, arrivalAngle + Math.PI);
+        const apexX = (startPt.x + 2 * cpx + endPt.x) / 4;
+        const apexY = (startPt.y + 2 * cpy + endPt.y) / 4;
+        return { type: 'curve', startPt, endPt, cpx, cpy, arrivalAngle,
+                 labelX: apexX + (nx / len) * 20, labelY: apexY + (ny / len) * 20, textAlign: 'center', text: e.text };
+      } else {
+        const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+        const startPt = boxEdge(p1, s1, angle);
+        const endPt = boxEdge(p2, s2, angle + Math.PI);
+        return { type: 'line', startPt, endPt, angle,
+                 labelX: (startPt.x + endPt.x) / 2 + 22, labelY: (startPt.y + endPt.y) / 2, textAlign: 'left', text: e.text };
+      }
+    });
+
+    // 1. Draw edge lines
+    ctx.strokeStyle = edgeColor;
+    ctx.lineWidth = 2;
+    edgeGeom.forEach((g) => {
+      ctx.beginPath();
+      if (g.type === 'curve') {
+        ctx.moveTo(g.startPt.x, g.startPt.y);
+        ctx.quadraticCurveTo(g.cpx, g.cpy, g.endPt.x, g.endPt.y);
+      } else {
+        ctx.moveTo(g.startPt.x, g.startPt.y);
+        ctx.lineTo(g.endPt.x, g.endPt.y);
+      }
+      ctx.stroke();
+    });
+
+    // 2. Draw nodes on top of lines
+    data.nodes.forEach((n) => {
+      const p = positions[n.id];
+      const s = sizes[n.id];
+      ctx.fillStyle = c.gridFaint;
+      ctx.strokeStyle = data.circular ? c.accent : c.fg;
+      ctx.lineWidth = 2;
+      const r = 8;
+      const x = p.x - s.w / 2;
+      const y = p.y - nodeH / 2;
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + s.w - r, y);
+      ctx.arc(x + s.w - r, y + r, r, -Math.PI / 2, 0);
+      ctx.lineTo(x + s.w, y + nodeH - r);
+      ctx.arc(x + s.w - r, y + nodeH - r, r, 0, Math.PI / 2);
+      ctx.lineTo(x + r, y + nodeH);
+      ctx.arc(x + r, y + nodeH - r, r, Math.PI / 2, Math.PI);
+      ctx.lineTo(x, y + r);
+      ctx.arc(x + r, y + r, r, Math.PI, -Math.PI / 2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = c.fg;
+      ctx.font = '13px -apple-system, Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, p.x, p.y + 4);
+
+    });
+
+    // 3. Draw arrowheads on top of nodes, at box boundaries
+    const ah = 8;
+    ctx.fillStyle = edgeColor;
+    edgeGeom.forEach((g) => {
+      const angle = g.type === 'curve' ? g.arrivalAngle : g.angle;
+      ctx.beginPath();
+      ctx.moveTo(g.endPt.x, g.endPt.y);
+      ctx.lineTo(g.endPt.x - ah * Math.cos(angle - 0.4), g.endPt.y - ah * Math.sin(angle - 0.4));
+      ctx.lineTo(g.endPt.x - ah * Math.cos(angle + 0.4), g.endPt.y - ah * Math.sin(angle + 0.4));
+      ctx.closePath();
+      ctx.fill();
+    });
+
+    // 4. Draw edge labels
+    ctx.fillStyle = c.fgDim;
+    ctx.font = 'italic 10px Charter, Georgia, serif';
+    edgeGeom.forEach((g) => {
+      ctx.textAlign = g.textAlign || 'center';
+      ctx.fillText(g.text, g.labelX, g.labelY);
+    });
+
+    // Status indicators
+    ctx.fillStyle = c.fgDim;
+    ctx.font = 'italic 12px Charter, Georgia, serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(data.label, 18, 22);
+
+    ctx.fillStyle = data.circular ? c.accent : c.fg;
+    ctx.font = 'bold 13px -apple-system, Inter, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(data.circular ? '\u2717 circular' : '\u2713 grounded', rect.width - 18, 22);
+    ctx.fillStyle = c.fgDim;
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    ctx.fillText(data.msg, rect.width - 18, 38);
+  }
+  vizCommon.animate(canvas, draw);
+})();
+
+/* ---------- Fig 2: Wikipedia first-link paths to Philosophy ---------- */
+(function(){
+  const canvas = document.getElementById('v2-wiki');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const paths = {
+    'Cat': ['Cat','Carnivore','Animal','Multicellular','Organism','Life','Matter','Classical physics','Scientific theory','Universe','Existence','Reality','Everything','Antithesis','Proposition','Meaning','Philosophy of language','Philosophy'],
+    'Guitar': ['Guitar','Stringed instrument','Instrument classification','Organology','Musical instrument','Music','Sound','Phenomenon','Observable','Physics','Science','Hypothesis','Explanation','Proposition','Meaning','Philosophy of language','Philosophy'],
+    'Love': ['Love','Attachment','John Bowlby','Psychiatrist','Physician','Health professional','Health care','Health','Well-being','Intrinsic value','Ethics','Philosophy'],
+    'Chocolate': ['Chocolate','Cocoa bean','Fermentation','Metabolism','Life','Matter','Classical physics','Scientific theory','Universe','Existence','Reality','Everything','Antithesis','Proposition','Meaning','Philosophy of language','Philosophy'],
+    'Football': ['Football','Team sport','Sport','Physical activity','Skeletal muscle','Vertebrate','Animal','Multicellular','Organism','Life','Matter','Classical physics','Scientific theory','Universe','Existence','Reality','Everything','Antithesis','Proposition','Meaning','Philosophy of language','Philosophy'],
+  };
+  const order = ['Cat','Guitar','Love','Chocolate','Football'];
+  let activeWord = 'Cat';
+  let animStart = performance.now();
+
+  document.querySelectorAll('.v2-word').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeWord = btn.dataset.word;
+      animStart = performance.now();
+    });
+  });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const path = paths[activeWord];
+    if (!path) return;
+
+    const elapsed = performance.now() - animStart;
+    const revealInterval = 180;
+    const revealCount = Math.min(Math.floor(elapsed / revealInterval) + 1, path.length);
+
+    const padX = 16;
+    const padY = 32;
+    const lineH = 26;
+    const arrowGap = 18;
+    const pillPadX = 7;
+    const pillH = 20;
+    const pillR = pillH / 2;
+
+    // Header
+    ctx.fillStyle = c.fgDim;
+    ctx.font = 'italic 11px Charter, Georgia, serif';
+    ctx.textAlign = 'left';
+    const clicks = path.length - 1;
+    ctx.fillText(activeWord + '  \u2192  Philosophy', padX, 16);
+    ctx.textAlign = 'right';
+    ctx.fillText(clicks + ' clicks', rect.width - padX, 16);
+
+    // Flow layout: pills with arrows, wrapping
+    ctx.font = '11px -apple-system, Inter, sans-serif';
+    let x = padX;
+    let y = padY;
+
+    for (let i = 0; i < revealCount; i++) {
+      const word = path[i];
+      const isFirst = i === 0;
+      const isLast = i === path.length - 1;
+      const font = (isFirst || isLast) ? 'bold 11px -apple-system, Inter, sans-serif' : '11px -apple-system, Inter, sans-serif';
+      ctx.font = font;
+      const wordW = ctx.measureText(word).width + pillPadX * 2;
+
+      // Check wrap
+      const totalW = wordW + (i < revealCount - 1 ? arrowGap : 0);
+      if (x + wordW > rect.width - padX && x > padX) {
+        x = padX;
+        y += lineH;
+      }
+
+      // Pill background
+      const pillY = y - pillH / 2;
+      ctx.fillStyle = isLast ? c.accentSoft : c.gridFaint;
+      ctx.strokeStyle = isLast ? c.accent : c.border;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x + pillR, pillY);
+      ctx.lineTo(x + wordW - pillR, pillY);
+      ctx.arc(x + wordW - pillR, pillY + pillR, pillR, -Math.PI / 2, Math.PI / 2);
+      ctx.lineTo(x + pillR, pillY + pillH);
+      ctx.arc(x + pillR, pillY + pillR, pillR, Math.PI / 2, -Math.PI / 2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      // Text
+      ctx.fillStyle = isLast ? c.accent : (isFirst ? c.fg : c.fgDim);
+      ctx.font = font;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(word, x + pillPadX, y);
+
+      x += wordW;
+
+      // Arrow
+      if (i < revealCount - 1 && i < path.length - 1) {
+        ctx.fillStyle = c.fgDim;
+        ctx.font = '10px -apple-system, Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('\u2192', x + arrowGap / 2, y);
+        x += arrowGap;
+      }
+    }
+    ctx.textBaseline = 'alphabetic';
+  }
+  vizCommon.animate(canvas, draw);
+})();
+</script>
+</body>
+</html>
