@@ -3,32 +3,25 @@
   const root = document.documentElement;
   const btn = document.getElementById('theme-toggle');
   if (btn) {
-    const modes = ['auto','light','dark'];
     const mq = matchMedia('(prefers-color-scheme: dark)');
     const icons = {
-      auto: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" stroke="none"/></svg>',
       light: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>',
       dark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>'
     };
     function apply(mode){
-      if (mode === 'auto') {
-        root.removeAttribute('data-theme');
-        root.setAttribute('data-theme-resolved', mq.matches ? 'dark' : 'light');
-      } else {
-        root.setAttribute('data-theme', mode);
-        root.setAttribute('data-theme-resolved', mode);
-      }
+      root.setAttribute('data-theme', mode);
+      root.setAttribute('data-theme-resolved', mode);
       btn.innerHTML = icons[mode];
       btn.setAttribute('title', 'Theme: ' + mode);
     }
-    apply(localStorage.getItem('theme') || 'auto');
+    const stored = localStorage.getItem('theme');
+    const initial = (stored === 'light' || stored === 'dark') ? stored : (mq.matches ? 'dark' : 'light');
+    apply(initial);
     btn.addEventListener('click', () => {
-      const cur = localStorage.getItem('theme') || 'auto';
-      const next = modes[(modes.indexOf(cur) + 1) % modes.length];
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       localStorage.setItem('theme', next);
       apply(next);
     });
-    mq.addEventListener('change', () => { if ((localStorage.getItem('theme') || 'auto') === 'auto') apply('auto'); });
   }
 
   const bar = document.getElementById('progress');
