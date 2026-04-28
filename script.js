@@ -33,38 +33,16 @@
     onScroll();
   }
 
-  // Inject EN/PT lang-switch into post meta (skip if already present)
-  const POSTS_WITH_PT = ['bayes', 'rigor'];
-  const postMeta = document.querySelector('article.post .post-meta');
-  if (postMeta && !postMeta.querySelector('.lang-switch')) {
-    const p = location.pathname;
-    const folderMatch = p.match(/\/posts\/([^/]+)\/(index|pt)\.html?$/) || p.match(/\/posts\/([^/]+)\/?$/);
-    const fileMatch = p.match(/\/posts\/([^/]+)\.html$/);
-    let slug = null, isPT = false, hasManualPT = false;
-    if (folderMatch) {
-      slug = folderMatch[1];
-      isPT = (folderMatch[2] === 'pt') || /\/pt\.html?$/.test(p);
-      hasManualPT = POSTS_WITH_PT.includes(slug);
-    } else if (fileMatch) {
-      slug = fileMatch[1];
-    }
-    if (slug) {
-      const sep = document.createElement('span');
-      sep.className = 'sep';
-      sep.textContent = '·';
-      const wrap = document.createElement('span');
-      wrap.className = 'lang-switch';
-      if (hasManualPT) {
-        wrap.innerHTML = isPT
-          ? '<a href="index.html">EN</a> · <strong>PT</strong>'
-          : '<strong>EN</strong> · <a href="pt.html">PT</a>';
-      } else {
-        const url = encodeURIComponent(location.href);
-        wrap.innerHTML = '<strong>EN</strong> · <a href="https://translate.google.com/translate?sl=en&tl=pt&u=' + url + '" rel="nofollow">PT <span class="auto-tag">(auto)</span></a>';
-      }
-      postMeta.appendChild(sep);
-      postMeta.appendChild(wrap);
-    }
+  // Site-wide EN/PT toggle in header (PT always auto via Google Translate)
+  const headerRow = document.querySelector('.site-header .header-row');
+  if (headerRow && !headerRow.querySelector('.site-lang')) {
+    const url = encodeURIComponent(location.href);
+    const wrap = document.createElement('span');
+    wrap.className = 'site-lang';
+    wrap.innerHTML = '<strong>EN</strong> · <a href="https://translate.google.com/translate?sl=en&tl=pt&u=' + url + '" rel="nofollow">PT <span class="auto-tag">(auto)</span></a>';
+    const themeBtn = headerRow.querySelector('.theme-toggle');
+    if (themeBtn) headerRow.insertBefore(wrap, themeBtn);
+    else headerRow.appendChild(wrap);
   }
 
   // Active nav highlighting
