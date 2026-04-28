@@ -527,23 +527,16 @@ article.post .post-meta {
   padding-top: 14px;
   border-top: 1px solid var(--border);
   font-weight: 500;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
 }
 article.post .post-meta .sep { margin: 0 10px; color: var(--text-faint); }
+article.post .post-meta .lang-switch { margin-left: auto; }
 article.post .post-meta .lang-switch a { color: var(--text-dim); text-decoration: none; }
 article.post .post-meta .lang-switch a:hover { color: var(--text); }
 article.post .post-meta .lang-switch strong { color: var(--text); font-weight: 600; }
-.site-lang {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-dim);
-  white-space: nowrap;
-}
-.site-lang a { color: var(--text-dim); text-decoration: none; }
-.site-lang a:hover { color: var(--text); }
-.site-lang strong { color: var(--text); font-weight: 600; }
-.site-lang .auto-tag { text-transform: lowercase; opacity: 0.6; margin-left: 2px; }
+article.post .post-meta .lang-switch .auto-tag { text-transform: lowercase; opacity: 0.6; margin-left: 2px; }
 article.post p {
   margin: 0 0 18px;
   line-height: 1.7;

@@ -33,16 +33,14 @@
     onScroll();
   }
 
-  // Site-wide EN/PT toggle in header (PT always auto via Google Translate)
-  const headerRow = document.querySelector('.site-header .header-row');
-  if (headerRow && !headerRow.querySelector('.site-lang')) {
+  // Inject EN/PT (auto) at the right edge of post meta
+  const postMeta = document.querySelector('article.post .post-meta');
+  if (postMeta && !postMeta.querySelector('.lang-switch')) {
     const url = encodeURIComponent(location.href);
     const wrap = document.createElement('span');
-    wrap.className = 'site-lang';
+    wrap.className = 'lang-switch';
     wrap.innerHTML = '<strong>EN</strong> · <a href="https://translate.google.com/translate?sl=en&tl=pt&u=' + url + '" rel="nofollow">PT <span class="auto-tag">(auto)</span></a>';
-    const themeBtn = headerRow.querySelector('.theme-toggle');
-    if (themeBtn) headerRow.insertBefore(wrap, themeBtn);
-    else headerRow.appendChild(wrap);
+    postMeta.appendChild(wrap);
   }
 
   // Active nav highlighting
