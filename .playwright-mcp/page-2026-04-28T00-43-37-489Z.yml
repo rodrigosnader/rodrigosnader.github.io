@@ -1,0 +1,87 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "Rodrigo S. Nader" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - strong [ref=e7]: Rodrigo
+          - text: S. Nader
+        - generic [ref=e8]: AI, rationality and the universe.
+      - navigation [ref=e9]:
+        - link "writing" [ref=e10] [cursor=pointer]:
+          - /url: /writing.html
+        - link "notes" [ref=e11] [cursor=pointer]:
+          - /url: /notes.html
+        - link "links" [ref=e12] [cursor=pointer]:
+          - /url: /links.html
+        - link "about" [ref=e13] [cursor=pointer]:
+          - /url: /about.html
+      - button "Toggle theme" [ref=e14] [cursor=pointer]:
+        - img [ref=e15]
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - heading "Writing" [level=1] [ref=e20]
+      - paragraph [ref=e21]: Essays on what I'm building and what I'm learning from it.
+    - region "2026" [ref=e22]:
+      - heading "2026" [level=2] [ref=e23]
+      - list [ref=e24]:
+        - listitem [ref=e25]:
+          - time: Apr 16
+          - link "Explanations that don't eat their tail" [ref=e26] [cursor=pointer]:
+            - /url: /posts/rigor/
+          - generic: 6 min
+        - listitem [ref=e27]:
+          - time: Apr 15
+          - link "The inside of a glass" [ref=e28] [cursor=pointer]:
+            - /url: /posts/inside-glass.html
+          - generic: 13 min
+        - listitem [ref=e29]:
+          - time: Apr 15
+          - link "Why truth is narrow" [ref=e30] [cursor=pointer]:
+            - /url: /posts/skepticism.html
+          - generic: 8 min
+        - listitem [ref=e31]:
+          - time: Apr 15
+          - link "The boy and the infinite universe" [ref=e32] [cursor=pointer]:
+            - /url: /posts/infinite-universe.html
+          - generic: 7 min
+        - listitem [ref=e33]:
+          - time: Apr 15
+          - link "What if time is just a direction?" [ref=e34] [cursor=pointer]:
+            - /url: /posts/time-dimension.html
+          - generic: 10 min
+        - listitem [ref=e35]:
+          - time: Apr 15
+          - link "Quantum gates without the hype" [ref=e36] [cursor=pointer]:
+            - /url: /posts/quantum-gates.html
+          - generic: 9 min
+        - listitem [ref=e37]:
+          - time: Apr 15
+          - link "The experiment that doesn't need you to look" [ref=e38] [cursor=pointer]:
+            - /url: /posts/quantum-eraser.html
+          - generic: 9 min
+        - listitem [ref=e39]:
+          - time: Apr 15
+          - link "You, included in the universe" [ref=e40] [cursor=pointer]:
+            - /url: /posts/free-will.html
+          - generic: 11 min
+        - listitem [ref=e41]:
+          - time: Apr 15
+          - link "Neurons that keep living between words" [ref=e42] [cursor=pointer]:
+            - /url: /posts/spiking-nets.html
+          - generic: 11 min
+        - listitem [ref=e43]:
+          - time: Apr 15
+          - link "Gamifying cooperation" [ref=e44] [cursor=pointer]:
+            - /url: /posts/bipartisanship.html
+          - generic: 7 min
+        - listitem [ref=e45]:
+          - time: Apr 12
+          - link "The one thing Bayes actually says" [ref=e46] [cursor=pointer]:
+            - /url: /posts/bayes/
+          - generic: 8 min
+  - contentinfo [ref=e47]:
+    - paragraph [ref=e49]:
+      - link "← back to home" [ref=e50] [cursor=pointer]:
+        - /url: /
+      - text: 0 frameworks. Plain HTML, CSS, a sprinkle of vanilla JS.
