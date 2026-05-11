@@ -33,19 +33,6 @@
     onScroll();
   }
 
-  // Inject EN/PT (auto) inline in post meta
-  const postMeta = document.querySelector('article.post .post-meta');
-  if (postMeta && !postMeta.querySelector('.lang-switch')) {
-    const url = encodeURIComponent(location.href);
-    const sep = document.createElement('span');
-    sep.className = 'sep';
-    sep.textContent = '·';
-    const wrap = document.createElement('span');
-    wrap.className = 'lang-switch';
-    wrap.innerHTML = '<strong>EN</strong> · <a href="https://translate.google.com/translate?sl=en&tl=pt&u=' + url + '" rel="nofollow">PT <span class="auto-tag">(auto)</span></a>';
-    postMeta.appendChild(sep);
-    postMeta.appendChild(wrap);
-  }
 
   // Active nav highlighting
   const path = location.pathname.replace(/\/$/, '') || '/';
