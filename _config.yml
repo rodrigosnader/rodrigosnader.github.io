@@ -1,0 +1,11 @@
+exclude:
+  - drafts
+  - review
+  - README.md
+  - writing-style.md
+  - outline-process.md
+  - home-1440-snap.md
+  - tmp.md
+  - serve.py
+  - _astro-archive
+  - references
