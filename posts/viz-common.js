@@ -1,5 +1,5 @@
 /* ---------- viz-common.js ----------
- * Shared helpers for the interactive canvas animations on rnader.com.
+ * Shared helpers for the interactive canvas animations on the blog.
  * Kept deliberately tiny: DPI-aware canvas sizing, theme color lookup,
  * a few drawing primitives, and a RAF loop that tracks its own pause state.
  * Any viz that needs more than this should inline its own code.
