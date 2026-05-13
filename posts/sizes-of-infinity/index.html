@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sizes of infinity — Rodrigo Nader</title>
+<meta name="description" content="Mathematicians say one infinity can be bigger than another. That sounds like nonsense — until you notice they're using a different definition of bigger.">
+<link rel="stylesheet" href="../../style.css?v=5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <div class="brand-block">
+        <a href="/" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+        <span class="brand-sub">AI, rationality and the universe.</span>
+      </div>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>Sizes of infinity</h1>
+    <p class="post-meta">
+      <time datetime="2026-05-12">2026 · May 12</time>
+      <span class="sep">·</span>
+      <span>3 min read</span>
+      <span class="sep">·</span>
+      <span>Essay</span>
+    </p>
+  </header>
+
+  <p>Mathematicians say one infinity can be bigger than another, and that kinda sounds to me as nonsense. If both go on forever, what could <em>bigger</em> even mean?</p>
+
+  <h2>Counting</h2>
+
+  <p>When they say a list (or a set) is bigger than another, they seem to mean: count set A, count set B, and compare the two numbers. Five apples is more than three because counting A lands on a bigger number than counting B.</p>
+
+  <p>For infinite sets, that doesn't really apply, because we can never end counting A or B. There is no end — that's the definition of infinity. So what do mathematicians mean when they say one infinite is bigger than another?</p>
+
+  <h2>Pairing</h2>
+
+  <p>Apparently, there's a way to check if one bag has more marbles than another without counting — by pairing them up. Pull a marble from A, pull a marble from B, set them down together. Repeat. If we run out of B but still have A in hand, A has more.</p>
+
+  <p>This is a different operation. We don't need to know the number in either bag. We don't need numbers at all.</p>
+
+  <p>For finite sets, the two definitions agree — if A has 5 marbles and B has 3, both methods say A is bigger. For infinite sets, only the pairing one is even well-defined. Counting needs an end; pairing doesn't.</p>
+
+  <p>So when mathematicians extended the notion of "size" to infinite sets, pairing seems to have been the only candidate left standing.</p>
+
+  <blockquote>
+    <p>Two sets have the same size if we can pair their elements one-to-one with nothing left over on either side.</p>
+  </blockquote>
+
+  <p>It seems like <em>bigger</em> for an infinite set isn't really the same concept as <em>bigger</em> for a finite one, and most of my confusion seems to have come from the word itself. We call both of them <em>bigger</em>, but they come from different definitions — even in math, the symbols give them away:</p>
+
+  <blockquote>
+    <p>3 &lt; 5 &nbsp;&nbsp;<em>(finite: comparing counts)</em></p>
+    <p>|A| &lt; |B| &nbsp;&nbsp;<em>(infinite: comparing by pairing)</em></p>
+  </blockquote>
+
+  <h2>ℕ vs ℝ</h2>
+
+  <p>So an example is: if you try to pair ℕ (the positive integers) against ℝ (the reals between 0 and 1), apparently no matter how you arrange the pairing, ℝ always has elements left over. This is a famous result (Cantor's theorem) in the 1870s, and it looks like the cleanest case of the pairing definition actually finding a difference between two infinities. ℝ comes out <strong><em>bigger</em></strong> than ℕ — but only in the sense of <em>pairing</em>, not in the everyday counting one.</p>
+
+  <p>So the original question — "can one infinity be bigger than another?" — kind of ends up with a not-so-friendly answer:</p>
+
+  <blockquote>
+    <p>Well, it depends on your definition of <em>bigger</em>.</p>
+  </blockquote>
+
+  <hr>
+
+  <p>If you have a cleaner way to think about this — or a worked example that made it click for you — I'd love to hear it: <a href="mailto:rodrigosnader@gmail.com">rodrigosnader@gmail.com</a>.</p>
+</article>
+
+<script src="/script.js?v=5"></script>
+</body>
+</html>
