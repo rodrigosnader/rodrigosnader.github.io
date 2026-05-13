@@ -886,12 +886,26 @@ article.post figure.viz,
 /* Mobile */
 @media (max-width: 640px) {
   body { font-size: 17px; }
-  .site-header { padding: 24px 0 18px; margin-bottom: 36px; }
-  .brand { font-size: 20px; }
+  .site-header { padding: 20px 0 16px; margin-bottom: 36px; }
+  .header-row { flex-wrap: wrap; gap: 14px; align-items: center; }
+  .brand-block { flex: 1 1 auto; min-width: 0; }
+  .brand { font-size: 19px; }
   .brand-sub { display: none; }
   .bio { font-size: 15px; }
-  .site-nav { gap: 18px; font-size: 13px; flex-wrap: wrap; }
-  .theme-toggle { width: 36px; height: 36px; }
+  .site-nav {
+    order: 3;
+    flex-basis: 100%;
+    width: 100%;
+    margin-left: 0;
+    gap: 20px;
+    font-size: 14px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    border-top: 1px solid var(--border);
+    margin-top: 2px;
+    padding-top: 12px;
+  }
+  .theme-toggle { width: 34px; height: 34px; flex-shrink: 0; }
   .post-list li {
     grid-template-columns: 1fr;
     gap: 3px;
