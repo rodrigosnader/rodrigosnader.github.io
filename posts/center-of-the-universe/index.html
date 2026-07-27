@@ -117,11 +117,11 @@
     <canvas id="v3-observable" style="height: 400px;"></canvas>
     <div class="viz-controls">
       <label>
-        <span class="ctrl-label">the clock — <span id="v3-t-readout">early universe</span></span>
-        <input type="range" id="v3-t" min="0" max="1" step="0.01" value="0.1">
+        <span class="ctrl-label">the clock — <span id="v3-t-readout">right after the big bang</span></span>
+        <input type="range" id="v3-t" min="0" max="1" step="0.01" value="0.08">
       </label>
     </div>
-    <div class="viz-caption"><span class="label">Fig 3</span>The warm galaxies are the ones whose light can ever reach us — our observable bubble. Run the clock: early on they sit packed tight and the bubble is marble-sized; today the <em>same</em> galaxies have drifted apart and the bubble spans some 93 billion light-years. Past its edge the grid keeps going — it was always infinite. What fit inside a marble was this bubble, never the whole thing. Nothing shrank or grew; it only got less crowded.</div>
+    <div class="viz-caption"><span class="label">Fig 3</span>The warm galaxies are the ones whose light has had time to reach us — our observable bubble. Run the clock: it starts marble-small, holding almost nothing, and grows to some 93 billion light-years across, sweeping in more and more galaxies as their light finally arrives. Past its edge the grid just keeps going — it was always infinite. What fit inside a marble was this bubble, never the whole thing.</div>
   </figure>
 
   <p>So the popular analogies do hold up — but only within their specific contexts. The trouble is that science headlines tend to strip away those contexts entirely, turning careful, conditional statements into blunt absolutes that end up raising more confusion than they resolve.</p>
@@ -135,6 +135,8 @@
     <li>How can something that is infinite expand? Isn't it infinite already?</li>
     <li>What does the stretching of space really mean?</li>
   </ul>
+
+  <p>If you have observations or concerns — or for an in-depth discussion, just reach out at <a href="mailto:rodrigosnader@gmail.com">rodrigosnader@gmail.com</a>.</p>
 </article>
 
 <script src="/script.js?v=5"></script>
@@ -263,6 +265,7 @@ function pillCentered(ctx, text, cx, y, opts) {
 
   const RING_N = 12;          // galaxies around the curved world (one loop)
   const PX_PER_GAL = 40;      // drag pixels per galaxy travelled
+  const TOP = 30, BOTTOM = 34; // clean bands reserved for labels
   let traveled = 0;           // in galaxies
   let dragging = false, lastX = 0;
 
@@ -301,15 +304,14 @@ function pillCentered(ctx, text, cx, y, opts) {
 
     const halfW = rect.width / 2;
     const absT = Math.abs(traveled);
+    const midY = (TOP + (rect.height - BOTTOM)) / 2;
+    const baseY = rect.height - 20;
     ctx.strokeStyle = c.gridFaint;
-    ctx.beginPath(); ctx.moveTo(halfW, 16); ctx.lineTo(halfW, rect.height - 34); ctx.stroke();
-
-    // Shared readout of distance travelled.
-    pillCentered(ctx, 'travelled: ' + absT.toFixed(1) + ' galaxies', rect.width / 2, 12, { fg: c.fgDim });
+    ctx.beginPath(); ctx.moveTo(halfW, TOP); ctx.lineTo(halfW, rect.height - BOTTOM); ctx.stroke();
 
     // ---------- LEFT: curved, finite (a ring) ----------
-    const cxL = halfW / 2, cyL = rect.height / 2 + 4;
-    const R = Math.min(halfW - 78, rect.height - 150) / 2;
+    const cxL = halfW / 2, cyL = midY;
+    const R = Math.min(halfW - 78, (rect.height - TOP - BOTTOM) - 44) / 2;
     ctx.strokeStyle = c.gridFaint; ctx.lineWidth = 1.5;
     ctx.beginPath(); ctx.arc(cxL, cyL, R, 0, Math.PI * 2); ctx.stroke();
 
@@ -329,23 +331,16 @@ function pillCentered(ctx, text, cx, y, opts) {
     ctx.fillStyle = c.fg;
     ctx.beginPath(); ctx.arc(cxL, cyL - R, 3.4, 0, Math.PI * 2); ctx.fill();
 
-    const loopPos = ((traveled % RING_N) + RING_N) % RING_N;
-    const backHome = absT > 0.6 && Math.min(loopPos, RING_N - loopPos) < 0.4;
-    if (backHome) {
-      pillCentered(ctx, '↺ back where you started', cxL, cyL - R - 30, { fg: c.accentWarm, border: c.accentWarm });
-    }
-    pillCentered(ctx, 'curved · finite', cxL, rect.height - 26, { fg: c.fgDim });
-
     // ---------- RIGHT: flat, infinite (a grid) ----------
     const regionX = halfW + 1, regionW = rect.width - halfW;
-    const cxR = halfW + regionW / 2, cyR = rect.height / 2 + 4;
+    const cxR = halfW + regionW / 2, cyR = midY;
     const sp = PX_PER_GAL;
     ctx.save();
-    ctx.beginPath(); ctx.rect(regionX, 0, regionW, rect.height - 40); ctx.clip();
+    ctx.beginPath(); ctx.rect(regionX, TOP, regionW, rect.height - TOP - BOTTOM); ctx.clip();
 
     const off = traveled * sp;              // you moved right by `traveled` galaxies
     const nx = Math.ceil(regionW / sp) + 4;
-    const ny = Math.ceil(rect.height / sp) + 3;
+    const ny = Math.ceil((rect.height - TOP - BOTTOM) / sp) + 3;
     // Which global column currently sits nearest the viewport centre.
     const baseCol = Math.round(traveled);
     for (let a = -nx; a <= nx; a++) {
@@ -354,18 +349,18 @@ function pillCentered(ctx, text, cx, y, opts) {
       if (x < regionX - 20 || x > rect.width + 20) continue;
       for (let b = -ny; b <= ny; b++) {
         const y = cyR + b * sp;
-        if (y < -20 || y > rect.height + 20) continue;
-        const isHomeCol = (gcol === 0);
+        if (y < TOP - 20 || y > rect.height - BOTTOM + 20) continue;
+        const isHome = (gcol === 0 && b === 0);
         const tint = landmark(c, gcol * 7 + b);
-        ctx.fillStyle = (isHomeCol && b === 0) ? c.accentWarm : (tint || c.accent);
-        ctx.beginPath(); ctx.arc(x, y, (isHomeCol && b === 0) ? 5 : 3.2, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = isHome ? c.accentWarm : (tint || c.accent);
+        ctx.beginPath(); ctx.arc(x, y, isHome ? 5 : 3.2, 0, Math.PI * 2); ctx.fill();
       }
     }
     // You: fixed traveller at region centre.
     ctx.fillStyle = c.fg;
     ctx.beginPath(); ctx.arc(cxR, cyR, 3.4, 0, Math.PI * 2); ctx.fill();
 
-    // Home galaxy (global column 0) marker / off-screen pointer.
+    // Home galaxy (global column 0) marker.
     const homeX = cxR + (0 - off);
     if (homeX > regionX + 6 && homeX < rect.width - 6) {
       ctx.strokeStyle = c.accentWarm; ctx.lineWidth = 1.5;
@@ -373,19 +368,25 @@ function pillCentered(ctx, text, cx, y, opts) {
     }
     ctx.restore();
 
-    if (absT > 0.6 && (homeX <= regionX + 6 || homeX >= rect.width - 6)) {
-      const arrow = homeX < cxR ? 'start ←' : '→ start';
-      pillCentered(ctx, arrow + ' ' + absT.toFixed(0) + ' back · no way home', cxR, 34, { fg: c.fgDim });
+    // ---------- labels, all inside the reserved clean bands ----------
+    pillCentered(ctx, 'curved · finite', cxL, 8, { fg: c.fgDim });
+    pillCentered(ctx, 'flat · infinite', cxR, 8, { fg: c.fgDim });
+    pillCentered(ctx, 'travelled ' + absT.toFixed(1), rect.width / 2, baseY, { fg: c.fgDim });
+    const loopPos = ((traveled % RING_N) + RING_N) % RING_N;
+    if (absT > 0.6 && Math.min(loopPos, RING_N - loopPos) < 0.4) {
+      pillCentered(ctx, '↺ back to start', cxL, baseY, { fg: c.accentWarm, border: c.accentWarm });
     }
-    pillCentered(ctx, 'flat · infinite — no edge', cxR, rect.height - 26, { fg: c.fgDim });
+    if (absT > 0.6 && (homeX <= regionX + 6 || homeX >= rect.width - 6)) {
+      pillCentered(ctx, 'no way home', cxR, baseY, { fg: c.fgDim });
+    }
   }
   vizCommon.animate(canvas, draw);
 })();
 
 /* ---------- Fig 3: the observable bubble ("the size of a marble") ----------
- * Insight: the same galaxies (our bubble) go from packed & marble-sized to
- * spread out & vast, inside a grid that never ends. Density changed, not the
- * size of the whole. */
+ * Insight: our observable bubble starts marble-small, holding almost nothing,
+ * and grows to sweep in more and more galaxies as their light reaches us — all
+ * inside a grid that never ends. The marble was ever only this bubble. */
 (function(){
   const canvas = document.getElementById('v3-observable');
   if (!canvas) return;
@@ -393,9 +394,9 @@ function pillCentered(ctx, text, cx, y, opts) {
   const tInput = document.getElementById('v3-t');
   const tReadout = document.getElementById('v3-t-readout');
 
-  const OURS = 2.5;   // comoving radius (in cells) of our observable bubble
+  const SPACING = 26;   // galaxies sit on a fixed grid; the bubble is what grows
   let t = parseFloat(tInput.value);
-  const phraseFor = (v) => v < 0.33 ? 'early universe' : (v < 0.7 ? 'expanding' : 'today');
+  const phraseFor = (v) => v < 0.15 ? 'right after the big bang' : (v < 0.7 ? 'expanding' : 'today');
 
   tInput.addEventListener('input', () => {
     t = parseFloat(tInput.value);
@@ -412,17 +413,19 @@ function pillCentered(ctx, text, cx, y, opts) {
     ctx.fillRect(0, 0, rect.width, rect.height);
 
     const cx = rect.width / 2, cy = rect.height / 2;
-    const spacing = vizCommon.lerp(16, 50, t);   // packed tight → spread out
-    const cols = Math.ceil(rect.width / spacing) + 3;
-    const rows = Math.ceil(rect.height / spacing) + 3;
-    const bubbleR = spacing * OURS;
+    const cols = Math.ceil(rect.width / SPACING) + 3;
+    const rows = Math.ceil(rect.height / SPACING) + 3;
+    // Our bubble: tiny at first, growing as light gets time to arrive, so it
+    // sweeps in more and more galaxies. The grid itself stays put and endless.
+    const maxR = Math.min(rect.width, rect.height) * 0.35;
+    const bubbleR = vizCommon.lerp(SPACING * 0.7, maxR, t);
 
     for (let di = -cols; di <= cols; di++) {
       for (let dj = -rows; dj <= rows; dj++) {
-        const x = cx + di * spacing, y = cy + dj * spacing;
+        const x = cx + di * SPACING, y = cy + dj * SPACING;
         if (x < -10 || x > rect.width + 10 || y < -10 || y > rect.height + 10) continue;
-        const ours = (di * di + dj * dj) <= OURS * OURS;
-        if (ours) {
+        const inside = Math.hypot(x - cx, y - cy) <= bubbleR;
+        if (inside) {
           ctx.fillStyle = c.accentWarm;
           ctx.beginPath(); ctx.arc(x, y, 3.6, 0, Math.PI * 2); ctx.fill();
         } else {
@@ -441,9 +444,9 @@ function pillCentered(ctx, text, cx, y, opts) {
     ctx.setLineDash([]);
 
     pillCentered(ctx, 'the part we can see', cx, cy - bubbleR - 26, { fg: c.accentWarm, border: c.accentWarm });
-    const size = t < 0.4 ? '≈ a marble' : (t > 0.6 ? '≈ 93 billion light-years' : 'growing…');
+    const size = t < 0.35 ? '≈ a marble' : (t > 0.65 ? '≈ 93 billion light-years' : 'growing…');
     pillCentered(ctx, size, cx, cy + bubbleR + 10, { fg: c.fgDim });
-    pillCentered(ctx, 'the grid never ends — the whole was always infinite', rect.width / 2, rect.height - 26, { fg: c.fgDim });
+    pillCentered(ctx, 'the grid never ends — the whole was always infinite', rect.width / 2, rect.height - 22, { fg: c.fgDim });
   }
   vizCommon.animate(canvas, draw);
 })();
