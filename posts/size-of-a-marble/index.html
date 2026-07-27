@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The size of a marble — Rodrigo Nader</title>
+<meta name="description" content="Physicists say the universe has no center, is like an inflating balloon, and was once the size of a marble. Working through why those three only seem to contradict each other.">
+<link rel="stylesheet" href="../../style.css?v=5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <div class="brand-block">
+        <a href="/" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+        <span class="brand-sub">AI, rationality and the universe.</span>
+      </div>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>The size of a marble</h1>
+    <p class="post-meta">
+      <time datetime="2026-07-27">2026 · Jul 27</time>
+      <span class="sep">·</span>
+      <span>5 min read</span>
+      <span class="sep">·</span>
+      <span>Physics</span>
+    </p>
+  </header>
+
+  <p>I often hear physicists say the universe has no privileged center: because it is expanding homogeneously in every direction, any observer sees all the galaxies moving away from each other and gets the impression of being at the center.</p>
+
+  <p>The standard analogy is <em>"points on the surface of an inflating balloon"</em> — they all recede from one another, and none of them is "the center." As the story is usually told, everything we can observe today was compressed into a point of infinite density, and about 10⁻³⁵ seconds later the universe underwent an episode of ultra-rapid expansion known as Cosmic Inflation, growing to roughly the size of a marble. Space then kept stretching in every direction, producing the vast, still-expanding universe we inhabit now.</p>
+
+  <p>The problem — at least for me — is that some of these claims can sound inconsistent, or at least hard to square with one another. Specifically:</p>
+
+  <ol>
+    <li><em>The universe has no privileged center</em></li>
+    <li><em>The balloon analogy</em></li>
+    <li><em>The size of a marble</em></li>
+  </ol>
+
+  <p>So back am I with Claude trying to work through some of these questions, starting from the basics:</p>
+
+  <blockquote>
+    <p>Where is the universe expanding into?</p>
+  </blockquote>
+
+  <p>This one typically answered with a conceptual redirect: the universe isn't expanding <em>into</em> anything. There is no surrounding space, no container it's filling up. Space itself is what's expanding — the distances between points grow, without the whole thing moving through something else.</p>
+
+  <p>Fair enough — we already heard it many times and it's kind of digestible: as the surface expands, every point on it moves away from every other, and the <strong>distances between them grow</strong> because space itself is stretching.</p>
+
+  <p>The balloon analogy makes sense, as inflating the balloon increases it in all directions so any two points will get further apart the more you blow. So no galaxies flying outward toward some edge.</p>
+
+  <figure class="viz">
+    <canvas id="v1-expand" style="height: 380px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">expansion — <span id="v1-scale-readout">1.0</span>×</span>
+        <input type="range" id="v1-scale" min="0.7" max="2.8" step="0.02" value="1">
+      </label>
+      <button id="v1-reset" class="ghost">Reset</button>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 1</span>Every dot is a galaxy; the coloured ones are landmarks, so you can tell one patch of sky from another. Drag <em>expansion</em>: your galaxy — at the centre — holds still while all the rest slide away, the far ones faster. Now tap any galaxy to stand there instead. The landmarks shift, but the view doesn't: everything is still fleeing from you. Nothing pours into a void at some edge — the gaps themselves grow, everywhere at once.</div>
+  </figure>
+
+  <p>But wait... the balloon analogy works so well for picturing expansion without a center because it's <strong>curved</strong> — the curvature is what makes every point equivalent. A stretching flat surface would still have edges and a "middle" point, right? I think this leads us to the next obvious question:</p>
+
+  <blockquote>
+    <p>Isn't space "flat"?</p>
+  </blockquote>
+
+  <p>The answer is that current evidence suggests the universe is indeed flat! The reason why "no privileged center" stands is that the default assumption in modern cosmology is universe is <strong>infinite</strong> (or at least borderless in other flat ways we can discuss later)!</p>
+
+  <p>So the balloon works only as an analogy for <em>expansion</em> but not for geometry. A flat, infinite space is what actually does the work of making every point equivalent: with no borders anywhere, there is no edge to be near and no middle to be far from. Every location is, by symmetry, as central as every other — not because of curvature bending the geometry back on itself, but because the space simply never ends in any direction. Infinity is the mechanism: "no privileged center" follows directly from "no boundary."</p>
+
+  <figure class="viz">
+    <canvas id="v2-travel" style="height: 360px;"></canvas>
+    <div class="viz-controls">
+      <span class="ctrl-label" id="v2-hint" style="align-self:center;">drag sideways to travel →</span>
+      <button id="v2-reset" class="ghost">Back to start</button>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 2</span>The same trip through two flat-looking worlds. Drag sideways to set out from your galaxy (the ringed one). On the left the surface is curved and finite: travel far enough and you loop right back to where you started. On the right it's flat and infinite — the same trip, but no edge ever arrives and nothing brings you home; there is only ever more space. Both manage to have no center. Ours looks like the one on the right.</div>
+  </figure>
+
+  <p>That's fair. Not perfectly intuitive of course (nothing that invokes infinities is!) but fine to keep the initial assumptions consistent with each other. Let's recap the most likely conclusions so far:</p>
+
+  <ol>
+    <li><em>Space is stretching in place — distances between all points growing simultaneously.</em></li>
+    <li><em>It has no edges because it's infinite. Every point is the center (or none is).</em></li>
+  </ol>
+
+  <p>All fine and coherent, right? Well... not so fast. Let's not forget the <em>size of a marble</em> comparison. Here's my problem with it: we just said that one of the accepted theories is that the universe is infinite. But if it once had a measurable size (around the size of a marble), wasn't it finite? And if it <strong>was</strong> <strong>finite</strong> and is <strong>still expanding</strong>, doesn't it remain finite? In other words:</p>
+
+  <blockquote>
+    <p>Was the universe at a finite size right after the big bang?</p>
+  </blockquote>
+
+  <p>And this is precisely where popular science gets confusing. When physicists say <em>"the universe was the size of a marble,"</em> they mean the <em>observable</em> universe — the portion we can see today (since we can only detect light that has had enough time to travel and actually reach us).</p>
+
+  <p>That region was once tiny. But the universe as a whole may always have been infinite. What fit inside a marble was only the small patch that would eventually grow into our observable bubble of 93 billion light-years.</p>
+
+  <figure class="viz">
+    <canvas id="v3-observable" style="height: 400px;"></canvas>
+    <div class="viz-controls">
+      <label>
+        <span class="ctrl-label">the clock — <span id="v3-t-readout">early universe</span></span>
+        <input type="range" id="v3-t" min="0" max="1" step="0.01" value="0.1">
+      </label>
+    </div>
+    <div class="viz-caption"><span class="label">Fig 3</span>The warm galaxies are the ones whose light can ever reach us — our observable bubble. Run the clock: early on they sit packed tight and the bubble is marble-sized; today the <em>same</em> galaxies have drifted apart and the bubble spans some 93 billion light-years. Past its edge the grid keeps going — it was always infinite. What fit inside a marble was this bubble, never the whole thing. Nothing shrank or grew; it only got less crowded.</div>
+  </figure>
+
+  <p>So the popular analogies do hold up — but only within their specific contexts. The trouble is that science headlines tend to strip away those contexts entirely, turning careful, conditional statements into blunt absolutes that end up raising more confusion than they resolve.</p>
+
+  <hr>
+
+  <p>I hope this makes traditional big bang explanations at least a bit less confusing, and let us leave some not-so-obvious questions for posterior research:</p>
+
+  <ul>
+    <li>Can a finite universe be flat and borderless at the same time?</li>
+    <li>How can something that is infinite expand? Isn't it infinite already?</li>
+    <li>What does the stretching of space really mean?</li>
+  </ul>
+</article>
+
+<script src="/script.js?v=5"></script>
+<script src="../viz-common.js?v=1"></script>
+<script>
+/* A pill label with a solid background, so text never collides with dots. */
+function pillCentered(ctx, text, cx, y, opts) {
+  opts = opts || {};
+  ctx.font = opts.font || '11px -apple-system, Inter, sans-serif';
+  const w = ctx.measureText(text).width + 12;
+  vizCommon.drawPill(ctx, text, cx - w / 2, y, opts);
+}
+
+/* ---------- Fig 1: expansion + change your galaxy ----------
+ * Insight: expand the space and everything flees your galaxy, the far ones
+ * faster. Stand on a different galaxy and it looks identical — no galaxy is
+ * the center, and nothing is expanding "into" anything. */
+(function(){
+  const canvas = document.getElementById('v1-expand');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const scaleInput = document.getElementById('v1-scale');
+  const scaleReadout = document.getElementById('v1-scale-readout');
+  const resetBtn = document.getElementById('v1-reset');
+  canvas.style.cursor = 'pointer';
+
+  const BASE = 46;
+  let scale = 1;
+  let anchor = { i: 0, j: 0 };
+
+  scaleInput.addEventListener('input', () => {
+    scale = parseFloat(scaleInput.value);
+    scaleReadout.textContent = scale.toFixed(1);
+  });
+  resetBtn.addEventListener('click', () => {
+    anchor = { i: 0, j: 0 };
+    scale = 1; scaleInput.value = 1; scaleReadout.textContent = '1.0';
+  });
+
+  // Deterministic landmark tint for a galaxy at global index (i, j).
+  function landmark(c, i, j) {
+    const h = (((i * 73856093) ^ (j * 19349663)) >>> 0) % 100;
+    if (h < 9) return c.blue;
+    if (h < 17) return c.green;
+    if (h < 23) return c.gold;
+    if (h < 29) return c.purple;
+    return null;
+  }
+
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const spacing = BASE * scale;
+    const di = Math.round((e.clientX - rect.left - rect.width / 2) / spacing);
+    const dj = Math.round((e.clientY - rect.top - rect.height / 2) / spacing);
+    anchor = { i: anchor.i + di, j: anchor.j + dj };
+  });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const cx = rect.width / 2, cy = rect.height / 2;
+    const spacing = BASE * scale;
+    const cols = Math.ceil(rect.width / spacing) + 3;
+    const rows = Math.ceil(rect.height / spacing) + 3;
+
+    // Recession trails: from each galaxy's rest position (scale 1) to now.
+    if (Math.abs(scale - 1) > 0.02) {
+      ctx.strokeStyle = c.accentSoft;
+      ctx.lineWidth = 1;
+      for (let di = -cols; di <= cols; di++) {
+        for (let dj = -rows; dj <= rows; dj++) {
+          if (di === 0 && dj === 0) continue;
+          if (di * di + dj * dj > 30) continue;
+          const x = cx + di * spacing, y = cy + dj * spacing;
+          if (x < -20 || x > rect.width + 20 || y < -20 || y > rect.height + 20) continue;
+          ctx.beginPath();
+          ctx.moveTo(cx + di * BASE, cy + dj * BASE);
+          ctx.lineTo(x, y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Galaxies.
+    for (let di = -cols; di <= cols; di++) {
+      for (let dj = -rows; dj <= rows; dj++) {
+        const x = cx + di * spacing, y = cy + dj * spacing;
+        if (x < -20 || x > rect.width + 20 || y < -20 || y > rect.height + 20) continue;
+        if (di === 0 && dj === 0) continue;
+        const tint = landmark(c, anchor.i + di, anchor.j + dj);
+        ctx.fillStyle = tint || c.accent;
+        ctx.beginPath();
+        ctx.arc(x, y, tint ? 4 : 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Your galaxy, held at the center.
+    ctx.fillStyle = c.accentWarm;
+    ctx.beginPath(); ctx.arc(cx, cy, 6, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = c.accentWarm; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(cx, cy, 12, 0, Math.PI * 2); ctx.stroke();
+    pillCentered(ctx, 'your galaxy', cx, cy + 20, { fg: c.accentWarm, border: c.accentWarm });
+
+    pillCentered(ctx, 'tap a galaxy to stand on it', rect.width / 2, rect.height - 26, { fg: c.fgDim });
+  }
+  vizCommon.animate(canvas, draw);
+})();
+
+/* ---------- Fig 2: one trip, two worlds ----------
+ * Insight: the same journey loops back on a curved, finite surface but never
+ * ends on a flat, infinite one. Both have no center; space is the flat one. */
+(function(){
+  const canvas = document.getElementById('v2-travel');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const resetBtn = document.getElementById('v2-reset');
+  const hint = document.getElementById('v2-hint');
+  canvas.style.cursor = 'grab';
+
+  const RING_N = 12;          // galaxies around the curved world (one loop)
+  const PX_PER_GAL = 40;      // drag pixels per galaxy travelled
+  let traveled = 0;           // in galaxies
+  let dragging = false, lastX = 0;
+
+  canvas.addEventListener('pointerdown', (e) => {
+    dragging = true; lastX = e.clientX; canvas.style.cursor = 'grabbing';
+    if (hint) hint.textContent = 'keep dragging —';
+    canvas.setPointerCapture && canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    traveled += (e.clientX - lastX) / PX_PER_GAL;
+    lastX = e.clientX;
+    e.preventDefault();
+  });
+  function endDrag() { dragging = false; canvas.style.cursor = 'grab'; }
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', endDrag);
+  resetBtn.addEventListener('click', () => { traveled = 0; });
+
+  function landmark(c, idx) {
+    const h = ((idx * 2654435761) >>> 0) % 100;
+    if (h < 20) return c.blue;
+    if (h < 38) return c.green;
+    if (h < 50) return c.gold;
+    return null;
+  }
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const halfW = rect.width / 2;
+    const absT = Math.abs(traveled);
+    ctx.strokeStyle = c.gridFaint;
+    ctx.beginPath(); ctx.moveTo(halfW, 16); ctx.lineTo(halfW, rect.height - 34); ctx.stroke();
+
+    // Shared readout of distance travelled.
+    pillCentered(ctx, 'travelled: ' + absT.toFixed(1) + ' galaxies', rect.width / 2, 12, { fg: c.fgDim });
+
+    // ---------- LEFT: curved, finite (a ring) ----------
+    const cxL = halfW / 2, cyL = rect.height / 2 + 4;
+    const R = Math.min(halfW - 78, rect.height - 150) / 2;
+    ctx.strokeStyle = c.gridFaint; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(cxL, cyL, R, 0, Math.PI * 2); ctx.stroke();
+
+    for (let k = 0; k < RING_N; k++) {
+      const ang = -Math.PI / 2 + ((k - traveled) / RING_N) * Math.PI * 2;
+      const x = cxL + Math.cos(ang) * R, y = cyL + Math.sin(ang) * R;
+      const isHome = (k === 0);
+      const tint = landmark(c, k);
+      ctx.fillStyle = isHome ? c.accentWarm : (tint || c.accent);
+      ctx.beginPath(); ctx.arc(x, y, isHome ? 5 : 3.4, 0, Math.PI * 2); ctx.fill();
+      if (isHome) {
+        ctx.strokeStyle = c.accentWarm; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI * 2); ctx.stroke();
+      }
+    }
+    // You: fixed traveller at the top of the ring.
+    ctx.fillStyle = c.fg;
+    ctx.beginPath(); ctx.arc(cxL, cyL - R, 3.4, 0, Math.PI * 2); ctx.fill();
+
+    const loopPos = ((traveled % RING_N) + RING_N) % RING_N;
+    const backHome = absT > 0.6 && Math.min(loopPos, RING_N - loopPos) < 0.4;
+    if (backHome) {
+      pillCentered(ctx, '↺ back where you started', cxL, cyL - R - 30, { fg: c.accentWarm, border: c.accentWarm });
+    }
+    pillCentered(ctx, 'curved · finite', cxL, rect.height - 26, { fg: c.fgDim });
+
+    // ---------- RIGHT: flat, infinite (a grid) ----------
+    const regionX = halfW + 1, regionW = rect.width - halfW;
+    const cxR = halfW + regionW / 2, cyR = rect.height / 2 + 4;
+    const sp = PX_PER_GAL;
+    ctx.save();
+    ctx.beginPath(); ctx.rect(regionX, 0, regionW, rect.height - 40); ctx.clip();
+
+    const off = traveled * sp;              // you moved right by `traveled` galaxies
+    const nx = Math.ceil(regionW / sp) + 4;
+    const ny = Math.ceil(rect.height / sp) + 3;
+    // Which global column currently sits nearest the viewport centre.
+    const baseCol = Math.round(traveled);
+    for (let a = -nx; a <= nx; a++) {
+      const gcol = baseCol + a;
+      const x = cxR + (gcol * sp - off);
+      if (x < regionX - 20 || x > rect.width + 20) continue;
+      for (let b = -ny; b <= ny; b++) {
+        const y = cyR + b * sp;
+        if (y < -20 || y > rect.height + 20) continue;
+        const isHomeCol = (gcol === 0);
+        const tint = landmark(c, gcol * 7 + b);
+        ctx.fillStyle = (isHomeCol && b === 0) ? c.accentWarm : (tint || c.accent);
+        ctx.beginPath(); ctx.arc(x, y, (isHomeCol && b === 0) ? 5 : 3.2, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    // You: fixed traveller at region centre.
+    ctx.fillStyle = c.fg;
+    ctx.beginPath(); ctx.arc(cxR, cyR, 3.4, 0, Math.PI * 2); ctx.fill();
+
+    // Home galaxy (global column 0) marker / off-screen pointer.
+    const homeX = cxR + (0 - off);
+    if (homeX > regionX + 6 && homeX < rect.width - 6) {
+      ctx.strokeStyle = c.accentWarm; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.arc(homeX, cyR, 10, 0, Math.PI * 2); ctx.stroke();
+    }
+    ctx.restore();
+
+    if (absT > 0.6 && (homeX <= regionX + 6 || homeX >= rect.width - 6)) {
+      const arrow = homeX < cxR ? 'start ←' : '→ start';
+      pillCentered(ctx, arrow + ' ' + absT.toFixed(0) + ' back · no way home', cxR, 34, { fg: c.fgDim });
+    }
+    pillCentered(ctx, 'flat · infinite — no edge', cxR, rect.height - 26, { fg: c.fgDim });
+  }
+  vizCommon.animate(canvas, draw);
+})();
+
+/* ---------- Fig 3: the observable bubble ("the size of a marble") ----------
+ * Insight: the same galaxies (our bubble) go from packed & marble-sized to
+ * spread out & vast, inside a grid that never ends. Density changed, not the
+ * size of the whole. */
+(function(){
+  const canvas = document.getElementById('v3-observable');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const tInput = document.getElementById('v3-t');
+  const tReadout = document.getElementById('v3-t-readout');
+
+  const OURS = 2.5;   // comoving radius (in cells) of our observable bubble
+  let t = parseFloat(tInput.value);
+  const phraseFor = (v) => v < 0.33 ? 'early universe' : (v < 0.7 ? 'expanding' : 'today');
+
+  tInput.addEventListener('input', () => {
+    t = parseFloat(tInput.value);
+    tReadout.textContent = phraseFor(t);
+  });
+
+  vizCommon.fitCanvas(canvas);
+  window.addEventListener('resize', () => vizCommon.fitCanvas(canvas));
+
+  function draw() {
+    const c = vizCommon.themeColors();
+    const rect = canvas.getBoundingClientRect();
+    ctx.fillStyle = c.bg;
+    ctx.fillRect(0, 0, rect.width, rect.height);
+
+    const cx = rect.width / 2, cy = rect.height / 2;
+    const spacing = vizCommon.lerp(16, 50, t);   // packed tight → spread out
+    const cols = Math.ceil(rect.width / spacing) + 3;
+    const rows = Math.ceil(rect.height / spacing) + 3;
+    const bubbleR = spacing * OURS;
+
+    for (let di = -cols; di <= cols; di++) {
+      for (let dj = -rows; dj <= rows; dj++) {
+        const x = cx + di * spacing, y = cy + dj * spacing;
+        if (x < -10 || x > rect.width + 10 || y < -10 || y > rect.height + 10) continue;
+        const ours = (di * di + dj * dj) <= OURS * OURS;
+        if (ours) {
+          ctx.fillStyle = c.accentWarm;
+          ctx.beginPath(); ctx.arc(x, y, 3.6, 0, Math.PI * 2); ctx.fill();
+        } else {
+          ctx.globalAlpha = 0.4;
+          ctx.fillStyle = c.fgDim;
+          ctx.beginPath(); ctx.arc(x, y, 2.4, 0, Math.PI * 2); ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+      }
+    }
+
+    // The observable bubble.
+    ctx.strokeStyle = c.accentWarm; ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.arc(cx, cy, bubbleR, 0, Math.PI * 2); ctx.stroke();
+    ctx.setLineDash([]);
+
+    pillCentered(ctx, 'the part we can see', cx, cy - bubbleR - 26, { fg: c.accentWarm, border: c.accentWarm });
+    const size = t < 0.4 ? '≈ a marble' : (t > 0.6 ? '≈ 93 billion light-years' : 'growing…');
+    pillCentered(ctx, size, cx, cy + bubbleR + 10, { fg: c.fgDim });
+    pillCentered(ctx, 'the grid never ends — the whole was always infinite', rect.width / 2, rect.height - 26, { fg: c.fgDim });
+  }
+  vizCommon.animate(canvas, draw);
+})();
+</script>
+</body>
+</html>
