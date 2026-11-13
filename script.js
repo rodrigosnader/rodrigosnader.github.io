@@ -62,4 +62,11 @@
     const map = { gh:'/', gw:'/writing.html', gn:'/notes.html', gl:'/links.html', ga:'/about.html' };
     if (map[seq]) { window.location.href = map[seq]; seq = ''; }
   });
+
+  // Visit counter (GoatCounter). count.js skips localhost on its own.
+  const gc = document.createElement('script');
+  gc.async = true;
+  gc.src = 'https://gc.zgo.at/count.js';
+  gc.dataset.goatcounter = 'https://rodrigosnader.goatcounter.com/count';
+  document.head.appendChild(gc);
 })();
