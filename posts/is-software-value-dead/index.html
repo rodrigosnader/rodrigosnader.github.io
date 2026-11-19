@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is Software Value Dead? — Rodrigo Nader</title>
+<meta name="description" content="If software is getting cheaper to build, what actually makes a software company valuable? Demand, position in the supply chain, and defensibility beyond code.">
+<link rel="stylesheet" href="../../style.css?v=5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28' font-family='Georgia,serif' font-weight='700'%3ER%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header">
+  <div class="limiter">
+    <div class="header-row">
+      <div class="brand-block">
+        <a href="/" class="brand"><strong>Rodrigo</strong> S. Nader</a>
+        <span class="brand-sub">AI, rationality and the universe.</span>
+      </div>
+      <nav class="site-nav">
+        <a href="/writing.html">writing</a>
+        <a href="/notes.html">notes</a>
+        <a href="/links.html">links</a>
+        <a href="/about.html">about</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</header>
+
+<article class="post">
+  <header>
+    <h1>Is Software Value Dead?</h1>
+    <p class="post-meta">
+      <time datetime="2026-11-19">2026 · Nov 19</time>
+      <span class="sep">·</span>
+      <span>5 min read</span>
+      <span class="sep">·</span>
+      <span>Software</span>
+    </p>
+  </header>
+
+  <p>A few years ago, a product that took a team of engineers two years to build was valuable partly because it was hard to reproduce. Today, a competitor might recreate much of it in weeks — or less amid the reverse-engineering frenzy. So how should this paradigm change affect how founders prioritize when building a software company?</p>
+
+  <p>The answer might not be so straightforward, but I often come back to these three factors:</p>
+
+  <ul>
+    <li><strong>Demand</strong> — how much are people willing to pay for what you provide?</li>
+    <li><strong>Supply chain position</strong> — how much of the market depends on you?</li>
+    <li><strong>Defensibility</strong> — how difficult would it be for someone else to reproduce it?</li>
+  </ul>
+
+  <h2>Value Creation vs. Value Capture</h2>
+
+  <p>Picture a company that builds a tool helping customers close deals faster. The natural assumption is that it can charge based on the revenue it helps generate: the more it saves or earns for a customer, the more it should be able to charge.</p>
+
+  <p>But a company can create value for customers without capturing all of it, because competition limits what it can charge. A product might save a customer $500k a year, but if competitors offer similar savings for $5k, its ability to charge that high may quickly disappear. The customer still gets the savings. It's the company's share of that value that shrinks. So the question for a founder isn't just what customers will pay today, but how much of that willingness to pay survives as AI reshapes both the competition and the need.</p>
+
+  <p>One way startups hold onto that captured value is by <a href="https://a16z.com/momentum-as-ai-moat/">moving first</a>: build a customer base, integrations, and trust before cheaper alternatives show up, so switching away costs something even when a competitor undercuts on price.</p>
+
+  <p>Competition can squeeze how much value you capture, while AI itself can eliminate the need for a vendor altogether. Startups that surround a model (wrappers) often see themselves competing not only with alternatives, but with the technology itself! Models are evolving so fast that providers end up swallowing the very applications built on top of it.</p>
+
+  <p>I think there are two ways to navigate this problem:</p>
+
+  <ol>
+    <li>Run faster — keep shipping new value faster than your provider can, through specialization, user experience, or whatever carries real value for your customer.</li>
+    <li>Move to an upstream layer in the supply chain.</li>
+  </ol>
+
+  <p>Let's talk about the second one.</p>
+
+  <h2>Upstream is a "safer" place to be</h2>
+
+  <p>The earlier a company sits in the supply chain, the greater its potential to capture value. In AI, that chain runs from silicon and energy to chip manufacturing, cloud computing, and foundation models — fine-tuned for specific industries, built into autonomous agents and customer-facing applications.</p>
+
+  <p>NVIDIA benefits from almost any outcome, regardless of which AI applications succeed, because so many companies rely on its GPUs. And as applications become cheaper and more accessible, <a href="https://www.joelonsoftware.com/2002/06/12/strategy-letter-v/">demand for the infrastructure underneath them can grow</a>. A small B2C SaaS, meanwhile, benefits only from its direct customers.</p>
+
+  <p>But being upstream isn't always easy. Position in the supply chain often requires capital, scale, or access to data and infrastructure that's hard to replicate (that's what makes a layer defensible in the first place).</p>
+
+  <p>The good news is that it's often possible for a company to move up the chain over time, usually through accumulated data, distribution, or infrastructure to build something valuable at a layer above it. A delivery-routing app can accumulate enough route data to train its own optimization model, just as a payments platform can turn transaction history into its own fraud-detection layer. A monitoring service can turn what it learns about failures into a hosting layer of its own.</p>
+
+  <p>But being upstream isn't valuable by itself. Cotton sits upstream of clothing manufacturing and isn't especially valuable on its own, because the barrier to growing cotton is low. Markets differ and technology has its own ways to build defensibility. So how do you raise that bar?</p>
+
+  <h2>Beyond the Software</h2>
+
+  <p>If software development itself is becoming a commodity, companies that <a href="https://a16z.com/good-news-ai-will-eat-application-software/">exclusively rely on code and features</a> seem to put themselves at risk.</p>
+
+  <p>In a <a href="https://www.youtube.com/watch?v=KpILHX2D-AA&list=PLwcQbu9cKWckgWPA6AdExoSDyrVFsclNX">MicroConf talk</a>, Rob Walling explores ten ways AI can attack a SaaS business, from customers vibe-coding a product to their own businesses being wiped out, and which SaaS moats still work in the age of AI.</p>
+
+  <p>What these threats have in common is that they make software functionality less scarce. A product can remain useful while becoming much less valuable as a business, simply because customers have more ways to achieve the same outcome. This shifts the question from how hard your product is to build to how hard your business is to replace. What AI doesn't make nearly as easy is building everything around the software — including <a href="https://www.paulgraham.com/ds.html">winning over customers one by one</a>.</p>
+
+  <p>The lesson is: don't just build something people can use. Build something people come to rely on.</p>
+
+  <ol>
+    <li>Start with a painful problem</li>
+    <li>Own the outcome rather than just providing features</li>
+    <li>Build relationships and unique ways to reach customers</li>
+    <li>Discover ways to become more valuable the longer they use you</li>
+  </ol>
+
+  <p>Solving a problem people are willing to pay for is still the starting point. But as software gets easier to copy, where you sit in the stack and what you've built beyond the code seem to matter more than they used to. The winners won't necessarily be those who build the best product, but those who build the hardest parts to replace.</p>
+
+  <p>If software is becoming cheaper to build, everything around it might be getting more valuable than ever.</p>
+
+  <hr>
+
+  <p>If you have observations or concerns — or for an in-depth discussion, just reach out at <a href="mailto:rodrigosnader@gmail.com">rodrigosnader@gmail.com</a>.</p>
+</article>
+
+<script src="/script.js?v=6"></script>
+</body>
+</html>
